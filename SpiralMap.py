@@ -183,6 +183,63 @@ class reid_spiral(object):
 			
 		return 
 
+	def output_(self,arm,color='',typ_='cartesian',xsun_=[]):	
+		
+		if len(xsun_) == 0:
+			xsun = get_lsr()['xsun']
+		else:
+			xsun = xsun_[0]
+		
+		
+		params = self.getparams(arm) ;
+
+		
+		
+		if typ_ =='cartesian':
+
+			xgc,ygc,xgc1,ygc1,xgc2,ygc2 = self.model_(params);			
+			xhc = xgc - xsun
+			xhc1 = xgc1 - xsun
+			xhc2 = xgc2 - xsun
+	
+			yhc = ygc
+			return xhc,yhc,xgc,ygc
+		
+		if typ_ =='polar':
+			
+			xhc = x - xsun
+			xhc1 = x1 - xsun
+			xhc2 = x2 - xsun
+			
+			rgc = sqrtsum(ds=[x,y])
+			phi1 = np.arctan2(y,-x)
+			phi2 = np.degrees(np.arctan(y/-x))
+			phi3 = np.degrees(np.arctan2(y,x))%180.	
+			
+			# phi3 = 180.-np.degrees(phi1)
+			
+			# phi1 = (np.arctan2(yhc,xgc))	
+			# plt.plot(phi1,rgc,color,linestyle='-',linewidth=linewidth)
+			plt.plot(phi1,rgc,'.',color=color,markersize=markersize)
+			
+			return 
+			
+		if typ_ =='polargrid':
+			
+			linewidth=2
+			
+			yhc = y
+			xgc = x
+			phi4 = np.degrees(np.arctan2(yhc,xgc))%360.	
+			rgc = sqrtsum(ds=[x,y])
+
+			plt.plot(np.radians(phi4),rgc,color=color,markersize=markersize,linestyle=linestyle,linewidth=linewidth,label=arm)
+
+	
+
+			
+			return 
+
 
  
 
@@ -205,22 +262,27 @@ class main_(object):
 
 
 	# def plot_(self,arm,color='',typ_='HC',xsun_=[],linewidth=0.8,markersize=3,linestyle = '-'):	
-	def plot_(self,model=''):
+	def plot_(self,model='',print_=False):
 		
-		print('')
 		
-		# reid = sp.reid_spiral()
-		
-		# params = reid.getparams('Perseus')
-		
-		# x,y, x1,y1,x2,y2 = reid.model_(params);		
+		if model == '':
+			 raise RuntimeError('model = blank | no model provided \n try self.models_class for list of available models')
+			 
+					
 
-			
+
+		spimod = self.models_class[model]
+		spimod.getarmlist()
+
+		if print_:
+			print('model = '+model)
+			print(spimod.arms)
+		
+
+		xhc,yhc,xgc,ygc = spimod.output_('Perseus')
+				
+		# return xhc,yhc,xgc,ygc
 		return 
 
 
 
-
-
-
-# spi.plot_('Perseus',color='red',linewidth=lnwidth); 
