@@ -522,12 +522,17 @@ class reid_spiral(object):
 		# self.arms = np.array(['3-kpc','Norma','Sct-Cen','Sgt-Car','Local','Perseus','Outer'])
 		self.arms = np.array(['3-kpc','Norma','Sct-Cen','Sgr-Car','Local','Perseus','Outer'])
 	
-	def info_(self):
+	def info(self):
 		
 		'''
 		here goes basic info for the user about this model
 		'''
-		
+
+		print('')
+		print('------------------------')	
+		dfmodlist = pd.DataFrame(self.arms,columns=['Arm list'])
+		print(dfmodlist)
+		print('------------------------')		
 		
 		
 	def getparams(self,arm):
@@ -783,41 +788,48 @@ class main_(object):
 			print('------------------------')
 		else:
 			spimod = self.models_class[model]
+			print('#####################')			
+			print('Model = '+model)
 			spimod.info()
 			
 			
 		
 	
-	def readout(self,plotattrs,model='',print_=False):
+	def readout(self,plotattrs={},model='',arm='',print_=False):
 		'''
 		
-		plotattrs = {'plot':False,
-					'markersize':3,
-					'linewidth':0.8,
-					'linestyle': '-'}
-		
+
 
 		# def plot_(self,arm,color='',typ_='HC',xsun_=[]		
 		'''
+
+		plotattrs_default = {'plot':False,
+								'markersize':3,
+								'linewidth':0.8,
+								'linestyle': '-'}
 		
 		
 		if model == '':
-			 raise RuntimeError('model = blank | no model provided \n try self.models_class for list of available models')
+			 raise RuntimeError('model = blank | no model provided \n try self.getino() for list of available models')
 			 
-					
-
 
 		spimod = self.models_class[model]
 		spimod.getarmlist()
+		xhc,yhc,xgc,ygc = spimod.output_(arm)
 
-		if print_:
-			print('model = '+model)
-			print(spimod.arms)
-		
-
-		xhc,yhc,xgc,ygc = spimod.output_('Perseus')
+		# in case plot attributes are not provided, or incomplete
+		for ky in plotattrs_default.keys():			
+			if ky not in list(plotattrs.keys()):				
+				plotattrs[ky] = plotattrs_default[ky]
+		self.plotattrs = plotattrs				
 				
-		# return xhc,yhc,xgc,ygc
+
+		self.dout = {'xhc':xhc,'yhc':yhc,'xgc':xgc,'ygc':ygc}				
+
+
+		if self.plotattrs['plot']:
+			plt.plot(xhc,yhc,'k.')
+
 		return 
 
 
