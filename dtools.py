@@ -1,6 +1,7 @@
 
 
-
+import os, sys
+import numpy as np
 
 def fcount(floc,flist=False,nlist=False):
 	
