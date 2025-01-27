@@ -2,6 +2,8 @@
 
 import os, sys
 import numpy as np
+from astropy.table import Table
+import pandas as pd
 
 def fcount(floc,flist=False,nlist=False):
 	
