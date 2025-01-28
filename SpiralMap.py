@@ -807,7 +807,7 @@ class main_(object):
 								'markersize':3,
 								'coordsys':'HC',
 								'linewidth':0.8,
-								'linestyle': '-'}
+								'linestyle': '-',armcolour=''}
 		
 		
 		if model == '':
@@ -815,8 +815,8 @@ class main_(object):
 			 
 
 		spimod = self.models_class[model]
-		spimod.getarmlist()
-		xhc,yhc,xgc,ygc = spimod.output_(arm)
+		spimod.getarmlist()	
+
 		
 
 		# in case plot attributes are not provided, or incomplete
@@ -824,14 +824,24 @@ class main_(object):
 			if ky not in list(plotattrs.keys()):				
 				plotattrs[ky] = plotattrs_default[ky]
 
-				
-
-		self.dout = {'xhc':xhc,'yhc':yhc,'xgc':xgc,'ygc':ygc}				
-
-
-		if plotattrs['plot']:
+		if arm != 'all':		
+			xhc,yhc,xgc,ygc = spimod.output_(arm)
+			self.dout = {'xhc':xhc,'yhc':yhc,'xgc':xgc,'ygc':ygc}		
 			
-			plt.plot(self.dout['x'+plotattrs['coordsys'].lower()],self.dout['y'+plotattrs['coordsys'].lower()],'.',color=spimod.armcolour[arm])
+			if plotattrs['armcolour'] = '':
+				plotattrs['armcolour'] = spimod.armcolour[arm]
+
+			if plotattrs['plot']:				
+				plt.plot(self.dout['x'+plotattrs['coordsys'].lower()],self.dout['y'+plotattrs['coordsys'].lower()],'.',color=plotattrs['armcolour'])			
+					
+		elif arm =='all':
+			for arm_temp in spimod.arms:
+				xhc,yhc,xgc,ygc = spimod.output_(arm_temp)
+				self.dout = {'xhc':xhc,'yhc':yhc,'xgc':xgc,'ygc':ygc}								
+
+				if plotattrs['plot']:
+					
+					plt.plot(self.dout['x'+plotattrs['coordsys'].lower()],self.dout['y'+plotattrs['coordsys'].lower()],'.',color=spimod.armcolour[arm_temp])
 
 		self.plotattrs = plotattrs				
 
