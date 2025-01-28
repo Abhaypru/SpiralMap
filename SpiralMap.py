@@ -805,6 +805,7 @@ class main_(object):
 
 		plotattrs_default = {'plot':False,
 								'markersize':3,
+								'coordsys':'HC',
 								'linewidth':0.8,
 								'linestyle': '-'}
 		
@@ -821,14 +822,17 @@ class main_(object):
 		for ky in plotattrs_default.keys():			
 			if ky not in list(plotattrs.keys()):				
 				plotattrs[ky] = plotattrs_default[ky]
-		self.plotattrs = plotattrs				
+
 				
 
 		self.dout = {'xhc':xhc,'yhc':yhc,'xgc':xgc,'ygc':ygc}				
 
 
-		if self.plotattrs['plot']:
-			plt.plot(xhc,yhc,'k.')
+		if plotattrs['plot']:
+			
+			plt.plot(self.dout['x'+plotattrs['coordsys'].lower()],self.dout['y'+plotattrs['coordsys'].lower()],'k.')
+
+		self.plotattrs = plotattrs				
 
 		return 
 
