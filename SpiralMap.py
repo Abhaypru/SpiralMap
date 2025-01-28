@@ -754,9 +754,15 @@ class reid_spiral(object):
 
 class main_(object):
 	
-	def __init__(self):
+	def __init__(self,xsun=-8.277,zsun=0.):
 		
-		self.tst = 'rub'
+		val = locals()		
+		self.args={}
+		for ky in val.keys():			
+			if ky !='self':
+				self.args[ky] = val[ky]	
+		self.Rsun = -self.xsun
+		
 		self.listmodels()
 		self.getinfo()	
 	
@@ -878,6 +884,13 @@ class main_(object):
 					plt.xlim([xmin,xmax])	
 					plt.ylim([ymin,ymax])	
 
+
+					plt.axvline(xsun,linewidth=1,linestyle='--')			
+					plt.axhline(0,linewidth=1,linestyle='--')			
+					# plt.xlabel('X$_{GC}$')
+					# plt.ylabel('Y$_{GC}$')
+					plt.plot(0.,0.,marker='+',markersize=10,color='black')
+					plt.plot(xsun,0.,marker='o',markersize=10,color='black')
 
 
 		self.plotattrs = plotattrs				
