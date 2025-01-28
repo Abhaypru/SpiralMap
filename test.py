@@ -9,7 +9,7 @@ plt.ion()
 plotattrs = {'plot':True,'coordsys':'GC'}
 spirals = sp.main_()
 spirals.getinfo(model='Reid_2019')
-spirals.readout(plotattrs,model='Reid_2019',arm='Norma')
+spirals.readout(plotattrs,model='Reid_2019',arm='Outer')
 
 
 

@@ -519,8 +519,8 @@ class reid_spiral(object):
 	
 	def getarmlist(self):
 		
-		# self.arms = np.array(['3-kpc','Norma','Sct-Cen','Sgt-Car','Local','Perseus','Outer'])
 		self.arms = np.array(['3-kpc','Norma','Sct-Cen','Sgr-Car','Local','Perseus','Outer'])
+		self.armcolour = {'3-kpc':'green','Norma':'red','Sct-Cen':'blue','Sgr-Car':'purple','Local':'cyan','Perseus':'black','Outer':'gold'}
 	
 	def info(self):
 		
@@ -817,6 +817,7 @@ class main_(object):
 		spimod = self.models_class[model]
 		spimod.getarmlist()
 		xhc,yhc,xgc,ygc = spimod.output_(arm)
+		
 
 		# in case plot attributes are not provided, or incomplete
 		for ky in plotattrs_default.keys():			
@@ -830,7 +831,7 @@ class main_(object):
 
 		if plotattrs['plot']:
 			
-			plt.plot(self.dout['x'+plotattrs['coordsys'].lower()],self.dout['y'+plotattrs['coordsys'].lower()],'k.')
+			plt.plot(self.dout['x'+plotattrs['coordsys'].lower()],self.dout['y'+plotattrs['coordsys'].lower()],'.',color=spimod.armcolour[arm])
 
 		self.plotattrs = plotattrs				
 
