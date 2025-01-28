@@ -8,7 +8,7 @@ plt.ion()
 
 plt.close('all')
 plt.figure(figsize=(6,6))
-plotattrs = {'plot':True,'coordsys':'GC','xmin':-16,'xmax':8,'ymin':-12,'ymax':12}
+plotattrs = {'plot':True,'coordsys':'GC','markSunGC':True,'xmin':-16,'xmax':8,'ymin':-12,'ymax':12}
 # plotattrs = {'plot':True,'coordsys':'GC'}
 spirals = sp.main_()
 spirals.getinfo(model='Reid_2019')

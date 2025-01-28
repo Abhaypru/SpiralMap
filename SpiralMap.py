@@ -565,7 +565,6 @@ class reid_spiral(object):
 		
 		return params
 
-
 	def model_(self,params):
 		'''
 		X and Y are flipped in Reid et al. 2019
@@ -614,84 +613,7 @@ class reid_spiral(object):
 		
 		
 		return x,y, x1,y1,x2,y2
-		
-	def plot_(self,arm,color='',typ_='HC',xsun_=[],linewidth=0.8,markersize=3,linestyle = '-'):	
-		
-		if len(xsun_) == 0:
-			xsun = get_lsr()['xsun']
-		else:
-			xsun = xsun_[0]
-		
-		
-		params = self.getparams(arm) ;
-		x,y, x1,y1,x2,y2 = self.model_(params);
-		
-		if color == '':
-			color = 'black'
-			
-		if typ_ == 'GC':	
-			plt.plot(x,y,color,label=params['name'],linestyle='--',linewidth=linewidth)
-			plt.plot(x2,y2,color,linestyle='dotted',linewidth=linewidth)
-			plt.plot(x1,y1,color,linestyle='dotted',linewidth=linewidth)
-			plt.axvline(xsun,linewidth=1,linestyle='--')			
-			plt.axhline(0,linewidth=1,linestyle='--')			
-			# plt.xlabel('X$_{GC}$')
-			# plt.ylabel('Y$_{GC}$')
-			plt.plot(0.,0.,marker='+',markersize=10,color='black')
-			plt.plot(xsun,0.,marker='o',markersize=10,color='black')
-		if typ_ == 'HC':	
-			print('..')
-			print('using linewidth = '+str(linewidth))
-			print('..')
-			xhc = x - xsun
-			xhc1 = x1 - xsun
-			xhc2 = x2 - xsun
-			plt.plot(xhc,y,color,label=params['name'],linestyle='-',linewidth=linewidth)
-			plt.plot(xhc1,y,color,linestyle='dotted',linewidth=linewidth)
-			plt.plot(xhc2,y,color,linestyle='dotted',linewidth=linewidth)
-			plt.plot(0.,0.,marker='o',markersize=markersize,color='black')
-			plt.plot(-xsun,0.,marker='+',markersize=markersize,color='black')		
-			# plt.xlabel('X$_{HC}$')
-			# plt.ylabel('Y$_{HC}$')			
-			# plt.xlabel('X [kpc]')
-			# plt.ylabel('Y [kpc]')			
-		
-		# plt.legend() 
-		
-		if typ_ =='polar':
-			
-			xhc = x - xsun
-			xhc1 = x1 - xsun
-			xhc2 = x2 - xsun
-			
-			rgc = sqrtsum(ds=[x,y])
-			phi1 = np.arctan2(y,-x)
-			phi2 = np.degrees(np.arctan(y/-x))
-			phi3 = np.degrees(np.arctan2(y,x))%180.	
-			
-			# phi3 = 180.-np.degrees(phi1)
-			
-			# phi1 = (np.arctan2(yhc,xgc))	
-			# plt.plot(phi1,rgc,color,linestyle='-',linewidth=linewidth)
-			plt.plot(phi1,rgc,'.',color=color,markersize=markersize)
-			
-			
-		if typ_ =='polargrid':
-			
-			linewidth=2
-			
-			yhc = y
-			xgc = x
-			phi4 = np.degrees(np.arctan2(yhc,xgc))%360.	
-			rgc = sqrtsum(ds=[x,y])
-
-			plt.plot(np.radians(phi4),rgc,color=color,markersize=markersize,linestyle=linestyle,linewidth=linewidth,label=arm)
-
 	
-
-			
-		return 
-
 	def output_(self,arm,color='',typ_='cartesian'):	
 		
 		xsun = self.xsun
@@ -796,13 +718,32 @@ class main_(object):
 								'linewidth':0.8,
 								'linestyle': '-',
 								'armcolour':'',
-								'markSun':True,
-								'markGC':True,
+								'markSunGC':True,
 								'xmin':'',
 								'xmax':'',
 								'ymin':'',
 								'ymax':''}
 		
+
+
+	
+	def add2plot(self,coordsys):
+		
+		if coordsys =='HC':					
+			# hc case					
+			plt.plot(0.,0.,marker='o',markersize=markersize,color='black')
+			plt.plot(-self.xsun,0.,marker='+',markersize=markersize,color='black')	
+
+
+		if coordsys =='GC':							
+			# gc case				
+			
+			plt.axvline(self.xsun,linewidth=1,linestyle='--')			
+			plt.axhline(0,linewidth=1,linestyle='--')			
+			plt.plot(0.,0.,marker='+',markersize=10,color='black')
+			plt.plot(self.xsun,0.,marker='o',markersize=10,color='black')
+			
+	
 	
 	def readout(self,plotattrs={},model='',arm='',print_=False):
 		'''
@@ -853,6 +794,9 @@ class main_(object):
 				plt.xlabel('X$_{'+plotattrs['coordsys']+'}$ [Kpc]')
 				plt.ylabel('Y$_{'+plotattrs['coordsys']+'}$ [Kpc]')
 				
+				
+				
+				
 				plt.xlim([xmin,xmax])	
 				plt.ylim([ymin,ymax])	
 
@@ -882,14 +826,12 @@ class main_(object):
 										
 					plt.xlim([xmin,xmax])	
 					plt.ylim([ymin,ymax])	
+					
+					if plotattrs['markSunGC']:
+						self.add2plot(plotattrs['coordsys'])
 
-					if plotattrs['markSun']:
-						plt.axvline(self.xsun,linewidth=1,linestyle='--')			
-						plt.plot(self.xsun,0.,marker='o',markersize=10,color='black')
-					plt.axhline(0,linewidth=1,linestyle='--')			
-					# plt.xlabel('X$_{GC}$')
-					# plt.ylabel('Y$_{GC}$')
-					plt.plot(0.,0.,marker='+',markersize=10,color='black')
+
+				
 
 
 
