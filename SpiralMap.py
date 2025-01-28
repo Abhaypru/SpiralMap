@@ -692,14 +692,9 @@ class reid_spiral(object):
 			
 		return 
 
-	def output_(self,arm,color='',typ_='cartesian',xsun_=[]):	
+	def output_(self,arm,color='',typ_='cartesian'):	
 		
-		if len(xsun_) == 0:
-			xsun = get_lsr()['xsun']
-		else:
-			xsun = xsun_[0]
-		
-		
+		xsun = self.xsun
 		params = self.getparams(arm) ;
 
 		
@@ -754,13 +749,9 @@ class reid_spiral(object):
 
 class main_(object):
 	
-	def __init__(self,xsun=-8.277,zsun=0.):
+	def __init__(self,xsun=-8.277):
 		
-		val = locals()		
-		self.args={}
-		for ky in val.keys():			
-			if ky !='self':
-				self.args[ky] = val[ky]	
+		self.xsun = xsun
 		self.Rsun = -self.xsun
 		
 		self.listmodels()
@@ -803,7 +794,14 @@ class main_(object):
 								'markersize':3,
 								'coordsys':'HC',
 								'linewidth':0.8,
-								'linestyle': '-','armcolour':'','xmin':'','xmax':'','ymin':'','ymax':''}
+								'linestyle': '-',
+								'armcolour':'',
+								'markSun':True,
+								'markGC':True,
+								'xmin':'',
+								'xmax':'',
+								'ymin':'',
+								'ymax':''}
 		
 	
 	def readout(self,plotattrs={},model='',arm='',print_=False):
@@ -821,6 +819,7 @@ class main_(object):
 			 
 
 		spimod = self.models_class[model]
+		spimod.xsun = self.xsun
 		spimod.getarmlist()	
 
 		
@@ -884,13 +883,14 @@ class main_(object):
 					plt.xlim([xmin,xmax])	
 					plt.ylim([ymin,ymax])	
 
-
-					plt.axvline(xsun,linewidth=1,linestyle='--')			
+					if plotattrs['markSun']:
+						plt.axvline(self.xsun,linewidth=1,linestyle='--')			
+						plt.plot(self.xsun,0.,marker='o',markersize=10,color='black')
 					plt.axhline(0,linewidth=1,linestyle='--')			
 					# plt.xlabel('X$_{GC}$')
 					# plt.ylabel('Y$_{GC}$')
 					plt.plot(0.,0.,marker='+',markersize=10,color='black')
-					plt.plot(xsun,0.,marker='o',markersize=10,color='black')
+
 
 
 		self.plotattrs = plotattrs				

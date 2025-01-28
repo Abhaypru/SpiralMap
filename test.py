@@ -7,9 +7,9 @@ import matplotlib.pyplot as plt
 plt.ion()
 
 plt.close('all')
-plt.figure(figsize=(5,5))
-# plotattrs = {'plot':True,'coordsys':'HC','xmin':-5,'xmax':0,'ymin':-1,'ymax':4}
-plotattrs = {'plot':True,'coordsys':'GC'}
+plt.figure(figsize=(6,6))
+plotattrs = {'plot':True,'coordsys':'GC','xmin':-16,'xmax':8,'ymin':-12,'ymax':12}
+# plotattrs = {'plot':True,'coordsys':'GC'}
 spirals = sp.main_()
 spirals.getinfo(model='Reid_2019')
 # spirals.readout(plotattrs,model='Reid_2019',arm='Sct-Cen')
