@@ -793,6 +793,11 @@ class main_(object):
 			spimod.info()
 			
 			
+		self.plotattrs_default = {'plot':False,
+								'markersize':3,
+								'coordsys':'HC',
+								'linewidth':0.8,
+								'linestyle': '-','armcolour':'','xmin':'','xmax':'','ymin':'','ymax':''}
 		
 	
 	def readout(self,plotattrs={},model='',arm='',print_=False):
@@ -803,11 +808,6 @@ class main_(object):
 		# def plot_(self,arm,color='',typ_='HC',xsun_=[]		
 		'''
 
-		plotattrs_default = {'plot':False,
-								'markersize':3,
-								'coordsys':'HC',
-								'linewidth':0.8,
-								'linestyle': '-',armcolour=''}
 		
 		
 		if model == '':
@@ -820,19 +820,38 @@ class main_(object):
 		
 
 		# in case plot attributes are not provided, or incomplete
-		for ky in plotattrs_default.keys():			
+		for ky in self.plotattrs_default.keys():			
 			if ky not in list(plotattrs.keys()):				
-				plotattrs[ky] = plotattrs_default[ky]
+				plotattrs[ky] = self.plotattrs_default[ky]
 
 		if arm != 'all':		
 			xhc,yhc,xgc,ygc = spimod.output_(arm)
 			self.dout = {'xhc':xhc,'yhc':yhc,'xgc':xgc,'ygc':ygc}		
-			
-			if plotattrs['armcolour'] = '':
-				plotattrs['armcolour'] = spimod.armcolour[arm]
+
 
 			if plotattrs['plot']:				
+
+				if plotattrs['armcolour'] == '':
+					plotattrs['armcolour'] = spimod.armcolour[arm]				
 				plt.plot(self.dout['x'+plotattrs['coordsys'].lower()],self.dout['y'+plotattrs['coordsys'].lower()],'.',color=plotattrs['armcolour'])			
+				
+
+				
+				if plotattrs['xmin'] == '' or plotattrs['xmax'] == '' or plotattrs['ymin'] == '' or plotattrs['ymax'] == '' :
+					xmin,xmax = np.nanmin(self.dout['x'+plotattrs['coordsys'].lower()]),np.nanmax(self.dout['x'+plotattrs['coordsys'].lower()])
+					ymin,ymax = np.nanmin(self.dout['y'+plotattrs['coordsys'].lower()]),np.nanmax(self.dout['y'+plotattrs['coordsys'].lower()])
+				else:
+					xmin,xmax = plotattrs['xmin'],plotattrs['xmax']
+					ymin,ymax = plotattrs['ymin'],plotattrs['ymax']
+
+
+				plt.xlabel('X$_{'+plotattrs['coordsys']+'}$ [Kpc]')
+				plt.ylabel('Y$_{'+plotattrs['coordsys']+'}$ [Kpc]')
+				
+				plt.xlim([xmin,xmax])	
+				plt.ylim([ymin,ymax])	
+
+					
 					
 		elif arm =='all':
 			for arm_temp in spimod.arms:
@@ -842,6 +861,24 @@ class main_(object):
 				if plotattrs['plot']:
 					
 					plt.plot(self.dout['x'+plotattrs['coordsys'].lower()],self.dout['y'+plotattrs['coordsys'].lower()],'.',color=spimod.armcolour[arm_temp])
+
+
+
+					if plotattrs['xmin'] == '' or plotattrs['xmax'] == '' or plotattrs['ymin'] == '' or plotattrs['ymax'] == '' :
+						xmin,xmax = np.nanmin(self.dout['x'+plotattrs['coordsys'].lower()]),np.nanmax(self.dout['x'+plotattrs['coordsys'].lower()])
+						ymin,ymax = np.nanmin(self.dout['y'+plotattrs['coordsys'].lower()]),np.nanmax(self.dout['y'+plotattrs['coordsys'].lower()])
+					else:
+						xmin,xmax = plotattrs['xmin'],plotattrs['xmax']
+						ymin,ymax = plotattrs['ymin'],plotattrs['ymax']
+	
+
+					plt.xlabel('X$_{'+plotattrs['coordsys']+'}$ [Kpc]')
+					plt.ylabel('Y$_{'+plotattrs['coordsys']+'}$ [Kpc]')
+										
+					plt.xlim([xmin,xmax])	
+					plt.ylim([ymin,ymax])	
+
+
 
 		self.plotattrs = plotattrs				
 
