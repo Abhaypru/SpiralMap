@@ -657,6 +657,9 @@ class spiral_cepheids(object):
 
 
 class LevineSpiral:
+
+
+
     def __init__(self, R0=8.5):
         """Initialize spiral parameters from Levine et al. 2006"""
         self.R0 = R0  # Solar Galactocentric radius (kpc)
