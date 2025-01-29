@@ -653,8 +653,97 @@ class spiral_cepheids(object):
 				self.dused['yhc'].append(yhc)
 				self.dused['phi4'].append(phi4)
 				
-					
 
+
+
+class LevineSpiral:
+    def __init__(self, R0=8.5):
+        """Initialize spiral parameters from Levine et al. 2006"""
+        self.R0 = R0  # Solar Galactocentric radius (kpc)
+        self.arms = {
+            'Arm1': {'pitch': 24, 'phi0': 56},   # Pitch angle and Solar crossing angle
+            'Arm2': {'pitch': 24, 'phi0': 135},
+            'Arm3': {'pitch': 25, 'phi0': 189},
+            'Arm4': {'pitch': 21, 'phi0': 234}
+        }
+        
+    def generate_arm(self, arm_name, R_max=25, n_points=1000):
+        """Generate spiral arm coordinates using logarithmic spiral formula"""
+        params = self.arms[arm_name]
+        pitch_rad = np.radians(params['pitch'])
+        phi0_rad = np.radians(params['phi0'])
+        
+        # Calculate maximum phi to reach R_max
+        phi_max = phi0_rad + (np.log(R_max/self.R0)/np.tan(pitch_rad))
+        
+        # Generate angular range
+        phi = np.linspace(phi0_rad, phi_max, n_points) #n_
+        
+        # Logarithmic spiral equation
+        R = self.R0 * np.exp((phi - phi0_rad) * np.tan(pitch_rad))
+        
+        # Convert to Cartesian coordinates
+        x_gc = R * np.cos(phi)
+        y_gc = R * np.sin(phi)
+        
+        # Convert to Heliocentric coordinates
+        x_hc = x_gc + self.R0  # Sun at (-R0, 0) in GC
+        
+        return x_gc, y_gc, x_hc, y_gc
+    
+    def plot_arms(self, coord_system='HC', R_max=25, show_sun=True):
+        """Plot spiral arms in specified coordinate system"""
+        plt.figure(figsize=(10, 10))
+        colors = plt.cm.viridis(np.linspace(0, 1, len(self.arms)))
+        
+        for arm, color in zip(self.arms.keys(), colors):
+            x_gc, y_gc, x_hc, y_hc = self.generate_arm(arm, R_max)
+            
+            if coord_system.upper() == 'GC':
+                plt.plot(x_gc, y_gc, color=color, label=arm)
+                plt.plot(-self.R0, 0, 'o', markersize=8, color='orange', label='Sun') if show_sun else None
+                plt.xlabel('X (GC) [kpc]')
+                plt.ylabel('Y (GC) [kpc]')
+            elif coord_system.upper() == 'HC':
+                plt.plot(x_hc, y_hc, color=color, label=arm)
+                plt.plot(0, 0, 'o', markersize=8, color='orange', label='Sun') if show_sun else None
+                plt.xlabel('X (HC) [kpc]')
+                plt.ylabel('Y (HC) [kpc]')
+            else:
+                raise ValueError("Coordinate system must be 'GC' or 'HC'")
+
+
+		
+
+	    """""""""""""""""""""""""""""""""""""""'
+     
+        plt.axhline(0, color='gray', ls='--', lw=0.5)
+        plt.axvline(0, color='gray', ls='--', lw=0.5)
+        plt.legend(loc='upper right')
+        plt.grid(alpha=0.3)
+        plt.axis('equal')
+        plt.title(f"Levine et al. HI Spiral Arms ({coord_system} Coordinates)")
+        plt.show()
+
+# Usage Example
+if __name__ == "__main__":
+    spiral_model = LevineSpiral(R0=8.5)
+    
+    # Plot in Heliocentric coordinates (default)
+    spiral_model.plot_arms(coord_system='HC', R_max=25)
+    
+    # Plot in Galactocentric coordinates
+    spiral_model.plot_arms(coord_system='GC', R_max=25)
+
+
+
+
+
+
+
+    
+"""""""""""""""""""""""""""""""""""""""""""""""
+		
 # kinematics
 def get_lsr(typ='schonrich',show=False):
 	'''
