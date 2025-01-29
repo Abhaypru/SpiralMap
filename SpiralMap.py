@@ -360,14 +360,12 @@ class spiral_drimmel(object):
 		dt = fitsread(self.loc+'/'+self.fname)
 		self.data0 = dt.copy()
 		
-		xsun = self.xsun			
-			
+		xsun = self.xsun						
 			
 		# rescaling to |xsun|
 		qnts = ['rgc1','xhc1','yhc1','rgc2','xhc2','yhc2']
 		for qnt in qnts:
-			dt[qnt] = dt[qnt]*abs(xsun)		
-		
+			dt[qnt] = dt[qnt]*abs(xsun)				
 		
 		
 		#----- add phase-shifted arms as `3` and `4`
@@ -534,7 +532,7 @@ class spiral_drimmel(object):
 					
 		numbs = [arm]
 		if arm == 'all':
-			numbs = ['1','2','4']
+			numbs = self.arms
 			# numbs = ['2','3','4']
 		elif arm == 'main':
 			numbs = ['1','2']
@@ -550,17 +548,21 @@ class spiral_drimmel(object):
 		self.dused['phi4'] = []
 		
 		
-		for numb in numbs:
+		for numb1 in numbs:
 			
-			linestyle = '-'
-			if float(numb) > 2:
-				linestyle = '--'
+			numb = str(int(numb1.split('_')[0]))	
 			
 			xhc = dt['xhc'+numb]
 			yhc = dt['yhc'+numb]
 			rgc = dt['rgc'+numb]
 			
 			xgc = xhc + xsun
+			
+			ygc = yhc
+			
+			print(xhc[:10])
+			if typ_ == 'cartesian':
+				return xhc,yhc,xgc,ygc
 			
 			if typ_ == 'HC':	
 				
@@ -642,8 +644,8 @@ class spiral_drimmel(object):
 				
 				# plt.plot(xgc,yhc,'.',color=color)
 		
-		# plt.legend() 
-		return 
+				# plt.legend() 
+				return 
 
 	
 
