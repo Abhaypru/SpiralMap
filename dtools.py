@@ -42,3 +42,29 @@ def fcount(floc,flist=False,nlist=False):
 		os.system('ls -lh '+floc)	
 		return 
 
+
+
+def fitsread(filename,ext=1):
+	
+	from astropy.io import fits    
+	
+	data1=np.array(fits.getdata(filename,ext))
+	# data1=(fits.getdata(filename,ext))
+	data={}
+	for x in data1.dtype.names:
+		data[x.lower()]=data1[x]
+		
+	return data
+
+def pickleread(file1):
+	
+	'''
+	read pickle files
+	input: fileloc+'/'+filename
+	
+	'''
+	import pickle	
+	data = pickle.load(open(file1,'rb'))	
+	
+	
+	return data

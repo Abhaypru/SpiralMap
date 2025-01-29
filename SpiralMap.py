@@ -8,197 +8,6 @@ root_ = os.getcwd()
 dataloc = root_+'/datafiles'
 
 
-
-
-
-class spiral_drimmel(object):
-	'''
-	
-	February 22, 2022
-	
-	Usage: 
-	spi = spiral_drimmel()
-	spi.plot_(arm='1',color='b',typ_='HC')
-	spi.plot_(arm='2',color='b',typ_='HC')
-	spi.plot_(arm='all',color='b',typ_='HC')
-	
-	'''
-
-	def __init__(self):
-		
-		
-		# self.loc = '/net/huygens/data/users/khanna/Documents/pdoc_work/science_verification/DR3/data/Drimmel_spiral'
-		self.loc = getdirec('pdocdir')+'/science_verification/DR3/data/Drimmel_spiral'
-		self.fname = 'Drimmel2armspiral.fits'
-		self.xsun = get_lsr()['xsun']
-		self.getdata(xsun_=[self.xsun])
-
-	def getdata(self,xsun_=[]):
-		'''
-		
-		'''
-
-		dt = tabpy.read(self.loc+'/'+self.fname)
-		self.data0 = dt.copy()
-		if len(xsun_) == 0:
-			xsun = self.xsun
-		else:
-			xsun = xsun_[0]	
-		# rescaling to |xsun|
-		qnts = ['rgc1','xhc1','yhc1','rgc2','xhc2','yhc2']
-		for qnt in qnts:
-			dt[qnt] = dt[qnt]*abs(xsun)		
-		
-		
-		
-		#----- add phase-shifted arms as `3` and `4`
-		
-	
-	
-		dloc = self.loc+'/phase_shifted'
-		for inum in [3,4]:
-			dt['xhc'+str(inum)] = np.load(dloc+'/Arm'+str(inum)+'_X_hel.npy')
-			dt['yhc'+str(inum)] = np.load(dloc+'/Arm'+str(inum)+'_Y_hel.npy')
-			dt['rgc'+str(inum)] = np.sqrt( ((dt['xhc'+str(inum)] + xsun)**2.) + ((dt['yhc'+str(inum)])**2.) )
-		
-		
-		#------------------
-		
-		
-		
-		self.data = dt.copy()
-
-		return 
-		
-	def plot_(self,color='',typ_='HC',xsun_=[],linewidth=0.8,arm='all',markersize=3):	
-
-		if len(xsun_) == 0:
-			xsun = get_lsr()['xsun']
-		else:
-			xsun = xsun_[0]
-
-		self.getdata(xsun_=[xsun])
-		dt = self.data.copy()
-		# print(list(dt.keys()))
-		
-		if color == '':
-			color = 'black'
-					
-		numbs = [arm]
-		if arm == 'all':
-			numbs = ['1','2','4']
-			# numbs = ['2','3','4']
-		elif arm == 'main':
-			numbs = ['1','2']
-			# numbs = ['1','4']
-
-		
-		
-		self.dused = {}
-		self.dused['rgc'] = []
-		self.dused['xgc'] = []
-		self.dused['yhc'] = []
-		self.dused['phi1'] = []
-		self.dused['phi4'] = []
-		
-		
-		for numb in numbs:
-			
-			linestyle = '-'
-			if float(numb) > 2:
-				linestyle = '--'
-			
-			xhc = dt['xhc'+numb]
-			yhc = dt['yhc'+numb]
-			rgc = dt['rgc'+numb]
-			
-			xgc = xhc + xsun
-			
-			if typ_ == 'HC':	
-				
-				
-				# plt.plot(xhc,yhc,color,label=arm,linestyle=linestyle,linewidth=linewidth,markersize=2)
-				plt.plot(xhc,yhc,color,linestyle=linestyle,linewidth=linewidth,markersize=2)
-				plt.plot(0.,0.,marker='o',markersize=markersize,color='black')
-				plt.plot(-xsun,0.,marker='+',markersize=markersize,color='black')
-
-				# plt.xlabel('X$_{HC}$')
-				# plt.ylabel('Y$_{HC}$')			
-
-
-			
-			if typ_ == 'GC':	
-				
-				# plt.plot(xgc,yhc,color,label=arm,linestyle=linestyle,linewidth=linewidth)
-				plt.plot(xgc,yhc,color,linestyle=linestyle,linewidth=linewidth)
-				plt.axvline(xsun,linewidth=1,linestyle='--')			
-				plt.axhline(0,linewidth=1,linestyle='--')			
-				# plt.xlabel('X$_{GC}$')
-				# plt.ylabel('Y$_{GC}$')
-				plt.plot(0.,0.,marker='+',markersize=10,color='black')
-				plt.plot(xsun,0.,marker='o',markersize=10,color='black')
-				self.dused['xgc'].append(xgc)
-				self.dused['yhc'].append(yhc)
-		
-
-			if typ_ =='polar':
-				
-
-				phi1 = np.arctan2(yhc,-xgc)
-				
-				phi2 = np.degrees(np.arctan(yhc/-xgc))
-				phi3 = np.degrees(np.arctan2(yhc,xgc))%180.	
-				phi4 = np.degrees(np.arctan2(yhc,xgc))%360.	
-				
-				# phi3 = 180.-np.degrees(phi1)
-				
-				# phi1 = (np.arctan2(yhc,xgc))	
-				# plt.plot(np.degrees(phi1),rgc,color,linestyle='--',linewidth=linewidth)
-				# plt.plot(np.degrees(phi1),rgc,'.',color='blue')
-				plt.plot(phi1,rgc,color=color,markersize=markersize,linestyle=linestyle,linewidth=linewidth)
-
-				self.dused['rgc'].append(rgc)
-				self.dused['xgc'].append(xgc)
-				self.dused['yhc'].append(yhc)
-				self.dused['phi1'].append(phi1)
-				self.dused['phi4'].append(phi4)
-				
-				
-			if typ_ =='polargrid':
-				
-
-				phi1 = np.arctan2(yhc,-xgc)
-				
-				phi2 = np.degrees(np.arctan(yhc/-xgc))
-				phi3 = np.degrees(np.arctan2(yhc,xgc))%180.	
-				phi4 = np.degrees(np.arctan2(yhc,xgc))%360.	
-				
-				# phi3 = 180.-np.degrees(phi1)
-
-
-				if numb == numbs[0]:
-					plt.plot(np.radians(phi4),rgc,color=color,markersize=markersize,linestyle=linestyle,linewidth=linewidth,label='NIR')
-
-				else:
-					plt.plot(np.radians(phi4),rgc,color=color,markersize=markersize,linestyle=linestyle,linewidth=linewidth)
-					
-
-
-
-				self.dused['rgc'].append(rgc)
-				self.dused['xgc'].append(xgc)
-				self.dused['yhc'].append(yhc)
-				self.dused['phi1'].append(phi1)
-				self.dused['phi4'].append(phi4)
-				
-				
-				# plt.plot(xgc,yhc,'.',color=color)
-		
-		# plt.legend() 
-		return 
-
-	
-
 class spiral_cepheids(object):
 	'''
 	
@@ -506,6 +315,338 @@ class spiral_eloisa(object):
 			
  
 
+class spiral_drimmel(object):
+	'''
+	
+	February 22, 2022
+	
+	Usage: 
+	spi = spiral_drimmel()
+	spi.plot_(arm='1',color='b',typ_='HC')
+	spi.plot_(arm='2',color='b',typ_='HC')
+	spi.plot_(arm='all',color='b',typ_='HC')
+	
+	'''
+
+	def __init__(self):
+				
+		self.loc = dataloc+'/Drimmel_NIR'
+		self.fname = 'Drimmel2armspiral.fits'
+		self.getarmlist()
+		
+	def getarmlist(self):
+		
+		self.arms = np.array(['1_arm','2_arm','3_interarm','4_interarm'])
+		self.armcolour = {'1_arm':'black','2_arm':'black','3_interarm':'red','4_interarm':'red'}
+	
+	def info(self):
+		
+		'''
+		here goes basic info for the user about this model
+		'''
+
+		print('')
+		print('------------------------')	
+		dfmodlist = pd.DataFrame(self.arms,columns=['Arm list'])
+		print(dfmodlist)
+		print('------------------------')		
+		
+	
+	def getdata(self):
+		'''
+		
+		'''
+
+		dt = fitsread(self.loc+'/'+self.fname)
+		self.data0 = dt.copy()
+		
+		xsun = self.xsun			
+			
+			
+		# rescaling to |xsun|
+		qnts = ['rgc1','xhc1','yhc1','rgc2','xhc2','yhc2']
+		for qnt in qnts:
+			dt[qnt] = dt[qnt]*abs(xsun)		
+		
+		
+		
+		#----- add phase-shifted arms as `3` and `4`
+		
+	
+	
+		dloc = self.loc+'/phase_shifted'
+		for inum in [3,4]:
+			dt['xhc'+str(inum)] = np.load(dloc+'/Arm'+str(inum)+'_X_hel.npy')
+			dt['yhc'+str(inum)] = np.load(dloc+'/Arm'+str(inum)+'_Y_hel.npy')
+			dt['rgc'+str(inum)] = np.sqrt( ((dt['xhc'+str(inum)] + xsun)**2.) + ((dt['yhc'+str(inum)])**2.) )
+		
+		
+		#------------------
+		
+		
+		
+		self.data = dt.copy()
+
+		return 
+
+
+
+	def output_copy(self,color='',typ_='cartesian',arm='all'):	
+
+		#self.getdata() 
+
+		xsun = self.xsun
+		params = self.getparams(arm) 
+
+
+		self.getdata(xsun_=[xsun])
+		dt = self.data.copy()
+		# print(list(dt.keys()))
+		
+		if color == '':
+			color = 'black'
+					
+		numbs = [arm]
+		if arm == 'all':
+			numbs = ['1','2','4']
+			# numbs = ['2','3','4']
+		elif arm == 'main':
+			numbs = ['1','2']
+			# numbs = ['1','4']
+
+		
+		
+		self.dused = {}
+		self.dused['rgc'] = []
+		self.dused['xgc'] = []
+		self.dused['yhc'] = []
+		self.dused['phi1'] = []
+		self.dused['phi4'] = []
+		
+		
+		for numb in numbs:
+			
+			linestyle = '-'
+			if float(numb) > 2:
+				linestyle = '--'
+			
+			xhc = dt['xhc'+numb]
+			yhc = dt['yhc'+numb]
+			rgc = dt['rgc'+numb]
+			
+			xgc = xhc + xsun
+			
+			if typ_ == 'HC':	
+				
+				
+				# plt.plot(xhc,yhc,color,label=arm,linestyle=linestyle,linewidth=linewidth,markersize=2)
+				plt.plot(xhc,yhc,color,linestyle=linestyle,linewidth=linewidth,markersize=2)
+				plt.plot(0.,0.,marker='o',markersize=markersize,color='black')
+				plt.plot(-xsun,0.,marker='+',markersize=markersize,color='black')
+
+				# plt.xlabel('X$_{HC}$')
+				# plt.ylabel('Y$_{HC}$')			
+
+
+			
+			if typ_ == 'GC':	
+				
+				# plt.plot(xgc,yhc,color,label=arm,linestyle=linestyle,linewidth=linewidth)
+				plt.plot(xgc,yhc,color,linestyle=linestyle,linewidth=linewidth)
+				plt.axvline(xsun,linewidth=1,linestyle='--')			
+				plt.axhline(0,linewidth=1,linestyle='--')			
+				# plt.xlabel('X$_{GC}$')
+				# plt.ylabel('Y$_{GC}$')
+				plt.plot(0.,0.,marker='+',markersize=10,color='black')
+				plt.plot(xsun,0.,marker='o',markersize=10,color='black')
+				self.dused['xgc'].append(xgc)
+				self.dused['yhc'].append(yhc)
+		
+
+			if typ_ =='polar':
+				
+
+				phi1 = np.arctan2(yhc,-xgc)
+				
+				phi2 = np.degrees(np.arctan(yhc/-xgc))
+				phi3 = np.degrees(np.arctan2(yhc,xgc))%180.	
+				phi4 = np.degrees(np.arctan2(yhc,xgc))%360.	
+				
+				# phi3 = 180.-np.degrees(phi1)
+				
+				# phi1 = (np.arctan2(yhc,xgc))	
+				# plt.plot(np.degrees(phi1),rgc,color,linestyle='--',linewidth=linewidth)
+				# plt.plot(np.degrees(phi1),rgc,'.',color='blue')
+				plt.plot(phi1,rgc,color=color,markersize=markersize,linestyle=linestyle,linewidth=linewidth)
+
+				self.dused['rgc'].append(rgc)
+				self.dused['xgc'].append(xgc)
+				self.dused['yhc'].append(yhc)
+				self.dused['phi1'].append(phi1)
+				self.dused['phi4'].append(phi4)
+				
+				
+			if typ_ =='polargrid':
+				
+
+				phi1 = np.arctan2(yhc,-xgc)
+				
+				phi2 = np.degrees(np.arctan(yhc/-xgc))
+				phi3 = np.degrees(np.arctan2(yhc,xgc))%180.	
+				phi4 = np.degrees(np.arctan2(yhc,xgc))%360.	
+				
+				# phi3 = 180.-np.degrees(phi1)
+
+
+				if numb == numbs[0]:
+					plt.plot(np.radians(phi4),rgc,color=color,markersize=markersize,linestyle=linestyle,linewidth=linewidth,label='NIR')
+
+				else:
+					plt.plot(np.radians(phi4),rgc,color=color,markersize=markersize,linestyle=linestyle,linewidth=linewidth)
+					
+
+
+
+				self.dused['rgc'].append(rgc)
+				self.dused['xgc'].append(xgc)
+				self.dused['yhc'].append(yhc)
+				self.dused['phi1'].append(phi1)
+				self.dused['phi4'].append(phi4)
+				
+				
+				# plt.plot(xgc,yhc,'.',color=color)
+		
+		# plt.legend() 
+		return 
+
+
+	def output_(self,color='',typ_='cartesian',arm='all'):	
+
+		#self.getdata() 
+
+		xsun = self.xsun
+		self.getdata()
+		dt = self.data.copy()
+		# print(list(dt.keys()))
+		
+		if color == '':
+			color = 'black'
+					
+		numbs = [arm]
+		if arm == 'all':
+			numbs = ['1','2','4']
+			# numbs = ['2','3','4']
+		elif arm == 'main':
+			numbs = ['1','2']
+			# numbs = ['1','4']
+
+		
+		
+		self.dused = {}
+		self.dused['rgc'] = []
+		self.dused['xgc'] = []
+		self.dused['yhc'] = []
+		self.dused['phi1'] = []
+		self.dused['phi4'] = []
+		
+		
+		for numb in numbs:
+			
+			linestyle = '-'
+			if float(numb) > 2:
+				linestyle = '--'
+			
+			xhc = dt['xhc'+numb]
+			yhc = dt['yhc'+numb]
+			rgc = dt['rgc'+numb]
+			
+			xgc = xhc + xsun
+			
+			if typ_ == 'HC':	
+				
+				
+				# plt.plot(xhc,yhc,color,label=arm,linestyle=linestyle,linewidth=linewidth,markersize=2)
+				plt.plot(xhc,yhc,color,linestyle=linestyle,linewidth=linewidth,markersize=2)
+				plt.plot(0.,0.,marker='o',markersize=markersize,color='black')
+				plt.plot(-xsun,0.,marker='+',markersize=markersize,color='black')
+
+				# plt.xlabel('X$_{HC}$')
+				# plt.ylabel('Y$_{HC}$')			
+
+
+			
+			if typ_ == 'GC':	
+				
+				# plt.plot(xgc,yhc,color,label=arm,linestyle=linestyle,linewidth=linewidth)
+				plt.plot(xgc,yhc,color,linestyle=linestyle,linewidth=linewidth)
+				plt.axvline(xsun,linewidth=1,linestyle='--')			
+				plt.axhline(0,linewidth=1,linestyle='--')			
+				# plt.xlabel('X$_{GC}$')
+				# plt.ylabel('Y$_{GC}$')
+				plt.plot(0.,0.,marker='+',markersize=10,color='black')
+				plt.plot(xsun,0.,marker='o',markersize=10,color='black')
+				self.dused['xgc'].append(xgc)
+				self.dused['yhc'].append(yhc)
+		
+
+			if typ_ =='polar':
+				
+
+				phi1 = np.arctan2(yhc,-xgc)
+				
+				phi2 = np.degrees(np.arctan(yhc/-xgc))
+				phi3 = np.degrees(np.arctan2(yhc,xgc))%180.	
+				phi4 = np.degrees(np.arctan2(yhc,xgc))%360.	
+				
+				# phi3 = 180.-np.degrees(phi1)
+				
+				# phi1 = (np.arctan2(yhc,xgc))	
+				# plt.plot(np.degrees(phi1),rgc,color,linestyle='--',linewidth=linewidth)
+				# plt.plot(np.degrees(phi1),rgc,'.',color='blue')
+				plt.plot(phi1,rgc,color=color,markersize=markersize,linestyle=linestyle,linewidth=linewidth)
+
+				self.dused['rgc'].append(rgc)
+				self.dused['xgc'].append(xgc)
+				self.dused['yhc'].append(yhc)
+				self.dused['phi1'].append(phi1)
+				self.dused['phi4'].append(phi4)
+				
+				
+			if typ_ =='polargrid':
+				
+
+				phi1 = np.arctan2(yhc,-xgc)
+				
+				phi2 = np.degrees(np.arctan(yhc/-xgc))
+				phi3 = np.degrees(np.arctan2(yhc,xgc))%180.	
+				phi4 = np.degrees(np.arctan2(yhc,xgc))%360.	
+				
+				# phi3 = 180.-np.degrees(phi1)
+
+
+				if numb == numbs[0]:
+					plt.plot(np.radians(phi4),rgc,color=color,markersize=markersize,linestyle=linestyle,linewidth=linewidth,label='NIR')
+
+				else:
+					plt.plot(np.radians(phi4),rgc,color=color,markersize=markersize,linestyle=linestyle,linewidth=linewidth)
+					
+
+
+
+				self.dused['rgc'].append(rgc)
+				self.dused['xgc'].append(xgc)
+				self.dused['yhc'].append(yhc)
+				self.dused['phi1'].append(phi1)
+				self.dused['phi4'].append(phi4)
+				
+				
+				# plt.plot(xgc,yhc,'.',color=color)
+		
+		# plt.legend() 
+		return 
+
+	
+
 
 
 class reid_spiral(object):
@@ -673,6 +814,10 @@ class main_(object):
 	
 	def __init__(self,xsun=-8.277):
 		
+
+		self.root_ = root_
+		self.dataloc = dataloc
+		
 		self.xsun = xsun
 		self.Rsun = -self.xsun
 		
@@ -685,9 +830,9 @@ class main_(object):
 		think of a name check exception
 		'''
 		
-		self.models = ['Drimmel_NIR_2000','DKPS_ceph_2024','Reid_2019','Poggio_2021','Taylor_Cordes_1992']
+		self.models = ['Taylor_Cordes_1992','Drimmel_NIR_2000','Hou_Han_2014','Reid_2019','Poggio_2021','DKPS_ceph_2024']
 		
-		self.models_class = {'Reid_2019':reid_spiral(),'Poggio_2021':spiral_eloisa()}
+		self.models_class = {'Reid_2019':reid_spiral(),'Poggio_2021':spiral_eloisa(),'Drimmel_NIR_2000':spiral_drimmel()}
 	
 
 	def getinfo(self,model=''):
@@ -759,7 +904,7 @@ class main_(object):
 			 raise RuntimeError('model = blank | no model provided \n try self.getino() for list of available models')
 			 
 
-		spimod = self.models_class[model]
+		spimod = self.models_class[model]			
 		spimod.xsun = self.xsun
 		spimod.getarmlist()	
 
