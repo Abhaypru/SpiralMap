@@ -17,12 +17,14 @@ plt.ion()
 
 
 plotattrs = {'plot':True,'coordsys':'GC','markersize':5,'markSunGC':True,'xmin':-16,'xmax':8,'ymin':-12,'ymax':12}
-models = ['Levine_2006', 'Reid_2019','Drimmel_NIR_2000']
+# models = ['Levine_2006', 'Reid_2019','Drimmel_NIR_2000']
+xsun=-8.277
+models = ['Drimmel_ceph_2024']
 plt.close('all')
 plt.figure(figsize=(6,6))
 for use_model in models:
 
-	spirals = sp.main_()
+	spirals = sp.main_(xsun=xsun)
 	spirals.getinfo(model=use_model)
 	spirals.readout(plotattrs,model=use_model,arm='all')
 	
