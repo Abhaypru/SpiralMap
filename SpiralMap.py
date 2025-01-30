@@ -498,9 +498,7 @@ class spiral_drimmel(object):
 		self.getdata()
 		dt = self.data.copy()
 		
-		
-		if color == '':
-			color = 'black'
+	
 					
 		numbs = [arm]
 		if arm == 'all':
@@ -526,8 +524,13 @@ class spiral_drimmel(object):
 			ygc = yhc
 		
 			if typ_ == 'cartesian':
-				return xhc,yhc,xgc,ygc
 				
+				self.dout = {'xhc':xhc,
+							 'yhc':yhc,
+							 'xgc':xgc,
+							 'ygc':ygc}					
+				
+			
 
 			if typ_ =='polar':
 				
@@ -679,7 +682,11 @@ class spiral_levine(object):
 
 			xhc,yhc,xgc,ygc = self.model_(arm);			
 
-			return xhc,yhc,xgc,ygc
+			self.dout = {'xhc':xhc,
+						 'yhc':yhc,
+						 'xgc':xgc,
+						 'ygc':ygc}								
+
 	
 class reid_spiral(object):
 
@@ -801,7 +808,12 @@ class reid_spiral(object):
 			xhc2 = xgc2 - xsun
 	
 			yhc = ygc
-			return xhc,yhc,xgc,ygc
+			
+			self.dout = {'xhc':xhc,
+						 'yhc':yhc,
+						 'xgc':xgc,
+						 'ygc':ygc}								
+			
 		
 		if typ_ =='polar':
 			
@@ -954,21 +966,24 @@ class main_(object):
 				plotattrs[ky] = self.plotattrs_default[ky]
 
 		if arm != 'all':		
-			xhc,yhc,xgc,ygc = spimod.output_(arm)
-			self.dout = {'xhc':xhc,'yhc':yhc,'xgc':xgc,'ygc':ygc}		
+
+			spimod.output_(arm)
 
 
 			if plotattrs['plot']:				
 
 				if plotattrs['armcolour'] == '':
 					plotattrs['armcolour'] = spimod.armcolour[arm]				
-				plt.plot(self.dout['x'+plotattrs['coordsys'].lower()],self.dout['y'+plotattrs['coordsys'].lower()],'.',color=plotattrs['armcolour'])			
+				plt.plot(spimod.dout['x'+plotattrs['coordsys'].lower()],spimod.dout['y'+plotattrs['coordsys'].lower()],'.',color=plotattrs['armcolour'])	
+				
+				if 'xhc_ex' in 	spimod.dout.keys():
+					plt.plot(spimod.dout['x'+plotattrs['coordsys'].lower()+'_ex'],spimod.dout['y'+plotattrs['coordsys'].lower()+'_ex'],'--',color=plotattrs['armcolour'])						
 				
 
 				
 				if plotattrs['xmin'] == '' or plotattrs['xmax'] == '' or plotattrs['ymin'] == '' or plotattrs['ymax'] == '' :
-					xmin,xmax = np.nanmin(self.dout['x'+plotattrs['coordsys'].lower()]),np.nanmax(self.dout['x'+plotattrs['coordsys'].lower()])
-					ymin,ymax = np.nanmin(self.dout['y'+plotattrs['coordsys'].lower()]),np.nanmax(self.dout['y'+plotattrs['coordsys'].lower()])
+					xmin,xmax = np.nanmin(spimod.dout['x'+plotattrs['coordsys'].lower()]),np.nanmax(spimod.dout['x'+plotattrs['coordsys'].lower()])
+					ymin,ymax = np.nanmin(spimod.dout['y'+plotattrs['coordsys'].lower()]),np.nanmax(spimod.dout['y'+plotattrs['coordsys'].lower()])
 				else:
 					xmin,xmax = plotattrs['xmin'],plotattrs['xmax']
 					ymin,ymax = plotattrs['ymin'],plotattrs['ymax']
@@ -987,19 +1002,18 @@ class main_(object):
 
 			for arm_temp in spimod.arms:
 				spimod.output_(arm_temp)
-				self.dout = spimod.dout # remove this later
-				# self.dout = {'xhc':xhc,'yhc':yhc,'xgc':xgc,'ygc':ygc}								
-
+				
 				if plotattrs['plot']:
 					
-					plt.plot(self.dout['x'+plotattrs['coordsys'].lower()],self.dout['y'+plotattrs['coordsys'].lower()],'.',color=spimod.armcolour[arm_temp])
-					plt.plot(self.dout['x'+plotattrs['coordsys'].lower()+'_ex'],self.dout['y'+plotattrs['coordsys'].lower()+'_ex'],'--',color=spimod.armcolour[arm_temp])
+					plt.plot(spimod.dout['x'+plotattrs['coordsys'].lower()],spimod.dout['y'+plotattrs['coordsys'].lower()],'.',color=spimod.armcolour[arm_temp])
 
+				if 'xhc_ex' in 	spimod.dout.keys():
+					plt.plot(spimod.dout['x'+plotattrs['coordsys'].lower()+'_ex'],spimod.dout['y'+plotattrs['coordsys'].lower()+'_ex'],'--',color=spimod.armcolour[arm_temp])						
 
 
 					if plotattrs['xmin'] == '' or plotattrs['xmax'] == '' or plotattrs['ymin'] == '' or plotattrs['ymax'] == '' :
-						xmin,xmax = np.nanmin(self.dout['x'+plotattrs['coordsys'].lower()]),np.nanmax(self.dout['x'+plotattrs['coordsys'].lower()])
-						ymin,ymax = np.nanmin(self.dout['y'+plotattrs['coordsys'].lower()]),np.nanmax(self.dout['y'+plotattrs['coordsys'].lower()])
+						xmin,xmax = np.nanmin(spimod.dout['x'+plotattrs['coordsys'].lower()]),np.nanmax(spimod.dout['x'+plotattrs['coordsys'].lower()])
+						ymin,ymax = np.nanmin(spimod.dout['y'+plotattrs['coordsys'].lower()]),np.nanmax(spimod.dout['y'+plotattrs['coordsys'].lower()])
 					else:
 						xmin,xmax = plotattrs['xmin'],plotattrs['xmax']
 						ymin,ymax = plotattrs['ymin'],plotattrs['ymax']
