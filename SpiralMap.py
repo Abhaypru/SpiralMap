@@ -7,7 +7,6 @@ exec(open("./dtools.py").read()) # utilities package
 root_ = os.getcwd()
 dataloc = root_+'/datafiles'
 
-
 class spiral_cepheids(object):
 	'''
 	
@@ -314,6 +313,107 @@ class spiral_eloisa(object):
 		print('')
 			
  
+
+
+class spiral_levine(object):
+	
+	
+	
+	def __init__(self):
+		"""Initialize spiral parameters from Levine et al. 2006"""
+		
+		self.getarmlist()
+	
+	def getarmlist(self):
+		
+		
+		self.arms = np.array(['Arm1','Arm2','Arm3','Arm4'])
+		self.armcolour = {'Arm1':'yellow','Arm2':'green','Arm3':'blue','Arm4':'purple'}
+		self.getparams()
+	
+	def info(self):
+		
+		'''
+		here goes basic info for the user about this model
+		'''
+	
+		print('')
+		print('------------------------')	
+		dfmodlist = pd.DataFrame(self.arms,columns=['Arm list'])
+		print(dfmodlist)
+		print('------------------------')		
+	
+	
+	def getparams(self):
+
+		self.arms_model = {
+			'Arm1': {'pitch': 24, 'phi0': 56},   # Pitch angle and Solar crossing angle
+			'Arm2': {'pitch': 24, 'phi0': 135},
+			'Arm3': {'pitch': 25, 'phi0': 189},
+			'Arm4': {'pitch': 21, 'phi0': 234}
+		}
+			
+		
+	def model_(self,arm_name, R_max=25, n_points=1000):
+		"""Generate spiral arm coordinates using logarithmic spiral formula"""
+
+		params = self.arms_model[arm_name]
+		pitch_rad = np.radians(params['pitch'])
+		phi0_rad = np.radians(params['phi0'])
+		
+		# Calculate maximum phi to reach R_max
+		phi_max = phi0_rad + (np.log(R_max/self.R0)/np.tan(pitch_rad))
+		
+		# Generate angular range
+		phi = np.linspace(phi0_rad, phi_max, n_points) #n_
+		
+		# Logarithmic spiral equation
+		R = self.R0 * np.exp((phi - phi0_rad) * np.tan(pitch_rad))
+		
+		# Convert to Cartesian coordinates
+		x_gc = R * np.cos(phi)
+		y_gc = R * np.sin(phi)
+		
+		# Convert to Heliocentric coordinates
+		x_hc = x_gc + self.R0  # Sun at (-R0, 0) in GC
+
+		return x_hc, y_gc,x_gc, y_gc
+	
+	def plot_arms(self, coord_system='HC', R_max=25, show_sun=True):
+		"""Plot spiral arms in specified coordinate system"""
+		plt.figure(figsize=(10, 10))
+		colors = plt.cm.viridis(np.linspace(0, 1, len(self.arms)))
+		
+		for arm, color in zip(self.arms_model.keys(), colors):
+			x_gc, y_gc, x_hc, y_hc = self.generate_arm(arm, R_max)
+			
+			if coord_system.upper() == 'GC':
+				plt.plot(x_gc, y_gc, color=color, label=arm)
+				plt.plot(-self.R0, 0, 'o', markersize=8, color='orange', label='Sun') if show_sun else None
+				plt.xlabel('X (GC) [kpc]')
+				plt.ylabel('Y (GC) [kpc]')
+			elif coord_system.upper() == 'HC':
+				plt.plot(x_hc, y_hc, color=color, label=arm)
+				plt.plot(0, 0, 'o', markersize=8, color='orange', label='Sun') if show_sun else None
+				plt.xlabel('X (HC) [kpc]')
+				plt.ylabel('Y (HC) [kpc]')
+			else:
+				raise ValueError("Coordinate system must be 'GC' or 'HC'")
+	
+	def output_(self,arm,color='',typ_='cartesian'):	
+		
+		xsun = self.xsun
+		self.R0 = -xsun  # Solar Galactocentric radius (kpc)
+				
+		if typ_ =='cartesian':
+
+			xhc,yhc,xgc,ygc = self.model_(arm);			
+
+			return xhc,yhc,xgc,ygc
+		
+	
+	
+
 
 class spiral_drimmel(object):
 	'''
@@ -647,7 +747,6 @@ class spiral_drimmel(object):
 				# plt.legend() 
 				return 
 
-	
 
 
 
@@ -832,9 +931,9 @@ class main_(object):
 		think of a name check exception
 		'''
 		
-		self.models = ['Taylor_Cordes_1992','Drimmel_NIR_2000','Hou_Han_2014','Reid_2019','Poggio_2021','DKPS_ceph_2024']
+		self.models = ['Taylor_Cordes_1992','Drimmel_NIR_2000','Levine_2006','Hou_Han_2014','Reid_2019','Poggio_2021','Drimmel_ceph_2024']
 		
-		self.models_class = {'Reid_2019':reid_spiral(),'Poggio_2021':spiral_eloisa(),'Drimmel_NIR_2000':spiral_drimmel()}
+		self.models_class = {'Reid_2019':reid_spiral(),'Levine_2006':spiral_levine(),'Poggio_2021':spiral_eloisa(),'Drimmel_NIR_2000':spiral_drimmel()}
 	
 
 	def getinfo(self,model=''):

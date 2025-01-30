@@ -746,6 +746,9 @@ if __name__ == "__main__":
 
     
 """""""""""""""""""""""""""""""""""""""""""""""
+
+
+
 		
 # kinematics
 def get_lsr(typ='schonrich',show=False):
