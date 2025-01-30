@@ -1031,7 +1031,7 @@ class main_(object):
 
 				
 
-
+		self.dout = spimod.dout
 
 		self.plotattrs = plotattrs				
 
