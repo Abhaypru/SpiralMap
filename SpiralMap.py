@@ -1014,6 +1014,7 @@ class main_(object):
 				plt.ylim([ymin,ymax])	
 					
 		elif arm =='all':
+
 			for arm_temp in spimod.arms:
 				xhc,yhc,xgc,ygc = spimod.output_(arm_temp)
 				self.dout = {'xhc':xhc,'yhc':yhc,'xgc':xgc,'ygc':ygc}								
