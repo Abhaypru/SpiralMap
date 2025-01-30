@@ -68,3 +68,25 @@ def pickleread(file1):
 	
 	
 	return data
+
+def sqrtsum(ds=[],prnt=False):
+	'''
+	handy function to sum up the squares and return the square-root
+	'''
+	
+	if prnt:
+		print(len(ds))
+	
+	mysum = 0
+	for i in range(len(ds)):
+		
+		
+		tmp = ds[i]**2.
+		mysum+=tmp
+	
+	
+	resval = np.sqrt(mysum)
+	
+	
+	return resval
+

@@ -16,15 +16,14 @@ plt.ion()
 # spirals.readout(plotattrs,model='Drimmel_NIR_2000',arm='all')
 
 
-plotattrs = {'plot':True,'coordsys':'GC','markersize':5,'markSunGC':True,'xmin':-16,'xmax':8,'ymin':-12,'ymax':12}
-models = ['Levine_2006', 'Reid_2019','Drimmel_NIR_2000','Drimmel_ceph_2024']
+plotattrs = {'plot':True,'coordsys':'HC','markersize':5,'markSunGC':True,'xmin':-16,'xmax':8,'ymin':-12,'ymax':12}
+models = ['Levine_2006', 'Reid_2019','Drimmel_NIR_2000','Drimmel_ceph_2024','Poggio_2021']
 xsun=-8.277
-# models = ['Drimmel_ceph_2024']
+# models = ['Poggio_2021']
 plt.close('all')
 plt.figure(figsize=(6,6))
-for use_model in models:
-
-	spirals = sp.main_(xsun=xsun)
+spirals = sp.main_(xsun=xsun)
+for use_model in models:	
 	spirals.getinfo(model=use_model)
 	spirals.readout(plotattrs,model=use_model,arm='all')
 	

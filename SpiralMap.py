@@ -7,6 +7,71 @@ exec(open("./dtools.py").read()) # utilities package
 root_ = os.getcwd()
 dataloc = root_+'/datafiles'
 
+		
+
+
+class spiral_eloisa(object):
+	def __init__(self):
+
+		'''
+		currently only makes it heliocentric, edit it!	
+		'''	
+
+		self.loc = dataloc+'/Poggio_OB_EDR3'
+
+		self.getarmlist()		
+
+	def getarmlist(self):
+
+		self.arms= np.array(['all'])
+		self.armcolour = {'all':'black'}
+	
+	def info(self):
+		
+		'''
+		here goes basic info for the user about this model
+		'''
+
+		print('')
+		print('------------------------')	
+		dfmodlist = pd.DataFrame(self.arms,columns=['Arm list'])
+		print(dfmodlist)
+		print('------------------------')		
+		
+	
+	def output_(self):
+	
+		'''
+		plot contours of OB star spirals from Poggio 2021	
+		'''	
+	
+
+		# #read overdensity contours
+		xvalues_overdens=np.load(self.loc+'/xvalues_dens.npy')
+		yvalues_overdens=np.load(self.loc+'/yvalues_dens.npy')
+		over_dens_grid=np.load(self.loc+'/over_dens_grid_threshold_0_003_dens.npy')		
+		phi1_dens = np.arctan2(yvalues_overdens,-xvalues_overdens)
+		Rvalues_dens = sqrtsum(ds=[xvalues_overdens,yvalues_overdens])
+		
+		# # #------------------ overplot spiral arms in overdens ------------------
+		iniz_overdens=0 #.1
+		fin_overdens=1.5 #.1
+		N_levels_overdens=2
+		levels_overdens=np.linspace(iniz_overdens,fin_overdens,N_levels_overdens)
+		cset1 = plt.contourf(xvalues_overdens, yvalues_overdens,over_dens_grid.T, levels=levels_overdens,alpha=0.2,cmap='Greys')
+		# cset1 = plt.contourf(phi1_dens, Rvalues_dens,over_dens_grid.T, levels=levels_overdens,alpha=0.2,cmap='Greys')
+		
+		iniz_overdens=0. #.1
+		fin_overdens=1.5 #.1
+		N_levels_overdens=4#7
+		levels_overdens=np.linspace(iniz_overdens,fin_overdens,N_levels_overdens)
+		cset1 = plt.contour(xvalues_overdens, yvalues_overdens,over_dens_grid.T, levels=levels_overdens,colors='black',linewidths=0.7)	
+		# cset1 = plt.contour(phi1_dens, Rvalues_dens,over_dens_grid.T, levels=levels_overdens,colors='black',linewidths=0.7)	
+			
+ 
+#----------------------
+# done
+#----------------------
 class spiral_cepheids(object):
 	'''
 	
@@ -372,53 +437,6 @@ class spiral_cepheids(object):
 				self.dused['yhc'].append(yhc)
 				self.dused['phi4'].append(phi4)
 				
-					
-
-
-class spiral_eloisa(object):
-	def __init__(self):
-		self.noth = 0
-		
-	def plotit_(self):
-		print('')
-		
-
-
-	def spiral_eloisa(self):
-	
-		'''
-		plot contours of OB star spirals from Poggio 2021	
-		'''	
-	
-		pdocdir = getdirec('pdocdir')
-		dloc = pdocdir+'/science_verification/DR3/data'
-		# #read overdensity contours
-		xvalues_overdens=np.load(dloc+'/Eloisa_contours/xvalues_dens.npy')
-		yvalues_overdens=np.load(dloc+'/Eloisa_contours/yvalues_dens.npy')
-		over_dens_grid=np.load(dloc+'/Eloisa_contours/over_dens_grid_threshold_0_003_dens.npy')
-		
-		phi1_dens = np.arctan2(yvalues_overdens,-xvalues_overdens)
-		Rvalues_dens = sqrtsum(ds=[xvalues_overdens,yvalues_overdens])
-		
-		# # #------------------ overplot spiral arms in overdens ------------------
-		iniz_overdens=0 #.1
-		fin_overdens=1.5 #.1
-		N_levels_overdens=2
-		levels_overdens=np.linspace(iniz_overdens,fin_overdens,N_levels_overdens)
-		cset1 = plt.contourf(xvalues_overdens, yvalues_overdens,over_dens_grid.T, levels=levels_overdens,alpha=0.2,cmap='Greys')
-		# cset1 = plt.contourf(phi1_dens, Rvalues_dens,over_dens_grid.T, levels=levels_overdens,alpha=0.2,cmap='Greys')
-		
-		iniz_overdens=0. #.1
-		fin_overdens=1.5 #.1
-		N_levels_overdens=4#7
-		levels_overdens=np.linspace(iniz_overdens,fin_overdens,N_levels_overdens)
-		cset1 = plt.contour(xvalues_overdens, yvalues_overdens,over_dens_grid.T, levels=levels_overdens,colors='black',linewidths=0.7)	
-		# cset1 = plt.contour(phi1_dens, Rvalues_dens,over_dens_grid.T, levels=levels_overdens,colors='black',linewidths=0.7)	
-		print('')
-			
- 
-
-
 class spiral_drimmel(object):
 	'''
 	
@@ -687,7 +705,6 @@ class spiral_levine(object):
 						 'xgc':xgc,
 						 'ygc':ygc}								
 
-	
 class reid_spiral(object):
 
 
@@ -850,8 +867,9 @@ class reid_spiral(object):
 			
 			return 
 
-
-
+#-------------------------
+# main class:
+#-------------------------
 
 class main_(object):
 	
@@ -916,8 +934,6 @@ class main_(object):
 								'ymin':'',
 								'ymax':''}
 		
-
-
 	
 	def add2plot(self,coordsys):
 		
@@ -958,59 +974,32 @@ class main_(object):
 		spimod.xsun = self.xsun
 		spimod.getarmlist()	
 
-		
+		if 'poggio' in model.lower():		
+			spimod.output_()	
 
-		# in case plot attributes are not provided, or incomplete
-		for ky in self.plotattrs_default.keys():			
-			if ky not in list(plotattrs.keys()):				
-				plotattrs[ky] = self.plotattrs_default[ky]
+		else:
 
-		if arm != 'all':		
-
-			spimod.output_(arm)
-
-
-			if plotattrs['plot']:				
-
-				if plotattrs['armcolour'] == '':
-					plotattrs['armcolour'] = spimod.armcolour[arm]				
-				plt.plot(spimod.dout['x'+plotattrs['coordsys'].lower()],spimod.dout['y'+plotattrs['coordsys'].lower()],'.',color=plotattrs['armcolour'])	
-				
-				if 'xhc_ex' in 	spimod.dout.keys():
-					plt.plot(spimod.dout['x'+plotattrs['coordsys'].lower()+'_ex'],spimod.dout['y'+plotattrs['coordsys'].lower()+'_ex'],'--',color=plotattrs['armcolour'])						
-				
-
-				
-				if plotattrs['xmin'] == '' or plotattrs['xmax'] == '' or plotattrs['ymin'] == '' or plotattrs['ymax'] == '' :
-					xmin,xmax = np.nanmin(spimod.dout['x'+plotattrs['coordsys'].lower()]),np.nanmax(spimod.dout['x'+plotattrs['coordsys'].lower()])
-					ymin,ymax = np.nanmin(spimod.dout['y'+plotattrs['coordsys'].lower()]),np.nanmax(spimod.dout['y'+plotattrs['coordsys'].lower()])
-				else:
-					xmin,xmax = plotattrs['xmin'],plotattrs['xmax']
-					ymin,ymax = plotattrs['ymin'],plotattrs['ymax']
-
-
-				plt.xlabel('X$_{'+plotattrs['coordsys']+'}$ [Kpc]')
-				plt.ylabel('Y$_{'+plotattrs['coordsys']+'}$ [Kpc]')
-				
-				
-				
-				
-				plt.xlim([xmin,xmax])	
-				plt.ylim([ymin,ymax])	
+			# in case plot attributes are not provided, or incomplete
+			for ky in self.plotattrs_default.keys():			
+				if ky not in list(plotattrs.keys()):				
+					plotattrs[ky] = self.plotattrs_default[ky]
+	
+			if arm != 'all':		
+	
+				spimod.output_(arm)
+	
+	
+				if plotattrs['plot']:				
+	
+					if plotattrs['armcolour'] == '':
+						plotattrs['armcolour'] = spimod.armcolour[arm]				
+					plt.plot(spimod.dout['x'+plotattrs['coordsys'].lower()],spimod.dout['y'+plotattrs['coordsys'].lower()],'.',color=plotattrs['armcolour'])	
 					
-		elif arm =='all':
-
-			for arm_temp in spimod.arms:
-				spimod.output_(arm_temp)
-				
-				if plotattrs['plot']:
+					if 'xhc_ex' in 	spimod.dout.keys():
+						plt.plot(spimod.dout['x'+plotattrs['coordsys'].lower()+'_ex'],spimod.dout['y'+plotattrs['coordsys'].lower()+'_ex'],'--',color=plotattrs['armcolour'])						
 					
-					plt.plot(spimod.dout['x'+plotattrs['coordsys'].lower()],spimod.dout['y'+plotattrs['coordsys'].lower()],'.',color=spimod.armcolour[arm_temp])
-
-				if 'xhc_ex' in 	spimod.dout.keys():
-					plt.plot(spimod.dout['x'+plotattrs['coordsys'].lower()+'_ex'],spimod.dout['y'+plotattrs['coordsys'].lower()+'_ex'],'--',color=spimod.armcolour[arm_temp])						
-
-
+	
+					
 					if plotattrs['xmin'] == '' or plotattrs['xmax'] == '' or plotattrs['ymin'] == '' or plotattrs['ymax'] == '' :
 						xmin,xmax = np.nanmin(spimod.dout['x'+plotattrs['coordsys'].lower()]),np.nanmax(spimod.dout['x'+plotattrs['coordsys'].lower()])
 						ymin,ymax = np.nanmin(spimod.dout['y'+plotattrs['coordsys'].lower()]),np.nanmax(spimod.dout['y'+plotattrs['coordsys'].lower()])
@@ -1018,22 +1007,50 @@ class main_(object):
 						xmin,xmax = plotattrs['xmin'],plotattrs['xmax']
 						ymin,ymax = plotattrs['ymin'],plotattrs['ymax']
 	
-
+	
 					plt.xlabel('X$_{'+plotattrs['coordsys']+'}$ [Kpc]')
 					plt.ylabel('Y$_{'+plotattrs['coordsys']+'}$ [Kpc]')
-										
+					
+					
+					
+					
 					plt.xlim([xmin,xmax])	
 					plt.ylim([ymin,ymax])	
+						
+			elif arm =='all':
+	
+				for arm_temp in spimod.arms:
+					spimod.output_(arm_temp)
 					
-					if plotattrs['markSunGC']:
-						self.add2plot(plotattrs['coordsys'])
-
-
-				
-
-		self.dout = spimod.dout
-
-		self.plotattrs = plotattrs				
+					if plotattrs['plot']:
+						
+						plt.plot(spimod.dout['x'+plotattrs['coordsys'].lower()],spimod.dout['y'+plotattrs['coordsys'].lower()],'.',color=spimod.armcolour[arm_temp])
+	
+					if 'xhc_ex' in 	spimod.dout.keys():
+						plt.plot(spimod.dout['x'+plotattrs['coordsys'].lower()+'_ex'],spimod.dout['y'+plotattrs['coordsys'].lower()+'_ex'],'--',color=spimod.armcolour[arm_temp])						
+	
+	
+						if plotattrs['xmin'] == '' or plotattrs['xmax'] == '' or plotattrs['ymin'] == '' or plotattrs['ymax'] == '' :
+							xmin,xmax = np.nanmin(spimod.dout['x'+plotattrs['coordsys'].lower()]),np.nanmax(spimod.dout['x'+plotattrs['coordsys'].lower()])
+							ymin,ymax = np.nanmin(spimod.dout['y'+plotattrs['coordsys'].lower()]),np.nanmax(spimod.dout['y'+plotattrs['coordsys'].lower()])
+						else:
+							xmin,xmax = plotattrs['xmin'],plotattrs['xmax']
+							ymin,ymax = plotattrs['ymin'],plotattrs['ymax']
+		
+	
+						plt.xlabel('X$_{'+plotattrs['coordsys']+'}$ [Kpc]')
+						plt.ylabel('Y$_{'+plotattrs['coordsys']+'}$ [Kpc]')
+											
+						plt.xlim([xmin,xmax])	
+						plt.ylim([ymin,ymax])	
+						
+						if plotattrs['markSunGC']:
+							self.add2plot(plotattrs['coordsys'])
+		
+	
+			self.dout = spimod.dout
+	
+			self.plotattrs = plotattrs				
 
 		return 
 
