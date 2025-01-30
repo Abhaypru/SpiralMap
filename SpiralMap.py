@@ -314,6 +314,7 @@ class spiral_eloisa(object):
 			
  
 
+
 class spiral_drimmel(object):
 	'''
 	
@@ -615,8 +616,6 @@ class spiral_drimmel(object):
 		
 				# plt.legend() 
 				return 
-
-
 
 class spiral_levine(object):
 	
