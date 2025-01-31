@@ -749,7 +749,99 @@ if __name__ == "__main__":
 
 
 
-		
+
+
+class HouHanSpiral:
+    def __init__(self, R0=8.3, Θ0=239):
+        """
+        Initialize spiral parameters from Hou & Han 2014.
+        """
+        self.R0 = R0  # Solar Galactocentric radius (kpc)
+        #self.s0 = Θ0  # Circular velocity at Sun (km/s)
+
+        # Taken value from the table 4 from Hou & Han (2014)
+        self.arms = {
+            'Norma': {'a': 1.1668, 'b': 0.1198, 'c': 0.002557, 'd': 0.0, 'θ_start': 40, 'θ_end': 250},
+            'Scutum-Centaurus': {'a': 5.8002, 'b': -1.8188, 'c': 0.2352, 'd': -0.008999, 'θ_start': 275, 'θ_end': 620},
+            'Sagittarius-Carina': {'a': 4.2300, 'b': -1.1505, 'c': 0.1561, 'd': -0.005898, 'θ_start': 275, 'θ_end': 570},
+            'Perseus': {'a': 0.9744, 'b': 0.1405, 'c': 0.003995, 'd': 0.0, 'θ_start': 280, 'θ_end': 500},
+            'Local': {'a': 0.9887, 'b': 0.1714, 'c': 0.004358, 'd': 0.0, 'θ_start': 280, 'θ_end': 475},
+            'Outer': {'a': 3.3846, 'b': -0.6554, 'c': 0.08170, 'd': 0.0, 'θ_start': 280, 'θ_end': 355}
+        }
+
+    def polynomial_log_spiral(self, θ, a, b, c, d):
+        """Polynomial-logarithmic spiral model."""
+        return np.exp(a + b*np.radians(θ) + c*np.radians(θ)**2 + d*np.radians(θ)**3)
+
+    def generate_arm(self, arm_name, n_points=500):
+        """Generate spiral arm coordinates based on the polynomial-logarithmic model."""
+        params = self.arms[arm_name]
+        θ = np.linspace(params['θ_start'], params['θ_end'], n_points)
+        R = self.polynomial_log_spiral(θ, params['a'], params['b'], params['c'], params['d'])
+        
+        # Convert to Cartesian coordinates (Galactocentric)
+        x_gc = R * np.cos(np.radians(θ))
+        y_gc = R * np.sin(np.radians(θ))
+        
+        # Convert to Heliocentric coordinates
+        x_hc = x_gc + self.R0
+        return x_gc, y_gc, x_hc, y_gc
+
+    def plot_arms(self, coord_system='GC'):
+        """Plot spiral arms in Galactocentric (GC) or Heliocentric (HC) coordinates."""
+        plt.figure(figsize=(12, 12))
+        colors = plt.cm.viridis(np.linspace(0, 1, len(self.arms)))
+
+        for (arm, color) in zip(self.arms.keys(), colors):
+            x_gc, y_gc, x_hc, y_hc = self.generate_arm(arm)
+            
+            if coord_system.upper() == 'GC':
+                plt.plot(x_gc, y_gc, color=color, label=arm)
+                plt.plot(-self.R0, 0, 'o', markersize=8, color='orange', label='Sun')
+            elif coord_system.upper() == 'HC':
+                plt.plot(x_hc, y_hc, color=color, label=arm)
+                plt.plot(0, 0, 'o', markersize=8, color='orange', label='Sun')
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+	    
+	plt.gca().set_aspect('equal')
+        plt.xlabel(f'X ({coord_system}) [kpc]')
+        plt.ylabel(f'Y ({coord_system}) [kpc]')
+        plt.legend()
+        plt.title("Hou & Han (2014) Spiral Arm Model (PL Spiral)")
+        plt.grid(alpha=0.3)
+        plt.show()
+
+    def fit_polynomial_spiral(self, θ_data, R_data, degree=3):
+        """Fit polynomial-logarithmic spiral to arm segments."""
+        log_R_data = np.log(R_data)
+        
+        # Fit polynomial: ln(R) = a + bθ + cθ^2 + dθ^3
+        coeffs = np.polyfit(np.radians(θ_data), log_R_data, degree)
+        
+        return coeffs
+
+# Example usage
+if __name__ == "__main__":
+    spiral_model = HouHanSpiral()
+    
+    # Plot in Heliocentric coordinates
+    spiral_model.plot_arms(coord_system='HC')
+    
+    # Plot in Galactocentric coordinates
+    spiral_model.plot_arms(coord_system='GC')
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+
+
+
+
+
+  
 # kinematics
 def get_lsr(typ='schonrich',show=False):
 	'''
