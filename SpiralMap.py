@@ -158,7 +158,7 @@ class spiral_cepheids(object):
 						 'xhc_ex':xhc_ex,
 						 'yhc_ex':yhc_ex,
 						 'xgc_ex':xgc_ex,	
-						 'ygc_ex':ygc_ex,}	
+						 'ygc_ex':ygc_ex}	
 			
 		if typ_ =='polar':
 						
