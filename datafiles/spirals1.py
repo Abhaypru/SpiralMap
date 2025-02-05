@@ -833,7 +833,7 @@ if __name__ == "__main__":
     spiral_model.plot_arms(coord_system='GC')
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+'''''
 
 
 
@@ -841,7 +841,135 @@ if __name__ == "__main__":
 
 
 
-  
+
+
+from scipy.interpolate import CubicSpline
+
+class TaylorCordesSpiral:
+    def __init__(self, R0=8.5):
+        """
+        Initialize parameters from Taylor & Cordes (1993).
+        """
+        self.R0 = R0  # Solar Galactocentric radius (kpc)
+        self.arms = self._initialize_spiral_arms()
+
+    def _initialize_spiral_arms(self):
+        """
+        Defines the spiral arms based on Taylor & Cordes (1993) Table 1.
+        Returns a list of arm dictionaries with (θ, r) values.
+        """
+        return [
+            {  # Arm 1 
+                'theta_deg': [164, 200, 240, 280, 290, 315, 330],
+                'r_kpc': [3.53, 3.76, 4.44, 5.24, 5.36, 5.81, 5.81],
+                'color': 'blue',
+                'label': 'Arm 1'
+            },
+            {  # Arm 2 
+                'theta_deg': [63, 120, 160, 200, 220, 250, 288],
+                'r_kpc': [3.76, 4.56, 4.79, 5.70, 6.49, 7.29, 8.20],
+                'color': 'green',
+                'label': 'Arm 2'
+            },
+            {  # Arm 3 
+                'theta_deg': [52, 120, 170, 180, 200, 220, 252],
+                'r_kpc': [4.90, 6.27, 6.49, 6.95, 8.20, 8.89, 9.57],
+                'color': 'red',
+                'label': 'Arm 3'
+            },
+            {  # Arm 4 
+                'theta_deg': [20, 70, 100, 160, 180, 200, 223],
+                'r_kpc': [5.92, 7.06, 7.86, 9.68, 10.37, 11.39, 12.08],
+                'color': 'purple',
+                'label': 'Arm 4'
+            }
+        ]
+
+    def _generate_coordinates(self, coord_system='GC'):
+        """
+        Generates x, y coordinates for each spiral arm in either:
+        - GC (Galacto-Centric) frame
+        - HC (Helio-Centric) frame
+        """
+        spiral_data = []
+
+        for arm in self.arms:
+            theta = np.deg2rad(arm['theta_deg'])  # Convert to radians
+            r = np.array(arm['r_kpc'])
+
+            # Cubic spline interpolation
+            cs = CubicSpline(theta, r)
+            
+            # Generate dense θ values
+            theta_fine = np.linspace(min(theta), max(theta), 300)
+            r_fine = cs(theta_fine)
+            
+            # Convert to Galacto-Centric coordinates
+            x_gc = r_fine * np.sin(theta_fine)
+            y_gc = -r_fine * np.cos(theta_fine)
+
+            if coord_system == 'HC':
+                # Convert to Helio-Centric coordinates
+                x = x_gc - self.R0
+                y = y_gc
+            else:
+                x, y = x_gc, y_gc
+
+            # Store results
+            spiral_data.append({'x': x, 'y': y, 'color': arm['color'], 'label': arm['label']})
+
+        return spiral_data
+
+    def plot_arms(self, coord_system='GC'):
+        """
+        Plots the spiral arms in either:
+        - 'GC' (Galacto-Centric)
+        - 'HC' (Helio-Centric)
+        """
+        spiral_data = self._generate_coordinates(coord_system)
+        frame_label = "Galacto-Centric" if coord_system == 'GC' else "Helio-Centric"
+
+
+
+
+	    '''''
+        plt.figure(figsize=(10, 10))
+        plt.title(f"Taylor & Cordes (1993) Spiral Arm Model - {frame_label}", fontsize=14)
+        plt.xlabel("x (kpc) → Galactic Rotation Direction (l=90°)", fontsize=12)
+        plt.ylabel("y (kpc) → Galactic Center Anti-Center (l=180°)", fontsize=12)
+        plt.grid(True, alpha=0.3)
+
+        # Plot each spiral arm
+        for arm in spiral_data:
+            plt.plot(arm['x'], arm['y'], color=arm['color'], lw=2, label=arm['label'])
+
+        # Mark key positions
+        plt.scatter(0, 0, s=120, c='gold', marker='*', edgecolor='black', label='Galactic Center')
+
+        if coord_system == 'HC':
+            plt.scatter(0, 0, s=80, c='orange', marker='o', edgecolor='black', label='Sun (HC Frame)')
+
+        plt.legend(fontsize=10)
+        plt.axis('equal')
+        plt.show()
+
+# Example usage
+if __name__ == "__main__":
+    spiral_model = TaylorCordesSpiral()
+    
+    # Plot in Galactocentric coordinates
+    spiral_model.plot_arms(coord_system='GC')
+
+    # Plot in Heliocentric coordinates
+    spiral_model.plot_arms(coord_system='HC')
+
+
+  ''''
+
+
+
+
+
 # kinematics
 def get_lsr(typ='schonrich',show=False):
 	'''
