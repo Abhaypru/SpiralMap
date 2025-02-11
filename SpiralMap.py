@@ -783,7 +783,7 @@ class TaylorCordesSpiral:
         plt.legend(fontsize=10)
         plt.axis('equal')
         plt.show()
-''''
+'''
 
 
 
