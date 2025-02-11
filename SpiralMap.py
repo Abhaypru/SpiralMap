@@ -774,19 +774,6 @@ class TaylorCordesSpiral:
             plt.plot(x, y, color=arm['color'], label=arm['label'])
 
 
-''''
-        # Mark Galactic Center and Sun
-        plt.scatter(0, 0, s=120, c='gold', marker='*', edgecolor='black', label='Galactic Center')
-        if coord_system == 'HC':
-            plt.scatter(0, 0, s=80, c='orange', marker='o', edgecolor='black', label='Sun')
-
-        plt.legend(fontsize=10)
-        plt.axis('equal')
-        plt.show()
-'''
-
-
-
 class reid_spiral(object):
 
 
