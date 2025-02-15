@@ -5,6 +5,7 @@ import numpy as np
 from astropy.table import Table
 import pandas as pd
 import matplotlib.pyplot as plt
+from scipy.interpolate import CubicSpline
 
 def fcount(floc,flist=False,nlist=False):
 	
