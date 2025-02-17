@@ -148,9 +148,7 @@ class TaylorCordesSpiral:
 		# Convert to Cartesian coordinates (Galacto-Centric)
 		x_gc = r_fine * np.sin(theta_fine)
 		y_gc = -r_fine * np.cos(theta_fine)
-	
-		print(self.R0)
-	
+		
 		# Convert to Heliocentric coordinates
 		x_hc = x_gc + self.R0  # Sun at (-R0, 0) in GC
 	
@@ -1213,8 +1211,7 @@ class main_(object):
 					plt.xlabel('X$_{'+plotattrs['coordsys']+'}$ [Kpc]')
 					plt.ylabel('Y$_{'+plotattrs['coordsys']+'}$ [Kpc]')
 					
-					
-					print('applying limits..')
+				
 					
 					plt.xlim([xmin,xmax])	
 					plt.ylim([ymin,ymax])	
@@ -1243,9 +1240,7 @@ class main_(object):
 					plt.xlabel('X$_{'+plotattrs['coordsys']+'}$ [Kpc]')
 					plt.ylabel('Y$_{'+plotattrs['coordsys']+'}$ [Kpc]')
 					
-					
-					print('applying limits..')
-										
+															
 					plt.xlim([xmin,xmax])	
 					plt.ylim([ymin,ymax])	
 					
@@ -1258,6 +1253,10 @@ class main_(object):
 			self.plotattrs = plotattrs				
 
 		return 
+
+
+
+
 
 
 
