@@ -1187,6 +1187,11 @@ class main_(object):
 			if arm != 'all':		
 	
 				spimod.output_(arm)
+												
+				spimod.dout['rgc'] = dtools.sqrtsum(ds=[spimod.dout['xgc'],spimod.dout['ygc']])						
+				spimod.dout['phi1'] = np.arctan2(spimod.dout['yhc'],-spimod.dout['xgc'])
+
+								# plt.plot(phi1,rgc,'-',color=arm_clr[armi],markersize=markersize)					
 	
 	
 				if plotattrs['plot']:				
@@ -1247,8 +1252,11 @@ class main_(object):
 					if plotattrs['markSunGC']:
 						self.add2plot(plotattrs['coordsys'])
 	
-	
-			self.dout = spimod.dout
+
+
+					    
+			
+			
 	
 			self.plotattrs = plotattrs				
 
