@@ -6,17 +6,32 @@ import SpiralMap as sp
 import matplotlib.pyplot as plt
 import os
 
-figdir = '/figdir'
-os.system('rm -rf figdir')
-os.system('mkdir figdir')
+figdir = 'figdir'
+figdir_primer = 'figdir_primer'
+os.system('rm -rf figdir'); os.system('mkdir figdir')
 plt.ion()
 
-plt.close('all')
-plt.figure(figsize=(6,6))
-plotattrs = {'plot':True,'coordsys':'GC','markSunGC':True,'xmin':-16,'xmax':8,'ymin':-12,'ymax':12}
-spirals = sp.main_()
-spirals.getinfo(model='Drimmel_NIR_2000')
-spirals.readout(plotattrs,model='Drimmel_NIR_2000',arm='all')
+
+
+
+
+mkpaperfigs = True
+
+if mkpaperfigs:
+	
+	
+	print('plotting figures for primer')
+	
+	
+	
+	
+	
+# plt.close('all')
+# plt.figure(figsize=(6,6))
+# plotattrs = {'plot':True,'coordsys':'GC','markSunGC':True,'xmin':-16,'xmax':8,'ymin':-12,'ymax':12}
+# spirals = sp.main_()
+# spirals.getinfo(model='Drimmel_NIR_2000')
+# spirals.readout(plotattrs,model='Drimmel_NIR_2000',arm='all')
 
 
 # plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'markSunGC':True,'xmin':-20,'xmax':10,'ymin':-15,'ymax':15}
