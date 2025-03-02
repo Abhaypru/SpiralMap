@@ -5,10 +5,12 @@ imp.reload(SpiralMap)
 import SpiralMap as sp
 import matplotlib.pyplot as plt
 import os
+import putil
 
 figdir = 'figdir'
 figdir_primer = 'figdir_primer'
-os.system('rm -rf figdir'); os.system('mkdir figdir')
+os.system('rm -rf '+figdir); os.system('mkdir '+figdir)
+os.system('rm -rf '+figdir_primer); os.system('mkdir '+figdir_primer)
 plt.ion()
 
 
@@ -21,9 +23,27 @@ if mkpaperfigs:
 	
 	
 	print('plotting figures for primer')
+	xsun=-8.277
+	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'xmin':-20,'xmax':20,'ymin':-20,'ymax':20}
+	# plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'markSunGC':True}
+	plt.close('all')
+	plm=putil.Plm2(3,2,xsize=8.0,ysize=8.,xmulti=False,ymulti=False,full=True,slabelx=0.7,slabely=0.07)			
 	
 	
+	spirals = sp.main_(xsun=xsun)
+	for inum,use_model in enumerate(spirals.models):		
+
+		plm.next()
 	
+		if 'pogg' in use_model:    
+			plotattrs['coordsys'] = 'HC'
+		
+		spirals.getinfo(model=use_model)
+		spirals.readout(plotattrs,model=use_model,arm='all')
+	
+	
+	plm.tight_layout()
+	plt.savefig(figdir_primer+'/spirals.png')
 	
 	
 # plt.close('all')
