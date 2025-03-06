@@ -40,6 +40,7 @@ if mkpaperfigs:
 		
 		spirals.getinfo(model=use_model)
 		spirals.readout(plotattrs,model=use_model,arm='all')
+
 	
 	
 	plm.tight_layout()

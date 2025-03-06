@@ -1157,7 +1157,6 @@ class main_(object):
 			plt.plot(self.xsun,0.,marker='o',markersize=self.plotattrs_default['markersize'],color='black')
 			
 	
-	
 	def readout_test(self,plotattrs={},model='',arm='',print_=False):
 		'''
 		
@@ -1185,6 +1184,8 @@ class main_(object):
 			for ky in self.plotattrs_default.keys():			
 				if ky not in list(plotattrs.keys()):				
 					plotattrs[ky] = self.plotattrs_default[ky]
+					
+					
 	
 			if arm != 'all':		
 	
