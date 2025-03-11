@@ -24,10 +24,10 @@ if mkpaperfigs:
 	
 	print('plotting figures for primer')
 	xsun=-8.277
-	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'xmin':-20,'xmax':20,'ymin':-20,'ymax':20}
-	# plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'markSunGC':True}
+	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'xmin':-10,'xmax':10,'ymin':-10,'ymax':10}
+	# plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True}
 	plt.close('all')
-	plm=putil.Plm2(3,2,xsize=8.0,ysize=8.,xmulti=False,ymulti=False,full=True,slabelx=0.7,slabely=0.07)			
+	plm=putil.Plm2(3,3,xsize=8.0,ysize=8.,xmulti=False,ymulti=False,full=True,slabelx=0.7,slabely=0.07)			
 	
 	
 	spirals = sp.main_(xsun=xsun)
@@ -41,7 +41,7 @@ if mkpaperfigs:
 		spirals.getinfo(model=use_model)
 		spirals.readout(plotattrs,model=use_model,arm='all')
 
-	
+		plt.title(use_model)
 	
 	plm.tight_layout()
 	plt.savefig(figdir_primer+'/spirals.png')

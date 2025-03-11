@@ -1137,24 +1137,24 @@ class main_(object):
 								'ymax':''}
 		
 	
-	def add2plot(self,coordsys):
+	def add2plot(self,plotattrs):
 		
-		if coordsys =='HC':					
+		if plotattrs['coordsys'] =='HC':					
 			# hc case					
 
 			plt.axvline(0,linewidth=1,linestyle='--')			
 			plt.axhline(0,linewidth=1,linestyle='--')		
-			plt.plot(0.,0.,marker='o',markersize=self.plotattrs_default['markersize'],color='black')
-			plt.plot(-self.xsun,0.,marker='+',markersize=self.plotattrs_default['markersize'],color='black')	
+			plt.plot(0.,0.,marker='o',markersize=plotattrs['markersize'],color='black')
+			plt.plot(-self.xsun,0.,marker='+',markersize=plotattrs['markersize'],color='black')	
 
 
-		if coordsys =='GC':							
+		if plotattrs['coordsys'] =='GC':							
 			# gc case				
 			
 			plt.axvline(self.xsun,linewidth=1,linestyle='--')			
 			plt.axhline(0,linewidth=1,linestyle='--')			
-			plt.plot(0.,0.,marker='+',markersize=self.plotattrs_default['markersize'],color='black')
-			plt.plot(self.xsun,0.,marker='o',markersize=self.plotattrs_default['markersize'],color='black')
+			plt.plot(0.,0.,marker='*',markersize=plotattrs['markersize'],color='black')
+			plt.plot(self.xsun,0.,marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')
 			
 	
 	def readout_test(self,plotattrs={},model='',arm='',print_=False):
@@ -1283,6 +1283,8 @@ class main_(object):
 		spimod.xsun = self.xsun
 		spimod.getarmlist()	
 
+		self.armlist = spimod.arms
+
 		if 'poggio' in model.lower():		
 			spimod.output_()	
 
@@ -1315,8 +1317,8 @@ class main_(object):
 	
 					
 					if plotattrs['xmin'] == '' or plotattrs['xmax'] == '' or plotattrs['ymin'] == '' or plotattrs['ymax'] == '' :
-						xmin,xmax = np.nanmin(spimod.dout['x'+plotattrs['coordsys'].lower()]),np.nanmax(spimod.dout['x'+plotattrs['coordsys'].lower()])
-						ymin,ymax = np.nanmin(spimod.dout['y'+plotattrs['coordsys'].lower()]),np.nanmax(spimod.dout['y'+plotattrs['coordsys'].lower()])
+						xmin,xmax = np.nanmin(spimod.dout['x'+plotattrs['coordsys'].lower()]) ,np.nanmax(spimod.dout['x'+plotattrs['coordsys'].lower()]) 
+						ymin,ymax = np.nanmin(spimod.dout['y'+plotattrs['coordsys'].lower()]) ,np.nanmax(spimod.dout['y'+plotattrs['coordsys'].lower()])  
 					else:
 						xmin,xmax = plotattrs['xmin'],plotattrs['xmax']
 						ymin,ymax = plotattrs['ymin'],plotattrs['ymax']
@@ -1344,8 +1346,8 @@ class main_(object):
 	
 	
 					if plotattrs['xmin'] == '' or plotattrs['xmax'] == '' or plotattrs['ymin'] == '' or plotattrs['ymax'] == '' :
-						xmin,xmax = np.nanmin(spimod.dout['x'+plotattrs['coordsys'].lower()]),np.nanmax(spimod.dout['x'+plotattrs['coordsys'].lower()])
-						ymin,ymax = np.nanmin(spimod.dout['y'+plotattrs['coordsys'].lower()]),np.nanmax(spimod.dout['y'+plotattrs['coordsys'].lower()])
+						xmin,xmax = np.nanmin(spimod.dout['x'+plotattrs['coordsys'].lower()]) ,np.nanmax(spimod.dout['x'+plotattrs['coordsys'].lower()]) 
+						ymin,ymax = np.nanmin(spimod.dout['y'+plotattrs['coordsys'].lower()]) ,np.nanmax(spimod.dout['y'+plotattrs['coordsys'].lower()]) 
 					else:
 						xmin,xmax = plotattrs['xmin'],plotattrs['xmax']
 						ymin,ymax = plotattrs['ymin'],plotattrs['ymax']
@@ -1359,7 +1361,7 @@ class main_(object):
 					plt.ylim([ymin,ymax])	
 					
 					if plotattrs['markSunGC']:
-						self.add2plot(plotattrs['coordsys'])
+						self.add2plot(plotattrs)
 	
 
 
