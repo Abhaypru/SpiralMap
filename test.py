@@ -24,8 +24,8 @@ if mkpaperfigs:
 	
 	print('plotting figures for primer')
 	xsun=-8.277
-	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'xmin':-10,'xmax':10,'ymin':-10,'ymax':10}
-	# plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True}
+	# plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'xmin':-10,'xmax':10,'ymin':-10,'ymax':10}
+	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True}
 	plt.close('all')
 	plm=putil.Plm2(3,3,xsize=8.0,ysize=8.,xmulti=False,ymulti=False,full=True,slabelx=0.7,slabely=0.07)			
 	

@@ -1346,8 +1346,8 @@ class main_(object):
 	
 	
 					if plotattrs['xmin'] == '' or plotattrs['xmax'] == '' or plotattrs['ymin'] == '' or plotattrs['ymax'] == '' :
-						xmin,xmax = np.nanmin(spimod.dout['x'+plotattrs['coordsys'].lower()]) ,np.nanmax(spimod.dout['x'+plotattrs['coordsys'].lower()]) 
-						ymin,ymax = np.nanmin(spimod.dout['y'+plotattrs['coordsys'].lower()]) ,np.nanmax(spimod.dout['y'+plotattrs['coordsys'].lower()]) 
+						xmin,xmax = np.nanmin(spimod.dout['x'+plotattrs['coordsys'].lower()]) -3,np.nanmax(spimod.dout['x'+plotattrs['coordsys'].lower()]) + 3
+						ymin,ymax = np.nanmin(spimod.dout['y'+plotattrs['coordsys'].lower()]) -3 ,np.nanmax(spimod.dout['y'+plotattrs['coordsys'].lower()]) + 3
 					else:
 						xmin,xmax = plotattrs['xmin'],plotattrs['xmax']
 						ymin,ymax = plotattrs['ymin'],plotattrs['ymax']
