@@ -1156,6 +1156,7 @@ class main_(object):
 			plt.plot(0.,0.,marker='*',markersize=plotattrs['markersize'],color='black')
 			plt.plot(self.xsun,0.,marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')
 			
+
 	
 	def readout_test(self,plotattrs={},model='',arm='',print_=False):
 		'''
@@ -1175,6 +1176,8 @@ class main_(object):
 		spimod.xsun = self.xsun
 		spimod.getarmlist()	
 
+		self.armlist = spimod.arms
+
 		if 'poggio' in model.lower():		
 			spimod.output_()	
 
@@ -1184,14 +1187,12 @@ class main_(object):
 			for ky in self.plotattrs_default.keys():			
 				if ky not in list(plotattrs.keys()):				
 					plotattrs[ky] = self.plotattrs_default[ky]
-					
-					
 	
 			if arm != 'all':		
 	
 				spimod.output_(arm)
 												
-				spimod.dout['rgc'] = dtools.sqrtsum(ds=[spimod.dout['xgc'],spimod.dout['ygc']])						
+				spimod.dout['rgc'] = sqrtsum(ds=[spimod.dout['xgc'],spimod.dout['ygc']])						
 				spimod.dout['phi1'] = np.arctan2(spimod.dout['yhc'],-spimod.dout['xgc'])
 
 								# plt.plot(phi1,rgc,'-',color=arm_clr[armi],markersize=markersize)					
@@ -1209,8 +1210,8 @@ class main_(object):
 	
 					
 					if plotattrs['xmin'] == '' or plotattrs['xmax'] == '' or plotattrs['ymin'] == '' or plotattrs['ymax'] == '' :
-						xmin,xmax = np.nanmin(spimod.dout['x'+plotattrs['coordsys'].lower()]),np.nanmax(spimod.dout['x'+plotattrs['coordsys'].lower()])
-						ymin,ymax = np.nanmin(spimod.dout['y'+plotattrs['coordsys'].lower()]),np.nanmax(spimod.dout['y'+plotattrs['coordsys'].lower()])
+						xmin,xmax = np.nanmin(spimod.dout['x'+plotattrs['coordsys'].lower()]) ,np.nanmax(spimod.dout['x'+plotattrs['coordsys'].lower()]) 
+						ymin,ymax = np.nanmin(spimod.dout['y'+plotattrs['coordsys'].lower()]) ,np.nanmax(spimod.dout['y'+plotattrs['coordsys'].lower()])  
 					else:
 						xmin,xmax = plotattrs['xmin'],plotattrs['xmax']
 						ymin,ymax = plotattrs['ymin'],plotattrs['ymax']
@@ -1219,6 +1220,7 @@ class main_(object):
 					plt.xlabel('X$_{'+plotattrs['coordsys']+'}$ [Kpc]')
 					plt.ylabel('Y$_{'+plotattrs['coordsys']+'}$ [Kpc]')
 					
+					self.dout = spimod.dout.copy()
 				
 					
 					plt.xlim([xmin,xmax])	
@@ -1238,8 +1240,8 @@ class main_(object):
 	
 	
 					if plotattrs['xmin'] == '' or plotattrs['xmax'] == '' or plotattrs['ymin'] == '' or plotattrs['ymax'] == '' :
-						xmin,xmax = np.nanmin(spimod.dout['x'+plotattrs['coordsys'].lower()]),np.nanmax(spimod.dout['x'+plotattrs['coordsys'].lower()])
-						ymin,ymax = np.nanmin(spimod.dout['y'+plotattrs['coordsys'].lower()]),np.nanmax(spimod.dout['y'+plotattrs['coordsys'].lower()])
+						xmin,xmax = np.nanmin(spimod.dout['x'+plotattrs['coordsys'].lower()]) -3,np.nanmax(spimod.dout['x'+plotattrs['coordsys'].lower()]) + 3
+						ymin,ymax = np.nanmin(spimod.dout['y'+plotattrs['coordsys'].lower()]) -3 ,np.nanmax(spimod.dout['y'+plotattrs['coordsys'].lower()]) + 3
 					else:
 						xmin,xmax = plotattrs['xmin'],plotattrs['xmax']
 						ymin,ymax = plotattrs['ymin'],plotattrs['ymax']
@@ -1252,8 +1254,10 @@ class main_(object):
 					plt.xlim([xmin,xmax])	
 					plt.ylim([ymin,ymax])	
 					
+					self.dout = spimod.dout.copy()
+					
 					if plotattrs['markSunGC']:
-						self.add2plot(plotattrs['coordsys'])
+						self.add2plot(plotattrs)
 	
 
 
@@ -1264,6 +1268,7 @@ class main_(object):
 			self.plotattrs = plotattrs				
 
 		return 
+
 	
 	def readout(self,plotattrs={},model='',arm='',print_=False):
 		'''
@@ -1299,7 +1304,7 @@ class main_(object):
 	
 				spimod.output_(arm)
 												
-				spimod.dout['rgc'] = dtools.sqrtsum(ds=[spimod.dout['xgc'],spimod.dout['ygc']])						
+				spimod.dout['rgc'] = sqrtsum(ds=[spimod.dout['xgc'],spimod.dout['ygc']])						
 				spimod.dout['phi1'] = np.arctan2(spimod.dout['yhc'],-spimod.dout['xgc'])
 
 								# plt.plot(phi1,rgc,'-',color=arm_clr[armi],markersize=markersize)					
@@ -1327,6 +1332,7 @@ class main_(object):
 					plt.xlabel('X$_{'+plotattrs['coordsys']+'}$ [Kpc]')
 					plt.ylabel('Y$_{'+plotattrs['coordsys']+'}$ [Kpc]')
 					
+					self.dout = spimod.dout.copy()
 				
 					
 					plt.xlim([xmin,xmax])	
@@ -1360,6 +1366,8 @@ class main_(object):
 					plt.xlim([xmin,xmax])	
 					plt.ylim([ymin,ymax])	
 					
+					self.dout = spimod.dout.copy()
+					
 					if plotattrs['markSunGC']:
 						self.add2plot(plotattrs)
 	
@@ -1372,6 +1380,9 @@ class main_(object):
 			self.plotattrs = plotattrs				
 
 		return 
+
+
+
 
 
 
