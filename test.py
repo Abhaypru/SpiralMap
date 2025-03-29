@@ -27,21 +27,26 @@ if mkpaperfigs:
 	# plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'xmin':-10,'xmax':10,'ymin':-10,'ymax':10}
 	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True}
 	plt.close('all')
-	plm=putil.Plm2(3,3,xsize=8.0,ysize=8.,xmulti=False,ymulti=False,full=True,slabelx=0.7,slabely=0.07)			
+	plm=putil.Plm2(2,3,xsize=8.0,ysize=4.5,xmulti=False,ymulti=False,full=True,slabelx=0.7,slabely=0.07)			
 	
 	
 	spirals = sp.main_(xsun=xsun)
 	for inum,use_model in enumerate(spirals.models):		
 
-		plm.next()
-	
-		if 'pogg' in use_model:    
-			plotattrs['coordsys'] = 'HC'
-		
-		spirals.getinfo(model=use_model)
-		spirals.readout(plotattrs,model=use_model,arm='all')
+		if use_model != 'Poggio_2021':
 
-		plt.title(use_model)
+			plm.next()
+				
+			spirals.getinfo(model=use_model)
+			spirals.readout(plotattrs,model=use_model,arm='all')
+	
+	
+			spirals.getinfo(model='Poggio_2021')
+			spirals.readout(plotattrs,model='Poggio_2021',arm='all')
+	
+	
+	
+			plt.title(use_model)
 	
 	plm.tight_layout()
 	plt.savefig(figdir_primer+'/spirals.png')

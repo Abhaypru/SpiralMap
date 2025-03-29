@@ -39,14 +39,22 @@ class spiral_eloisa(object):
 		print('------------------------')		
 		
 	
-	def output_(self):
+	def output_(self,coordsys='HC'):
 	
 		'''
 		plot contours of OB star spirals from Poggio 2021	
 		
-		HW : include GC version
+		
 		'''	
-	
+		xcorr = 0.
+		xsun = self.xsun
+		
+		if coordsys == 'GC':
+			xcorr = xsun
+		
+		print(xsun)	
+		print(xcorr)	
+		print(coordsys)	
 
 		# #read overdensity contours
 		xvalues_overdens=np.load(self.loc+'/xvalues_dens.npy')
@@ -60,14 +68,16 @@ class spiral_eloisa(object):
 		fin_overdens=1.5 #.1
 		N_levels_overdens=2
 		levels_overdens=np.linspace(iniz_overdens,fin_overdens,N_levels_overdens)
-		cset1 = plt.contourf(xvalues_overdens, yvalues_overdens,over_dens_grid.T, levels=levels_overdens,alpha=0.2,cmap='Greys')
+		# cset1 = plt.contourf(xvalues_overdens + xcorr, yvalues_overdens,over_dens_grid.T, levels=levels_overdens,alpha=0.2,cmap='Greys')
+		cset1 = plt.contourf(xvalues_overdens + xcorr, yvalues_overdens,over_dens_grid.T, levels=levels_overdens,alpha=0.05,cmap='Greys')
 		# cset1 = plt.contourf(phi1_dens, Rvalues_dens,over_dens_grid.T, levels=levels_overdens,alpha=0.2,cmap='Greys')
 		
 		iniz_overdens=0. #.1
 		fin_overdens=1.5 #.1
 		N_levels_overdens=4#7
 		levels_overdens=np.linspace(iniz_overdens,fin_overdens,N_levels_overdens)
-		cset1 = plt.contour(xvalues_overdens, yvalues_overdens,over_dens_grid.T, levels=levels_overdens,colors='black',linewidths=0.7)	
+		# cset1 = plt.contour(xvalues_overdens + xcorr, yvalues_overdens,over_dens_grid.T, levels=levels_overdens,colors='black',linewidths=0.7)	
+		cset1 = plt.contour(xvalues_overdens + xcorr, yvalues_overdens,over_dens_grid.T, levels=levels_overdens,colors='black',linewidths=0.2)	
 		# cset1 = plt.contour(phi1_dens, Rvalues_dens,over_dens_grid.T, levels=levels_overdens,colors='black',linewidths=0.7)	
 		print('')		
  
@@ -1291,7 +1301,7 @@ class main_(object):
 		self.armlist = spimod.arms
 
 		if 'poggio' in model.lower():		
-			spimod.output_()	
+			spimod.output_(coordsys=plotattrs['coordsys'])	
 
 		else:
 
@@ -1363,8 +1373,8 @@ class main_(object):
 					plt.ylabel('Y$_{'+plotattrs['coordsys']+'}$ [Kpc]')
 					
 															
-					plt.xlim([xmin,xmax])	
-					plt.ylim([ymin,ymax])	
+					# plt.xlim([xmin,xmax])	
+					# plt.ylim([ymin,ymax])	
 					
 					self.dout = spimod.dout.copy()
 					
