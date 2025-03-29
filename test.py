@@ -49,7 +49,7 @@ if mkpaperfigs:
 			plt.title(use_model)
 	
 	plm.tight_layout()
-	plt.savefig(figdir_primer+'/spirals.png')
+	plt.savefig(figdir_primer+'/spirals_'+plotattrs['coordsys']+'.png')
 	
 	
 # plt.close('all')
