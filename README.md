@@ -8,5 +8,5 @@ If you make use of this package, please cite (), as well as the particular spira
   title = {SpiralMap: A Python Package for Galactic Spiral Structure Analysis},  
   year = {2025},  
   publisher = {GitHub},  
-  url = {https://github.com/Abhaypru/spiralmap}  
+  url = {https://github.com/Abhaypru/SpiralMapping_package}  
 }  
