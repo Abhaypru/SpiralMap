@@ -191,7 +191,17 @@ class TaylorCordesSpiral:
 						 'yhc':yhc,
 						 'xgc':xgc,
 						 'ygc':ygc}	
-	
+		elif typ_ == 'polar':
+		# Using Heliocentric for polar, you can switch to GC if preferred
+		r = np.sqrt(xhc**2 + yhc**2)
+		theta = np.arctan2(yhc, xhc)
+
+		self.dout = {
+			'theta': theta,
+			'r': r
+		}
+	else:
+		raise ValueError("typ_ must be 'cartesian' or 'polar'")
 	
 	
 
@@ -260,19 +270,31 @@ class spiral_houhan(object):
 	
 	
 	
-	def output_(self,arm,typ_='cartesian'):	
-		
-		xsun = self.xsun
-		self.R0 = -xsun  # Solar Galactocentric radius (kpc)
-				
-		if typ_ =='cartesian':
+	def output_(self, arm, typ_='cartesian'):	
+	xsun = self.xsun
+	self.R0 = -xsun  # Solar Galactocentric radius (kpc)
+
+	# Generate spiral arm coordinates
+	xhc, yhc, xgc, ygc = self.model_(arm)
+
+	if typ_ == 'cartesian':
+		self.dout = {
+			'xhc': xhc,
+			'yhc': yhc,
+			'xgc': xgc,
+			'ygc': ygc
+		}
+	elif typ_ == 'polar':
+		# Using Heliocentric coordinates for polar; change to xgc/ygc if GC is preferred
+		r = np.sqrt(xhc**2 + yhc**2)
+		theta = np.arctan2(yhc, xhc)
+		self.dout = {
+			'theta': theta,
+			'r': r
+		}
+	else:
+		raise ValueError("typ_ must be 'cartesian' or 'polar'")
 	
-			xhc,yhc,xgc,ygc = self.model_(arm);			
-	
-			self.dout = {'xhc':xhc,
-						 'yhc':yhc,
-						 'xgc':xgc,
-						 'ygc':ygc}	
 
 
 
@@ -362,19 +384,31 @@ class spiral_levine(object):
 			else:
 				raise ValueError("Coordinate system must be 'GC' or 'HC'")
 	
-	def output_(self,arm,typ_='cartesian'):	
-		
-		xsun = self.xsun
-		self.R0 = -xsun  # Solar Galactocentric radius (kpc)
-				
-		if typ_ =='cartesian':
+	def output_(self, arm, typ_='cartesian'):
+	xsun = self.xsun
+	self.R0 = -xsun  # Solar Galactocentric radius (kpc)
 
-			xhc,yhc,xgc,ygc = self.model_(arm);			
+	xhc, yhc, xgc, ygc = self.model_(arm)
 
-			self.dout = {'xhc':xhc,
-						 'yhc':yhc,
-						 'xgc':xgc,
-						 'ygc':ygc}	
+	if typ_ == 'cartesian':
+		self.dout = {
+			'xhc': xhc,
+			'yhc': yhc,
+			'xgc': xgc,
+			'ygc': ygc
+		}
+	elif typ_ == 'polar':
+		# Use Heliocentric coordinates for polar (you can switch to GC)
+		r = np.sqrt(xhc**2 + yhc**2)
+		theta = np.arctan2(yhc, xhc)
+
+		self.dout = {
+			'theta': theta,
+			'r': r
+		}
+	else:
+		raise ValueError("typ_ must be 'cartesian' or 'polar'")
+	
 
 
 
