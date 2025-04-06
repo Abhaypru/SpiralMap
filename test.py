@@ -7,9 +7,7 @@ import matplotlib.pyplot as plt
 import os
 import putil
 
-figdir = 'figdir'
 figdir_primer = 'figdir_primer'
-os.system('rm -rf '+figdir); os.system('mkdir '+figdir)
 os.system('rm -rf '+figdir_primer); os.system('mkdir '+figdir_primer)
 plt.ion()
 
