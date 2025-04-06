@@ -1138,7 +1138,8 @@ class main_(object):
 								'xmin':'',
 								'xmax':'',
 								'ymin':'',
-								'ymax':''}
+								'ymax':'',
+								'polargrid':False}
 		
 	
 	def add2plot(self,plotattrs):
@@ -1338,6 +1339,8 @@ class main_(object):
 					
 					self.dout = spimod.dout.copy()
 				
+					self.xmin, self.xmax = xmin,xmax
+					self.ymin, self.ymax = ymin,ymax
 					
 					plt.xlim([xmin,xmax])	
 					plt.ylim([ymin,ymax])	
@@ -1354,21 +1357,23 @@ class main_(object):
 					if 'xhc_ex' in 	spimod.dout.keys():
 						plt.plot(spimod.dout['x'+plotattrs['coordsys'].lower()+'_ex'],spimod.dout['y'+plotattrs['coordsys'].lower()+'_ex'],'--',color=spimod.armcolour[arm_temp])						
 	
-	
-					if plotattrs['xmin'] == '' or plotattrs['xmax'] == '' or plotattrs['ymin'] == '' or plotattrs['ymax'] == '' :
-						xmin,xmax = np.nanmin(spimod.dout['x'+plotattrs['coordsys'].lower()]) -3,np.nanmax(spimod.dout['x'+plotattrs['coordsys'].lower()]) + 3
-						ymin,ymax = np.nanmin(spimod.dout['y'+plotattrs['coordsys'].lower()]) -3 ,np.nanmax(spimod.dout['y'+plotattrs['coordsys'].lower()]) + 3
-					else:
-						xmin,xmax = plotattrs['xmin'],plotattrs['xmax']
-						ymin,ymax = plotattrs['ymin'],plotattrs['ymax']
-	
+		
 
 					plt.xlabel('X$_{'+plotattrs['coordsys']+'}$ [Kpc]')
 					plt.ylabel('Y$_{'+plotattrs['coordsys']+'}$ [Kpc]')
 					
-															
-					# plt.xlim([xmin,xmax])	
-					# plt.ylim([ymin,ymax])	
+	
+					if plotattrs['xmin'] == '' or plotattrs['xmax'] == '' or plotattrs['ymin'] == '' or plotattrs['ymax'] == '' :
+						1+1				
+					else:
+						xmin,xmax = plotattrs['xmin'],plotattrs['xmax']
+						ymin,ymax = plotattrs['ymin'],plotattrs['ymax']
+
+						# xmin,xmax = np.nanmin(spimod.dout['x'+plotattrs['coordsys'].lower()]) -3,np.nanmax(spimod.dout['x'+plotattrs['coordsys'].lower()]) + 3
+						# ymin,ymax = np.nanmin(spimod.dout['y'+plotattrs['coordsys'].lower()]) -3 ,np.nanmax(spimod.dout['y'+plotattrs['coordsys'].lower()]) + 3
+	
+						plt.xlim([xmin,xmax])	
+						plt.ylim([ymin,ymax])	
 					
 					self.dout = spimod.dout.copy()
 					

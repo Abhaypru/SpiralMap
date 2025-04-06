@@ -93,28 +93,32 @@ def sqrtsum(ds=[],prnt=False):
 
 
 
-def add_polargrid(typ='hc',rlevels=6,xmin=-20,xmax=20,ymin=-20,ymax=20):
+def add_polargrid(xsun=-8.27,typ='hc',rlevels=8,xmin=-20,xmax=10,ymin=-15,ymax=15):
 	
 	if typ.lower() == 'hc':
+		xorig = xsun
+	if typ.lower() == 'gc':
+		xorig = 0.
 
-		rmin = 3
-		rvals = np.array([rmin + rmin*i for i in range(rlevels)])
-		for r in rvals:
-			ang = np.radians(np.linspace(0.,360.,100))
-			x = r*np.cos(ang)
-			y = r*np.sin(ang)
+
+	rmin = 3
+	rvals = np.array([rmin + rmin*i for i in range(rlevels)])
+	for r in rvals:
+		ang = np.radians(np.linspace(0.,360.,100))
+		x = r*np.cos(ang)
+		y = r*np.sin(ang)
+	
+		plt.plot(x + xorig,y,color='grey',linewidth=0.5)	
+
+	rvals = np.array([0 + i for i in range(rlevels*6)])	
+
+	for l in np.arange(0.,360.,30):
 		
-			plt.plot(x,y,color='grey',linewidth=0.5)	
-
-		rvals = np.array([0 + i for i in range(rlevels*6)])	
-
-		for l in np.arange(0.,360.,30):
-			
-			l=np.radians(l)		
-			
-			x = np.array([r*np.cos(l) for r in rvals])
-			y = np.array([r*np.sin(l) for r in rvals])
-			
-			plt.plot(x,y,color='grey',linewidth=0.5)	
-			
-		plt.axis([xmin,xmax,ymin,ymax])
+		l=np.radians(l)		
+		
+		x = np.array([r*np.cos(l) for r in rvals])
+		y = np.array([r*np.sin(l) for r in rvals])
+		
+		plt.plot(x + xorig,y,color='grey',linewidth=0.5)	
+		
+	plt.axis([xmin,xmax,ymin,ymax])

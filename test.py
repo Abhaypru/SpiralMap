@@ -11,30 +11,7 @@ import putil
 figdir_primer = 'figdir_primer'
 os.system('rm -rf '+figdir_primer); os.system('mkdir '+figdir_primer)
 plt.ion()
-
-
-
-
-
-
-
-gridtest = True
-if gridtest:
-
-	
-	
-	plt.close('all')
-	plm=putil.Plm1(1,1,xsize=8.0,ysize=8.,xmulti=False,ymulti=False,full=True,slabelx=0.7,slabely=0.07)			
-
-	plm.next()
-
-	dtools.add_polargrid()
-
-	plm.tight_layout()
-	plt.savefig(figdir_primer+'/dummy.png')
-	
-	
-	
+		
 
 
 mkpaperfigs = False
@@ -45,7 +22,7 @@ if mkpaperfigs:
 	print('plotting figures for primer')
 	xsun=-8.277
 	# plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'xmin':-10,'xmax':10,'ymin':-10,'ymax':10}
-	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True}
+	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':False}
 	plt.close('all')
 	plm=putil.Plm2(2,3,xsize=8.0,ysize=4.5,xmulti=False,ymulti=False,full=True,slabelx=0.7,slabely=0.07)			
 	
@@ -63,7 +40,7 @@ if mkpaperfigs:
 	
 			spirals.getinfo(model='Poggio_2021')
 			spirals.readout(plotattrs,model='Poggio_2021',arm='all')
-	
+			dtools.add_polargrid()
 	
 	
 			plt.title(use_model)
@@ -71,71 +48,37 @@ if mkpaperfigs:
 	plm.tight_layout()
 	plt.savefig(figdir_primer+'/spirals_'+plotattrs['coordsys']+'.png')
 	
+single_ = True
+
+if single_:
+		
+	print('plotting figures for primer')
+	xsun=-8.277
+	# plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'xmin':-10,'xmax':10,'ymin':-10,'ymax':10}
+	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':True}
+	plt.close('all')
+	plm=putil.Plm1(1,1,xsize=8.0,ysize=8,xmulti=False,ymulti=False,full=True,slabelx=0.7,slabely=0.07)			
 	
-# plt.close('all')
-# plt.figure(figsize=(6,6))
-# plotattrs = {'plot':True,'coordsys':'GC','markSunGC':True,'xmin':-16,'xmax':8,'ymin':-12,'ymax':12}
-# spirals = sp.main_()
-# spirals.getinfo(model='Drimmel_NIR_2000')
-# spirals.readout(plotattrs,model='Drimmel_NIR_2000',arm='all')
-
-
-# plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'markSunGC':True,'xmin':-20,'xmax':10,'ymin':-15,'ymax':15}
-# # models = ['Levine_2006', 'Reid_2019','Drimmel_NIR_2000','Drimmel_ceph_2024','Poggio_2021','Hou_Han_2014', 'Levine_2006']
-# # # # models = ['Hou_Han_2014', 'Levine_2006']
-# models = ['Taylor_Cordes_1992']
-# xsun=-8.277
-# models = ['Poggio_2021']
-
-# spirals = sp.main_(xsun=xsun)
-# for inum,use_model in enumerate(models):		
-	# plt.close('all')
-	# plt.figure(figsize=(6,6))
-
-	# spirals.getinfo(model=use_model)
-	# spirals.readout(plotattrs,model=use_model,arm='all')
 	
-	# plt.tight_layout()
-	# plt.savefig('figdir/test_'+str(inum)+'.png')
+	spirals = sp.main_(xsun=xsun)
+
+	use_model = 'Drimmel_ceph_2024'		
+
+	plm.next()
+		
+	spirals.getinfo(model=use_model)
+	spirals.readout(plotattrs,model=use_model,arm='all')
+
+	if plotattrs['polargrid']:
+		dtools.add_polargrid(xsun=xsun,typ='gc')#xmin=spirals.xmin,xmax=spirals.xmax,ymin=spirals.ymin,ymax=spirals.ymax)
 
 
-
-# plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'xmin':-20,'xmax':10,'ymin':-15,'ymax':15}
-# xsun=-8.277
-# spirals = sp.main_(xsun=xsun)
-# for inum,use_model in enumerate(spirals.models):		
-	# plt.close('all')
-	# plt.figure(figsize=(6,6))
+	plt.title(use_model)
 	
-	# if 'pogg' in use_model:    
-		# plotattrs['coordsys'] = 'HC'
+	plm.tight_layout()
+	plt.savefig(figdir_primer+'/test.png')
 	
-	# spirals.getinfo(model=use_model)
-	# spirals.readout(plotattrs,model=use_model,arm='all')
 	
-	# plt.tight_layout()
-	# plt.savefig('figdir/test_'+str(inum)+'.png')
-
-# plt.close('all')
-# plt.close()
-# plt.figure(figsize=(7,7))
-# for inum,use_model in enumerate(models):	
-
-
-	# spirals.getinfo(model=use_model)
-	# spirals.readout(plotattrs,model=use_model,arm='all')
-
-
-	
-# plt.tight_layout()
-# plt.savefig('figdir/test_'+str(inum)+'.png')
-
-# spiral = sp.TaylorCordesSpiral()
-# spiral.info()
-# param = spiral.getparams()
-
-
-
 
 
 
