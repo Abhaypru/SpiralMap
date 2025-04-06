@@ -4,6 +4,7 @@ import imp,SpiralMap, dtools
 imp.reload(SpiralMap)
 import SpiralMap as sp
 import matplotlib.pyplot as plt
+import numpy as np
 import os
 import putil
 
@@ -15,7 +16,28 @@ plt.ion()
 
 
 
-mkpaperfigs = True
+
+
+gridtest = True
+if gridtest:
+
+	
+	
+	plt.close('all')
+	plm=putil.Plm1(1,1,xsize=8.0,ysize=8.,xmulti=False,ymulti=False,full=True,slabelx=0.7,slabely=0.07)			
+
+	plm.next()
+
+	dtools.add_polargrid()
+
+	plm.tight_layout()
+	plt.savefig(figdir_primer+'/dummy.png')
+	
+	
+	
+
+
+mkpaperfigs = False
 
 if mkpaperfigs:
 	

@@ -370,20 +370,7 @@ class spiral_levine(object):
 				'xgc': xgc,
 				'ygc': ygc
 			}
-		elif typ_ == 'polar':
-			# Use Heliocentric coordinates for polar (you can switch to GC)
-			r = np.sqrt(xhc**2 + yhc**2)
-			theta = np.arctan2(yhc, xhc)
 	
-			self.dout = {
-				'theta': theta,
-				'r': r
-			}
-		else:
-			raise ValueError("typ_ must be 'cartesian' or 'polar'")
-		
-
-
 
 
 class spiral_cepheids(object):
