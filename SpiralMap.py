@@ -111,12 +111,25 @@ Class representing spiral arm model from Poggio et al. 2021 (EDR3 OB stars)
   
 
 class TaylorCordesSpiral:
-	"""
-	Class to generate and plot the Galactic Spiral Arms based on Taylor & Cordes (1993).
 	
-	
-	to check: should we rescale their R ?
-	"""
+"""Taylor & Cordes (1993) Galactic spiral arm model
+    
+    Attributes
+    ----------
+    arms : list
+        Available arm identifiers
+    armcolour : dict
+        Color mapping for arms
+    params : dict
+        Arm parameters from Table 1 of paper
+    
+    Methods
+    -------
+    model_(arm_name)
+        Generate arm coordinates using cubic spline interpolation
+    output_(arm, typ_)
+        Return coordinates in specified format
+    """
 	
 	def __init__(self, R0=8.5):
 		"""Initialize spiral parameters from Taylor & Cordes (1993)"""
