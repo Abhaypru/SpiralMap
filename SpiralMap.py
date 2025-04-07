@@ -112,32 +112,46 @@ Class representing spiral arm model from Poggio et al. 2021 (EDR3 OB stars)
 
 class TaylorCordesSpiral:
 	
-"""Taylor & Cordes (1993) Galactic spiral arm model
-    
+""" Taylor & Cordes (1993) Galactic spiral arm model,	  
+    based on radio pulsar observations. The model defines four major spiral arms and 
+    provides both Galactocentric and Heliocentric coordinates for the arm segments.
+
     Attributes
     ----------
-    arms : list
-        Available arm identifiers
+    arms : ndarray
+        Array of arm identifiers ['Arm1', 'Arm2', 'Arm3', 'Arm4']
     armcolour : dict
-        Color mapping for arms
+        Color mapping for visualization {'Arm1': 'yellow', ...}
     params : dict
-        Arm parameters from Table 1 of paper
-    
+        Original parameters from paper (angles in deg, radii in kpc)
+    R0 : float
+        Solar galactocentric radius (kpc), set from xsun parameter
+
     Methods
     -------
+    info()
+        Display basic model information
     model_(arm_name)
-        Generate arm coordinates using cubic spline interpolation
+        Generate coordinates for specified arm
+    plot_arms(coord_system)
+        Visualize arms in chosen coordinate system
     output_(arm, typ_)
-        Return coordinates in specified format
+        Get coordinates in structured format
     """
+
 	
 	def __init__(self, R0=8.5):
-		"""Initialize spiral parameters from Taylor & Cordes (1993)"""
-		
+	"""Initialize spiral parameters from Taylor & Cordes (1993)
+        
+        Parameters
+        ----------
+        R0 : float, optional
+            Initial solar galactocentric radius (kpc), default 8.5
+        """		
 		self.getarmlist()
 		
 	def getarmlist(self):
-		
+		"""Set arm names and colours"""
 	
 		self.arms = np.array(['Arm1','Arm2','Arm3','Arm4'])
 		self.armcolour = {'Arm1':'yellow','Arm2':'green','Arm3':'blue','Arm4':'purple'}
@@ -176,9 +190,20 @@ class TaylorCordesSpiral:
 					              }
 
 	
-	def model_(self, arm_name):				
-		"""Generate x, y coordinates for a given spiral arm."""
+	def model_(self, arm_name):	
 		
+"""Generate arm coordinates using cubic spline interpolation
+        
+        Parameters
+        ----------
+        arm_name : str
+            Name of arm to model
+            
+        Returns
+        -------
+        tuple
+            (x_hc, y_hc, x_gc, y_gc) coordinate arrays
+        """		
 		
 		self.getparams()
 		arm_data = self.params[arm_name]
