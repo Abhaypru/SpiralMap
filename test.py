@@ -54,29 +54,30 @@ if single_:
 		
 	print('plotting figures for primer')
 	xsun=-8.277
-	# plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'xmin':-10,'xmax':10,'ymin':-10,'ymax':10}
-	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':True}
-	plt.close('all')
-	plm=putil.Plm1(1,1,xsize=8.0,ysize=8,xmulti=False,ymulti=False,full=True,slabelx=0.7,slabely=0.07)			
-	
-	
 	spirals = sp.main_(xsun=xsun)
-
-	use_model = 'Drimmel_ceph_2024'		
-
-	plm.next()
-		
+	use_model = 'Drimmel_NIR_2000'
 	spirals.getinfo(model=use_model)
+				
+	plt.close('all')
+	plm=putil.Plm1(1,2,xsize=8.0,ysize=4,xmulti=False,ymulti=False,full=True,slabelx=0.7,slabely=0.07)			
+		
+
+	plm.next()		
+
+	plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'markSunGC':True,'polargrid':True}
 	spirals.readout(plotattrs,model=use_model,arm='all')
 
-	if plotattrs['polargrid']:
-		dtools.add_polargrid(xsun=xsun,typ='gc')#xmin=spirals.xmin,xmax=spirals.xmax,ymin=spirals.ymin,ymax=spirals.ymax)
+	plm.next()		
+
+	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':True}
+	spirals.readout(plotattrs,model=use_model,arm='all')
+
 
 
 	plt.title(use_model)
 	
 	plm.tight_layout()
-	plt.savefig(figdir_primer+'/test.png')
+	plt.savefig(figdir_primer+'/polar_grid_overplotted.png')
 	
 	
 

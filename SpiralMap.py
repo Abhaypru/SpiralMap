@@ -1149,8 +1149,8 @@ class main_(object):
 
 			plt.axvline(0,linewidth=1,linestyle='--')			
 			plt.axhline(0,linewidth=1,linestyle='--')		
-			plt.plot(0.,0.,marker='o',markersize=plotattrs['markersize'],color='black')
-			plt.plot(-self.xsun,0.,marker='+',markersize=plotattrs['markersize'],color='black')	
+			plt.plot(0.,0.,marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')
+			plt.plot(-self.xsun,0.,marker='*',markersize=plotattrs['markersize'],color='black')	
 
 
 		if plotattrs['coordsys'] =='GC':							
@@ -1326,24 +1326,29 @@ class main_(object):
 					
 	
 					
-					if plotattrs['xmin'] == '' or plotattrs['xmax'] == '' or plotattrs['ymin'] == '' or plotattrs['ymax'] == '' :
-						xmin,xmax = np.nanmin(spimod.dout['x'+plotattrs['coordsys'].lower()]) ,np.nanmax(spimod.dout['x'+plotattrs['coordsys'].lower()]) 
-						ymin,ymax = np.nanmin(spimod.dout['y'+plotattrs['coordsys'].lower()]) ,np.nanmax(spimod.dout['y'+plotattrs['coordsys'].lower()])  
+	
+					plt.xlabel('X$_{'+plotattrs['coordsys']+'}$ [Kpc]')
+					plt.ylabel('Y$_{'+plotattrs['coordsys']+'}$ [Kpc]')
+
+					if plotattrs['xmin'] == '' or plotattrs['xmax'] == '' or plotattrs['ymin'] == '' or plotattrs['ymax'] == '' :						
+						1+1
+																			
 					else:
 						xmin,xmax = plotattrs['xmin'],plotattrs['xmax']
 						ymin,ymax = plotattrs['ymin'],plotattrs['ymax']
 	
-	
-					plt.xlabel('X$_{'+plotattrs['coordsys']+'}$ [Kpc]')
-					plt.ylabel('Y$_{'+plotattrs['coordsys']+'}$ [Kpc]')
+						plt.xlim([xmin,xmax])	
+						plt.ylim([ymin,ymax])	
+										
 					
 					self.dout = spimod.dout.copy()
 				
 					self.xmin, self.xmax = xmin,xmax
 					self.ymin, self.ymax = ymin,ymax
+					if plotattrs['polargrid']:
+						add_polargrid(xmin=self.xmin,xmax=self.xmax,ymin=self.ymin,ymax=self.ymax)
 					
-					plt.xlim([xmin,xmax])	
-					plt.ylim([ymin,ymax])	
+
 						
 			elif arm =='all':
 	
@@ -1364,7 +1369,10 @@ class main_(object):
 					
 	
 					if plotattrs['xmin'] == '' or plotattrs['xmax'] == '' or plotattrs['ymin'] == '' or plotattrs['ymax'] == '' :
-						1+1				
+						1+1
+						
+
+									
 					else:
 						xmin,xmax = plotattrs['xmin'],plotattrs['xmax']
 						ymin,ymax = plotattrs['ymin'],plotattrs['ymax']
@@ -1382,10 +1390,13 @@ class main_(object):
 	
 
 
-					    
+					  			
 			
+			self.xmin,self.xmax =plt.gca().get_xlim()[0],plt.gca().get_xlim()[1]				
+			self.ymin,self.ymax =plt.gca().get_ylim()[0],plt.gca().get_ylim()[1]	
 			
-	
+			if plotattrs['polargrid']:
+				add_polargrid(xmin=self.xmin,xmax=self.xmax,ymin=self.ymin,ymax=self.ymax)			
 			self.plotattrs = plotattrs				
 
 		return 

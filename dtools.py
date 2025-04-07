@@ -93,12 +93,10 @@ def sqrtsum(ds=[],prnt=False):
 
 
 
-def add_polargrid(xsun=-8.27,typ='hc',rlevels=8,xmin=-20,xmax=10,ymin=-15,ymax=15):
+def add_polargrid(rlevels=8,xmin=-20,xmax=10,ymin=-15,ymax=15):
 	
-	if typ.lower() == 'hc':
-		xorig = xsun
-	if typ.lower() == 'gc':
-		xorig = 0.
+
+	xorig = 0.
 
 
 	rmin = 3
