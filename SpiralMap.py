@@ -172,7 +172,12 @@ class TaylorCordesSpiral:
 	        
 	  
 	def getparams(self):	   
-	
+	"""Load original spiral parameters from Taylor & Cordes (1993) Table 1.
+        
+        Sets params dictionary with:
+        - theta_deg: Anchor points in galactic longitude (degrees)
+        - r_kpc: Corresponding galactocentric radii (kiloparsecs)
+	"""
 	
 		self.params = {	'Arm1': {'theta_deg': [164, 200, 240, 280, 290, 315, 330],
 					'r_kpc': [3.53, 3.76, 4.44, 5.24, 5.36, 5.81, 5.81]},
@@ -192,18 +197,25 @@ class TaylorCordesSpiral:
 	
 	def model_(self, arm_name):	
 		
-"""Generate arm coordinates using cubic spline interpolation
+"""Generate arm coordinates using cubic spline interpolation.
         
         Parameters
         ----------
         arm_name : str
-            Name of arm to model
-            
+            Must be one of: 'Arm1', 'Arm2', 'Arm3', 'Arm4'
+
         Returns
         -------
         tuple
-            (x_hc, y_hc, x_gc, y_gc) coordinate arrays
-        """		
+            (x_hc, y_hc, x_gc, y_gc) coordinate arrays where:
+            - hc = heliocentric coordinates
+            - gc = galactocentric coordinates
+
+        Raises
+        ------
+        ValueError
+            If invalid arm_name is provided
+        """	
 		
 		self.getparams()
 		arm_data = self.params[arm_name]
@@ -225,7 +237,16 @@ class TaylorCordesSpiral:
 		return x_hc, y_gc, x_gc, y_gc
 	
 	def plot_arms(self, coord_system='HC'):
-		"""Plot spiral arms in either Galacto-Centric (GC) or Helio-Centric (HC) frame."""
+	"""Visualize spiral arms in specified coordinate system.
+        
+        Parameters
+        ----------
+        coord_system : {'HC', 'GC'}, default 'HC'
+            Coordinate system for visualization:
+        Notes
+        -----
+        Creates matplotlib figure with arms plotted in predefined colors
+        """
 		plt.figure(figsize=(10, 10))
 		frame_label = "Galacto-Centric" if coord_system == 'GC' else "Helio-Centric"
 		plt.title(f"Taylor & Cordes (1993) Spiral Arm Model - {frame_label}", fontsize=14)
