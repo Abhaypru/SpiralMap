@@ -259,6 +259,28 @@ class TaylorCordesSpiral:
 	
 	def output_(self,arm,typ_='cartesian'):	
 		
+	"""Get arm coordinates in structured format.
+        
+        Parameters
+        ----------
+        arm : str
+            Arm identifier (e.g., 'Arm1')
+        typ_ : {'cartesian', 'polar'}, default 'cartesian'
+            Output coordinate type
+
+        Returns
+        -------
+        dict
+            Contains coordinate arrays under keys:
+            - 'xhc', 'yhc' (heliocentric)
+            - 'xgc', 'ygc' (galactocentric)
+            - Additional keys for polar coordinates if requested
+
+        Notes
+        -----
+        Requires prior setting of xsun attribute for coordinate conversion
+        """
+		
 		xsun = self.xsun
 		self.R0 = -xsun  # Solar Galactocentric radius (kpc)
 				
