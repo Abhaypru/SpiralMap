@@ -36,7 +36,7 @@ Class representing spiral arm model from Poggio et al. 2021 (EDR3 OB stars)
 	def __init__(self):
 
 		'''
-        """Initialize Poggio 2021 spiral model with heliocentric """
+        Initialize Poggio 2021 spiral model with heliocentric 
 		'''	
 
 		self.loc = dataloc+'/Poggio_OB_EDR3'
@@ -44,15 +44,19 @@ Class representing spiral arm model from Poggio et al. 2021 (EDR3 OB stars)
 		self.getarmlist()		
 
 	def getarmlist(self):
+        """Set available arms and their plot colors"""
 
-		self.arms= np.array(['all'])
+		self.arms= np.array(['all']) 
 		self.armcolour = {'all':'black'}
 	
 	def info(self):
 		
-		'''
-		here goes basic info for the user about this model
-		'''
+		
+       		 """
+	Display basic information about available arms
+ 
+ 		"""
+		
 
 		print('')
 		print('------------------------')	
@@ -62,12 +66,14 @@ Class representing spiral arm model from Poggio et al. 2021 (EDR3 OB stars)
 		
 	
 	def output_(self,coordsys='HC'):
-	
-		'''
-		plot contours of OB star spirals from Poggio 2021	
 		
-		
-		'''	
+	"""Generate spiral arm density contours from OB star data
+        
+        Parameters
+        ----------
+        coordsys : str, optional
+            Coordinate system: 'HC' (heliocentric) or 'GC' (galactocentric)
+        """	
 		xcorr = 0.
 		xsun = self.xsun
 		
