@@ -11,10 +11,32 @@ dataloc = root_+'/datafiles'
 
 
 class spiral_eloisa(object):
+"""
+Class representing spiral arm model from Poggio et al. 2021 (EDR3 OB stars)
+    
+    Attributes
+    ----------
+    loc : str
+        Path to data directory
+    arms : np.array
+        Array of available arm names
+    armcolour : dict
+        Color mapping for arms
+    
+    Methods
+    -------
+    getarmlist()
+        Initialize arm names and colors
+    info()
+        Print basic model information
+    output_(coordsys='HC')
+        Generate spiral arm contours in specified coordinate system
+    """
+	
 	def __init__(self):
 
 		'''
-		currently only makes it heliocentric, edit it!	
+        """Initialize Poggio 2021 spiral model with heliocentric """
 		'''	
 
 		self.loc = dataloc+'/Poggio_OB_EDR3'
