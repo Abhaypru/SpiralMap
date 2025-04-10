@@ -11,10 +11,32 @@ dataloc = root_+'/datafiles'
 
 
 class spiral_eloisa(object):
+"""
+Class representing spiral arm model from Poggio et al. 2021 (EDR3 OB stars)
+    
+    Attributes
+    ----------
+    loc : str
+        Path to data directory
+    arms : np.array
+        Array of available arm names
+    armcolour : dict
+        Color mapping for arms
+    
+    Methods
+    -------
+    getarmlist()
+        Initialize arm names and colors
+    info()
+        Print basic model information
+    output_(coordsys='HC')
+        Generate spiral arm contours in specified coordinate system
+    """
+	
 	def __init__(self):
 
 		'''
-		currently only makes it heliocentric, edit it!	
+        Initialize Poggio 2021 spiral model with heliocentric 
 		'''	
 
 		self.loc = dataloc+'/Poggio_OB_EDR3'
@@ -22,15 +44,19 @@ class spiral_eloisa(object):
 		self.getarmlist()		
 
 	def getarmlist(self):
+        """Set available arms and their plot colors"""
 
-		self.arms= np.array(['all'])
+		self.arms= np.array(['all']) 
 		self.armcolour = {'all':'black'}
 	
 	def info(self):
 		
-		'''
-		here goes basic info for the user about this model
-		'''
+		
+       		 """
+	Display basic information about available arms
+ 
+ 		"""
+		
 
 		print('')
 		print('------------------------')	
@@ -40,12 +66,14 @@ class spiral_eloisa(object):
 		
 	
 	def output_(self,coordsys='HC'):
-	
-		'''
-		plot contours of OB star spirals from Poggio 2021	
 		
-		
-		'''	
+	"""Generate spiral arm density contours from OB star data
+        
+        Parameters
+        ----------
+        coordsys : str, optional
+            Coordinate system: 'HC' (heliocentric) or 'GC' (galactocentric)
+        """	
 		xcorr = 0.
 		xsun = self.xsun
 		
@@ -83,20 +111,47 @@ class spiral_eloisa(object):
   
 
 class TaylorCordesSpiral:
-	"""
-	Class to generate and plot the Galactic Spiral Arms based on Taylor & Cordes (1993).
 	
-	
-	to check: should we rescale their R ?
-	"""
+""" Taylor & Cordes (1993) Galactic spiral arm model,	  
+    based on radio pulsar observations. The model defines four major spiral arms and 
+    provides both Galactocentric and Heliocentric coordinates for the arm segments.
+
+    Attributes
+    ----------
+    arms : ndarray
+        Array of arm identifiers ['Arm1', 'Arm2', 'Arm3', 'Arm4']
+    armcolour : dict
+        Color mapping for visualization {'Arm1': 'yellow', ...}
+    params : dict
+        Original parameters from paper (angles in deg, radii in kpc)
+    R0 : float
+        Solar galactocentric radius (kpc), set from xsun parameter
+
+    Methods
+    -------
+    info()
+        Display basic model information
+    model_(arm_name)
+        Generate coordinates for specified arm
+    plot_arms(coord_system)
+        Visualize arms in chosen coordinate system
+    output_(arm, typ_)
+        Get coordinates in structured format
+    """
+
 	
 	def __init__(self, R0=8.5):
-		"""Initialize spiral parameters from Taylor & Cordes (1993)"""
-		
+	"""Initialize spiral parameters from Taylor & Cordes (1993)
+        
+        Parameters
+        ----------
+        R0 : float, optional
+            Initial solar galactocentric radius (kpc), default 8.5
+        """		
 		self.getarmlist()
 		
 	def getarmlist(self):
-		
+		"""Set arm names and colours"""
 	
 		self.arms = np.array(['Arm1','Arm2','Arm3','Arm4'])
 		self.armcolour = {'Arm1':'yellow','Arm2':'green','Arm3':'blue','Arm4':'purple'}
@@ -117,7 +172,12 @@ class TaylorCordesSpiral:
 	        
 	  
 	def getparams(self):	   
-	
+	"""Load original spiral parameters from Taylor & Cordes (1993) Table 1.
+        
+        Sets params dictionary with:
+        - theta_deg: Anchor points in galactic longitude (degrees)
+        - r_kpc: Corresponding galactocentric radii (kiloparsecs)
+	"""
 	
 		self.params = {	'Arm1': {'theta_deg': [164, 200, 240, 280, 290, 315, 330],
 					'r_kpc': [3.53, 3.76, 4.44, 5.24, 5.36, 5.81, 5.81]},
@@ -135,9 +195,27 @@ class TaylorCordesSpiral:
 					              }
 
 	
-	def model_(self, arm_name):				
-		"""Generate x, y coordinates for a given spiral arm."""
+	def model_(self, arm_name):	
 		
+"""Generate arm coordinates using cubic spline interpolation.
+        
+        Parameters
+        ----------
+        arm_name : str
+            Must be one of: 'Arm1', 'Arm2', 'Arm3', 'Arm4'
+
+        Returns
+        -------
+        tuple
+            (x_hc, y_hc, x_gc, y_gc) coordinate arrays where:
+            - hc = heliocentric coordinates
+            - gc = galactocentric coordinates
+
+        Raises
+        ------
+        ValueError
+            If invalid arm_name is provided
+        """	
 		
 		self.getparams()
 		arm_data = self.params[arm_name]
@@ -159,7 +237,16 @@ class TaylorCordesSpiral:
 		return x_hc, y_gc, x_gc, y_gc
 	
 	def plot_arms(self, coord_system='HC'):
-		"""Plot spiral arms in either Galacto-Centric (GC) or Helio-Centric (HC) frame."""
+	"""Visualize spiral arms in specified coordinate system.
+        
+        Parameters
+        ----------
+        coord_system : {'HC', 'GC'}, default 'HC'
+            Coordinate system for visualization:
+        Notes
+        -----
+        Creates matplotlib figure with arms plotted in predefined colors
+        """
 		plt.figure(figsize=(10, 10))
 		frame_label = "Galacto-Centric" if coord_system == 'GC' else "Helio-Centric"
 		plt.title(f"Taylor & Cordes (1993) Spiral Arm Model - {frame_label}", fontsize=14)
@@ -171,6 +258,28 @@ class TaylorCordesSpiral:
 			plt.plot(x, y, color=arm['color'], label=arm['label'])
 	
 	def output_(self,arm,typ_='cartesian'):	
+		
+	"""Get arm coordinates in structured format.
+        
+        Parameters
+        ----------
+        arm : str
+            Arm identifier (e.g., 'Arm1')
+        typ_ : {'cartesian', 'polar'}, default 'cartesian'
+            Output coordinate type
+
+        Returns
+        -------
+        dict
+            Contains coordinate arrays under keys:
+            - 'xhc', 'yhc' (heliocentric)
+            - 'xgc', 'ygc' (galactocentric)
+            - Additional keys for polar coordinates if requested
+
+        Notes
+        -----
+        Requires prior setting of xsun attribute for coordinate conversion
+        """
 		
 		xsun = self.xsun
 		self.R0 = -xsun  # Solar Galactocentric radius (kpc)
