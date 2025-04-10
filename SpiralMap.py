@@ -296,7 +296,32 @@ class TaylorCordesSpiral:
 	
 
 class spiral_houhan(object):	
-	
+	"""Hou & Han (2014) polynomial-logarithmic spiral arm model
+    
+    Implements the Milky Way spiral structure model from:
+    "The spiral structure of the Milky Way from classical Cepheids" (Hou & Han 2014)
+    using polynomial-logarithmic spiral functions. Provides 6 major arm segments.
+
+    Attributes
+    ----------
+    arms : ndarray
+        Array of arm names ['Norma', 'Scutum-Centaurus', ...]
+    armcolour : dict
+        Visualization colors for each arm
+    R0 : float
+        Solar galactocentric radius (kpc), calculated from xsun
+    params : dict
+        Spiral parameters from Table 4 of Hou & Han (2014)
+    
+    Methods
+    -------
+    info()
+        Display available spiral arms
+    model_(arm_name)
+        Generate coordinates for specified arm
+    output_(arm)
+        Get structured coordinate data
+    """
 	
 	def __init__(self):
 		
@@ -304,14 +329,20 @@ class spiral_houhan(object):
 		self.getarmlist()
 
 	def getarmlist(self):
-		
+		"""Initialize arm names and visualization colors.
+        
+        Sets:
+        - arms: List of 6 spiral arm segments
+        - armcolour: Color mapping dictionary with hex/RGB values
+        """
+
 		self.arms = np.array(['Norma','Scutum-Centaurus','Sagittarius-Carina','Perseus','Local','Outer'])
 		self.armcolour = {'Norma':'black','Scutum-Centaurus':'red','Sagittarius-Carina':'green','Perseus':'blue','Local':'purple','Outer':'gold'}
 	
 	def info(self):
 		
 		'''
-		here goes basic info for the user about this model
+        Prints formatted table of arm names to stdout.
 		'''
 
 		print('')
@@ -323,6 +354,25 @@ class spiral_houhan(object):
 
 	def getparams(self):		
 		# Taken value from the table 4 from Hou & Han (2014)
+		
+		"""Load spiral parameters from Hou & Han (2014) Table 4.
+        
+        Returns
+        -------
+        dict
+            Nested dictionary containing for each arm:
+            - a, b, c, d: Polynomial coefficients
+            - θ_start: Start angle in degrees (Galactic longitude)
+            - θ_end: End angle in degrees
+            
+        Example
+        -------
+        >>> params['Scutum-Centaurus']
+        {'a': 5.8002, 'b': -1.8188, 'c': 0.2352, 'd': -0.008999,
+         'θ_start': 275, 'θ_end': 620}
+        """
+
+		
 		params = {
 			'Norma': {'a': 1.1668, 'b': 0.1198, 'c': 0.002557, 'd': 0.0, 'θ_start': 40, 'θ_end': 250},
 			'Scutum-Centaurus': {'a': 5.8002, 'b': -1.8188, 'c': 0.2352, 'd': -0.008999, 'θ_start': 275, 'θ_end': 620},
@@ -336,11 +386,32 @@ class spiral_houhan(object):
 
 	
 	def polynomial_log_spiral(self, θ, a, b, c, d):
-		"""Polynomial-logarithmic spiral model."""
+		
+"""Calculate radius using polynomial-logarithmic spiral equation.
+        
+        Parameters
+        ----------
+        θ : float or ndarray
+            Galactic longitude angle in degrees
+        a,b,c,d : float
+            Polynomial coefficients from Hou & Han Table 4
+            
+        Returns
+        -------
+        float or ndarray
+            Galactocentric radius in kiloparsecs
+            
+        Notes
+        -----
+        Implements equation:
+        R(θ) = exp(a + bθ_rad + cθ_rad² + dθ_rad³)
+        where θ_rad = np.radians(θ)
+        """	
 		return np.exp(a + b*np.radians(θ) + c*np.radians(θ)**2 + d*np.radians(θ)**3)
 	
 	def model_(self, arm_name, n_points=500):
-		"""Generate spiral arm coordinates based on the polynomial-logarithmic model."""
+        """Generate spiral arm coordinates in both coordinate systems."""
+		
 		params_ = self.getparams()
 		params = params_[arm_name]
 		
@@ -361,6 +432,8 @@ class spiral_houhan(object):
 	
 	def output_(self, arm, typ_='cartesian'):	
 		
+        """Get structured coordinate data for analysis/plotting."""
+
 		xsun = self.xsun
 		self.R0 = -xsun  # Solar Galactocentric radius (kpc)
 	
