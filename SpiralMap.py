@@ -454,6 +454,40 @@ class spiral_houhan(object):
 
 class spiral_levine(object):
 	
+	"""Levine et al. (2006) logarithmic spiral arm model for the Milky Way.
+    
+    Implements a four-arm logarithmic spiral model based on:
+    Levine, E. S., Blitz, L., & Heiles, C. (2006). "The Spiral Structure 
+    of the Outer Milky Way in Hydrogen". Astrophysical Journal.
+    
+    The model provides both galactocentric (GC) and heliocentric (HC) coordinates
+    for each spiral arm segment with fixed pitch angles.
+
+    Attributes
+    ----------
+    arms : numpy.ndarray
+        Array of arm identifiers ['Arm1', 'Arm2', 'Arm3', 'Arm4']
+    armcolour : dict
+        Color mapping for visualization purposes:
+        {'Arm1':'yellow', 'Arm2':'green', 'Arm3':'blue', 'Arm4':'purple'}
+    arms_model : dict
+        Dictionary containing spiral parameters for each arm:
+        - pitch: Pitch angle in degrees
+        - phi0: Solar crossing angle in degrees
+    R0 : float
+        Solar galactocentric radius in kpc (derived from xsun)
+
+    Methods
+    -------
+    info()
+        Display basic information about available arms
+    model_(arm_name, R_max=25, n_points=1000)
+        Generate coordinates for a specified arm
+    plot_arms(coord_system='HC', R_max=25, show_sun=True)
+        Visualize spiral arms in chosen coordinate system
+    output_(arm, typ_='cartesian')
+        Get structured coordinate data for analysis
+    """
 	
 	
 	def __init__(self):
@@ -472,7 +506,8 @@ class spiral_levine(object):
 	def info(self):
 		
 		'''
-		here goes basic info for the user about this model
+  	Displays basic informations about the models
+        Prints a formatted table showing all arm identifiers to stdout.
 		'''
 	
 		print('')
@@ -493,7 +528,40 @@ class spiral_levine(object):
 			
 		
 	def model_(self,arm_name, R_max=25, n_points=1000):
-		"""Generate spiral arm coordinates using logarithmic spiral formula"""
+		
+"""Generate logarithmic spiral coordinates for specified arm.
+        
+        Parameters
+        ----------
+        arm_name : str
+            Name of arm to model (must be in ['Arm1', 'Arm2', 'Arm3', 'Arm4'])
+        R_max : float, optional
+            Maximum galactocentric radius to model (kpc), default=25
+        n_points : int, optional
+            Number of points to sample along the spiral, default=1000
+
+        Returns
+        -------
+        tuple
+            (x_hc, y_hc, x_gc, y_gc) coordinate arrays where:
+            - x_hc, y_hc: Heliocentric coordinates (kpc)
+            - x_gc, y_gc: Galactocentric coordinates (kpc)
+
+        Raises
+        ------
+        ValueError
+            If invalid arm_name is provided
+
+        Notes
+        -----
+        Implements the logarithmic spiral equation:
+            R(φ) = R₀ * exp[(φ - φ₀) * tan(i)]
+        where:
+        - R₀ is solar galactocentric distance
+        - i is pitch angle
+        - φ₀ is solar crossing angle
+        - φ is the angular coordinate
+        """
 
 		params = self.arms_model[arm_name]
 		pitch_rad = np.radians(params['pitch'])
@@ -539,7 +607,27 @@ class spiral_levine(object):
 				raise ValueError("Coordinate system must be 'GC' or 'HC'")
 	
 	def output_(self, arm, typ_='cartesian'):
-		
+		"""Get structured coordinate data for analysis.
+        
+        Parameters
+        ----------
+        arm : str
+            Name of arm to output (must be in self.arms)
+        typ_ : {'cartesian'}, default 'cartesian'
+            Output coordinate type (currently only cartesian supported)
+
+        Returns
+        -------
+        dict
+            Dictionary containing coordinate arrays:
+            - 'xhc', 'yhc': Heliocentric coordinates (kpc)
+            - 'xgc', 'ygc': Galactocentric coordinates (kpc)
+
+        Notes
+        -----
+        Requires xsun attribute to be set for coordinate conversion
+        """
+	
 		xsun = self.xsun
 		self.R0 = -xsun  # Solar Galactocentric radius (kpc)
 	
