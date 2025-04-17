@@ -92,7 +92,6 @@ def sqrtsum(ds=[],prnt=False):
 	return resval
 
 
-
 def add_polargrid(rlevels=12,xmin=-20,xmax=10,ymin=-15,ymax=15):
 	
 
