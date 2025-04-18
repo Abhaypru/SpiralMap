@@ -29,7 +29,7 @@ class spiral_eloisa(object):
     output_(coordsys='HC')
         Generate spiral arm contours in specified coordinate system
     """
-    def __init__(self, dataloc):
+    def __init__(self):
         """
         Initialize the Poggio 2021 spiral arm model with heliocentric configuration.
 
@@ -1235,239 +1235,248 @@ class spiral_drimmel(object):
 
 
 class reid_spiral(object):
-    """Reid et al. (2019) kinked logarithmic spiral arm model
-    
-    Implements the Milky Way spiral structure model from:
-    "Trigonometric Parallaxes of High Mass Star Forming Regions: The Structure and Kinematics of the Milky Way"
-    using kinked logarithmic spirals with varying pitch angles. Models 7 major arm features.
+	"""Reid et al. (2019) kinked logarithmic spiral arm model
+	
+	Implements the Milky Way spiral structure model from:
+	"Trigonometric Parallaxes of High Mass Star Forming Regions: The Structure and Kinematics of the Milky Way"
+	using kinked logarithmic spirals with varying pitch angles. Models 7 major arm features.
+	
+	Attributes
+	----------
+	arms : ndarray
+		Array of arm identifiers ['3-kpc', 'Norma', 'Sct-Cen', 'Sgr-Car', 'Local', 'Perseus', 'Outer']
+	armcolour : dict
+		Color mapping for visualization purposes
+	kcor : bool
+		Flag for kinematic distance correction adjustment
+	params : dict
+		Dictionary containing spiral parameters for each arm
+	
+	Methods
+	-------
+	info()
+		Display basic information about available arms
+	model_(params)
+		Generate spiral coordinates with kink parameters
+	output_(arm, typ_)
+		Get structured coordinate data
+	"""
+	
+	def __init__(self, kcor=False):
+		"""Initialize Reid et al. (2019) spiral model
+		
+		Parameters
+		----------
+		kcor : bool, optional
+			Apply kinematic distance correction adjustment to R_kink parameters,
+			default=False
+		"""
+		self.kcor = kcor
+		self.getarmlist()
+	
+	
+	def getarmlist(self):
+		
+		# self.arms = np.array(['3-kpc','Norma','Sct-Cen','Sgt-Car','Local','Perseus','Outer'])
+		self.arms = np.array(['3-kpc','Norma','Sct-Cen','Sgr-Car','Local','Perseus','Outer'])        
+		
+	def info(self):
+		
+		'''
+		here goes basic info for the user about this model
+		'''
+	
+		print('')
+		print('------------------------')	
+		dfmodlist = pd.DataFrame(self.arms,columns=['Arm list'])
+		print(dfmodlist)
+		print('------------------------')		
+		
+		
+	def getparams(self,arm):
+		"""Load spiral parameters for specified arm from Reid et al. (2019) Table 4.
+		
+		Parameters
+		----------
+		arm : str
+			Valid arm identifier from class arms list
+	
+		Returns
+		-------
+		dict
+			Dictionary containing:
+			- beta_kink: Kink angle position in degrees
+			- pitch_low: Pitch angle before kink (degrees)
+			- pitch_high: Pitch angle after kink (degrees)
+			- R_kink: Galactocentric radius at kink (kpc)
+			- beta_min/max: Angular range in degrees
+			- width: Arm width parameter (kpc)
+	
+		Notes
+		-----
+		Applies kinematic correction to R_kink if kcor=True during initialization
+		"""
+		if arm == '3-kpc':
+			params = {'name':arm,'beta_kink':15,'pitch_low':-4.2,'pitch_high':-4.2,'R_kink':3.52,'beta_min':15,'beta_max':18,'width':0.18}
+		if arm == 'Norma':
+			params = {'name':arm,'beta_kink':18,'pitch_low':-1.,'pitch_high':19.5,'R_kink':4.46,'beta_min':5,'beta_max':54,'width':0.14}
+		if arm == 'Sct-Cen':
+			params = {'name':arm,'beta_kink':23,'pitch_low':14.1,'pitch_high':12.1,'R_kink':4.91,'beta_min':0,'beta_max':104,'width':0.23}
+		if arm == 'Sgr-Car': #'Sgr-Car'
+			params = {'name':arm,'beta_kink':24,'pitch_low':17.1,'pitch_high':1,'R_kink':6.04,'beta_min':2,'beta_max':97,'width':0.27}
+		if arm == 'Local':
+			params = {'name':arm,'beta_kink':9,'pitch_low':11.4,'pitch_high':11.4,'R_kink':8.26,'beta_min':-8,'beta_max':34,'width':0.31}
+		if arm == 'Perseus':
+			params = {'name':arm,'beta_kink':40,'pitch_low':10.3,'pitch_high':8.7,'R_kink':8.87,'beta_min':-23,'beta_max':115,'width':0.35}
+		if arm == 'Outer':
+			params = {'name':arm,'beta_kink':18,'pitch_low':3,'pitch_high':9.4,'R_kink':12.24,'beta_min':-16,'beta_max':71,'width':0.65}
+		
+		
+		if self.kcor:
+			Rreid = 8.15
+			diffval = params['R_kink'] - Rreid
+			xsun = get_lsr()['xsun']
+			if diffval < 0:
+				 params['R_kink'] = (-xsun) + diffval
+			else:
+				 params['R_kink'] = (-xsun) + diffval
+					
+		
+		return params
+	
+	def model_(self,params):
+		"""Generate kinked logarithmic spiral coordinates.
+		
+		Parameters
+		----------
+		params : dict
+			Spiral parameters dictionary from getparams()
+	
+		Returns
+		-------
+		tuple
+			(x, y, x1, y1, x2, y2) coordinate arrays where:
+			- x,y: Arm center coordinates (GC)
+			- x1,y1: Inner arm boundary
+			- x2,y2: Outer arm boundary
+	
+		Notes
+		-----
+		Implements modified logarithmic spiral equation with pitch angle kink:
+		R(β) = R_kink * exp[-(β - β_kink) * tan(pitch)]
+		where pitch changes at β_kink
+		"""
+		
+		beta_kink = np.radians(params['beta_kink'])
+		pitch_low = np.radians(params['pitch_low'])
+		pitch_high = np.radians(params['pitch_high'])
+		R_kink = params['R_kink']
+		beta_min = params['beta_min']
+		beta_max = params['beta_max']
+		width = params['width']
+		
+		
+		# beta = np.linspace(beta_min-180,beta_max,100)
+		beta = np.linspace(beta_min,beta_max,1000)
+	
+	
+		beta_min = np.radians(beta_min)
+		beta_max = np.radians(beta_max)
+		beta = np.radians(beta)	
+		
+		
+		pitch = np.zeros(beta.size) + np.nan
+		indl = np.where(beta<beta_kink)[0]; pitch[indl] = pitch_low
+		indr = np.where(beta>beta_kink)[0]; pitch[indr] = pitch_high
+		
+		tmp1 = (beta - beta_kink)*(np.tan(pitch))
+		tmp2 = np.exp(-tmp1)
+				
+		R = R_kink*tmp2
+		x = -R*(np.cos(beta))
+		y = R*(np.sin(beta))
+	
+		##3 testing 
+		R2 = (R_kink+(width*0.5))*tmp2
+		x2 = -R2*(np.cos(beta))
+		y2 = R2*(np.sin(beta))
+	
+		R1 = (R_kink-(width*0.5))*tmp2
+		x1 = -R1*(np.cos(beta))
+		y1 = R1*(np.sin(beta))
+		
+		
+		
+		return x,y, x1,y1,x2,y2
+	
+	def output_(self,arm,typ_='cartesian'):	
+		"""Get structured coordinate data for analysis/plotting.
+		Returns
+		-------
+		dict
+			For 'cartesian' type contains:
+			- xhc, yhc: Heliocentric coordinates (kpc)
+			- xgc, ygc: Galactocentric coordinates (kpc)
+	
+		Notes
+		-----
+		Polar modes create matplotlib plots directly
+		"""
+		xsun = self.xsun
+		params = self.getparams(arm)
+		
+		if typ_ =='cartesian':
+	
+			xgc,ygc,xgc1,ygc1,xgc2,ygc2 = self.model_(params);			
+			xhc = xgc - xsun
+			xhc1 = xgc1 - xsun
+			xhc2 = xgc2 - xsun
+	
+			yhc = ygc
+			
+			self.dout = {'xhc':xhc,
+						 'yhc':yhc,
+						 'xgc':xgc,
+						 'ygc':ygc}								
+			
+		
+		if typ_ =='polar':
+			
+			xhc = x - xsun
+			xhc1 = x1 - xsun
+			xhc2 = x2 - xsun
+			
+			rgc = sqrtsum(ds=[x,y])
+			phi1 = np.arctan2(y,-x)
+			phi2 = np.degrees(np.arctan(y/-x))
+			phi3 = np.degrees(np.arctan2(y,x))%180.	
+			
+			# phi3 = 180.-np.degrees(phi1)
+			
+			# phi1 = (np.arctan2(yhc,xgc))	
+			# plt.plot(phi1,rgc,color,linestyle='-',linewidth=linewidth)
+			plt.plot(phi1,rgc,'.',color=color,markersize=markersize)
+			
+			return 
+			
+		if typ_ =='polargrid':
+			
+			linewidth=2
+			
+			yhc = y
+			xgc = x
+			phi4 = np.degrees(np.arctan2(yhc,xgc))%360.	
+			rgc = sqrtsum(ds=[x,y])
+	
+			plt.plot(np.radians(phi4),rgc,color=color,markersize=markersize,linestyle=linestyle,linewidth=linewidth,label=arm)
+	
+	
+	
+			
+			return 
+	
 
-    Attributes
-    ----------
-    arms : ndarray
-        Array of arm identifiers ['3-kpc', 'Norma', 'Sct-Cen', 'Sgr-Car', 'Local', 'Perseus', 'Outer']
-    armcolour : dict
-        Color mapping for visualization purposes
-    kcor : bool
-        Flag for kinematic distance correction adjustment
-    params : dict
-        Dictionary containing spiral parameters for each arm
 
-    Methods
-    -------
-    info()
-        Display basic information about available arms
-    model_(params)
-        Generate spiral coordinates with kink parameters
-    output_(arm, typ_)
-        Get structured coordinate data
-    """
-
-    def __init__(self, kcor=False):
-        """Initialize Reid et al. (2019) spiral model
-        
-        Parameters
-        ----------
-        kcor : bool, optional
-            Apply kinematic distance correction adjustment to R_kink parameters,
-            default=False
-        """
-        self.kcor = kcor
-        self.getarmlist()
-        
-    def info(self):
-        
-        '''
-        here goes basic info for the user about this model
-        '''
-
-        print('')
-        print('------------------------')	
-        dfmodlist = pd.DataFrame(self.arms,columns=['Arm list'])
-        print(dfmodlist)
-        print('------------------------')		
-        
-        
-    def getparams(self,arm):
-        """Load spiral parameters for specified arm from Reid et al. (2019) Table 4.
-        
-        Parameters
-        ----------
-        arm : str
-            Valid arm identifier from class arms list
-
-        Returns
-        -------
-        dict
-            Dictionary containing:
-            - beta_kink: Kink angle position in degrees
-            - pitch_low: Pitch angle before kink (degrees)
-            - pitch_high: Pitch angle after kink (degrees)
-            - R_kink: Galactocentric radius at kink (kpc)
-            - beta_min/max: Angular range in degrees
-            - width: Arm width parameter (kpc)
-
-        Notes
-        -----
-        Applies kinematic correction to R_kink if kcor=True during initialization
-        """
-        if arm == '3-kpc':
-            params = {'name':arm,'beta_kink':15,'pitch_low':-4.2,'pitch_high':-4.2,'R_kink':3.52,'beta_min':15,'beta_max':18,'width':0.18}
-        if arm == 'Norma':
-            params = {'name':arm,'beta_kink':18,'pitch_low':-1.,'pitch_high':19.5,'R_kink':4.46,'beta_min':5,'beta_max':54,'width':0.14}
-        if arm == 'Sct-Cen':
-            params = {'name':arm,'beta_kink':23,'pitch_low':14.1,'pitch_high':12.1,'R_kink':4.91,'beta_min':0,'beta_max':104,'width':0.23}
-        if arm == 'Sgr-Car': #'Sgr-Car'
-            params = {'name':arm,'beta_kink':24,'pitch_low':17.1,'pitch_high':1,'R_kink':6.04,'beta_min':2,'beta_max':97,'width':0.27}
-        if arm == 'Local':
-            params = {'name':arm,'beta_kink':9,'pitch_low':11.4,'pitch_high':11.4,'R_kink':8.26,'beta_min':-8,'beta_max':34,'width':0.31}
-        if arm == 'Perseus':
-            params = {'name':arm,'beta_kink':40,'pitch_low':10.3,'pitch_high':8.7,'R_kink':8.87,'beta_min':-23,'beta_max':115,'width':0.35}
-        if arm == 'Outer':
-            params = {'name':arm,'beta_kink':18,'pitch_low':3,'pitch_high':9.4,'R_kink':12.24,'beta_min':-16,'beta_max':71,'width':0.65}
-        
-        
-        if self.kcor:
-            Rreid = 8.15
-            diffval = params['R_kink'] - Rreid
-            xsun = get_lsr()['xsun']
-            if diffval < 0:
-                 params['R_kink'] = (-xsun) + diffval
-            else:
-                 params['R_kink'] = (-xsun) + diffval
-                    
-        
-        return params
-
-    def model_(self,params):
-        """Generate kinked logarithmic spiral coordinates.
-        
-        Parameters
-        ----------
-        params : dict
-            Spiral parameters dictionary from getparams()
-
-        Returns
-        -------
-        tuple
-            (x, y, x1, y1, x2, y2) coordinate arrays where:
-            - x,y: Arm center coordinates (GC)
-            - x1,y1: Inner arm boundary
-            - x2,y2: Outer arm boundary
-
-        Notes
-        -----
-        Implements modified logarithmic spiral equation with pitch angle kink:
-        R(β) = R_kink * exp[-(β - β_kink) * tan(pitch)]
-        where pitch changes at β_kink
-        """
-        
-        beta_kink = np.radians(params['beta_kink'])
-        pitch_low = np.radians(params['pitch_low'])
-        pitch_high = np.radians(params['pitch_high'])
-        R_kink = params['R_kink']
-        beta_min = params['beta_min']
-        beta_max = params['beta_max']
-        width = params['width']
-        
-        
-        # beta = np.linspace(beta_min-180,beta_max,100)
-        beta = np.linspace(beta_min,beta_max,1000)
-
-
-        beta_min = np.radians(beta_min)
-        beta_max = np.radians(beta_max)
-        beta = np.radians(beta)	
-        
-        
-        pitch = np.zeros(beta.size) + np.nan
-        indl = np.where(beta<beta_kink)[0]; pitch[indl] = pitch_low
-        indr = np.where(beta>beta_kink)[0]; pitch[indr] = pitch_high
-        
-        tmp1 = (beta - beta_kink)*(np.tan(pitch))
-        tmp2 = np.exp(-tmp1)
-                
-        R = R_kink*tmp2
-        x = -R*(np.cos(beta))
-        y = R*(np.sin(beta))
-
-        ##3 testing 
-        R2 = (R_kink+(width*0.5))*tmp2
-        x2 = -R2*(np.cos(beta))
-        y2 = R2*(np.sin(beta))
-
-        R1 = (R_kink-(width*0.5))*tmp2
-        x1 = -R1*(np.cos(beta))
-        y1 = R1*(np.sin(beta))
-        
-        
-        
-        return x,y, x1,y1,x2,y2
-    
-    def output_(self,arm,typ_='cartesian'):	
-        """Get structured coordinate data for analysis/plotting.
-        Returns
-        -------
-        dict
-            For 'cartesian' type contains:
-            - xhc, yhc: Heliocentric coordinates (kpc)
-            - xgc, ygc: Galactocentric coordinates (kpc)
-
-        Notes
-        -----
-        Polar modes create matplotlib plots directly
-        """
-        xsun = self.xsun
-        params = self.getparams(arm)
-        
-        if typ_ =='cartesian':
-
-            xgc,ygc,xgc1,ygc1,xgc2,ygc2 = self.model_(params);			
-            xhc = xgc - xsun
-            xhc1 = xgc1 - xsun
-            xhc2 = xgc2 - xsun
-    
-            yhc = ygc
-            
-            self.dout = {'xhc':xhc,
-                         'yhc':yhc,
-                         'xgc':xgc,
-                         'ygc':ygc}								
-            
-        
-        if typ_ =='polar':
-            
-            xhc = x - xsun
-            xhc1 = x1 - xsun
-            xhc2 = x2 - xsun
-            
-            rgc = sqrtsum(ds=[x,y])
-            phi1 = np.arctan2(y,-x)
-            phi2 = np.degrees(np.arctan(y/-x))
-            phi3 = np.degrees(np.arctan2(y,x))%180.	
-            
-            # phi3 = 180.-np.degrees(phi1)
-            
-            # phi1 = (np.arctan2(yhc,xgc))	
-            # plt.plot(phi1,rgc,color,linestyle='-',linewidth=linewidth)
-            plt.plot(phi1,rgc,'.',color=color,markersize=markersize)
-            
-            return 
-            
-        if typ_ =='polargrid':
-            
-            linewidth=2
-            
-            yhc = y
-            xgc = x
-            phi4 = np.degrees(np.arctan2(yhc,xgc))%360.	
-            rgc = sqrtsum(ds=[x,y])
-
-            plt.plot(np.radians(phi4),rgc,color=color,markersize=markersize,linestyle=linestyle,linewidth=linewidth,label=arm)
-
-    
-
-            
-            return 
 
 #-------------------------
 # main class:
