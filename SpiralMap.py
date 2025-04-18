@@ -8,6 +8,18 @@ root_ = os.getcwd()
 dataloc = root_+'/datafiles'
 
         
+###----------------------------------------------------------###
+# General rules/style 
+# each spiral model function should contain: 
+#
+#
+#
+#
+#
+#
+#
+###----------------------------------------------------------###
+
 
 class spiral_eloisa(object):
     """Class representing spiral arm model from Poggio et al. 2021 (EDR3 OB stars)
