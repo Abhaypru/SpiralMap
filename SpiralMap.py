@@ -1646,6 +1646,8 @@ class main_(object):
                                 # plt.plot(phi1,rgc,'-',color=arm_clr[armi],markersize=markersize)					
     
     
+			    self.dout = spimod.dout.copy() 
+    
                 if plotattrs['plot']:				
     
                     if plotattrs['armcolour'] == '':
@@ -1672,13 +1674,13 @@ class main_(object):
                         plt.ylim([ymin,ymax])	
                                         
                     
-                    self.dout = spimod.dout.copy()
+
                 
                     self.xmin,self.xmax =plt.gca().get_xlim()[0],plt.gca().get_xlim()[1]				
                     self.ymin,self.ymax =plt.gca().get_ylim()[0],plt.gca().get_ylim()[1]	
                     if plotattrs['polargrid']:
                         add_polargrid(xmin=self.xmin,xmax=self.xmax,ymin=self.ymin,ymax=self.ymax)
-                    
+				                   
 
                         
             elif arm =='all':
