@@ -1290,7 +1290,10 @@ class reid_spiral(object):
 	def getarmlist(self):
 		
 		# self.arms = np.array(['3-kpc','Norma','Sct-Cen','Sgt-Car','Local','Perseus','Outer'])
-		self.arms = np.array(['3-kpc','Norma','Sct-Cen','Sgr-Car','Local','Perseus','Outer'])        
+		self.arms = np.array(['3-kpc','Norma','Sct-Cen','Sgr-Car','Local','Perseus','Outer'])      
+		
+		
+		self.armcolour = {'3-kpc':'C6','Norma':'C5','Sct-Cen':'C4','Sgr-Car':'C3','Local':'C2','Perseus':'C1','Outer':'C0'}		  
 		
 	def info(self):
 		
@@ -1641,13 +1644,12 @@ class main_(object):
                 spimod.output_(arm)
                                                 
                 spimod.dout['rgc'] = sqrtsum(ds=[spimod.dout['xgc'],spimod.dout['ygc']])						
-                spimod.dout['phi1'] = np.arctan2(spimod.dout['yhc'],-spimod.dout['xgc'])
+                spimod.dout['phi1'] = np.arctan2(spimod.dout['yhc'],-spimod.dout['xgc']);  self.dout = spimod.dout.copy() 
+
 
                                 # plt.plot(phi1,rgc,'-',color=arm_clr[armi],markersize=markersize)					
     
-    
-			    self.dout = spimod.dout.copy() 
-    
+        
                 if plotattrs['plot']:				
     
                     if plotattrs['armcolour'] == '':
