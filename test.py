@@ -48,7 +48,7 @@ if mkpaperfigs:
 	plm.tight_layout()
 	plt.savefig(figdir_primer+'/spirals_'+plotattrs['coordsys']+'.png')
 	
-single_ = True
+single_ = False
 
 if single_:
 		
