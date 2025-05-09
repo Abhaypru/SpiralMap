@@ -26,16 +26,16 @@ class spiral_eloisa(object):
     def __init__(self):		
         """
         NAME:
-			__init__ 
+		__init__ 
 	    PURPOSE: 
-	        Initialize the Poggio 2021 spiral arm model	
+        Initialize the Poggio 2021 spiral arm model	
 	    INPUT:	
-	    
+		-
 	    OUTPUT:
-			object 
-			(self.loc = model directory)
-			(self.arms = available arms in this model)
-			(self.armcolour = arm colours in this model)
+		object 
+		(self.loc = model directory)
+		(self.arms = available arms in this model)
+		(self.armcolour = arm colours in this model)
 	    HISTORY:  
 			09 May 2025: Prusty/Khanna
 			
