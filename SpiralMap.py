@@ -11,6 +11,16 @@ class spiral_eloisa(object):
 	"""
 	Class containing spiral arm model from
 		Poggio et al. 2021 (EDR3 OB stars)
+
+	Methods
+	-------
+	getarmlist()
+		Initialize arm names and colors
+	info()
+		Print basic model information
+	output_(coordsys='HC')
+		Generate spiral arm contours in specified coordinate system   
+
 	
 	HISTORY:
 		09 May 2025: Prusty/Khanna					
@@ -63,21 +73,20 @@ class spiral_eloisa(object):
 		Rvalues_dens=sqrtsum(ds=[xvalues_overdens, yvalues_overdens])
 	
 		#----overplot spiral arms in overdens----#
-		iniz_overdens = 0  
-		fin_overdens = 1.5 
-		N_levels_overdens = 2
-		levels_overdens = np.linspace(iniz_overdens,fin_overdens,N_levels_overdens)		
-		cset1 = plt.contourf(xvalues_overdens + xcorr,yvalues_overdens,over_dens_grid.T, 
-							levels=levels_overdens, alpha=0.05,
-							cmap='Greys')	
-		iniz_overdens = 0. 
-		fin_overdens = 1.5 
-		N_levels_overdens = 4 
-		levels_overdens = np.linspace(iniz_overdens,fin_overdens,N_levels_overdens)
-		cset1 = plt.contour(xvalues_overdens + xcorr,yvalues_overdens, over_dens_grid.T,
-							levels=levels_overdens, colors='black',
+		iniz_overdens= 0  
+		fin_overdens= 1.5 
+		N_levels_overdens= 2
+		levels_overdens= np.linspace(iniz_overdens,fin_overdens,N_levels_overdens)		
+		cset1 = plt.contourf(xvalues_overdens+xcorr,yvalues_overdens,over_dens_grid.T, 
+							levels=levels_overdens,alpha=0.05,cmap='Greys')	
+		iniz_overdens= 0. 
+		fin_overdens= 1.5 
+		N_levels_overdens= 4 
+		levels_overdens= np.linspace(iniz_overdens,fin_overdens,N_levels_overdens)
+		cset1 = plt.contour(xvalues_overdens+xcorr,yvalues_overdens,over_dens_grid.T,
+							levels=levels_overdens,colors='black',
 							linewidths=0.2)
-	
+
 
 class TaylorCordesSpiral:
     
