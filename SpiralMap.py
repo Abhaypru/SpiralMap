@@ -11,7 +11,7 @@ class spiral_eloisa(object):
 	"""
 	Class containing spiral arm model from
 		Poggio et al. 2021 (EDR3 OB stars)
-
+		
 	Methods
 	-------
 	getarmlist()
@@ -20,8 +20,7 @@ class spiral_eloisa(object):
 		Print basic model information
 	output_(coordsys='HC')
 		Generate spiral arm contours in specified coordinate system   
-
-	
+			
 	HISTORY:
 		09 May 2025: Prusty/Khanna					
 	"""
@@ -87,7 +86,7 @@ class spiral_eloisa(object):
 							levels=levels_overdens,colors='black',
 							linewidths=0.2)
 
-
+# to clean...
 class TaylorCordesSpiral:
     
     """ Taylor & Cordes (1993) Galactic spiral arm model,	  
@@ -270,9 +269,6 @@ class TaylorCordesSpiral:
                          'yhc':yhc,
                          'xgc':xgc,
                          'ygc':ygc}	
-        
-    
-
 class spiral_houhan(object):	
     """Hou & Han (2014) polynomial-logarithmic spiral arm model
     
@@ -425,10 +421,6 @@ class spiral_houhan(object):
                 'xgc': xgc,
                 'ygc': ygc
             }
-
-    
-
-
 
 class spiral_levine(object):
     
@@ -618,8 +610,6 @@ class spiral_levine(object):
                 'xgc': xgc,
                 'ygc': ygc
             }
-    
-
 
 class spiral_cepheids(object):
     '''
@@ -1217,8 +1207,6 @@ class spiral_drimmel(object):
                 # plt.legend() 
                 return 
 
-
-
 class reid_spiral(object):
 	"""Reid et al. (2019) kinked logarithmic spiral arm model
 	
@@ -1462,37 +1450,22 @@ class reid_spiral(object):
 	
 			
 			return 
-	
-
-
-
-#-------------------------
-# main class:
-#-------------------------
 
 class main_(object):
     
-    def __init__(self,xsun=-8.277):
-        
+    def __init__(self,xsun=-8.277):        
 
         self.root_ = root_
-        self.dataloc = dataloc
-        
+        self.dataloc = dataloc        
         self.xsun = xsun
-        self.Rsun = -self.xsun
-        
+        self.Rsun = -self.xsun        
         self.listmodels()
         self.getinfo()	
     
-    def listmodels(self):
+    def listmodels(self):        
+        ''' to do: think of a name check exception '''
         
-        '''
-        think of a name check exception
-        '''
-        
-        self.models = ['Taylor_Cordes_1992','Drimmel_NIR_2000','Levine_2006','Hou_Han_2014','Reid_2019','Poggio_2021','Drimmel_ceph_2024']
-        # self.models = ['Drimmel_NIR_2000','Levine_2006','Hou_Han_2014','Reid_2019','Poggio_2021']
-        
+        self.models = ['Taylor_Cordes_1992','Drimmel_NIR_2000','Levine_2006','Hou_Han_2014','Reid_2019','Poggio_2021','Drimmel_ceph_2024']        
         self.models_class = {'Reid_2019':reid_spiral(),
                              'Levine_2006':spiral_levine(),
                              'Poggio_2021':spiral_eloisa(),
