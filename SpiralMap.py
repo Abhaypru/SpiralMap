@@ -8,8 +8,13 @@ dataloc = root_+'/datafiles'
        
 
 class spiral_eloisa(object):
-	"""	Class containing spiral arm model from
-		Poggio et al. 2021 (EDR3 OB stars)    """
+	"""
+	Class containing spiral arm model from
+		Poggio et al. 2021 (EDR3 OB stars)
+	
+	HISTORY:
+		09 May 2025: Prusty/Khanna					
+	"""
 	
 	def _init__(self):		
 		"""
@@ -20,34 +25,22 @@ class spiral_eloisa(object):
 		OUTPUT:
 			object (self.loc = model directory)
 			object (self.arms = available arms in this model)
-			object (self.armcolour = arm colours in this model)
-		HISTORY:
-			09 May 2025: Prusty/Khanna		
-		
+			object (self.armcolour = arm colours in this model)			
 		"""
-		
-					
-		
 		self.loc = dataloc + '/Poggio_OB_EDR3'
-		self.getarmlist()
-	
+		self.getarmlist()	
 	def getarmlist(self):
-		"""
-		Initialize the list of available spiral arms and their corresponding plot colors.
-		"""
+		"""Initialize the list of available spiral arms 
+		and their corresponding plot colors. """
 		self.arms = np.array(['all'])
-		self.armcolour = {'all': 'black'}
-	
+		self.armcolour = {'all': 'black'}	
 	def info(self):
-		"""
-		Print basic information about the available spiral arms.
-		"""
+		"""Collate arm information """
 		print('')
 		print('------------------------')
 		dfmodlist = pd.DataFrame(self.arms, columns=['Arm list'])
 		print(dfmodlist)
-		print('------------------------')
-	
+		print('------------------------')	
 	def output_(self, coordsys='HC'):
 		"""
 		Generate and display spiral arm density contours from OB star data.
@@ -62,36 +55,25 @@ class spiral_eloisa(object):
 		if coordsys == 'GC':
 			xcorr = xsun
 	
-		print(xsun)
-		print(xcorr)
-		print(coordsys)
-	
-		# #read overdensity contours
+		# read overdensity contours
 		xvalues_overdens = np.load(self.loc + '/xvalues_dens.npy')
 		yvalues_overdens = np.load(self.loc + '/yvalues_dens.npy')
 		over_dens_grid = np.load(self.loc + '/over_dens_grid_threshold_0_003_dens.npy')
 		phi1_dens = np.arctan2(yvalues_overdens, -xvalues_overdens)
 		Rvalues_dens = sqrtsum(ds=[xvalues_overdens, yvalues_overdens])
 	
-		# # #------------------ overplot spiral arms in overdens ------------------
-		iniz_overdens = 0  # .1
-		fin_overdens = 1.5  # .1
+		#----overplot spiral arms in overdens----#
+		iniz_overdens = 0  
+		fin_overdens = 1.5 
 		N_levels_overdens = 2
+		levels_overdens = np.linspace(iniz_overdens, fin_overdens, N_levels_overdens)		
+		cset1 = plt.contourf(xvalues_overdens + xcorr, yvalues_overdens, over_dens_grid.T, levels=levels_overdens, alpha=0.05, cmap='Greys')	
+		iniz_overdens = 0. 
+		fin_overdens = 1.5 
+		N_levels_overdens = 4 
 		levels_overdens = np.linspace(iniz_overdens, fin_overdens, N_levels_overdens)
-		# cset1 = plt.contourf(xvalues_overdens + xcorr, yvalues_overdens, over_dens_grid.T, levels=levels_overdens, alpha=0.2, cmap='Greys')
-		cset1 = plt.contourf(xvalues_overdens + xcorr, yvalues_overdens, over_dens_grid.T, levels=levels_overdens, alpha=0.05, cmap='Greys')
-		# cset1 = plt.contourf(phi1_dens, Rvalues_dens, over_dens_grid.T, levels=levels_overdens, alpha=0.2, cmap='Greys')
-	
-		iniz_overdens = 0.  # .1
-		fin_overdens = 1.5  # .1
-		N_levels_overdens = 4  # 7
-		levels_overdens = np.linspace(iniz_overdens, fin_overdens, N_levels_overdens)
-		# cset1 = plt.contour(xvalues_overdens + xcorr, yvalues_overdens, over_dens_grid.T, levels=levels_overdens, colors='black', linewidths=0.7)
 		cset1 = plt.contour(xvalues_overdens + xcorr, yvalues_overdens, over_dens_grid.T, levels=levels_overdens, colors='black', linewidths=0.2)
-		# cset1 = plt.contour(phi1_dens, Rvalues_dens, over_dens_grid.T, levels=levels_overdens, colors='black', linewidths=0.7)
 	
-		print('')
-
 
 class TaylorCordesSpiral:
     
