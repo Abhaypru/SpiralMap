@@ -67,8 +67,7 @@ class spiral_eloisa(object):
 		fin_overdens = 1.5 
 		N_levels_overdens = 2
 		levels_overdens = np.linspace(iniz_overdens,fin_overdens,N_levels_overdens)		
-		cset1 = plt.contourf(xvalues_overdens + xcorr,
-							yvalues_overdens,over_dens_grid.T, 
+		cset1 = plt.contourf(xvalues_overdens + xcorr,yvalues_overdens,over_dens_grid.T, 
 							levels=levels_overdens, alpha=0.05,
 							cmap='Greys')	
 		iniz_overdens = 0. 
@@ -77,8 +76,7 @@ class spiral_eloisa(object):
 		levels_overdens = np.linspace(iniz_overdens, 
 									  fin_overdens, 
 									  N_levels_overdens)
-		cset1 = plt.contour(xvalues_overdens + xcorr,
-							yvalues_overdens, over_dens_grid.T,
+		cset1 = plt.contour(xvalues_overdens + xcorr,yvalues_overdens, over_dens_grid.T,
 							levels=levels_overdens, colors='black',
 							linewidths=0.2)
 	
