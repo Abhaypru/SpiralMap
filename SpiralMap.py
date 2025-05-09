@@ -1,50 +1,44 @@
 
 
-
-exec(open("./dtools.py").read()) # utilities package
-
+# utilities package
+exec(open("./dtools.py").read()) 
 
 root_ = os.getcwd()
 dataloc = root_+'/datafiles'
+       
 
-        
-###----------------------------------------------------------###
-# General rules/style 
-# each spiral model function should contain: 
-#
-#
-#
-#
-#
-#
-#
-###----------------------------------------------------------###
+"""
 
+ Methods
+-------
+getarmlist()
+	Initialize arm names and colors
+info()
+	Print basic model information
+output_(coordsys='HC')
+	Generate spiral arm contours in specified coordinate system   
 
+"""	
 class spiral_eloisa(object):
-    """Class representing spiral arm model from Poggio et al. 2021 (EDR3 OB stars)
+    """	Class containing spiral arm model from
+        Poggio et al. 2021 (EDR3 OB stars)    """
     
-    Attributes
-    ----------
-    loc : str
-        Path to data directory
-    arms : np.array
-        Array of available arm names
-    armcolour : dict
-        Color mapping for arms
-    Methods
-    -------
-    getarmlist()
-        Initialize arm names and colors
-    info()
-        Print basic model information
-    output_(coordsys='HC')
-        Generate spiral arm contours in specified coordinate system
-    """
-    def __init__(self):
+    def __init__(self):		
         """
-        Initialize the Poggio 2021 spiral arm model with heliocentric configuration.
-
+        NAME:
+			__init__ 
+	    PURPOSE: 
+	        Initialize the Poggio 2021 spiral arm model	
+	    INPUT:	
+	    
+	    OUTPUT:
+			object 
+			(self.loc = model directory)
+			(self.arms = available arms in this model)
+			(self.armcolour = arm colours in this model)
+	    HISTORY:  
+			09 May 2025: Prusty/Khanna
+			
         Parameters
         ----------
         dataloc : str
