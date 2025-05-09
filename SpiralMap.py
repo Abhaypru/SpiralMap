@@ -56,23 +56,33 @@ class spiral_eloisa(object):
 			xcorr = xsun
 	
 		# read overdensity contours
-		xvalues_overdens = np.load(self.loc + '/xvalues_dens.npy')
-		yvalues_overdens = np.load(self.loc + '/yvalues_dens.npy')
-		over_dens_grid = np.load(self.loc + '/over_dens_grid_threshold_0_003_dens.npy')
-		phi1_dens = np.arctan2(yvalues_overdens, -xvalues_overdens)
-		Rvalues_dens = sqrtsum(ds=[xvalues_overdens, yvalues_overdens])
+		xvalues_overdens=np.load(self.loc+'/xvalues_dens.npy')
+		yvalues_overdens=np.load(self.loc+'/yvalues_dens.npy')
+		over_dens_grid=np.load(self.loc+'/over_dens_grid_threshold_0_003_dens.npy')
+		phi1_dens=np.arctan2(yvalues_overdens, -xvalues_overdens)
+		Rvalues_dens=sqrtsum(ds=[xvalues_overdens, yvalues_overdens])
 	
 		#----overplot spiral arms in overdens----#
 		iniz_overdens = 0  
 		fin_overdens = 1.5 
 		N_levels_overdens = 2
-		levels_overdens = np.linspace(iniz_overdens, fin_overdens, N_levels_overdens)		
-		cset1 = plt.contourf(xvalues_overdens + xcorr, yvalues_overdens, over_dens_grid.T, levels=levels_overdens, alpha=0.05, cmap='Greys')	
+		levels_overdens = np.linspace(iniz_overdens,
+									  fin_overdens,
+									  N_levels_overdens)		
+		cset1 = plt.contourf(xvalues_overdens + xcorr,
+							yvalues_overdens,over_dens_grid.T, 
+							levels=levels_overdens, alpha=0.05,
+							cmap='Greys')	
 		iniz_overdens = 0. 
 		fin_overdens = 1.5 
 		N_levels_overdens = 4 
-		levels_overdens = np.linspace(iniz_overdens, fin_overdens, N_levels_overdens)
-		cset1 = plt.contour(xvalues_overdens + xcorr, yvalues_overdens, over_dens_grid.T, levels=levels_overdens, colors='black', linewidths=0.2)
+		levels_overdens = np.linspace(iniz_overdens, 
+									  fin_overdens, 
+									  N_levels_overdens)
+		cset1 = plt.contour(xvalues_overdens + xcorr,
+							yvalues_overdens, over_dens_grid.T,
+							levels=levels_overdens, colors='black',
+							linewidths=0.2)
 	
 
 class TaylorCordesSpiral:
