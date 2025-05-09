@@ -24,26 +24,21 @@ class spiral_eloisa(object):
         Poggio et al. 2021 (EDR3 OB stars)    """
     
     def __init__(self):		
-        """
+
+
+		"""
         NAME:
-		__init__ 
-	    PURPOSE: 
-        Initialize the Poggio 2021 spiral arm model	
-	    INPUT:	
-		-
-	    OUTPUT:
-		object 
-		(self.loc = model directory)
-		(self.arms = available arms in this model)
-		(self.armcolour = arm colours in this model)
-	    HISTORY:  
-			09 May 2025: Prusty/Khanna
-			
-        Parameters
-        ----------
-        dataloc : str
-            Path to the base data directory.
+           __init__
+        PURPOSE:
+           Initialize the Poggio 2021 spiral arm model	
+        OUTPUT:
+           object (self.loc = model directory)
+           object (self.arms = available arms in this model)
+           object (self.armcolour = arm colours in this model)
+        HISTORY:
+		   09 May 2025: Prusty/Khanna
         """
+			
         self.loc = dataloc + '/Poggio_OB_EDR3'
         self.getarmlist()
 
