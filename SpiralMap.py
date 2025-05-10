@@ -85,343 +85,322 @@ class spiral_eloisa(object):
 		cset1 = plt.contour(xvalues_overdens+xcorr,yvalues_overdens,over_dens_grid.T,
 							levels=levels_overdens,colors='black',
 							linewidths=0.2)
-
-# to clean...
-class TaylorCordesSpiral:
+class TaylorCordesSpiral:	
+	""" Taylor & Cordes (1993) Galactic spiral arm model,	  
+	based on radio pulsar observations. The model defines four major spiral arms and 
+	provides both Galactocentric and Heliocentric coordinates for the arm segments.
+	
+	Attributes
+	----------
+	arms : ndarray
+		Array of arm identifiers ['Arm1', 'Arm2', 'Arm3', 'Arm4']
+	armcolour : dict
+		Color mapping for visualization {'Arm1': 'yellow', ...}
+	params : dict
+		Original parameters from paper (angles in deg, radii in kpc)
+	R0 : float
+		Solar galactocentric radius (kpc), set from xsun parameter
+	
+	Methods
+	-------
+	info()
+		Display basic model information
+	model_(arm_name)
+		Generate coordinates for specified arm
+	plot_arms(coord_system)
+		Visualize arms in chosen coordinate system
+	output_(arm, typ_)
+		Get coordinates in structured format
+	"""
     
-    """ Taylor & Cordes (1993) Galactic spiral arm model,	  
-    based on radio pulsar observations. The model defines four major spiral arms and 
-    provides both Galactocentric and Heliocentric coordinates for the arm segments.
-
-    Attributes
-    ----------
-    arms : ndarray
-        Array of arm identifiers ['Arm1', 'Arm2', 'Arm3', 'Arm4']
-    armcolour : dict
-        Color mapping for visualization {'Arm1': 'yellow', ...}
-    params : dict
-        Original parameters from paper (angles in deg, radii in kpc)
-    R0 : float
-        Solar galactocentric radius (kpc), set from xsun parameter
-
-    Methods
-    -------
-    info()
-        Display basic model information
-    model_(arm_name)
-        Generate coordinates for specified arm
-    plot_arms(coord_system)
-        Visualize arms in chosen coordinate system
-    output_(arm, typ_)
-        Get coordinates in structured format
-    """
-
-    
-    def __init__(self, R0=8.5):
-        """Initialize spiral parameters from Taylor & Cordes (1993)
-        
-        Parameters
-        ----------
-        R0 : float, optional
-            Initial solar galactocentric radius (kpc), default 8.5
-        """		
-        self.getarmlist()
-        
-    def getarmlist(self):
-        """Set arm names and colours"""
-    
-        self.arms = np.array(['Arm1','Arm2','Arm3','Arm4'])
-        self.armcolour = {'Arm1':'yellow','Arm2':'green','Arm3':'blue','Arm4':'purple'}
-        self.getparams()
-    
-    
-    def info(self):
-        
-        '''
-        here goes basic info for the user about this model
-        '''
-    
-        print('')
-        print('------------------------')	
-        dfmodlist = pd.DataFrame(self.arms,columns=['Arm list'])
-        print(dfmodlist)
-        print('------------------------')		
-            
-      
-    def getparams(self):	   
-        """Load original spiral parameters from Taylor & Cordes (1993) Table 1.
-        
-        Sets params dictionary with:
-        - theta_deg: Anchor points in galactic longitude (degrees)
-        - r_kpc: Corresponding galactocentric radii (kiloparsecs)
-        """
-    
-        self.params = {	'Arm1': {'theta_deg': [164, 200, 240, 280, 290, 315, 330],
-                    'r_kpc': [3.53, 3.76, 4.44, 5.24, 5.36, 5.81, 5.81]},
-                    
-                    'Arm2':{'theta_deg': [63, 120, 160, 200, 220, 250, 288],
-                    'r_kpc': [3.76, 4.56, 4.79, 5.70, 6.49, 7.29, 8.20]},
-                    
-                    'Arm3':{'theta_deg': [52, 120, 170, 180, 200, 220, 252],
-                    'r_kpc': [4.90, 6.27, 6.49, 6.95, 8.20, 8.89, 9.57]},
-                    
-                    'Arm4':{'theta_deg': [20, 70, 100, 160, 180, 200, 223],
-                    'r_kpc': [5.92, 7.06, 7.86, 9.68, 10.37, 11.39, 12.08]}					
-                                  
-                                  
-                                  }
-
-    
-    def model_(self, arm_name):	
-        
-        """Generate arm coordinates using cubic spline interpolation.
-        
-        Parameters
-        ----------
-        arm_name : str
-            Must be one of: 'Arm1', 'Arm2', 'Arm3', 'Arm4'
-
-        Returns
-        -------
-        tuple
-            (x_hc, y_hc, x_gc, y_gc) coordinate arrays where:
-            - hc = heliocentric coordinates
-            - gc = galactocentric coordinates
-
-        Raises
-        ------
-        ValueError
-            If invalid arm_name is provided
-        """	
-        
-        self.getparams()
-        arm_data = self.params[arm_name]
-        theta = np.deg2rad(arm_data['theta_deg'])  # Convert to radians
-        r = np.array(arm_data['r_kpc'])
-    
-        # Cubic spline interpolation for smooth curve
-        cs = CubicSpline(theta, r)
-        theta_fine = np.linspace(min(theta), max(theta), 300)
-        r_fine = cs(theta_fine)
-    
-        # Convert to Cartesian coordinates (Galacto-Centric)
-        x_gc = r_fine * np.sin(theta_fine)
-        y_gc = -r_fine * np.cos(theta_fine)
-        
-        # Convert to Heliocentric coordinates
-        x_hc = x_gc + self.R0  # Sun at (-R0, 0) in GC
-    
-        return x_hc, y_gc, x_gc, y_gc
-    
-    def plot_arms(self, coord_system='HC'):
-        """Visualize spiral arms in specified coordinate system.
-        
-        Parameters
-        ----------
-        coord_system : {'HC', 'GC'}, default 'HC'
-            Coordinate system for visualization:
-        Notes
-        -----
-        Creates matplotlib figure with arms plotted in predefined colors
-        """
-        plt.figure(figsize=(10, 10))
-        frame_label = "Galacto-Centric" if coord_system == 'GC' else "Helio-Centric"
-        plt.title(f"Taylor & Cordes (1993) Spiral Arm Model - {frame_label}", fontsize=14)
-        plt.grid(True, alpha=0.3)
-    
-        for arm in self.arms:
-            x_hc, y_gc, x_gc, y_gc = self.generate_arm(arm)
-            x, y = (x_gc, y_gc) if coord_system == 'GC' else (x_hc, y_hc)
-            plt.plot(x, y, color=arm['color'], label=arm['label'])
-    
-    def output_(self,arm,typ_='cartesian'):	
-        
-        """Get arm coordinates in structured format.
-        
-        Parameters
-        ----------
-        arm : str
-            Arm identifier (e.g., 'Arm1')
-        typ_ : {'cartesian', 'polar'}, default 'cartesian'
-            Output coordinate type
-
-        Returns
-        -------
-        dict
-            Contains coordinate arrays under keys:
-            - 'xhc', 'yhc' (heliocentric)
-            - 'xgc', 'ygc' (galactocentric)
-            - Additional keys for polar coordinates if requested
-
-        Notes
-        -----
-        Requires prior setting of xsun attribute for coordinate conversion
-        """
-        
-        xsun = self.xsun
-        self.R0 = -xsun  # Solar Galactocentric radius (kpc)
-                
-        if typ_ =='cartesian':
-    
-            xhc,yhc,xgc,ygc = self.model_(arm);			
-    
-            self.dout = {'xhc':xhc,
-                         'yhc':yhc,
-                         'xgc':xgc,
-                         'ygc':ygc}	
+	def __init__(self, R0=8.5):
+		
+		"""Initialize spiral parameters from Taylor & Cordes (1993)
+		
+		Parameters
+		----------
+		R0 : float, optional
+			Initial solar galactocentric radius (kpc), default 8.5
+		"""		
+		self.getarmlist()        
+	def getarmlist(self):
+		"""Set arm names and colours"""
+		
+		self.arms = np.array(['Arm1','Arm2','Arm3','Arm4'])
+		self.armcolour = {'Arm1':'yellow','Arm2':'green','Arm3':'blue','Arm4':'purple'}
+		self.getparams()        
+	def info(self):        
+		'''
+		here goes basic info for the user about this model
+		'''		
+		print('')
+		print('------------------------')	
+		dfmodlist = pd.DataFrame(self.arms,columns=['Arm list'])
+		print(dfmodlist)
+		print('------------------------')		
+				
+	def getparams(self):	   
+		"""Load original spiral parameters from Taylor & Cordes (1993) Table 1.
+		
+		Sets params dictionary with:
+		- theta_deg: Anchor points in galactic longitude (degrees)
+		- r_kpc: Corresponding galactocentric radii (kiloparsecs)
+		"""		
+		self.params = {	'Arm1': {'theta_deg': [164, 200, 240, 280, 290, 315, 330],
+					'r_kpc': [3.53, 3.76, 4.44, 5.24, 5.36, 5.81, 5.81]},
+					
+					'Arm2':{'theta_deg': [63, 120, 160, 200, 220, 250, 288],
+					'r_kpc': [3.76, 4.56, 4.79, 5.70, 6.49, 7.29, 8.20]},
+					
+					'Arm3':{'theta_deg': [52, 120, 170, 180, 200, 220, 252],
+					'r_kpc': [4.90, 6.27, 6.49, 6.95, 8.20, 8.89, 9.57]},
+					
+					'Arm4':{'theta_deg': [20, 70, 100, 160, 180, 200, 223],
+					'r_kpc': [5.92, 7.06, 7.86, 9.68, 10.37, 11.39, 12.08]}					  
+								  }    
+	def model_(self, arm_name):			
+		"""Generate arm coordinates using cubic spline interpolation.
+		
+		Parameters
+		----------
+		arm_name : str
+			Must be one of: 'Arm1', 'Arm2', 'Arm3', 'Arm4'
+		
+		Returns
+		-------
+		tuple
+			(x_hc, y_hc, x_gc, y_gc) coordinate arrays where:
+			- hc = heliocentric coordinates
+			- gc = galactocentric coordinates
+		
+		Raises
+		------
+		ValueError
+			If invalid arm_name is provided
+		"""	
+		
+		self.getparams()
+		arm_data = self.params[arm_name]
+		theta = np.deg2rad(arm_data['theta_deg'])  # Convert to radians
+		r = np.array(arm_data['r_kpc'])
+		
+		# Cubic spline interpolation for smooth curve
+		cs = CubicSpline(theta, r)
+		theta_fine = np.linspace(min(theta), max(theta), 300)
+		r_fine = cs(theta_fine)
+		
+		# Convert to Cartesian coordinates (Galacto-Centric)
+		x_gc = r_fine * np.sin(theta_fine)
+		y_gc = -r_fine * np.cos(theta_fine)
+		
+		# Convert to Heliocentric coordinates
+		x_hc = x_gc + self.R0  # Sun at (-R0, 0) in GC
+		
+		return x_hc, y_gc, x_gc, y_gc
+	
+	def plot_arms(self, coord_system='HC'):
+		"""Visualize spiral arms in specified coordinate system.
+		
+		Parameters
+		----------
+		coord_system : {'HC', 'GC'}, default 'HC'
+			Coordinate system for visualization:
+		Notes
+		-----
+		Creates matplotlib figure with arms plotted in predefined colors
+		"""
+		plt.figure(figsize=(10, 10))
+		frame_label = "Galacto-Centric" if coord_system == 'GC' else "Helio-Centric"
+		plt.title(f"Taylor & Cordes (1993) Spiral Arm Model - {frame_label}", fontsize=14)
+		plt.grid(True, alpha=0.3)
+		
+		for arm in self.arms:
+			x_hc, y_gc, x_gc, y_gc = self.generate_arm(arm)
+			x, y = (x_gc, y_gc) if coord_system == 'GC' else (x_hc, y_hc)
+			plt.plot(x, y, color=arm['color'], label=arm['label'])
+	
+	def output_(self,arm,typ_='cartesian'):			
+		"""Get arm coordinates in structured format.
+		
+		Parameters
+		----------
+		arm : str
+			Arm identifier (e.g., 'Arm1')
+		typ_ : {'cartesian', 'polar'}, default 'cartesian'
+			Output coordinate type
+		
+		Returns
+		-------
+		dict
+			Contains coordinate arrays under keys:
+			- 'xhc', 'yhc' (heliocentric)
+			- 'xgc', 'ygc' (galactocentric)
+			- Additional keys for polar coordinates if requested
+		
+		Notes
+		-----
+		Requires prior setting of xsun attribute for coordinate conversion
+		"""		
+		xsun = self.xsun
+		self.R0 = -xsun  # Solar Galactocentric radius (kpc)				
+		if typ_ =='cartesian':		
+			xhc,yhc,xgc,ygc = self.model_(arm);					
+			self.dout = {'xhc':xhc,
+						 'yhc':yhc,
+						 'xgc':xgc,
+						 'ygc':ygc}							 
 class spiral_houhan(object):	
-    """Hou & Han (2014) polynomial-logarithmic spiral arm model
-    
-    Implements the Milky Way spiral structure model from:
-    "The spiral structure of the Milky Way from classical Cepheids" (Hou & Han 2014)
-    using polynomial-logarithmic spiral functions. Provides 6 major arm segments.
-
-    Attributes
-    ----------
-    arms : ndarray
-        Array of arm names ['Norma', 'Scutum-Centaurus', ...]
-    armcolour : dict
-        Visualization colors for each arm
-    R0 : float
-        Solar galactocentric radius (kpc), calculated from xsun
-    params : dict
-        Spiral parameters from Table 4 of Hou & Han (2014)
-    
-    Methods
-    -------
-    info()
-        Display available spiral arms
-    model_(arm_name)
-        Generate coordinates for specified arm
-    output_(arm)
-        Get structured coordinate data
-    """
-    
-    def __init__(self):
-        
-
-        self.getarmlist()
-
-    def getarmlist(self):
-        """Initialize arm names and visualization colors.
-        
-        Sets:
-        - arms: List of 6 spiral arm segments
-        - armcolour: Color mapping dictionary with hex/RGB values
-        """
-
-        self.arms = np.array(['Norma','Scutum-Centaurus','Sagittarius-Carina','Perseus','Local','Outer'])
-        self.armcolour = {'Norma':'black','Scutum-Centaurus':'red','Sagittarius-Carina':'green','Perseus':'blue','Local':'purple','Outer':'gold'}
-    
-    def info(self):
-        
-        '''
-        Prints formatted table of arm names to stdout.
-        '''
-
-        print('')
-        print('------------------------')	
-        dfmodlist = pd.DataFrame(self.arms,columns=['Arm list'])
-        print(dfmodlist)
-        print('------------------------')		
-
-
-    def getparams(self):		
-        # Taken value from the table 4 from Hou & Han (2014)
-        
-        """Load spiral parameters from Hou & Han (2014) Table 4.
-        
-        Returns
-        -------
-        dict
-            Nested dictionary containing for each arm:
-            - a, b, c, d: Polynomial coefficients
-            - θ_start: Start angle in degrees (Galactic longitude)
-            - θ_end: End angle in degrees
-            
-        Example
-        -------
-        >>> params['Scutum-Centaurus']
-        {'a': 5.8002, 'b': -1.8188, 'c': 0.2352, 'd': -0.008999,
-         'θ_start': 275, 'θ_end': 620}
-        """
-
-        
-        params = {
-            'Norma': {'a': 1.1668, 'b': 0.1198, 'c': 0.002557, 'd': 0.0, 'θ_start': 40, 'θ_end': 250},
-            'Scutum-Centaurus': {'a': 5.8002, 'b': -1.8188, 'c': 0.2352, 'd': -0.008999, 'θ_start': 275, 'θ_end': 620},
-            'Sagittarius-Carina': {'a': 4.2300, 'b': -1.1505, 'c': 0.1561, 'd': -0.005898, 'θ_start': 275, 'θ_end': 570},
-            'Perseus': {'a': 0.9744, 'b': 0.1405, 'c': 0.003995, 'd': 0.0, 'θ_start': 280, 'θ_end': 500},
-            'Local': {'a': 0.9887, 'b': 0.1714, 'c': 0.004358, 'd': 0.0, 'θ_start': 280, 'θ_end': 475},
-            'Outer': {'a': 3.3846, 'b': -0.6554, 'c': 0.08170, 'd': 0.0, 'θ_start': 280, 'θ_end': 355}
-        }
-
-        return params
-
-    
-    def polynomial_log_spiral(self, θ, a, b, c, d):
-        
-        """Calculate radius using polynomial-logarithmic spiral equation.
-        
-        Parameters
-        ----------
-        θ : float or ndarray
-            Galactic longitude angle in degrees
-        a,b,c,d : float
-            Polynomial coefficients from Hou & Han Table 4
-            
-        Returns
-        -------
-        float or ndarray
-            Galactocentric radius in kiloparsecs
-            
-        Notes
-        -----
-        Implements equation:
-        R(θ) = exp(a + bθ_rad + cθ_rad² + dθ_rad³)
-        where θ_rad = np.radians(θ)
-        """	
-        return np.exp(a + b*np.radians(θ) + c*np.radians(θ)**2 + d*np.radians(θ)**3)
-    
-    def model_(self, arm_name, n_points=500):
-        """Generate spiral arm coordinates in both coordinate systems."""
-        
-        params_ = self.getparams()
-        params = params_[arm_name]
-        
-        
-        θ = np.linspace(params['θ_start'], params['θ_end'], n_points)
-        R = self.polynomial_log_spiral(θ, params['a'], params['b'], params['c'], params['d'])
-        
-        # Convert to Cartesian coordinates (Galactocentric)
-        x_gc = R*np.cos(np.radians(θ))
-        y_gc = R * np.sin(np.radians(θ))
-        
-        # Convert to Heliocentric coordinates
-        x_hc = (x_gc + self.R0)
-
-        return x_hc, y_gc, x_gc, y_gc
-    
-    
-    
-    def output_(self, arm, typ_='cartesian'):	
-        
-        """Get structured coordinate data for analysis/plotting."""
-
-        xsun = self.xsun
-        self.R0 = -xsun  # Solar Galactocentric radius (kpc)
-    
-        # Generate spiral arm coordinates
-        xhc, yhc, xgc, ygc = self.model_(arm)
-    
-        if typ_ == 'cartesian':
-            self.dout = {
-                'xhc': xhc,
-                'yhc': yhc,
-                'xgc': xgc,
-                'ygc': ygc
-            }
-
+	"""Hou & Han (2014) polynomial-logarithmic spiral arm model
+	
+	Implements the Milky Way spiral structure model from:
+	"The spiral structure of the Milky Way from classical Cepheids" (Hou & Han 2014)
+	using polynomial-logarithmic spiral functions. Provides 6 major arm segments.
+	
+	Attributes
+	----------
+	arms : ndarray
+		Array of arm names ['Norma', 'Scutum-Centaurus', ...]
+	armcolour : dict
+		Visualization colors for each arm
+	R0 : float
+		Solar galactocentric radius (kpc), calculated from xsun
+	params : dict
+		Spiral parameters from Table 4 of Hou & Han (2014)
+	
+	Methods
+	-------
+	info()
+		Display available spiral arms
+	model_(arm_name)
+		Generate coordinates for specified arm
+	output_(arm)
+		Get structured coordinate data
+	"""
+	
+	def __init__(self):
+		
+	
+		self.getarmlist()
+	
+	def getarmlist(self):
+		"""Initialize arm names and visualization colors.
+		
+		Sets:
+		- arms: List of 6 spiral arm segments
+		- armcolour: Color mapping dictionary with hex/RGB values
+		"""
+	
+		self.arms = np.array(['Norma','Scutum-Centaurus','Sagittarius-Carina','Perseus','Local','Outer'])
+		self.armcolour = {'Norma':'black','Scutum-Centaurus':'red','Sagittarius-Carina':'green','Perseus':'blue','Local':'purple','Outer':'gold'}
+	
+	def info(self):
+		
+		'''
+		Prints formatted table of arm names to stdout.
+		'''
+	
+		print('')
+		print('------------------------')	
+		dfmodlist = pd.DataFrame(self.arms,columns=['Arm list'])
+		print(dfmodlist)
+		print('------------------------')		
+	
+	
+	def getparams(self):		
+		# Taken value from the table 4 from Hou & Han (2014)
+		
+		"""Load spiral parameters from Hou & Han (2014) Table 4.
+		
+		Returns
+		-------
+		dict
+			Nested dictionary containing for each arm:
+			- a, b, c, d: Polynomial coefficients
+			- θ_start: Start angle in degrees (Galactic longitude)
+			- θ_end: End angle in degrees
+			
+		Example
+		-------
+		>>> params['Scutum-Centaurus']
+		{'a': 5.8002, 'b': -1.8188, 'c': 0.2352, 'd': -0.008999,
+		 'θ_start': 275, 'θ_end': 620}
+		"""
+	
+		
+		params = {
+			'Norma': {'a': 1.1668, 'b': 0.1198, 'c': 0.002557, 'd': 0.0, 'θ_start': 40, 'θ_end': 250},
+			'Scutum-Centaurus': {'a': 5.8002, 'b': -1.8188, 'c': 0.2352, 'd': -0.008999, 'θ_start': 275, 'θ_end': 620},
+			'Sagittarius-Carina': {'a': 4.2300, 'b': -1.1505, 'c': 0.1561, 'd': -0.005898, 'θ_start': 275, 'θ_end': 570},
+			'Perseus': {'a': 0.9744, 'b': 0.1405, 'c': 0.003995, 'd': 0.0, 'θ_start': 280, 'θ_end': 500},
+			'Local': {'a': 0.9887, 'b': 0.1714, 'c': 0.004358, 'd': 0.0, 'θ_start': 280, 'θ_end': 475},
+			'Outer': {'a': 3.3846, 'b': -0.6554, 'c': 0.08170, 'd': 0.0, 'θ_start': 280, 'θ_end': 355}
+		}
+	
+		return params
+	
+	
+	def polynomial_log_spiral(self, θ, a, b, c, d):
+		
+		"""Calculate radius using polynomial-logarithmic spiral equation.
+		
+		Parameters
+		----------
+		θ : float or ndarray
+			Galactic longitude angle in degrees
+		a,b,c,d : float
+			Polynomial coefficients from Hou & Han Table 4
+			
+		Returns
+		-------
+		float or ndarray
+			Galactocentric radius in kiloparsecs
+			
+		Notes
+		-----
+		Implements equation:
+		R(θ) = exp(a + bθ_rad + cθ_rad² + dθ_rad³)
+		where θ_rad = np.radians(θ)
+		"""	
+		return np.exp(a + b*np.radians(θ) + c*np.radians(θ)**2 + d*np.radians(θ)**3)
+	
+	def model_(self, arm_name, n_points=500):
+		"""Generate spiral arm coordinates in both coordinate systems."""
+		
+		params_ = self.getparams()
+		params = params_[arm_name]
+		
+		
+		θ = np.linspace(params['θ_start'], params['θ_end'], n_points)
+		R = self.polynomial_log_spiral(θ, params['a'], params['b'], params['c'], params['d'])
+		
+		# Convert to Cartesian coordinates (Galactocentric)
+		x_gc = R*np.cos(np.radians(θ))
+		y_gc = R * np.sin(np.radians(θ))
+		
+		# Convert to Heliocentric coordinates
+		x_hc = (x_gc + self.R0)
+	
+		return x_hc, y_gc, x_gc, y_gc
+	
+	
+	
+	def output_(self, arm, typ_='cartesian'):	
+		
+		"""Get structured coordinate data for analysis/plotting."""
+	
+		xsun = self.xsun
+		self.R0 = -xsun  # Solar Galactocentric radius (kpc)
+	
+		# Generate spiral arm coordinates
+		xhc, yhc, xgc, ygc = self.model_(arm)
+	
+		if typ_ == 'cartesian':
+			self.dout = {
+				'xhc': xhc,
+				'yhc': yhc,
+				'xgc': xgc,
+				'ygc': ygc
+			}
 class spiral_levine(object):
     
     """Levine et al. (2006) logarithmic spiral arm model for the Milky Way.
@@ -610,7 +589,6 @@ class spiral_levine(object):
                 'xgc': xgc,
                 'ygc': ygc
             }
-
 class spiral_cepheids(object):
     '''
     
@@ -974,8 +952,7 @@ class spiral_cepheids(object):
                 self.dused['rgc'].append(rgc)
                 self.dused['xgc'].append(xgc)
                 self.dused['yhc'].append(yhc)
-                self.dused['phi4'].append(phi4)
-                
+                self.dused['phi4'].append(phi4)                
 class spiral_drimmel(object):
 
     """Drimmel (2000) Near-Infrared (NIR) spiral arm model
@@ -1206,7 +1183,6 @@ class spiral_drimmel(object):
         
                 # plt.legend() 
                 return 
-
 class reid_spiral(object):
 	"""Reid et al. (2019) kinked logarithmic spiral arm model
 	
@@ -1241,33 +1217,36 @@ class reid_spiral(object):
 		Parameters
 		----------
 		kcor : bool, optional
-			Apply kinematic distance correction adjustment to R_kink parameters,
+			Apply distance correction adjustment to R_kink parameters,
 			default=False
 		"""
 		self.kcor = kcor
 		self.getarmlist()
-	
-	
-	def getarmlist(self):
 		
-		# self.arms = np.array(['3-kpc','Norma','Sct-Cen','Sgt-Car','Local','Perseus','Outer'])
-		self.arms = np.array(['3-kpc','Norma','Sct-Cen','Sgr-Car','Local','Perseus','Outer'])      
-		
-		
-		self.armcolour = {'3-kpc':'C6','Norma':'C5','Sct-Cen':'C4','Sgr-Car':'C3','Local':'C2','Perseus':'C1','Outer':'C0'}		  
-		
-	def info(self):
-		
+	def getarmlist(self):		
+		self.arms = np.array(['3-kpc',
+							  'Norma',
+							  'Sct-Cen',
+							  'Sgr-Car',
+							  'Local',
+							  'Perseus',
+							  'Outer'])      				
+		self.armcolour = {'3-kpc':'C6',
+						  'Norma':'C5',
+						  'Sct-Cen':'C4',
+						  'Sgr-Car':'C3',
+						  'Local':'C2',
+						  'Perseus':'C1',
+						  'Outer':'C0'}		  		
+	def info(self):		
 		'''
 		here goes basic info for the user about this model
-		'''
-	
+		'''	
 		print('')
 		print('------------------------')	
 		dfmodlist = pd.DataFrame(self.arms,columns=['Arm list'])
 		print(dfmodlist)
-		print('------------------------')		
-		
+		print('------------------------')				
 		
 	def getparams(self,arm):
 		"""Load spiral parameters for specified arm from Reid et al. (2019) Table 4.
@@ -1290,24 +1269,37 @@ class reid_spiral(object):
 	
 		Notes
 		-----
-		Applies kinematic correction to R_kink if kcor=True during initialization
+		Applies correction to R_kink if kcor=True during initialization
 		"""
 		if arm == '3-kpc':
-			params = {'name':arm,'beta_kink':15,'pitch_low':-4.2,'pitch_high':-4.2,'R_kink':3.52,'beta_min':15,'beta_max':18,'width':0.18}
+			params = {'name':arm,'beta_kink':15,
+					  'pitch_low':-4.2,'pitch_high':-4.2,
+					  'R_kink':3.52,'beta_min':15,
+					  'beta_max':18,'width':0.18}
 		if arm == 'Norma':
-			params = {'name':arm,'beta_kink':18,'pitch_low':-1.,'pitch_high':19.5,'R_kink':4.46,'beta_min':5,'beta_max':54,'width':0.14}
+			params = {'name':arm,'beta_kink':18,'pitch_low':-1.,
+			          'pitch_high':19.5,'R_kink':4.46,'beta_min':5,
+			          'beta_max':54,'width':0.14}
 		if arm == 'Sct-Cen':
-			params = {'name':arm,'beta_kink':23,'pitch_low':14.1,'pitch_high':12.1,'R_kink':4.91,'beta_min':0,'beta_max':104,'width':0.23}
+			params = {'name':arm,'beta_kink':23,'pitch_low':14.1,
+			          'pitch_high':12.1,'R_kink':4.91,'beta_min':0,
+			          'beta_max':104,'width':0.23}
 		if arm == 'Sgr-Car': #'Sgr-Car'
-			params = {'name':arm,'beta_kink':24,'pitch_low':17.1,'pitch_high':1,'R_kink':6.04,'beta_min':2,'beta_max':97,'width':0.27}
+			params = {'name':arm,'beta_kink':24,'pitch_low':17.1,
+			          'pitch_high':1,'R_kink':6.04,'beta_min':2,
+			          'beta_max':97,'width':0.27}
 		if arm == 'Local':
-			params = {'name':arm,'beta_kink':9,'pitch_low':11.4,'pitch_high':11.4,'R_kink':8.26,'beta_min':-8,'beta_max':34,'width':0.31}
+			params = {'name':arm,'beta_kink':9,'pitch_low':11.4,
+			          'pitch_high':11.4,'R_kink':8.26,'beta_min':-8,
+			          'beta_max':34,'width':0.31}
 		if arm == 'Perseus':
-			params = {'name':arm,'beta_kink':40,'pitch_low':10.3,'pitch_high':8.7,'R_kink':8.87,'beta_min':-23,'beta_max':115,'width':0.35}
+			params = {'name':arm,'beta_kink':40,'pitch_low':10.3,
+			          'pitch_high':8.7,'R_kink':8.87,'beta_min':-23,
+			          'beta_max':115,'width':0.35}
 		if arm == 'Outer':
-			params = {'name':arm,'beta_kink':18,'pitch_low':3,'pitch_high':9.4,'R_kink':12.24,'beta_min':-16,'beta_max':71,'width':0.65}
-		
-		
+			params = {'name':arm,'beta_kink':18,'pitch_low':3,
+			          'pitch_high':9.4,'R_kink':12.24,'beta_min':-16,
+			          'beta_max':71,'width':0.65}				
 		if self.kcor:
 			Rreid = 8.15
 			diffval = params['R_kink'] - Rreid
@@ -1315,9 +1307,7 @@ class reid_spiral(object):
 			if diffval < 0:
 				 params['R_kink'] = (-xsun) + diffval
 			else:
-				 params['R_kink'] = (-xsun) + diffval
-					
-		
+				 params['R_kink'] = (-xsun) + diffval							
 		return params
 	
 	def model_(self,params):
@@ -1450,6 +1440,7 @@ class reid_spiral(object):
 	
 			
 			return 
+
 
 class main_(object):
     
