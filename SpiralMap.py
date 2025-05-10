@@ -1340,17 +1340,12 @@ class reid_spiral(object):
 		beta_min = params['beta_min']
 		beta_max = params['beta_max']
 		width = params['width']
-		
-		
-		# beta = np.linspace(beta_min-180,beta_max,100)
-		beta = np.linspace(beta_min,beta_max,1000)
-	
-	
+				
+		beta = np.linspace(beta_min,beta_max,1000)		
 		beta_min = np.radians(beta_min)
 		beta_max = np.radians(beta_max)
 		beta = np.radians(beta)	
-		
-		
+				
 		pitch = np.zeros(beta.size) + np.nan
 		indl = np.where(beta<beta_kink)[0]; pitch[indl] = pitch_low
 		indr = np.where(beta>beta_kink)[0]; pitch[indr] = pitch_high
@@ -1362,7 +1357,6 @@ class reid_spiral(object):
 		x = -R*(np.cos(beta))
 		y = R*(np.sin(beta))
 	
-		##3 testing 
 		R2 = (R_kink+(width*0.5))*tmp2
 		x2 = -R2*(np.cos(beta))
 		y2 = R2*(np.sin(beta))
@@ -1370,11 +1364,8 @@ class reid_spiral(object):
 		R1 = (R_kink-(width*0.5))*tmp2
 		x1 = -R1*(np.cos(beta))
 		y1 = R1*(np.sin(beta))
-		
-		
-		
-		return x,y, x1,y1,x2,y2
-	
+						
+		return x,y, x1,y1,x2,y2	
 	def output_(self,arm,typ_='cartesian'):	
 		"""Get structured coordinate data for analysis/plotting.
 		Returns
@@ -1389,25 +1380,18 @@ class reid_spiral(object):
 		Polar modes create matplotlib plots directly
 		"""
 		xsun = self.xsun
-		params = self.getparams(arm)
-		
+		params = self.getparams(arm)		
 		if typ_ =='cartesian':
-	
 			xgc,ygc,xgc1,ygc1,xgc2,ygc2 = self.model_(params);			
 			xhc = xgc - xsun
 			xhc1 = xgc1 - xsun
-			xhc2 = xgc2 - xsun
-	
-			yhc = ygc
-			
+			xhc2 = xgc2 - xsun	
+			yhc = ygc			
 			self.dout = {'xhc':xhc,
 						 'yhc':yhc,
 						 'xgc':xgc,
-						 'ygc':ygc}								
-			
-		
-		if typ_ =='polar':
-			
+						 'ygc':ygc}													
+		if typ_ =='polar':			
 			xhc = x - xsun
 			xhc1 = x1 - xsun
 			xhc2 = x2 - xsun
@@ -1423,8 +1407,7 @@ class reid_spiral(object):
 			# plt.plot(phi1,rgc,color,linestyle='-',linewidth=linewidth)
 			plt.plot(phi1,rgc,'.',color=color,markersize=markersize)
 			
-			return 
-			
+			return 			
 		if typ_ =='polargrid':
 			
 			linewidth=2
@@ -1441,10 +1424,9 @@ class reid_spiral(object):
 			
 			return 
 
-
 class main_(object):
     
-    def __init__(self,xsun=-8.277):        
+    def __init__(self,xsun=-8.277):       
 
         self.root_ = root_
         self.dataloc = dataloc        
