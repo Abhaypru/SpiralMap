@@ -1,11 +1,10 @@
 
-
-# utilities package
+#--------------------------------------------
+# import utilities package / set root 
 exec(open("./dtools.py").read()) 
-
 root_ = os.getcwd()
 dataloc = root_+'/datafiles'
-       
+#--------------------------------------------       
 
 class spiral_eloisa(object):
 	"""
@@ -590,31 +589,17 @@ class spiral_levine(object):
                 'ygc': ygc
             }
 class spiral_cepheids(object):
-    '''
-    
-    June 28, 2024
-    
-    Usage: 
-    spi = spiral_drimmel()
-    spi.plot_(arm='1',color='b',typ_='HC')
-    spi.plot_(arm='2',color='b',typ_='HC')
-    spi.plot_(arm='all',color='b',typ_='HC')
-    
-    '''
 
     def __init__(self):
-
         self.loc = dataloc+'/DKPS_cepheids'
         self.fname = 'ArmAttributes_dyoungW1_bw025.pkl'
         self.getarmlist()
         
     def getarmlist(self):
-
         self.spirals = pickleread(self.loc+'/'+self.fname)
         self.arms= np.array(list(self.spirals['0']['arm_attributes'].keys()))
-
-        self.armcolour = {'Scutum':'C3','Sag-Car':'C0','Orion':'C1','Perseus':'C2'}
-    
+        self.armcolour = {'Scutum':'C3','Sag-Car':'C0',
+						  'Orion':'C1','Perseus':'C2'}   
     def info(self):
         
         '''
@@ -625,17 +610,14 @@ class spiral_cepheids(object):
         print('------------------------')	
         dfmodlist = pd.DataFrame(self.arms,columns=['Arm list'])
         print(dfmodlist)
-        print('------------------------')		
-        
-
+        print('------------------------')		        
     def output_(self,arm,typ_='cartesian'):		
 
         xsun = self.xsun
         rsun = -xsun	
         spirals = self.spirals
         arms = self.arms
-        
-                    
+                            
         # XY positions
         lnrsun = np.log(rsun) 
             
@@ -663,11 +645,7 @@ class spiral_cepheids(object):
 
         rgc = np.sqrt(xgc**2. + ygc**2.)
         rgc_ex = np.sqrt(xgc_ex**2. + ygc_ex**2.)
-
-        if typ_ =='cartesian':
-            
-            # return xhc,yhc,xgc,ygc
-
+        if typ_ =='cartesian':            
             self.dout = {'xhc':xhc,
                          'yhc':yhc,
                          'xgc':xgc,
@@ -697,262 +675,21 @@ class spiral_cepheids(object):
             self.dused['phi1'].append(phi1)
             self.dused['phi4'].append(phi4)
 
-
-        if typ_ =='polargrid':
-            
-            linewidth=2
-            linestyle = '-'
-            phi4 = np.degrees(np.arctan2(yhc,xgc))%360.	
-            phi4_ex = np.degrees(np.arctan2(ygc_ex,xgc_ex))%360.	
-
-            phi1 = np.arctan2(yhc,-xgc)
-            phi1_ex = np.arctan2(ygc_ex,-xgc_ex)
-
-
-            # plt.plot(np.radians(phi4),rgc,color=arm_clr[armi],markersize=markersize,linestyle=linestyle,linewidth=linewidth)
-
-            # plt.plot(phi1,rgc,color=arm_clr[armi],markersize=markersize,linestyle=linestyle,linewidth=linewidth)
-            # plt.plot(phi1_ex,rgc_ex,color=arm_clr[armi],markersize=markersize,linestyle='--',linewidth=linewidth)
-            
-            plt.plot(np.radians(phi4),rgc,color=arm_clr[armi],markersize=markersize,linestyle=linestyle,linewidth=linewidth)
-            
-            plt.plot(np.radians(phi4_ex),rgc_ex,color=arm_clr[armi],markersize=markersize,linestyle=linestyle2,linewidth=linewidth)
-            # plt.plot(np.radians(phi4_ex),rgc_ex,color=arm_clr[armi],markersize=markersize,linestyle='--',linewidth=linewidth)
-
-
-            self.dused['rgc'].append(rgc)
-            self.dused['xgc'].append(xgc)
-            self.dused['yhc'].append(yhc)
-            self.dused['phi4'].append(phi4)
-                
-                    
-        
-    def plotit_(self,armplt='',typ_='GC',markersize=4,linewidth=2,linestyle2='--'):
-        
-        from time import sleep
-        from scipy.signal import find_peaks
-        import numpy as np
-        import astropy
-        import astropy.table as tb
-        import pandas as pd
-        import os
-        import matplotlib as mpl
-        import matplotlib.pyplot as plt
-        import imp 
-        import dtools
-        import autil 
-        import tabpy
-        params = {'font.size':12,
-              'text.usetex':False,
-              'ytick.labelsize': 'medium',
-              'legend.fontsize': 'large',
-              'axes.linewidth': 1.0,
-              'figure.dpi': 150.0,
-              'xtick.labelsize': 'medium',
-              'font.family': 'sans-serif',
-              'axes.labelsize': 'medium'}
-        mpl.rcParams.update(params)
-        
-        imp.reload(dtools)
-        
-
-        
-        spirals = self.spirals
-        
-        # arms and plotting colors for the arms
-        colors = ['C3','C0','C1','C2']
-        arms = np.array(['Scutum','Sag-Car','Orion','Perseus'])
-        
-        figtyp = 'png'
-        
-        # XY positions
-        rsun = self.rsun  # Might want to put these in a configuration file
-        xsun = self.xsun  # Might want to put these in a configuration file
-        lnrsun = np.log(rsun) 
-        
-        
-        # best phi range:
-        phi_range = np.deg2rad(np.sort(spirals['1']['phi_range'].copy()))
-        maxphi_range = np.deg2rad([60,-120]) 
-        
-        
-        # arms and plotting colors for the arms
-        colors = ['C3','C0','C1','C2']
-        arms = np.array(self.armlist)
-        
-        arm_clr = {'Scutum':'C3','Sag-Car':'C0','Orion':'C1','Perseus':'C2'}
-        self.arm_clr = arm_clr
-        
-        dt = {}
-        
-        
-        for armi in np.arange(arms.size):
-            
-            arm = arms[armi]
-            pang = (spirals['1']['arm_attributes'][arm]['arm_pang_strength']+spirals['1']['arm_attributes'][arm]['arm_pang_prom'])/2.
-            lnr0 = (spirals['1']['arm_attributes'][arm]['arm_lgr0_strength']+spirals['1']['arm_attributes'][arm]['arm_lgr0_prom'])/2.
-            
-                        
-            
-            # plot the arms
-            
-            
-            phi=(np.arange(51)/50.)*np.diff(phi_range)[0] + phi_range[0]  
-            lgrarm = lnr0 - np.tan(np.deg2rad(pang))*phi 
-            
-            
-            xgc = -np.exp(lgrarm)*np.cos(phi); xhc = xgc - xsun
-            ygc = np.exp(lgrarm)*np.sin(phi) ;  yhc = ygc
-            
-                            
-            # extrapolate the arms
-            phi=(np.arange(101)/100.)*np.diff(maxphi_range)[0] + maxphi_range[0]  
-            lgrarm = lnr0 - np.tan(np.deg2rad(pang))*phi 
-            
-            xgc_ex = -np.exp(lgrarm)*np.cos(phi);  xhc_ex = xgc_ex - xsun
-            ygc_ex = np.exp(lgrarm)*np.sin(phi); yhc_ex = ygc_ex
-            lonarm = np.arctan((np.exp(lgrarm)*np.sin(phi))/(rsun - np.exp(lgrarm)*np.cos(phi))) 
-            
-            dt[arm] = {}
-            dt[arm]['xgc'] = xgc
-            dt[arm]['xhc'] = xhc
-            dt[arm]['ygc'] = ygc
-            dt[arm]['yhc'] = yhc
-                        
-            dt[arm]['xgc_ex'] = xgc_ex
-            dt[arm]['xhc_ex'] = xhc_ex
-            dt[arm]['ygc_ex'] = ygc_ex
-            dt[arm]['yhc_ex'] = yhc_ex
-                        
-
-
-        self.dused = {}
-        self.dused['rgc'] = []
-        self.dused['xgc'] = []
-        self.dused['yhc'] = []
-        self.dused['phi1'] = []
-        self.dused['phi4'] = []
-        
-
-
-        # for armi in dt.keys():
-        for armi in armplt:
-            # print(armplt)
-                        
-            xgc = dt[armi]['xgc']
-            ygc = dt[armi]['ygc']
-            xhc = dt[armi]['xhc']
-            yhc = dt[armi]['yhc']
-            
-            xgc_ex = dt[armi]['xgc_ex']
-            ygc_ex = dt[armi]['ygc_ex']
-            xhc_ex = dt[armi]['xhc_ex']
-            yhc_ex = dt[armi]['yhc_ex']			
-
-
-            rgc = np.sqrt(xgc**2. + ygc**2.)
-            rgc_ex = np.sqrt(xgc_ex**2. + ygc_ex**2.)
-
-
-
-            if typ_ == 'GC':
-                
-
-                
-                plt.plot(xgc,ygc,'-',color=arm_clr[armi])				
-                plt.plot(xgc_ex,ygc_ex,linestyle=linestyle2,color=arm_clr[armi])
-                
-                plt.axvline(xsun,linewidth=1,linestyle='--')			
-                plt.axhline(0,linewidth=1,linestyle='--')			
-                
-    
-                plt.plot(0.,0.,marker='+',markersize=10,color='black')
-                plt.plot(xsun,0.,marker='o',markersize=10,color='black')				
-    
-                plt.xlabel('X$_{GC}$')
-                plt.ylabel('Y$_{GC}$')
-                    
-                
-                
-                
-                # # labels
-                # plt.text(-2,-5,'Scutum',fontsize=14,fontweight='bold',color=colors[0])
-                # plt.text(-2,-10,'Sgr-Car',fontsize=14,fontweight='bold',color=colors[1])
-                # plt.text(-3,-13,'Local',fontsize=14,fontweight='bold',color=colors[2])
-                # plt.text(-9,-14,'Perseus',fontsize=14,fontweight='bold',color=colors[3])		
-        
-        
-            if typ_ == 'HC':	
-                
-                
-        
-            
-                
-                # plt.plot(xhc,yhc,color,label=arm,linestyle=linestyle,linewidth=linewidth,markersize=2)
-                # plt.plot(xhc,yhc,color,linestyle=linestyle,linewidth=linewidth,markersize=2)
-                
-                
-                plt.plot(xhc,yhc,'-',color=arm_clr[armi])				
-                plt.plot(xhc_ex,yhc_ex,linestyle=linestyle2,color=arm_clr[armi])
-    
-                plt.plot(0.,0.,marker='o',markersize=markersize,color='black')
-                plt.plot(-xsun,0.,marker='+',markersize=markersize,color='black')						
-                                
-    
-                
-                plt.xlabel('X$_{HC}$')
-                plt.ylabel('Y$_{HC}$')			
-    
-    
-    
-    
-            if typ_ =='polar':
-                            
-                
-                phi1 = np.arctan2(yhc,-xgc)
-                phi1_ex = np.arctan2(ygc_ex,-xgc_ex)
-                
-                phi2 = np.degrees(np.arctan(yhc/-xgc))
-                phi3 = np.degrees(np.arctan2(yhc,xgc))%180.	
-                phi4 = np.degrees(np.arctan2(yhc,xgc))%360.	
-                
-                plt.plot(phi1,rgc,'-',color=arm_clr[armi],markersize=markersize)
-                plt.plot(phi1_ex,rgc_ex,linestyle=linestyle2,color=arm_clr[armi],markersize=markersize)
-            
-                            
-                self.dused['rgc'].append(rgc)
-                self.dused['xgc'].append(xgc)
-                self.dused['yhc'].append(yhc)
-                self.dused['phi1'].append(phi1)
-                self.dused['phi4'].append(phi4)
-
-
-            if typ_ =='polargrid':
-                
-                linewidth=2
-                linestyle = '-'
-                phi4 = np.degrees(np.arctan2(yhc,xgc))%360.	
-                phi4_ex = np.degrees(np.arctan2(ygc_ex,xgc_ex))%360.	
-
-                phi1 = np.arctan2(yhc,-xgc)
-                phi1_ex = np.arctan2(ygc_ex,-xgc_ex)
-    
-
-                # plt.plot(np.radians(phi4),rgc,color=arm_clr[armi],markersize=markersize,linestyle=linestyle,linewidth=linewidth)
-
-                # plt.plot(phi1,rgc,color=arm_clr[armi],markersize=markersize,linestyle=linestyle,linewidth=linewidth)
-                # plt.plot(phi1_ex,rgc_ex,color=arm_clr[armi],markersize=markersize,linestyle='--',linewidth=linewidth)
-                
-                plt.plot(np.radians(phi4),rgc,color=arm_clr[armi],markersize=markersize,linestyle=linestyle,linewidth=linewidth)
-                
-                plt.plot(np.radians(phi4_ex),rgc_ex,color=arm_clr[armi],markersize=markersize,linestyle=linestyle2,linewidth=linewidth)
-                # plt.plot(np.radians(phi4_ex),rgc_ex,color=arm_clr[armi],markersize=markersize,linestyle='--',linewidth=linewidth)
-
-    
-                self.dused['rgc'].append(rgc)
-                self.dused['xgc'].append(xgc)
-                self.dused['yhc'].append(yhc)
-                self.dused['phi4'].append(phi4)                
+        if typ_ =='polargrid':			            
+			linewidth=2
+			linestyle = '-'
+			phi4 = np.degrees(np.arctan2(yhc,xgc))%360.	
+			phi4_ex = np.degrees(np.arctan2(ygc_ex,xgc_ex))%360.	
+			phi1 = np.arctan2(yhc,-xgc)
+			phi1_ex = np.arctan2(ygc_ex,-xgc_ex)
+			
+			plt.plot(np.radians(phi4),rgc,color=arm_clr[armi],markersize=markersize,linestyle=linestyle,linewidth=linewidth)            
+			plt.plot(np.radians(phi4_ex),rgc_ex,color=arm_clr[armi],markersize=markersize,linestyle=linestyle2,linewidth=linewidth)
+			
+			self.dused['rgc'].append(rgc)
+			self.dused['xgc'].append(xgc)
+			self.dused['yhc'].append(yhc)
+			self.dused['phi4'].append(phi4)      		
 class spiral_drimmel(object):
 
     """Drimmel (2000) Near-Infrared (NIR) spiral arm model
