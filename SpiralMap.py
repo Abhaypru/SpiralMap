@@ -693,8 +693,6 @@ class spiral_cepheids(object):
 			self.dused['yhc'].append(yhc)
 			self.dused['phi4'].append(phi4)      		
 
-
-
 class spiral_drimmel(object):
 
     """Drimmel (2000) Near-Infrared (NIR) spiral arm model
@@ -723,8 +721,6 @@ class spiral_drimmel(object):
     output_(arm, typ_)
         Retrieve coordinate data in specified format
     """
-
-
     def __init__(self):
         """Initialize Drimmel NIR spiral model with default parameters"""
      
@@ -753,8 +749,7 @@ class spiral_drimmel(object):
         print('------------------------')	
         dfmodlist = pd.DataFrame(self.arms,columns=['Arm list'])
         print(dfmodlist)
-        print('------------------------')		
-        
+        print('------------------------')		        
     
     def getdata(self):
         """Load and preprocess spiral arm data from FITS file.
@@ -775,25 +770,18 @@ class spiral_drimmel(object):
         dt = fitsread(self.loc+'/'+self.fname)
         self.data0 = dt.copy()
         
-        xsun = self.xsun						
+        xsun = self.xsun					
             
         # rescaling to |xsun|
         qnts = ['rgc1','xhc1','yhc1','rgc2','xhc2','yhc2']
         for qnt in qnts:
-            dt[qnt] = dt[qnt]*abs(xsun)				
-        
-        
-        #----- add phase-shifted arms as `3` and `4`
-        
-    
-    
+            dt[qnt] = dt[qnt]*abs(xsun)			        
+        #----- add phase-shifted arms as `3` and `4`    
         dloc = self.loc+'/phase_shifted'
         for inum in [3,4]:
             dt['xhc'+str(inum)] = np.load(dloc+'/Arm'+str(inum)+'_X_hel.npy')
             dt['yhc'+str(inum)] = np.load(dloc+'/Arm'+str(inum)+'_Y_hel.npy')
-            dt['rgc'+str(inum)] = np.sqrt( ((dt['xhc'+str(inum)] + xsun)**2.) + ((dt['yhc'+str(inum)])**2.) )
-        
-        
+            dt['rgc'+str(inum)] = np.sqrt( ((dt['xhc'+str(inum)] + xsun)**2.) + ((dt['yhc'+str(inum)])**2.) )       
         #------------------
         
         
