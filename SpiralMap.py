@@ -82,9 +82,7 @@ class spiral_eloisa(object):
 		fin_overdens= 1.5 
 		N_levels_overdens= 4 
 		levels_overdens= np.linspace(iniz_overdens,fin_overdens,N_levels_overdens)
-		cset1 = plt.contour(xvalues_overdens+xcorr,yvalues_overdens,over_dens_grid.T,
-							levels=levels_overdens,colors='black',
-							linewidths=0.2)
+		cset1 = plt.contour(xvalues_overdens+xcorr,yvalues_overdens,over_dens_grid.T,levels=levels_overdens,colors='black',linewidths=0.2)
 class TaylorCordesSpiral:	
 	""" Taylor & Cordes (1993) Galactic spiral arm model,	  
 	based on radio pulsar observations. The model defines four major spiral arms and 
@@ -245,10 +243,7 @@ class TaylorCordesSpiral:
 		self.R0 = -xsun  # Solar Galactocentric radius (kpc)				
 		if typ_ =='cartesian':		
 			xhc,yhc,xgc,ygc = self.model_(arm);					
-			self.dout = {'xhc':xhc,
-						 'yhc':yhc,
-						 'xgc':xgc,
-						 'ygc':ygc}							 
+			self.dout = {'xhc':xhc,'yhc':yhc,'xgc':xgc,'ygc':ygc}							 
 class spiral_houhan(object):	
 	"""Hou & Han (2014) polynomial-logarithmic spiral arm model
 	
@@ -641,16 +636,8 @@ class spiral_cepheids(object):
 		rgc = np.sqrt(xgc**2. + ygc**2.)
 		rgc_ex = np.sqrt(xgc_ex**2. + ygc_ex**2.)
 		if typ_ =='cartesian':            
-			self.dout = {'xhc':xhc,
-						 'yhc':yhc,
-						 'xgc':xgc,
-						 'ygc':ygc,	
-						 'xhc_ex':xhc_ex,
-						 'yhc_ex':yhc_ex,
-						 'xgc_ex':xgc_ex,	
-						 'ygc_ex':ygc_ex}	
+			self.dout = {'xhc':xhc,'yhc':yhc,'xgc':xgc,'ygc':ygc,'xhc_ex':xhc_ex,'yhc_ex':yhc_ex,'xgc_ex':xgc_ex,'ygc_ex':ygc_ex}	
 class spiral_drimmel(object):
-
     """Drimmel (2000) Near-Infrared (NIR) spiral arm model
     
     Implements the 2-arm spiral structure model from:
@@ -683,7 +670,6 @@ class spiral_drimmel(object):
         self.loc = dataloc+'/Drimmel_NIR'
         self.fname = 'Drimmel2armspiral.fits'
         self.getarmlist()
-        
     def getarmlist(self):
         """Initialize arm identifiers and visualization scheme.
         
@@ -693,7 +679,6 @@ class spiral_drimmel(object):
         """
         self.arms = np.array(['1_arm','2_arm','3_interarm','4_interarm'])
         self.armcolour = {'1_arm':'black','2_arm':'black','3_interarm':'red','4_interarm':'red'}
-    
     def info(self):
         
         """Display basic model information and arm components.
@@ -706,7 +691,6 @@ class spiral_drimmel(object):
         dfmodlist = pd.DataFrame(self.arms,columns=['Arm list'])
         print(dfmodlist)
         print('------------------------')		        
-    
     def getdata(self):
         """Load and preprocess spiral arm data from FITS file.
         
@@ -743,8 +727,6 @@ class spiral_drimmel(object):
         self.data = dt.copy()
 
         return 
-
-
     def output_(self,arm,typ_='cartesian'):			
         """Retrieve spiral arm coordinates in specified format.
         
@@ -776,9 +758,7 @@ class spiral_drimmel(object):
         """
         xsun = self.xsun
         self.getdata()
-        dt = self.data.copy()
-        
-    
+        dt = self.data.copy()  
                     
         numbs = [arm]
         if arm == 'all':
@@ -803,10 +783,7 @@ class spiral_drimmel(object):
             ygc = yhc
         
             if typ_ == 'cartesian':                
-                self.dout = {'xhc':xhc,
-                             'yhc':yhc,
-                             'xgc':xgc,
-                             'ygc':ygc}					
+                self.dout = {'xhc':xhc,'yhc':yhc,'xgc':xgc,'ygc':ygc}					
 
 class reid_spiral(object):
 	"""Reid et al. (2019) kinked logarithmic spiral arm model
