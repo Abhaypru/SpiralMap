@@ -14,7 +14,7 @@ plt.ion()
 		
 
 
-mkpaperfigs = True
+mkpaperfigs = False
 
 if mkpaperfigs:
 	
@@ -79,8 +79,28 @@ if single_:
 	plm.tight_layout()
 	plt.savefig(figdir_primer+'/polar_grid_overplotted.png')
 	
-	
+polar_test = True
 
+if polar_test:
+		
+	print('plotting figures for primer')
+	xsun=-8.277
+	spirals = sp.main_(xsun=xsun)
+	use_model = 'Drimmel_NIR_2000'
+	spirals.getinfo(model=use_model)
+				
+	plt.close('all')
+	fig, ax = plt.subplots(figsize=(7.5,7.),subplot_kw=dict(projection="polar"))
+
+
+	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':True}
+	spirals.readout(plotattrs,model=use_model,arm='all_test')
+
+	plt.title(use_model)
+
+	plt.savefig(figdir_primer+'/polar_grid_overplotted.png')
+	
+	
 
 
 
