@@ -14,7 +14,7 @@ plt.ion()
 		
 
 
-mkpaperfigs = False
+mkpaperfigs = True
 
 if mkpaperfigs:
 	
