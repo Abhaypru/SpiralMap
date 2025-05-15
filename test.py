@@ -65,7 +65,8 @@ if single_:
 	plm.next()		
 
 	plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'markSunGC':True,'polargrid':True}
-	spirals.readout(plotattrs,model=use_model,arm='all')
+	spirals.readout(plotattrs,model=use_model,arm='4_interarm')
+	# spirals.readout(plotattrs,model=use_model,arm='all')
 
 	plm.next()		
 
@@ -93,8 +94,16 @@ if polar_test:
 	fig, ax = plt.subplots(figsize=(7.5,7.),subplot_kw=dict(projection="polar"))
 
 
-	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':True}
-	spirals.readout(plotattrs,model=use_model,arm='all_test')
+	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':False,'polarproj':True}
+	spirals.readout(plotattrs,model=use_model,arm='4_interarm')
+
+
+	ax.set_rticks([3., 6.,9.,12,15.])
+	
+	rlabels = ax.get_ymajorticklabels()
+	for label in rlabels:
+	    label.set_color('blue')
+	    label.set_size(fontsize=10)
 
 	plt.title(use_model)
 
