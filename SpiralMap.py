@@ -1001,10 +1001,7 @@ class reid_spiral(object):
 			xhc1 = xgc1 - xsun
 			xhc2 = xgc2 - xsun	
 			yhc = ygc			
-			self.dout = {'xhc':xhc,
-						 'yhc':yhc,
-						 'xgc':xgc,
-						 'ygc':ygc}													
+			self.dout = {'xhc':xhc,'yhc':yhc,'xgc':xgc,'ygc':ygc}													
 			
 			return 
 
