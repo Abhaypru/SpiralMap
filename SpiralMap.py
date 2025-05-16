@@ -6,7 +6,7 @@ root_ = os.getcwd()
 dataloc = root_+'/datafiles'
 #--------------------------------------------       
 
-class spiral_eloisa(object):
+class spiral_poggio(object):
 	"""
 	Class containing spiral arm model from
 		Poggio et al. 2021 (EDR3 OB stars)
@@ -990,7 +990,7 @@ class main_(object):
 					   'Poggio_2021','Drimmel_ceph_2024']        
 		self.models_class = {'Reid_2019':reid_spiral(),
 							 'Levine_2006':spiral_levine(),
-							 'Poggio_2021':spiral_eloisa(),
+							 'Poggio_2021':spiral_poggio(),
 							 'Drimmel_NIR_2000':spiral_drimmel(),
 							 'Taylor_Cordes_1992':TaylorCordesSpiral(),
 							 'Hou_Han_2014':spiral_houhan(),
