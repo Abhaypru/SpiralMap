@@ -1086,22 +1086,26 @@ class main_(object):
 			plt.xlim([xmin,xmax])	
 			plt.ylim([ymin,ymax])	
 		
-
 		self.xmin,self.xmax =plt.gca().get_xlim()[0].copy(),plt.gca().get_xlim()[1].copy()				
-		self.ymin,self.ymax =plt.gca().get_ylim()[0].copy(),plt.gca().get_ylim()[1].copy()	
-		# print(self.xmin,self.xmax,self.ymin,self.ymax)
-		
+		self.ymin,self.ymax =plt.gca().get_ylim()[0].copy(),plt.gca().get_ylim()[1].copy()			
 		
 		if plotattrs_['markSunGC']:
 			self.add2plot(plotattrs_)	
 		
-		# print(self.xmin,self.xmax,self.ymin,self.ymax)			
+			
 
 	def getangular(self,spimod):
 
 		spimod.dout['rgc'] = sqrtsum(ds=[spimod.dout['xgc'],spimod.dout['ygc']])						
 		spimod.dout['phi1'] = np.arctan2(spimod.dout['yhc'],-spimod.dout['xgc'])
-		spimod.dout['phi4'] = np.degrees(np.arctan2(spimod.dout['yhc'],spimod.dout['xgc']))%360.		
+		spimod.dout['phi4'] = np.degrees(np.arctan2(spimod.dout['yhc'],spimod.dout['xgc']))%360.	
+		
+		if 'xhc_ex' in 	spimod.dout.keys():			
+
+			spimod.dout['rgc_ex'] = sqrtsum(ds=[spimod.dout['xgc_ex'],spimod.dout['ygc_ex']])						
+			spimod.dout['phi1_ex'] = np.arctan2(spimod.dout['yhc_ex'],-spimod.dout['xgc_ex'])
+			spimod.dout['phi4_ex'] = np.degrees(np.arctan2(spimod.dout['yhc_ex'],spimod.dout['xgc_ex']))%360.	
+						
 		
 	def readout(self,plotattrs={},model='',arm='',print_=False):					
 		if model == '':
@@ -1151,6 +1155,12 @@ class main_(object):
 					self.xyplot(spimod,plotattrs1)										
 				if plotattrs1['plot'] and plotattrs1['polarproj']:										
 					plt.plot(np.radians(spimod.dout['phi4']),spimod.dout['rgc'],'.',color=plotattrs1['armcolour'])	
+
+					try:
+						plt.plot(np.radians(spimod.dout['phi4_ex']),spimod.dout['rgc_ex'],'.',color=plotattrs1['armcolour'])	
+					except KeyError:
+						pass
+					
 			try:	
 				add_polargrid(plotattrs1,xmin=self.xmin,xmax=self.xmax,ymin=self.ymin,ymax=self.ymax)		
 			except AttributeError:

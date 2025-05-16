@@ -55,7 +55,7 @@ if single_:
 	print('plotting figures for primer')
 	xsun=-8.277
 	spirals = sp.main_(xsun=xsun)
-	use_model = 'Reid_2019'
+	use_model = 'Drimmel_ceph_2024'
 	spirals.getinfo(model=use_model)
 				
 	plt.close('all')
@@ -81,7 +81,7 @@ if single_:
 	plm.tight_layout()
 	plt.savefig(figdir_primer+'/polar_grid_overplotted.png')
 	
-polar_test = False
+polar_test = True
 
 if polar_test:
 		
@@ -96,8 +96,16 @@ if polar_test:
 
 
 	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':False,'polargrid':False,'polarproj':True}
-	spirals.readout(plotattrs,model=use_model,arm='all')
+
+
+	# for inum,use_model in enumerate(spirals.models):
+	
+		# spirals.readout(plotattrs,model=use_model,arm='all')
 	use_model = 'Reid_2019'
+	spirals.readout(plotattrs,model=use_model,arm='all')
+	use_model = 'Drimmel_ceph_2024'
+	spirals.readout(plotattrs,model=use_model,arm='all')
+	use_model = 'Poggio_2021'
 	spirals.readout(plotattrs,model=use_model,arm='all')
 
 
