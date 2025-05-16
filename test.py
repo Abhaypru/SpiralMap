@@ -94,8 +94,8 @@ if polar_test:
 	fig, ax = plt.subplots(figsize=(7.5,7.),subplot_kw=dict(projection="polar"))
 
 
-	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':False,'polarproj':True}
-	spirals.readout(plotattrs,model=use_model,arm='4_interarm')
+	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':False,'polargrid':False,'polarproj':True}
+	spirals.readout(plotattrs,model=use_model,arm='all')
 
 
 	ax.set_rticks([3., 6.,9.,12,15.])
@@ -108,6 +108,15 @@ if polar_test:
 	plt.title(use_model)
 
 	plt.savefig(figdir_primer+'/polar_grid_overplotted.png')
+	
+	plt.close('all')
+
+	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':False,'polarproj':False}
+	spirals.readout(plotattrs,model=use_model,arm='all')
+
+	plt.title(use_model)
+
+	plt.savefig(figdir_primer+'/normal_overplotted.png')
 	
 	
 

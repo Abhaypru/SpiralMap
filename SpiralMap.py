@@ -1274,93 +1274,33 @@ class main_(object):
 					self.xyplot(spimod,plotattrs)
 				if plotattrs['plot'] and plotattrs['polarproj']:			
 					plt.plot(np.radians(spimod.dout['phi4']),spimod.dout['rgc'],'.',color=spimod.armcolour[arm])		
-					
-	
-								
-	
+						
 						
 								
 			elif arm =='all':
 	
 				for arm_temp in spimod.arms:
 					spimod.output_(arm_temp)
-
 					spimod.dout['rgc'] = sqrtsum(ds=[spimod.dout['xgc'],spimod.dout['ygc']])						
 					spimod.dout['phi1'] = np.arctan2(spimod.dout['yhc'],-spimod.dout['xgc'])
 					spimod.dout['phi4'] = np.degrees(np.arctan2(spimod.dout['yhc'],spimod.dout['xgc']))%360.						
-					
-					if plotattrs['plot']:
-						
-						plt.plot(spimod.dout['x'+plotattrs['coordsys'].lower()],
-						         spimod.dout['y'+plotattrs['coordsys'].lower()],
-						         '.',color=spimod.armcolour[arm_temp])	
-						if 'xhc_ex' in 	spimod.dout.keys():
-							plt.plot(spimod.dout['x'+plotattrs['coordsys'].lower()+'_ex'],
-							         spimod.dout['y'+plotattrs['coordsys'].lower()+'_ex'],
-							         '--',color=spimod.armcolour[arm_temp])	
-						plt.xlabel('X$_{'+plotattrs['coordsys']+'}$ [Kpc]')
-						plt.ylabel('Y$_{'+plotattrs['coordsys']+'}$ [Kpc]')						
-		
-						if plotattrs['xmin'] == '' or plotattrs['xmax'] == '' or plotattrs['ymin'] == '' or plotattrs['ymax'] == '' :
-							1+1										
-						else:
-							xmin,xmax = plotattrs['xmin'],plotattrs['xmax']
-							ymin,ymax = plotattrs['ymin'],plotattrs['ymax']
-		
-							plt.xlim([xmin,xmax])	
-							plt.ylim([ymin,ymax])					
-					
-						self.xmin,self.xmax =plt.gca().get_xlim()[0],plt.gca().get_xlim()[1]				
-						self.ymin,self.ymax =plt.gca().get_ylim()[0],plt.gca().get_ylim()[1]	
-						
-						if plotattrs['markSunGC']:
-							self.add2plot(plotattrs)
-					
-			elif arm =='all_test':
-	
-				for arm_temp in spimod.arms:
-					spimod.output_(arm_temp)
 
-					spimod.dout['rgc'] = sqrtsum(ds=[spimod.dout['xgc'],spimod.dout['ygc']])						
-					spimod.dout['phi1'] = np.arctan2(spimod.dout['yhc'],-spimod.dout['xgc'])
-					spimod.dout['phi4'] = np.degrees(np.arctan2(spimod.dout['yhc'],spimod.dout['xgc']))%360.	
-					
-					if plotattrs['plot']:
-						
-						# plt.plot(spimod.dout['x'+plotattrs['coordsys'].lower()],
-						         # spimod.dout['y'+plotattrs['coordsys'].lower()],
-						         # '.',color=spimod.armcolour[arm_temp])	
-						         
-						plt.plot(np.radians(spimod.dout['phi4']),spimod.dout['rgc'],'.',color=spimod.armcolour[arm_temp])						         
+					print('test...')
+					print(spimod.armcolour[arm_temp]	)
+					print(plotattrs['armcolour']	)
+					print('.....')
 
-						# if 'xhc_ex' in 	spimod.dout.keys():
-							# plt.plot(spimod.dout['x'+plotattrs['coordsys'].lower()+'_ex'],
-							         # spimod.dout['y'+plotattrs['coordsys'].lower()+'_ex'],
-							         # '--',color=spimod.armcolour[arm_temp])	
-						# plt.xlabel('X$_{'+plotattrs['coordsys']+'}$ [Kpc]')
-						# plt.ylabel('Y$_{'+plotattrs['coordsys']+'}$ [Kpc]')						
-		
-						# if plotattrs['xmin'] == '' or plotattrs['xmax'] == '' or plotattrs['ymin'] == '' or plotattrs['ymax'] == '' :
-							# 1+1										
-						# else:
-							# xmin,xmax = plotattrs['xmin'],plotattrs['xmax']
-							# ymin,ymax = plotattrs['ymin'],plotattrs['ymax']
-		
-							# plt.xlim([xmin,xmax])	
-							# plt.ylim([ymin,ymax])					
-					
-						# self.xmin,self.xmax =plt.gca().get_xlim()[0],plt.gca().get_xlim()[1]				
-						# self.ymin,self.ymax =plt.gca().get_ylim()[0],plt.gca().get_ylim()[1]	
+					if plotattrs['armcolour'] == '':
+						plotattrs['armcolour'] = spimod.armcolour[arm_temp]						
+					if plotattrs['plot'] and plotattrs['polarproj']==False:						
+						self.xyplot(spimod,plotattrs)
+					if plotattrs['plot'] and plotattrs['polarproj']:			
+						# plt.plot(np.radians(spimod.dout['phi4']),spimod.dout['rgc'],'.',color=spimod.armcolour[arm_temp])								
+						plt.plot(np.radians(spimod.dout['phi4']),spimod.dout['rgc'],'.',color=plotattrs['armcolour'])								
 						
-						# if plotattrs['markSunGC']:
-							# self.add2plot(plotattrs)
+					# if plotattrs['markSunGC']:
+						# self.add2plot(plotattrs)
 					
-					
-					self.dout = spimod.dout.copy()	
-					
-							
-			if plotattrs['polargrid']:
-				add_polargrid(xmin=self.xmin,xmax=self.xmax,ymin=self.ymin,ymax=self.ymax)			
 			self.plotattrs = plotattrs					
 		return 
 
