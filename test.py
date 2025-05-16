@@ -55,7 +55,7 @@ if single_:
 	print('plotting figures for primer')
 	xsun=-8.277
 	spirals = sp.main_(xsun=xsun)
-	use_model = 'Drimmel_NIR_2000'
+	use_model = 'Reid_2019'
 	spirals.getinfo(model=use_model)
 				
 	plt.close('all')
@@ -64,15 +64,16 @@ if single_:
 
 	plm.next()		
 
-	plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'markSunGC':True,'polargrid':True}
-	spirals.readout(plotattrs,model=use_model,arm='4_interarm')
-	# spirals.readout(plotattrs,model=use_model,arm='all')
+	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':False}
+	spirals.readout(plotattrs,model=use_model,arm='all')
+	
 
 	plm.next()		
-
+	print('style 2')
 	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':True}
 	spirals.readout(plotattrs,model=use_model,arm='all')
-
+	
+	# plt.xlim([-15,0.])
 
 
 	plt.title(use_model)
@@ -80,14 +81,14 @@ if single_:
 	plm.tight_layout()
 	plt.savefig(figdir_primer+'/polar_grid_overplotted.png')
 	
-polar_test = True
+polar_test = False
 
 if polar_test:
 		
 	print('plotting figures for primer')
 	xsun=-8.277
 	spirals = sp.main_(xsun=xsun)
-	use_model = 'Hou_Han_2014'
+	use_model = 'Poggio_2021'
 	spirals.getinfo(model=use_model)
 				
 	plt.close('all')
@@ -95,6 +96,8 @@ if polar_test:
 
 
 	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':False,'polargrid':False,'polarproj':True}
+	spirals.readout(plotattrs,model=use_model,arm='all')
+	use_model = 'Reid_2019'
 	spirals.readout(plotattrs,model=use_model,arm='all')
 
 
@@ -109,14 +112,7 @@ if polar_test:
 
 	plt.savefig(figdir_primer+'/polar_grid_overplotted.png')
 	
-	plt.close('all')
 
-	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':False,'polarproj':False}
-	spirals.readout(plotattrs,model=use_model,arm='all')
-
-	plt.title(use_model)
-
-	plt.savefig(figdir_primer+'/normal_overplotted.png')
 	
 	
 
