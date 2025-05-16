@@ -1088,7 +1088,7 @@ class main_(object):
 		plt.ylabel('Y$_{'+plotattrs['coordsys']+'}$ [Kpc]')
 	
 		if plotattrs['xmin'] == '' or plotattrs['xmax'] == '' or plotattrs['ymin'] == '' or plotattrs['ymax'] == '' :						
-			1+1																			
+			print('')																			
 		else:
 			xmin,xmax = plotattrs['xmin'],plotattrs['xmax']
 			ymin,ymax = plotattrs['ymin'],plotattrs['ymax']	
@@ -1098,11 +1098,13 @@ class main_(object):
 		self.ymin,self.ymax =plt.gca().get_ylim()[0],plt.gca().get_ylim()[1]	
 		if plotattrs['polargrid']:
 			add_polargrid(xmin=self.xmin,xmax=self.xmax,ymin=self.ymin,ymax=self.ymax)	
-		
-		
-		return
 
+	def getangular(self,spimod):
 
+		spimod.dout['rgc'] = sqrtsum(ds=[spimod.dout['xgc'],spimod.dout['ygc']])						
+		spimod.dout['phi1'] = np.arctan2(spimod.dout['yhc'],-spimod.dout['xgc'])
+		spimod.dout['phi4'] = np.degrees(np.arctan2(spimod.dout['yhc'],spimod.dout['xgc']))%360.			
+		
 
 	def readout(self,plotattrs={},model='',arm='',print_=False):					
 		if model == '':
@@ -1123,51 +1125,37 @@ class main_(object):
 			return spimod.output_(coordsys=plotattrs1['coordsys'])		
 		if (('poggio' not in model.lower())&('all' not in arm))  :	
 			
-
 			plotattrs1 = plotattrs.copy()				
 									
-			spimod.output_(arm)												
-			spimod.dout['rgc'] = sqrtsum(ds=[spimod.dout['xgc'],spimod.dout['ygc']])						
-			spimod.dout['phi1'] = np.arctan2(spimod.dout['yhc'],-spimod.dout['xgc'])
-			spimod.dout['phi4'] = np.degrees(np.arctan2(spimod.dout['yhc'],spimod.dout['xgc']))%360.	
-			
+			spimod.output_(arm)
+			self.getangular(spimod)															
 			
 			self.dout = spimod.dout.copy() 													
 			if plotattrs1['armcolour'] == '':
 				plotattrs1['armcolour'] = spimod.armcolour[arm]		
-
-	
 			if plotattrs1['plot'] and plotattrs1['polarproj']==False:				
 				self.xyplot(spimod,plotattrs1)
+				if plotattrs['markSunGC']:
+					self.add2plot(plotattrs)				
 			if plotattrs1['plot'] and plotattrs1['polarproj']:			
-				plt.plot(np.radians(spimod.dout['phi4']),spimod.dout['rgc'],'.',color=plotattrs1['armcolour'])		
-						
+				plt.plot(np.radians(spimod.dout['phi4']),spimod.dout['rgc'],'.',color=plotattrs1['armcolour'])								
 			return 
 						
 		if (('poggio' not in model.lower())&(arm=='all'))  :	
-			
-										
+													
 			for arm_temp in spimod.arms:
 				
 				plotattrs1 = plotattrs.copy()
-
 				spimod.output_(arm_temp)
-				spimod.dout['rgc'] = sqrtsum(ds=[spimod.dout['xgc'],spimod.dout['ygc']])						
-				spimod.dout['phi1'] = np.arctan2(spimod.dout['yhc'],-spimod.dout['xgc'])
-				spimod.dout['phi4'] = np.degrees(np.arctan2(spimod.dout['yhc'],spimod.dout['xgc']))%360.						
+				self.getangular(spimod)							
 				
 				if plotattrs1['armcolour'] == '':
 					plotattrs1['armcolour'] = spimod.armcolour[arm_temp]							
 										
 				if plotattrs1['plot'] and plotattrs1['polarproj']==False:						
-					self.xyplot(spimod,plotattrs1)
-				if plotattrs1['plot'] and plotattrs1['polarproj']:			
-					# plt.plot(np.radians(spimod.dout['phi4']),spimod.dout['rgc'],'.',color=spimod.armcolour[arm_temp])								
+					self.xyplot(spimod,plotattrs1)					
+					if plotattrs['markSunGC']:
+						self.add2plot(plotattrs)
+				if plotattrs1['plot'] and plotattrs1['polarproj']:										
 					plt.plot(np.radians(spimod.dout['phi4']),spimod.dout['rgc'],'.',color=plotattrs1['armcolour'])								
-					
-				# if plotattrs['markSunGC']:
-					# self.add2plot(plotattrs)
-					
-				# self.plotattrs = plotattrs1					
-			return 
-
+						

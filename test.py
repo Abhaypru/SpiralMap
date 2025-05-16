@@ -87,7 +87,7 @@ if polar_test:
 	print('plotting figures for primer')
 	xsun=-8.277
 	spirals = sp.main_(xsun=xsun)
-	use_model = 'Drimmel_NIR_2000'
+	use_model = 'Hou_Han_2014'
 	spirals.getinfo(model=use_model)
 				
 	plt.close('all')
