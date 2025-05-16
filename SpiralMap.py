@@ -1250,57 +1250,62 @@ class main_(object):
 		spimod.xsun = self.xsun
 		spimod.getarmlist()		
 		self.armlist = spimod.arms	
+				
+		# in case plot attributes are not provided, or incomplete
+		for ky in self.plotattrs_default.keys():			
+			if ky not in list(plotattrs.keys()):				
+				plotattrs[ky] = self.plotattrs_default[ky]
+		plotattrs1 = plotattrs.copy()
+		
 		if 'poggio' in model.lower():		
-			spimod.output_(coordsys=plotattrs['coordsys'])		
-		else:	
-			# in case plot attributes are not provided, or incomplete
-			for ky in self.plotattrs_default.keys():			
-				if ky not in list(plotattrs.keys()):				
-					plotattrs[ky] = self.plotattrs_default[ky]
+			return spimod.output_(coordsys=plotattrs1['coordsys'])		
+		if (('poggio' not in model.lower())&('all' not in arm))  :	
+			
+
+			plotattrs1 = plotattrs.copy()				
+									
+			spimod.output_(arm)												
+			spimod.dout['rgc'] = sqrtsum(ds=[spimod.dout['xgc'],spimod.dout['ygc']])						
+			spimod.dout['phi1'] = np.arctan2(spimod.dout['yhc'],-spimod.dout['xgc'])
+			spimod.dout['phi4'] = np.degrees(np.arctan2(spimod.dout['yhc'],spimod.dout['xgc']))%360.	
+			
+			
+			self.dout = spimod.dout.copy() 													
+			if plotattrs1['armcolour'] == '':
+				plotattrs1['armcolour'] = spimod.armcolour[arm]		
+
 	
-			if 'all' not in arm:							
-				spimod.output_(arm)												
+			if plotattrs1['plot'] and plotattrs1['polarproj']==False:				
+				self.xyplot(spimod,plotattrs1)
+			if plotattrs1['plot'] and plotattrs1['polarproj']:			
+				plt.plot(np.radians(spimod.dout['phi4']),spimod.dout['rgc'],'.',color=plotattrs1['armcolour'])		
+						
+			return 
+						
+		if (('poggio' not in model.lower())&(arm=='all'))  :	
+			
+										
+			for arm_temp in spimod.arms:
+				
+				plotattrs1 = plotattrs.copy()
+
+				spimod.output_(arm_temp)
 				spimod.dout['rgc'] = sqrtsum(ds=[spimod.dout['xgc'],spimod.dout['ygc']])						
 				spimod.dout['phi1'] = np.arctan2(spimod.dout['yhc'],-spimod.dout['xgc'])
-				spimod.dout['phi4'] = np.degrees(np.arctan2(spimod.dout['yhc'],spimod.dout['xgc']))%360.	
+				spimod.dout['phi4'] = np.degrees(np.arctan2(spimod.dout['yhc'],spimod.dout['xgc']))%360.						
 				
-				
-				self.dout = spimod.dout.copy() 													
-				if plotattrs['armcolour'] == '':
-					plotattrs['armcolour'] = spimod.armcolour[arm]		
-
-		
-				if plotattrs['plot'] and plotattrs['polarproj']==False:				
-					self.xyplot(spimod,plotattrs)
-				if plotattrs['plot'] and plotattrs['polarproj']:			
-					plt.plot(np.radians(spimod.dout['phi4']),spimod.dout['rgc'],'.',color=spimod.armcolour[arm])		
-						
-						
-								
-			elif arm =='all':
-	
-				for arm_temp in spimod.arms:
-					spimod.output_(arm_temp)
-					spimod.dout['rgc'] = sqrtsum(ds=[spimod.dout['xgc'],spimod.dout['ygc']])						
-					spimod.dout['phi1'] = np.arctan2(spimod.dout['yhc'],-spimod.dout['xgc'])
-					spimod.dout['phi4'] = np.degrees(np.arctan2(spimod.dout['yhc'],spimod.dout['xgc']))%360.						
-
-					print('test...')
-					print(spimod.armcolour[arm_temp]	)
-					print(plotattrs['armcolour']	)
-					print('.....')
-
-					if plotattrs['armcolour'] == '':
-						plotattrs['armcolour'] = spimod.armcolour[arm_temp]						
-					if plotattrs['plot'] and plotattrs['polarproj']==False:						
-						self.xyplot(spimod,plotattrs)
-					if plotattrs['plot'] and plotattrs['polarproj']:			
-						# plt.plot(np.radians(spimod.dout['phi4']),spimod.dout['rgc'],'.',color=spimod.armcolour[arm_temp])								
-						plt.plot(np.radians(spimod.dout['phi4']),spimod.dout['rgc'],'.',color=plotattrs['armcolour'])								
-						
-					# if plotattrs['markSunGC']:
-						# self.add2plot(plotattrs)
+				if plotattrs1['armcolour'] == '':
+					plotattrs1['armcolour'] = spimod.armcolour[arm_temp]							
+										
+				if plotattrs1['plot'] and plotattrs1['polarproj']==False:						
+					self.xyplot(spimod,plotattrs1)
+				if plotattrs1['plot'] and plotattrs1['polarproj']:			
+					# plt.plot(np.radians(spimod.dout['phi4']),spimod.dout['rgc'],'.',color=spimod.armcolour[arm_temp])								
+					plt.plot(np.radians(spimod.dout['phi4']),spimod.dout['rgc'],'.',color=plotattrs1['armcolour'])								
 					
-			self.plotattrs = plotattrs					
-		return 
+				# if plotattrs['markSunGC']:
+					# self.add2plot(plotattrs)
+					
+				# self.plotattrs = plotattrs1					
+			return 
 
