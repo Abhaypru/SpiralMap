@@ -107,16 +107,20 @@ if polar_test:
 	spirals.readout(plotattrs,model=use_model,arm='all')
 	use_model = 'Poggio_2021'
 	spirals.readout(plotattrs,model=use_model,arm='all')
+	use_model = 'Hou_Han_2014'
+	spirals.readout(plotattrs,model=use_model,arm='all')
 
 
-	ax.set_rticks([3., 6.,9.,12,15.])
+	ax.set_rticks([3., 6.,9.,12,15.,20.])
 	
 	rlabels = ax.get_ymajorticklabels()
 	for label in rlabels:
 	    label.set_color('blue')
 	    label.set_size(fontsize=10)
 
-	plt.title(use_model)
+	# plt.title(use_model)
+	ax.set_xlim([np.radians(100),np.radians(260)])
+	ax.set_ylim([0.,8])
 
 	plt.savefig(figdir_primer+'/polar_grid_overplotted.png')
 	
