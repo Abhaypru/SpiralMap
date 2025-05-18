@@ -98,10 +98,7 @@ class spiral_poggio(object):
 		if plotattrs['polarproj']:
 			phi4_overdens = np.degrees(np.arctan2(yvalues_overdens,xvalues_overdens+xcorr))%360.							
 			cset1 = plt.contour(np.radians(phi4_overdens),Rgcvalues_dens,over_dens_grid,levels=levels_overdens,colors='black',linewidths=plotattrs['linewidth'])
-			
-		# s
-		
-		
+							
 class TaylorCordesSpiral(object):	
 	""" Taylor & Cordes (1993) Galactic spiral arm model,	  
 	based on radio pulsar observations. The model defines four major spiral arms and 
@@ -578,7 +575,7 @@ class spiral_levine(object):
 			'xgc': xgc,
 			'ygc': ygc}
 
-class spiral_cepheids(object):
+class spiral_drimmel_cepheids(object):
 	
 	def __init__(self):
 		self.loc = dataloc+'/Drimmel2024_cepheids'
@@ -637,7 +634,7 @@ class spiral_cepheids(object):
           
 		self.dout = {'xhc':xhc,'yhc':yhc,'xgc':xgc,'ygc':ygc,'xhc_ex':xhc_ex,'yhc_ex':yhc_ex,'xgc_ex':xgc_ex,'ygc_ex':ygc_ex}	
 		
-class spiral_drimmel(object):
+class spiral_drimmel_nir(object):
 	"""Drimmel (2000) Near-Infrared (NIR) spiral arm model
 	
 	Implements the 2-arm spiral structure model from:
@@ -998,10 +995,10 @@ class main_(object):
 		self.models_class = {'Reid_2019':reid_spiral(),
 							 'Levine_2006':spiral_levine(),
 							 'Poggio_2021':spiral_poggio(),
-							 'Drimmel_NIR_2000':spiral_drimmel(),
+							 'Drimmel_NIR_2000':spiral_drimmel_nir(),
 							 'Taylor_Cordes_1992':TaylorCordesSpiral(),
 							 'Hou_Han_2014':spiral_houhan(),
-							 'Drimmel_ceph_2024':spiral_cepheids()}
+							 'Drimmel_ceph_2024':spiral_drimmel_cepheids()}
 	
 	def getinfo(self,model=''):	
 		'''                
