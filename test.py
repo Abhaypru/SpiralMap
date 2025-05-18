@@ -171,21 +171,12 @@ if polar_test:
 mkJossfigs = True
 if mkJossfigs:
 
-	# 0  Taylor_Cordes_1992
-	# 1    Drimmel_NIR_2000
-	# 2         Levine_2006
-	# 3        Hou_Han_2014
-	# 4           Reid_2019
-	# 5         Poggio_2021
-	# 6   Drimmel_ceph_2024
-
-
 	print('plotting figures for primer')
 	xsun=-8.277
 	spirals = sp.main_(xsun=xsun)
 	use_model1 = 'Hou_Han_2014' 
-	use_model2 = 'Taylor_Cordes_1992' #'Poggio_2021'
-	use_model3 = 'Levine_2006'
+	use_model2 = 'Poggio_2021' #'Taylor_Cordes_1992' #'Poggio_2021'
+	use_model3 = 'Poggio_2021'
 	spirals.getinfo(model=use_model)
 
 
