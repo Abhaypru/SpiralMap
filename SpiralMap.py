@@ -102,7 +102,7 @@ class spiral_poggio(object):
 		# s
 		
 		
-class TaylorCordesSpiral:	
+class TaylorCordesSpiral(object):	
 	""" Taylor & Cordes (1993) Galactic spiral arm model,	  
 	based on radio pulsar observations. The model defines four major spiral arms and 
 	provides both Galactocentric and Heliocentric coordinates for the arm segments.
@@ -581,7 +581,7 @@ class spiral_levine(object):
 class spiral_cepheids(object):
 	
 	def __init__(self):
-		self.loc = dataloc+'/DKPS_cepheids'
+		self.loc = dataloc+'/Drimmel2024_cepheids'
 		self.fname = 'ArmAttributes_dyoungW1_bw025.pkl'
 		self.getarmlist()
 	def getarmlist(self):
