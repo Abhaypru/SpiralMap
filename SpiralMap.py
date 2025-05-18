@@ -89,14 +89,17 @@ class spiral_poggio(object):
 		N_levels_overdens= 4 
 		levels_overdens= np.linspace(iniz_overdens,fin_overdens,N_levels_overdens)
 		if plotattrs['polarproj'] == False:				
-			cset1 = plt.contour(xvalues_overdens+xcorr,yvalues_overdens,over_dens_grid.T,levels=levels_overdens,colors='black',linewidths=0.2)
-			
+			cset1 = plt.contour(xvalues_overdens+xcorr,yvalues_overdens,over_dens_grid.T,levels=levels_overdens,colors='black',linewidths=plotattrs['linewidth'])
+
+			self.xmin,self.xmax =plt.gca().get_xlim()[0].copy(),plt.gca().get_xlim()[1].copy()				
+			self.ymin,self.ymax =plt.gca().get_ylim()[0].copy(),plt.gca().get_ylim()[1].copy()		
+			# add_polargrid(plotattrs,xmin=xmin,xmax=xmax,ymin=ymin,ymax=ymax)					
 		
 		if plotattrs['polarproj']:
 			phi4_overdens = np.degrees(np.arctan2(yvalues_overdens,xvalues_overdens+xcorr))%360.							
-			cset1 = plt.contour(np.radians(phi4_overdens),Rgcvalues_dens,over_dens_grid,levels=levels_overdens,colors='black',linewidths=0.2)
+			cset1 = plt.contour(np.radians(phi4_overdens),Rgcvalues_dens,over_dens_grid,levels=levels_overdens,colors='black',linewidths=plotattrs['linewidth'])
 			
-		
+		# s
 		
 		
 class TaylorCordesSpiral:	
@@ -976,7 +979,9 @@ class reid_spiral(object):
 
 
 class main_(object):
-	
+	'''
+	To do: find a way to reset modrec using plot axis
+	'''
 	def __init__(self,xsun=-8.277):       	
 		self.root_ = root_
 		self.dataloc = dataloc        
@@ -984,6 +989,8 @@ class main_(object):
 		self.Rsun = -self.xsun        
 		self.listmodels()
 		self.getinfo()	    
+		
+		self.modrec = []
 	def listmodels(self):        		
 		self.models = ['Taylor_Cordes_1992','Drimmel_NIR_2000',
 					   'Levine_2006','Hou_Han_2014','Reid_2019',
@@ -1043,7 +1050,7 @@ class main_(object):
 		self.plotattrs_default = {'plot':False,
 								'markersize':3,
 								'coordsys':'HC',
-								'linewidth':0.8,
+								'linewidth':0.5,
 								'linestyle': '-',
 								'armcolour':'',
 								'markSunGC':True,
@@ -1052,17 +1059,18 @@ class main_(object):
 								'ymin':'',
 								'ymax':'',
 								'polarproj':False,    
-								'polargrid':False}    
+								'polargrid':False,    
+								'dataloc':dataloc}    
 	def add2plot(self,plotattrs):
 		
 		if plotattrs['coordsys'] =='HC':						
-			plt.axvline(0,linewidth=1,linestyle='--')			
-			plt.axhline(0,linewidth=1,linestyle='--')		
+			# plt.axvline(0,linewidth=plotattrs['linewidth'],linestyle='--')			
+			# plt.axhline(0,linewidth=plotattrs['linewidth'],linestyle='--')		
 			plt.plot(0.,0.,marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')
 			plt.plot(-self.xsun,0.,marker='*',markersize=plotattrs['markersize'],color='black')		
 		if plotattrs['coordsys'] =='GC':										
-			plt.axvline(self.xsun,linewidth=1,linestyle='--')			
-			plt.axhline(0,linewidth=1,linestyle='--')			
+			# plt.axvline(self.xsun,linewidth=plotattrs['linewidth'],linestyle='--')			
+			# plt.axhline(0,linewidth=plotattrs['linewidth'],linestyle='--')			
 			plt.plot(0.,0.,marker='*',markersize=plotattrs['markersize'],color='black')
 			plt.plot(self.xsun,0.,marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')
 
@@ -1106,11 +1114,16 @@ class main_(object):
 			spimod.dout['phi1_ex'] = np.arctan2(spimod.dout['yhc_ex'],-spimod.dout['xgc_ex'])
 			spimod.dout['phi4_ex'] = np.degrees(np.arctan2(spimod.dout['yhc_ex'],spimod.dout['xgc_ex']))%360.	
 						
+				
+	def readout(self,plotattrs={},model='',arm='',print_=False):	
 		
-	def readout(self,plotattrs={},model='',arm='',print_=False):					
+						
 		if model == '':
 			 raise RuntimeError('model = blank | no model provided \n try self.getino() for list of available models')			 
 	
+		
+		self.modrec.append(model)
+		
 		spimod = self.models_class[model]			
 		spimod.xsun = self.xsun
 		spimod.getarmlist()		
@@ -1122,8 +1135,9 @@ class main_(object):
 				plotattrs[ky] = self.plotattrs_default[ky]
 		plotattrs1 = plotattrs.copy()
 		
-		if 'poggio' in model.lower():		
-			return spimod.output_(plotattrs1,coordsys=plotattrs1['coordsys'])		
+		if 'poggio' in model.lower():													
+			spimod.output_(plotattrs1,coordsys=plotattrs1['coordsys'])					
+			add_polargrid(plotattrs1,xmin=spimod.xmin,xmax=spimod.xmax,ymin=spimod.ymin,ymax=spimod.ymax,modrec=self.modrec)					
 		if (('poggio' not in model.lower())&('all' not in arm))  :	
 			
 			plotattrs1 = plotattrs.copy()													
@@ -1133,11 +1147,11 @@ class main_(object):
 			if plotattrs1['armcolour'] == '':
 				plotattrs1['armcolour'] = spimod.armcolour[arm]		
 			if plotattrs1['plot'] and plotattrs1['polarproj']==False:				
-				self.xyplot(spimod,plotattrs1)				
+				self.xyplot(spimod,plotattrs1)								
 			if plotattrs1['plot'] and plotattrs1['polarproj']:			
-				plt.plot(np.radians(spimod.dout['phi4']),spimod.dout['rgc'],'.',color=plotattrs1['armcolour'])		
+				plt.plot(np.radians(spimod.dout['phi4']),spimod.dout['rgc'],'.',color=plotattrs1['armcolour'])	
 			try:	
-				add_polargrid(plotattrs1,xmin=self.xmin,xmax=self.xmax,ymin=self.ymin,ymax=self.ymax)		
+				add_polargrid(plotattrs1,xmin=self.xmin,xmax=self.xmax,ymin=self.ymin,ymax=self.ymax)			
 			except AttributeError:
 				pass							
 			return 
@@ -1145,14 +1159,14 @@ class main_(object):
 		if (('poggio' not in model.lower())&(arm=='all'))  :	
 													
 			for arm_temp in spimod.arms:			
-				print(arm_temp)	
 				plotattrs1 = plotattrs.copy()
+			
 				spimod.output_(arm_temp)
 				self.getangular(spimod)											
 				if plotattrs1['armcolour'] == '':
 					plotattrs1['armcolour'] = spimod.armcolour[arm_temp]																	
 				if plotattrs1['plot'] and plotattrs1['polarproj']==False:			
-					self.xyplot(spimod,plotattrs1)										
+					self.xyplot(spimod,plotattrs1)															
 				if plotattrs1['plot'] and plotattrs1['polarproj']:										
 					plt.plot(np.radians(spimod.dout['phi4']),spimod.dout['rgc'],'.',color=plotattrs1['armcolour'])	
 
@@ -1160,11 +1174,12 @@ class main_(object):
 						plt.plot(np.radians(spimod.dout['phi4_ex']),spimod.dout['rgc_ex'],'.',color=plotattrs1['armcolour'])	
 					except KeyError:
 						pass
-					
+						
 			try:	
-				add_polargrid(plotattrs1,xmin=self.xmin,xmax=self.xmax,ymin=self.ymin,ymax=self.ymax)		
+				add_polargrid(plotattrs1,xmin=self.xmin,xmax=self.xmax,ymin=self.ymin,ymax=self.ymax,modrec=self.modrec)	
 			except AttributeError:
 				pass															
 
+			
 										
 			return

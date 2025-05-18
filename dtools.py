@@ -57,6 +57,21 @@ def fitsread(filename,ext=1):
 		
 	return data
 
+def picklewrite(data,nam,loc,prnt=True):
+	'''
+	write files using pickle
+	'''
+	
+	
+	
+	import pickle
+	
+	pickle.dump(data,open(loc+'/'+nam+'.pkl','wb'))	
+	if prnt:
+		print(nam+' .pkl written to '+loc)	
+		
+	return 
+
 def pickleread(file1):
 	
 	'''
@@ -91,28 +106,44 @@ def sqrtsum(ds=[],prnt=False):
 	
 	return resval
 
+def add_polargrid(plotattrs,rlevels=12,xmin=-10,xmax=10,ymin=-10,ymax=10,modrec=[]):
+	
+	flim = pickleread(plotattrs['dataloc']+'/flim.pkl')
+	
 
-def add_polargrid(plotattrs1,rlevels=12,xmin=-20,xmax=10,ymin=-15,ymax=15):
+	xmins = [flim[model]['xmin'] for model in modrec]
+	xmaxs = [flim[model]['xmax'] for model in modrec]
+	ymins = [flim[model]['ymin'] for model in modrec]
+	ymaxs = [flim[model]['ymax'] for model in modrec]
 
-	if (plotattrs1['plot']&(plotattrs1['polarproj']==False)&(plotattrs1['polargrid'])):
-			
-				
-			xorig = 0.
-			rmin = 3
-			rvals = np.array([rmin + rmin*i for i in range(rlevels)])
-			for r in rvals:
-				ang = np.radians(np.linspace(0.,360.,100))
-				x = r*np.cos(ang)
-				y = r*np.sin(ang)	
-				plt.plot(x + xorig,y,color='grey',linewidth=0.5)	
-			rvals = np.array([0 + i for i in range(rlevels*6)])	
+	
+	xmin1 = np.nanmin(xmins)
+	xmax1 = np.nanmax(xmaxs)
+	ymin1 = np.nanmin(ymins)
+	ymax1 = np.nanmax(ymaxs)
 		
-			for l in np.arange(0.,360.,30):		
-				l=np.radians(l)				
-				x = np.array([r*np.cos(l) for r in rvals])
-				y = np.array([r*np.sin(l) for r in rvals])
-				
-				plt.plot(x + xorig,y,color='grey',linewidth=0.5)	
-				
-			plt.axis([xmin,xmax,ymin,ymax])
+	if ((plotattrs['plot']==True)&(plotattrs['polarproj']==False)&(plotattrs['polargrid'])):
+											
+		xorig = 0.
+		rmin = 3
+
+		rvals = np.array([rmin + rmin*i for i in range(rlevels)])
+		for r in rvals:
+			ang = np.radians(np.linspace(0.,360.,100))
+			x = r*np.cos(ang)
+			y = r*np.sin(ang)	
+			indg = np.where((x>xmin)&(x<xmax)&(y>ymin)&(y<ymax))[0]				
+			plt.plot(x + xorig,y,color='grey',linewidth=0.5)		
+
+		rvals = np.array([0 + i for i in range(rlevels*10)])			
+		for l in np.arange(0.,360.,30):		
+			l=np.radians(l)				
+			x = np.array([r*np.cos(l) for r in rvals])
+			y = np.array([r*np.sin(l) for r in rvals])
+								
+			plt.plot(x + xorig,y,color='grey',linewidth=0.5)								
+
+
+		# plt.axis([xmin,xmax,ymin,ymax])
+		plt.axis([xmin1,xmax1,ymin1,ymax1])
 
