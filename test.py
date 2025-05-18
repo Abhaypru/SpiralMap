@@ -1,11 +1,19 @@
 
 
-import imp,SpiralMap, dtools
-imp.reload(SpiralMap)
+# import imp,SpiralMap, dtools
+# imp.reload(SpiralMap)
+# import SpiralMap as sp
+# import matplotlib.pyplot as plt
+# import numpy as np
+# import os
+# import putil
+# import imp,SpiralMap
+# imp.reload(SpiralMap)
+from SpiralMap import *
 import SpiralMap as sp
-import matplotlib.pyplot as plt
-import numpy as np
-import os
+# import matplotlib.pyplot as plt
+# import numpy as np
+# import os
 import putil
 
 figdir_primer = 'figdir_primer'
@@ -177,7 +185,7 @@ if mkJossfigs:
 	use_model1 = 'Hou_Han_2014' 
 	use_model2 = 'Poggio_2021' #'Taylor_Cordes_1992' #'Poggio_2021'
 	use_model3 = 'Poggio_2021'
-	spirals.getinfo(model=use_model)
+	spirals.getinfo(model=use_model1)
 
 
 	plt.close('all')

@@ -1,5 +1,4 @@
 
-
 import os, sys
 import numpy as np
 from astropy.table import Table
@@ -42,8 +41,6 @@ def fcount(floc,flist=False,nlist=False):
 	else:
 		os.system('ls -lh '+floc)	
 		return 
-
-
 
 def fitsread(filename,ext=1):
 	
