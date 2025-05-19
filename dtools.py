@@ -104,22 +104,28 @@ def sqrtsum(ds=[],prnt=False):
 	return resval
 
 def add_polargrid(plotattrs,rlevels=12,xmin=-10,xmax=10,ymin=-10,ymax=10,modrec=[]):
-	
-	flim = pickleread(plotattrs['dataloc']+'/flim.pkl')
-	
 
-	xmins = [flim[model]['xmin'] for model in modrec]
-	xmaxs = [flim[model]['xmax'] for model in modrec]
-	ymins = [flim[model]['ymin'] for model in modrec]
-	ymaxs = [flim[model]['ymax'] for model in modrec]
 
-	
-	xmin1 = np.nanmin(xmins)
-	xmax1 = np.nanmax(xmaxs)
-	ymin1 = np.nanmin(ymins)
-	ymax1 = np.nanmax(ymaxs)
-		
+
+
 	if ((plotattrs['plot']==True)&(plotattrs['polarproj']==False)&(plotattrs['polargrid'])):
+		
+
+
+		flim = pickleread(plotattrs['dataloc']+'/flim.pkl')
+		
+	
+		xmins = [flim[model]['xmin'] for model in modrec]
+		xmaxs = [flim[model]['xmax'] for model in modrec]
+		ymins = [flim[model]['ymin'] for model in modrec]
+		ymaxs = [flim[model]['ymax'] for model in modrec]
+	
+		
+		xmin1 = np.nanmin(xmins)
+		xmax1 = np.nanmax(xmaxs)
+		ymin1 = np.nanmin(ymins)
+		ymax1 = np.nanmax(ymaxs)
+					
 											
 		xorig = 0.
 		rmin = 3

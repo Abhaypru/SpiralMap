@@ -999,7 +999,6 @@ class main_(object):
 							 'Taylor_Cordes_1992':TaylorCordesSpiral(),
 							 'Hou_Han_2014':spiral_houhan(),
 							 'Drimmel_ceph_2024':spiral_drimmel_cepheids()}
-	
 	def getinfo(self,model=''):	
 		'''                
 		plotattrs_description:
@@ -1070,7 +1069,6 @@ class main_(object):
 			# plt.axhline(0,linewidth=plotattrs['linewidth'],linestyle='--')			
 			plt.plot(0.,0.,marker='*',markersize=plotattrs['markersize'],color='black')
 			plt.plot(self.xsun,0.,marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')
-
 	def xyplot(self,spimod,plotattrs_):		
 			
 		plt.plot(spimod.dout['x'+plotattrs_['coordsys'].lower()],
@@ -1096,9 +1094,6 @@ class main_(object):
 		
 		if plotattrs_['markSunGC']:
 			self.add2plot(plotattrs_)	
-		
-			
-
 	def getangular(self,spimod):
 
 		spimod.dout['rgc'] = sqrtsum(ds=[spimod.dout['xgc'],spimod.dout['ygc']])						
@@ -1110,8 +1105,6 @@ class main_(object):
 			spimod.dout['rgc_ex'] = sqrtsum(ds=[spimod.dout['xgc_ex'],spimod.dout['ygc_ex']])						
 			spimod.dout['phi1_ex'] = np.arctan2(spimod.dout['yhc_ex'],-spimod.dout['xgc_ex'])
 			spimod.dout['phi4_ex'] = np.degrees(np.arctan2(spimod.dout['yhc_ex'],spimod.dout['xgc_ex']))%360.	
-						
-				
 	def readout(self,plotattrs={},model='',arm='',print_=False):	
 		
 						
@@ -1148,7 +1141,7 @@ class main_(object):
 			if plotattrs1['plot'] and plotattrs1['polarproj']:			
 				plt.plot(np.radians(spimod.dout['phi4']),spimod.dout['rgc'],'.',color=plotattrs1['armcolour'])	
 			try:	
-				add_polargrid(plotattrs1,xmin=self.xmin,xmax=self.xmax,ymin=self.ymin,ymax=self.ymax)			
+				add_polargrid(plotattrs1,xmin=self.xmin,xmax=self.xmax,ymin=self.ymin,ymax=self.ymax,modrec=self.modrec)			
 			except AttributeError:
 				pass							
 			return 

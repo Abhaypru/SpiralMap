@@ -1,7 +1,8 @@
 
 
-# import imp,SpiralMap, dtools
-# imp.reload(SpiralMap)
+import imp,SpiralMap, dtools
+imp.reload(SpiralMap)
+imp.reload(dtools)
 # import SpiralMap as sp
 # import matplotlib.pyplot as plt
 # import numpy as np
@@ -9,8 +10,8 @@
 # import putil
 # import imp,SpiralMap
 # imp.reload(SpiralMap)
-from SpiralMap import *
-import SpiralMap as sp
+# from SpiralMap import *
+# import SpiralMap as sp
 # import matplotlib.pyplot as plt
 # import numpy as np
 # import os
@@ -95,8 +96,8 @@ if savelims:
 	dtools.picklewrite(mylims,'flim',sp.dataloc)	
 
 
-single_ = False
-if single_:
+single_old = False
+if single_old:
 		
 	print('plotting figures for primer')
 	xsun=-8.277
@@ -112,16 +113,16 @@ if single_:
 
 	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':False}
 	spirals.readout(plotattrs,model=use_model,arm='all')
-	spirals.readout(plotattrs,model='Levine_2006',arm='all')
-	spirals.readout(plotattrs,model='Hou_Han_2014',arm='all')	
+	# spirals.readout(plotattrs,model='Levine_2006',arm='all')
+	# spirals.readout(plotattrs,model='Hou_Han_2014',arm='all')	
 			
 
 	plm.next()		
 	print('style 2')
 	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':True}
 	spirals.readout(plotattrs,model=use_model,arm='all')
-	spirals.readout(plotattrs,model='Levine_2006',arm='all')
-	spirals.readout(plotattrs,model='Hou_Han_2014',arm='all')
+	# spirals.readout(plotattrs,model='Levine_2006',arm='all')
+	# spirals.readout(plotattrs,model='Hou_Han_2014',arm='all')
 
 
 	
@@ -132,7 +133,7 @@ if single_:
 	
 	plm.tight_layout()
 	plt.savefig(figdir_primer+'/polar_grid_overplotted.png')
-	
+
 polar_test = False
 if polar_test:
 		
@@ -176,7 +177,7 @@ if polar_test:
 	plt.savefig(figdir_primer+'/polar_grid_overplotted.png')
 	
 
-mkJossfigs = True
+mkJossfigs = False
 if mkJossfigs:
 
 	print('plotting figures for primer')
@@ -251,8 +252,60 @@ if mkJossfigs:
 	# # ax.set_ylim([0.,8])
 
 	# # plt.savefig(figdir_primer+'/polar_grid_overplotted.png')
+	print('')
+	
+#------------------------------------------------------------	
+############## figures for documentation ####################
 
+
+
+single_extract = True
+if single_extract:
+	
+	xsun=-8.277
+	spirals = sp.main_(xsun=xsun)
+	use_model = 'Drimmel_ceph_2024'
+	spirals.getinfo(model=use_model)
+	plotattrs = {'plot':True,'coordsys':'HC','polargrid':True}
+	spirals.readout(plotattrs,model=use_model,arm='Orion')
 	
 	
+
+
+single_model = False
+if single_model:
+		
+	print('plotting figures for primer')
+	xsun=-8.277
+	spirals = sp.main_(xsun=xsun)
+	use_model = 'Drimmel_ceph_2024'
+	spirals.getinfo(model=use_model)
+				
+	import matplotlib.gridspec as gridspec
 	
+	plt.close('all')
+	fig = plt.figure(figsize=(8, 3))
+
+	fig.add_subplot(1,3,1)
+	plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'markSunGC':True,'polargrid':False}
+	spirals.readout(plotattrs,model=use_model,arm='all')
+
+	fig.add_subplot(1,3,2)
+	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':True}
+	spirals.readout(plotattrs,model=use_model,arm='all')
+
+	fig.add_subplot(1,3,3)
+	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':True}
+	spirals.readout(plotattrs,model=use_model,arm='all')
 	
+	fig.suptitle(use_model)
+	fig.tight_layout()
+	plt.savefig(figdir_primer+'/single_model_demo.png')
+	
+
+
+
+
+
+
+
