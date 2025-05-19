@@ -1118,6 +1118,7 @@ class main_(object):
 		spimod.xsun = self.xsun
 		spimod.getarmlist()		
 		self.armlist = spimod.arms	
+		self.arm = arm
 				
 		# in case plot attributes are not provided, or incomplete
 		for ky in self.plotattrs_default.keys():			

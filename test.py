@@ -1,8 +1,8 @@
 
 
-import imp,SpiralMap, dtools
-imp.reload(SpiralMap)
-imp.reload(dtools)
+# import imp,SpiralMap, dtools
+# imp.reload(SpiralMap)
+# imp.reload(dtools)
 # import SpiralMap as sp
 # import matplotlib.pyplot as plt
 # import numpy as np
@@ -10,10 +10,11 @@ imp.reload(dtools)
 # import putil
 # import imp,SpiralMap
 # imp.reload(SpiralMap)
-# from SpiralMap import *
-# import SpiralMap as sp
+
 # import matplotlib.pyplot as plt
 # import numpy as np
+from SpiralMap import *
+import SpiralMap as sp
 # import os
 import putil
 
@@ -259,17 +260,52 @@ if mkJossfigs:
 
 
 
-single_extract = True
-if single_extract:
+single_extract_plot = False
+if single_extract_plot:	
 	
+	#
 	xsun=-8.277
 	spirals = sp.main_(xsun=xsun)
 	use_model = 'Drimmel_ceph_2024'
-	spirals.getinfo(model=use_model)
-	plotattrs = {'plot':True,'coordsys':'HC','polargrid':True}
+	use_arm = 'Orion'
+	spirals.getinfo(model=use_model)	
+	plotattrs = {'plot':False}
 	spirals.readout(plotattrs,model=use_model,arm='Orion')
+		
+	print(list(spirals.dout.keys()))
+	print('first 4 data points from the first 4 keys..')
+	for ky in list(spirals.dout.keys())[:4]:
+	    print(ky)
+	    print(spirals.dout[ky][:4])	
+
+
+	#
+	xsun=-8.277
+	spirals = sp.main_(xsun=xsun)
+	use_model = 'Drimmel_ceph_2024'
+	use_arm = 'Orion'
+	spirals.getinfo(model=use_model)	
+
+	import matplotlib.gridspec as gridspec
 	
+	plt.close('all')
+	fig = plt.figure(figsize=(8, 3))
+
+	fig.add_subplot(1,3,1)
+	plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'markSunGC':True}
+	spirals.readout(plotattrs,model=use_model,arm=use_arm)
+
+	fig.add_subplot(1,3,2)
+	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True}
+	spirals.readout(plotattrs,model=use_model,arm=use_arm)
+
+	fig.add_subplot(1,3,3)
+	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':True}
+	spirals.readout(plotattrs,model=use_model,arm=use_arm)
 	
+	fig.suptitle(use_model+'('+use_arm+')')
+	fig.tight_layout()
+	plt.savefig(figdir_primer+'/single_model_single_arm_demo.png')
 
 
 single_model = False
@@ -279,6 +315,7 @@ if single_model:
 	xsun=-8.277
 	spirals = sp.main_(xsun=xsun)
 	use_model = 'Drimmel_ceph_2024'
+	use_arm = 'all'
 	spirals.getinfo(model=use_model)
 				
 	import matplotlib.gridspec as gridspec
@@ -288,24 +325,21 @@ if single_model:
 
 	fig.add_subplot(1,3,1)
 	plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'markSunGC':True,'polargrid':False}
-	spirals.readout(plotattrs,model=use_model,arm='all')
-
+	spirals.readout(plotattrs,model=use_model,arm=use_arm)
+	
 	fig.add_subplot(1,3,2)
 	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':True}
-	spirals.readout(plotattrs,model=use_model,arm='all')
+	spirals.readout(plotattrs,model=use_model,arm=use_arm)
 
 	fig.add_subplot(1,3,3)
 	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':True}
-	spirals.readout(plotattrs,model=use_model,arm='all')
+	spirals.readout(plotattrs,model=use_model,arm=use_arm)
 	
-	fig.suptitle(use_model)
+	fig.suptitle(use_model+'('+use_arm+')')
 	fig.tight_layout()
-	plt.savefig(figdir_primer+'/single_model_demo.png')
+	plt.savefig(figdir_primer+'/single_all_arms_demo.png')
 	
 
-
-
-
-
-
-
+single_model_polar = True
+if single_model_polar:
+	print('continue from here..')
