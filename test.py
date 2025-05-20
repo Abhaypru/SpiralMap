@@ -1,8 +1,8 @@
 
 
-# import imp,SpiralMap, dtools
-# imp.reload(SpiralMap)
-# imp.reload(dtools)
+import imp,SpiralMap, dtools
+imp.reload(SpiralMap)
+imp.reload(dtools)
 # import SpiralMap as sp
 # import matplotlib.pyplot as plt
 # import numpy as np
@@ -59,13 +59,12 @@ if mkpaperfigs:
 savelims = False
 if savelims:
 		
-	
+	# correct poggio hc limits')
 	print('plotting figures for primer')
 	xsun=-8.277
-	# plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'xmin':-10,'xmax':10,'ymin':-10,'ymax':10}
-	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':False}
+		
 	plt.close('all')
-	plm=putil.Plm2(2,3,xsize=8.0,ysize=4.5,xmulti=False,ymulti=False,full=True,slabelx=0.7,slabely=0.07)			
+	plm=putil.Plm2(10,10,xsize=8.0,ysize=4.5,xmulti=False,ymulti=False,full=True,slabelx=0.7,slabely=0.07)			
 	
 	mylims = {}
 	
@@ -73,26 +72,49 @@ if savelims:
 	for inum,use_model in enumerate(spirals.models):		
 		
 		if use_model != 'Poggio_2021':
+			mylims[use_model] = {}
 			
-			
+			plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':False}		
+
+			coordsys = plotattrs['coordsys']
 
 			plm.next()
 				
 			spirals.getinfo(model=use_model)
 			spirals.readout(plotattrs,model=use_model,arm='all')
-			mylims[use_model] = {}
-			mylims[use_model]['xmin'] = spirals.xmin
-			mylims[use_model]['xmax'] = spirals.xmax
-			mylims[use_model]['ymin'] = spirals.ymin
-			mylims[use_model]['ymax'] = spirals.ymax
+			
+			mylims[use_model]['xmin'+'_'+coordsys] = spirals.xmin
+			mylims[use_model]['xmax'+'_'+coordsys] = spirals.xmax
+			mylims[use_model]['ymin'+'_'+coordsys] = spirals.ymin
+			mylims[use_model]['ymax'+'_'+coordsys] = spirals.ymax
 	
 			spirals.getinfo(model='Poggio_2021')
 			spirals.readout(plotattrs,model='Poggio_2021',arm='all')
 			mylims['Poggio_2021'] = {}
-			mylims['Poggio_2021']['xmin'] = spirals.xmin
-			mylims['Poggio_2021']['xmax'] = spirals.xmax
-			mylims['Poggio_2021']['ymin'] = -10
-			mylims['Poggio_2021']['ymax'] = 10
+			mylims['Poggio_2021']['xmin'+'_'+coordsys] = spirals.xmin
+			mylims['Poggio_2021']['xmax'+'_'+coordsys] = spirals.xmax
+			mylims['Poggio_2021']['ymin'+'_'+coordsys] = -10
+			mylims['Poggio_2021']['ymax'+'_'+coordsys] = 10
+			
+			plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'markSunGC':True,'polargrid':False}		
+			coordsys = plotattrs['coordsys']
+			plm.next()
+				
+			spirals.getinfo(model=use_model)
+			spirals.readout(plotattrs,model=use_model,arm='all')
+	
+			mylims[use_model]['xmin'+'_'+coordsys] = spirals.xmin
+			mylims[use_model]['xmax'+'_'+coordsys] = spirals.xmax
+			mylims[use_model]['ymin'+'_'+coordsys] = spirals.ymin
+			mylims[use_model]['ymax'+'_'+coordsys] = spirals.ymax
+	
+			spirals.getinfo(model='Poggio_2021')
+			spirals.readout(plotattrs,model='Poggio_2021',arm='all')
+
+			mylims['Poggio_2021']['xmin'+'_'+coordsys] = spirals.xmin
+			mylims['Poggio_2021']['xmax'+'_'+coordsys] = spirals.xmax
+			mylims['Poggio_2021']['ymin'+'_'+coordsys] = -10
+			mylims['Poggio_2021']['ymax'+'_'+coordsys] = 10
 
 	dtools.picklewrite(mylims,'flim',sp.dataloc)	
 
@@ -314,7 +336,7 @@ if single_model:
 	print('plotting figures for primer')
 	xsun=-8.277
 	spirals = sp.main_(xsun=xsun)
-	use_model = 'Drimmel_ceph_2024'
+	use_model = 'Taylor_Cordes_1992'
 	use_arm = 'all'
 	spirals.getinfo(model=use_model)
 				
@@ -324,16 +346,19 @@ if single_model:
 	fig = plt.figure(figsize=(8, 3))
 
 	fig.add_subplot(1,3,1)
-	plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'markSunGC':True,'polargrid':False}
+	plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'markSunGC':True,'polargrid':True}
 	spirals.readout(plotattrs,model=use_model,arm=use_arm)
+	spirals.readout(plotattrs,model='Poggio_2021')
 	
 	fig.add_subplot(1,3,2)
-	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':True}
+	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':False}
 	spirals.readout(plotattrs,model=use_model,arm=use_arm)
+	spirals.readout(plotattrs,model='Poggio_2021')
 
 	fig.add_subplot(1,3,3)
 	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':True}
 	spirals.readout(plotattrs,model=use_model,arm=use_arm)
+	spirals.readout(plotattrs,model='Poggio_2021')
 	
 	fig.suptitle(use_model+'('+use_arm+')')
 	fig.tight_layout()
@@ -342,4 +367,61 @@ if single_model:
 
 single_model_polar = True
 if single_model_polar:
-	print('continue from here..')
+
+	print('plotting figures for primer')
+	xsun=-8.277
+	spirals = sp.main_(xsun=xsun)
+	use_model = 'Poggio_2021'#'Hou_Han_2014'
+	spirals.getinfo(model=use_model)
+				
+	plt.close('all')
+	fig, ax = plt.subplots(figsize=(7.5,7.),subplot_kw=dict(projection="polar"))
+	
+	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':False,'polargrid':False,'polarproj':True}
+	spirals.readout(plotattrs,model=use_model,arm='all')
+	spirals.readout(plotattrs,model='Taylor_Cordes_1992',arm='all')
+
+
+	ax.set_rticks([3., 6.,9.,12,15.,20.])
+	
+	rlabels = ax.get_ymajorticklabels()
+	for label in rlabels:
+	    label.set_color('blue')
+	    label.set_size(fontsize=10)
+
+	plt.title(use_model)
+	# ax.set_xlim([np.radians(100),np.radians(260)])
+	# ax.set_ylim([0.,8])
+
+	plt.savefig(figdir_primer+'/polar_grid_overplotted.png')
+
+
+checkpolar = False
+if checkpolar:
+
+	print('plotting figures for primer')
+	xsun=-8.277
+	spirals = sp.main_(xsun=xsun)
+	use_model = 'Taylor_Cordes_1992'
+	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':False,'polargrid':False,'polarproj':True}
+	spirals.readout(plotattrs,model=use_model,arm='all')
+				
+	plt.close('all')
+	fig, ax = plt.subplots(figsize=(7.5,7.),subplot_kw=dict(projection="polar"))
+	
+
+	ax.set_rticks([3., 6.,9.,12,15.,20.])
+	
+	rlabels = ax.get_ymajorticklabels()
+	for label in rlabels:
+	    label.set_color('blue')
+	    label.set_size(fontsize=10)
+
+	plt.title(use_model)
+	# ax.set_xlim([np.radians(100),np.radians(260)])
+	# ax.set_ylim([0.,8])
+
+	plt.savefig(figdir_primer+'/polar_grid_overplotted.png')
+
+
+

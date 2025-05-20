@@ -42,6 +42,13 @@ def fcount(floc,flist=False,nlist=False):
 		os.system('ls -lh '+floc)	
 		return 
 
+
+
+def xyz2lbr(x,y,z):
+    rc2=x*x+y*y
+    return [np.degrees(np.arctan2(y,x)),np.degrees(np.arctan(z/np.sqrt(rc2))),np.sqrt(rc2+z*z)]
+
+
 def fitsread(filename,ext=1):
 	
 	from astropy.io import fits    
@@ -105,7 +112,7 @@ def sqrtsum(ds=[],prnt=False):
 
 def add_polargrid(plotattrs,rlevels=12,xmin=-10,xmax=10,ymin=-10,ymax=10,modrec=[]):
 
-
+	coordsys = plotattrs['coordsys']
 
 
 	if ((plotattrs['plot']==True)&(plotattrs['polarproj']==False)&(plotattrs['polargrid'])):
@@ -115,10 +122,10 @@ def add_polargrid(plotattrs,rlevels=12,xmin=-10,xmax=10,ymin=-10,ymax=10,modrec=
 		flim = pickleread(plotattrs['dataloc']+'/flim.pkl')
 		
 	
-		xmins = [flim[model]['xmin'] for model in modrec]
-		xmaxs = [flim[model]['xmax'] for model in modrec]
-		ymins = [flim[model]['ymin'] for model in modrec]
-		ymaxs = [flim[model]['ymax'] for model in modrec]
+		xmins = [flim[model]['xmin'+'_'+coordsys] for model in modrec]
+		xmaxs = [flim[model]['xmax'+'_'+coordsys] for model in modrec]
+		ymins = [flim[model]['ymin'+'_'+coordsys] for model in modrec]
+		ymaxs = [flim[model]['ymax'+'_'+coordsys] for model in modrec]
 	
 		
 		xmin1 = np.nanmin(xmins)
@@ -130,6 +137,7 @@ def add_polargrid(plotattrs,rlevels=12,xmin=-10,xmax=10,ymin=-10,ymax=10,modrec=
 		xorig = 0.
 		rmin = 3
 
+		# gc r-phi projection (works)
 		rvals = np.array([rmin + rmin*i for i in range(rlevels)])
 		for r in rvals:
 			ang = np.radians(np.linspace(0.,360.,100))
@@ -144,9 +152,8 @@ def add_polargrid(plotattrs,rlevels=12,xmin=-10,xmax=10,ymin=-10,ymax=10,modrec=
 			x = np.array([r*np.cos(l) for r in rvals])
 			y = np.array([r*np.sin(l) for r in rvals])
 								
-			plt.plot(x + xorig,y,color='grey',linewidth=0.5)								
+			plt.plot(x + xorig,y,color='grey',linewidth=0.5)		
+			
 
-
-		# plt.axis([xmin,xmax,ymin,ymax])
 		plt.axis([xmin1,xmax1,ymin1,ymax1])
 

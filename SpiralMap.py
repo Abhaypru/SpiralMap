@@ -98,6 +98,9 @@ class spiral_poggio(object):
 		if plotattrs['polarproj']:
 			phi4_overdens = np.degrees(np.arctan2(yvalues_overdens,xvalues_overdens+xcorr))%360.							
 			cset1 = plt.contour(np.radians(phi4_overdens),Rgcvalues_dens,over_dens_grid,levels=levels_overdens,colors='black',linewidths=plotattrs['linewidth'])
+			self.xmin,self.xmax =plt.gca().get_xlim()[0].copy(),plt.gca().get_xlim()[1].copy()				
+			self.ymin,self.ymax =plt.gca().get_ylim()[0].copy(),plt.gca().get_ylim()[1].copy()	
+
 							
 class TaylorCordesSpiral(object):	
 	""" Taylor & Cordes (1993) Galactic spiral arm model,	  
@@ -203,9 +206,14 @@ class TaylorCordesSpiral(object):
 		r_fine = cs(theta_fine)
 		
 		# Convert to Cartesian coordinates (Galacto-Centric)
-		x_gc = r_fine * np.sin(theta_fine)
-		y_gc = -r_fine * np.cos(theta_fine)
-		
+
+		xgc = r_fine * np.sin(theta_fine)
+		ygc = -r_fine * np.cos(theta_fine)
+
+		rot_ang = np.radians(90)
+		x_gc = (xgc*np.cos(rot_ang)) - (ygc*np.sin(rot_ang)  )
+		y_gc = (xgc*np.sin(rot_ang)) + (ygc*np.cos(rot_ang)  )
+        		
 		# Convert to Heliocentric coordinates
 		x_hc = x_gc + self.R0  # Sun at (-R0, 0) in GC
 		
@@ -1099,12 +1107,17 @@ class main_(object):
 		spimod.dout['rgc'] = sqrtsum(ds=[spimod.dout['xgc'],spimod.dout['ygc']])						
 		spimod.dout['phi1'] = np.arctan2(spimod.dout['yhc'],-spimod.dout['xgc'])
 		spimod.dout['phi4'] = np.degrees(np.arctan2(spimod.dout['yhc'],spimod.dout['xgc']))%360.	
+		spimod.dout['glon4'] = np.degrees(np.arctan2(spimod.dout['yhc'],spimod.dout['xhc']))%360.	
+		spimod.dout['glon'],spimod.dout['glat'],spimod.dout['dhelio'] = xyz2lbr(spimod.dout['xhc'],spimod.dout['yhc'],0)
+		
 		
 		if 'xhc_ex' in 	spimod.dout.keys():			
 
 			spimod.dout['rgc_ex'] = sqrtsum(ds=[spimod.dout['xgc_ex'],spimod.dout['ygc_ex']])						
 			spimod.dout['phi1_ex'] = np.arctan2(spimod.dout['yhc_ex'],-spimod.dout['xgc_ex'])
 			spimod.dout['phi4_ex'] = np.degrees(np.arctan2(spimod.dout['yhc_ex'],spimod.dout['xgc_ex']))%360.	
+			spimod.dout['glon4_ex'] = np.degrees(np.arctan2(spimod.dout['yhc_ex'],spimod.dout['xhc_ex']))%360.	
+			spimod.dout['glon_ex'],spimod.dout['glat_ex'],spimod.dout['dhelio_ex'] = xyz2lbr(spimod.dout['xhc_ex'],spimod.dout['yhc_ex'],0)
 	def readout(self,plotattrs={},model='',arm='',print_=False):	
 		
 						
@@ -1141,6 +1154,7 @@ class main_(object):
 				self.xyplot(spimod,plotattrs1)								
 			if plotattrs1['plot'] and plotattrs1['polarproj']:			
 				plt.plot(np.radians(spimod.dout['phi4']),spimod.dout['rgc'],'.',color=plotattrs1['armcolour'])	
+				# # plt.plot(np.radians(spimod.dout['glon4']),spimod.dout['dhelio'],'.',color=plotattrs1['armcolour'])	
 			try:	
 				add_polargrid(plotattrs1,xmin=self.xmin,xmax=self.xmax,ymin=self.ymin,ymax=self.ymax,modrec=self.modrec)			
 			except AttributeError:
@@ -1160,9 +1174,11 @@ class main_(object):
 					self.xyplot(spimod,plotattrs1)															
 				if plotattrs1['plot'] and plotattrs1['polarproj']:										
 					plt.plot(np.radians(spimod.dout['phi4']),spimod.dout['rgc'],'.',color=plotattrs1['armcolour'])	
+					# # plt.plot(np.radians(spimod.dout['glon4']),spimod.dout['dhelio'],'.',color=plotattrs1['armcolour'])	
 
 					try:
 						plt.plot(np.radians(spimod.dout['phi4_ex']),spimod.dout['rgc_ex'],'.',color=plotattrs1['armcolour'])	
+						# plt.plot(np.radians(spimod.dout['glon4']),spimod.dout['dhelio'],'.',color=plotattrs1['armcolour'])	
 					except KeyError:
 						pass
 						
