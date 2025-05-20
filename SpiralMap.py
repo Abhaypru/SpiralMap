@@ -210,6 +210,7 @@ class TaylorCordesSpiral(object):
 		xgc = r_fine * np.sin(theta_fine)
 		ygc = -r_fine * np.cos(theta_fine)
 
+		# rotate by 90 anti-clockwise to match with our convention 
 		rot_ang = np.radians(90)
 		x_gc = (xgc*np.cos(rot_ang)) - (ygc*np.sin(rot_ang)  )
 		y_gc = (xgc*np.sin(rot_ang)) + (ygc*np.cos(rot_ang)  )
@@ -1036,7 +1037,7 @@ class main_(object):
 			print('try self.getinfo(model) for more details')
 			print('')
 			print('------------------------')			
-			dfmodlist = pd.DataFrame(self.models,columns=['Available models:'])
+			dfmodlist = pd.DataFrame(self.models,columns=['Available models & maps:'])
 			print(dfmodlist)
 			print('------------------------')
 		else:
@@ -1063,6 +1064,7 @@ class main_(object):
 								'ymin':'',
 								'ymax':'',
 								'polarproj':False,    
+								'polarproj_hc':False,    
 								'polargrid':False,    
 								'dataloc':dataloc}    
 	def add2plot(self,plotattrs):
@@ -1150,11 +1152,26 @@ class main_(object):
 			self.dout = spimod.dout.copy() 													
 			if plotattrs1['armcolour'] == '':
 				plotattrs1['armcolour'] = spimod.armcolour[arm]		
-			if plotattrs1['plot'] and plotattrs1['polarproj']==False:				
+			if plotattrs1['plot'] and plotattrs1['polarproj']==False and plotattrs1['polarproj_hc']==False:				
 				self.xyplot(spimod,plotattrs1)								
-			if plotattrs1['plot'] and plotattrs1['polarproj']:			
+			if plotattrs1['plot'] and plotattrs1['polarproj'] and plotattrs1['polarproj_hc']==False:		
+				plt.plot(0.,0.,marker='*',markersize=plotattrs['markersize'],color='black')	
+				plt.plot(np.radians(180.),abs(self.xsun),marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')
 				plt.plot(np.radians(spimod.dout['phi4']),spimod.dout['rgc'],'.',color=plotattrs1['armcolour'])	
-				# # plt.plot(np.radians(spimod.dout['glon4']),spimod.dout['dhelio'],'.',color=plotattrs1['armcolour'])	
+				try:
+					plt.plot(np.radians(spimod.dout['phi4_ex']),spimod.dout['rgc_ex'],'.',color=plotattrs1['armcolour'])						
+				except KeyError:
+					pass				
+			if plotattrs1['plot'] and plotattrs1['polarproj_hc']:
+				plt.plot(np.radians(0.),abs(self.xsun),marker='*',markersize=plotattrs['markersize'],color='black')
+				plt.plot(0.,0.,marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')															
+				plt.plot(np.radians(spimod.dout['glon4']),spimod.dout['dhelio'],'.',color=plotattrs1['armcolour'])	
+				
+				try:
+					plt.plot(np.radians(spimod.dout['glon4_ex']),spimod.dout['dhelio_ex'],'.',color=plotattrs1['armcolour'])	
+					print('')
+				except KeyError:
+					pass					
 			try:	
 				add_polargrid(plotattrs1,xmin=self.xmin,xmax=self.xmax,ymin=self.ymin,ymax=self.ymax,modrec=self.modrec)			
 			except AttributeError:
@@ -1170,15 +1187,24 @@ class main_(object):
 				self.getangular(spimod)											
 				if plotattrs1['armcolour'] == '':
 					plotattrs1['armcolour'] = spimod.armcolour[arm_temp]																	
-				if plotattrs1['plot'] and plotattrs1['polarproj']==False:			
+				if plotattrs1['plot'] and plotattrs1['polarproj']==False and plotattrs1['polarproj_hc']==False:				
 					self.xyplot(spimod,plotattrs1)															
-				if plotattrs1['plot'] and plotattrs1['polarproj']:										
+				if plotattrs1['plot'] and plotattrs1['polarproj'] and plotattrs1['polarproj_hc']==False:												
+					plt.plot(0.,0.,marker='*',markersize=plotattrs['markersize'],color='black')		
+					plt.plot(np.radians(180.),abs(self.xsun),marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')				
 					plt.plot(np.radians(spimod.dout['phi4']),spimod.dout['rgc'],'.',color=plotattrs1['armcolour'])	
-					# # plt.plot(np.radians(spimod.dout['glon4']),spimod.dout['dhelio'],'.',color=plotattrs1['armcolour'])	
-
 					try:
 						plt.plot(np.radians(spimod.dout['phi4_ex']),spimod.dout['rgc_ex'],'.',color=plotattrs1['armcolour'])	
-						# plt.plot(np.radians(spimod.dout['glon4']),spimod.dout['dhelio'],'.',color=plotattrs1['armcolour'])	
+					except KeyError:
+						pass
+				if plotattrs1['plot'] and plotattrs1['polarproj_hc']:
+					plt.plot(np.radians(0.),abs(self.xsun),marker='*',markersize=plotattrs['markersize'],color='black')
+					plt.plot(0.,0.,marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')															
+					plt.plot(np.radians(spimod.dout['glon4']),spimod.dout['dhelio'],'.',color=plotattrs1['armcolour'])	
+					print('')
+					try:
+						plt.plot(np.radians(spimod.dout['glon4_ex']),spimod.dout['dhelio_ex'],'.',color=plotattrs1['armcolour'])	
+						print('')
 					except KeyError:
 						pass
 						
