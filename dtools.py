@@ -157,3 +157,27 @@ def add_polargrid(plotattrs,rlevels=12,xmin=-10,xmax=10,ymin=-10,ymax=10,modrec=
 
 		plt.axis([xmin1,xmax1,ymin1,ymax1])
 
+
+
+def _polarproj(spimod,plotattrs):		
+
+	if plotattrs['plot'] and plotattrs['polarproj'] and plotattrs['polarproj_hc']==False:												
+		plt.plot(0.,0.,marker='*',markersize=plotattrs['markersize'],color='black')		
+		plt.plot(np.radians(180.),abs(spimod.xsun),marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')				
+		plt.plot(np.radians(spimod.dout['phi4']),spimod.dout['rgc'],'.',color=plotattrs['armcolour'])	
+		try:
+			plt.plot(np.radians(spimod.dout['phi4_ex']),spimod.dout['rgc_ex'],'.',color=plotattrs['armcolour'])	
+		except KeyError:
+			pass
+	if plotattrs['plot'] and plotattrs['polarproj_hc']:
+		plt.plot(np.radians(0.),abs(spimod.xsun),marker='*',markersize=plotattrs['markersize'],color='black')
+		plt.plot(0.,0.,marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')															
+		plt.plot(np.radians(spimod.dout['glon4']),spimod.dout['dhelio'],'.',color=plotattrs['armcolour'])	
+		print('')
+		try:
+			plt.plot(np.radians(spimod.dout['glon4_ex']),spimod.dout['dhelio_ex'],'.',color=plotattrs['armcolour'])	
+			print('')
+		except KeyError:
+			pass
+	
+	

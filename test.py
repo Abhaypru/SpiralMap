@@ -411,8 +411,8 @@ if checkpolar:
 	fig, ax = plt.subplots(figsize=(7.5,7.),subplot_kw=dict(projection="polar"))
 	plotattrs = {'plot':True,'markersize':15,'polarproj':True}	
 	spirals.readout(plotattrs,model=use_model,arm='all')	
-	spirals.readout(plotattrs,model='Taylor_Cordes_1992',arm='all')	
-	spirals.readout(plotattrs,model='Levine_2006',arm='all')	
+	# spirals.readout(plotattrs,model='Taylor_Cordes_1992',arm='all')	
+	# spirals.readout(plotattrs,model='Levine_2006',arm='all')	
 
 	ax.set_rticks([3., 6.,9.,12,15.])
 	ax.set_thetagrids(list(np.arange(0.,360.,30)))

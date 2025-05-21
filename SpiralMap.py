@@ -1080,30 +1080,34 @@ class main_(object):
 			plt.plot(0.,0.,marker='*',markersize=plotattrs['markersize'],color='black')
 			plt.plot(self.xsun,0.,marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')
 	def xyplot(self,spimod,plotattrs_):		
+		
+		
+		if plotattrs_['plot'] and plotattrs_['polarproj']==False and plotattrs_['polarproj_hc']==False:	
+				
 			
-		plt.plot(spimod.dout['x'+plotattrs_['coordsys'].lower()],
-		         spimod.dout['y'+plotattrs_['coordsys'].lower()],
-		         '.',color=plotattrs_['armcolour'])			
-		if 'xhc_ex' in 	spimod.dout.keys():
-			plt.plot(spimod.dout['x'+plotattrs_['coordsys'].lower()+'_ex'],
-			         spimod.dout['y'+plotattrs_['coordsys'].lower()+'_ex'],
-			         '--',color=plotattrs_['armcolour'])	
-			                							
-		plt.xlabel('X$_{'+plotattrs_['coordsys']+'}$ [Kpc]')
-		plt.ylabel('Y$_{'+plotattrs_['coordsys']+'}$ [Kpc]')	
-		if plotattrs_['xmin'] == '' or plotattrs_['xmax'] == '' or plotattrs_['ymin'] == '' or plotattrs_['ymax'] == '' :						
-			1+1																			
-		else:
-			xmin,xmax = plotattrs_['xmin'],plotattrs_['xmax']
-			ymin,ymax = plotattrs_['ymin'],plotattrs_['ymax']	
-			plt.xlim([xmin,xmax])	
-			plt.ylim([ymin,ymax])	
-		
-		self.xmin,self.xmax =plt.gca().get_xlim()[0].copy(),plt.gca().get_xlim()[1].copy()				
-		self.ymin,self.ymax =plt.gca().get_ylim()[0].copy(),plt.gca().get_ylim()[1].copy()			
-		
-		if plotattrs_['markSunGC']:
-			self.add2plot(plotattrs_)	
+			plt.plot(spimod.dout['x'+plotattrs_['coordsys'].lower()],
+			         spimod.dout['y'+plotattrs_['coordsys'].lower()],
+			         '.',color=plotattrs_['armcolour'])			
+			if 'xhc_ex' in 	spimod.dout.keys():
+				plt.plot(spimod.dout['x'+plotattrs_['coordsys'].lower()+'_ex'],
+				         spimod.dout['y'+plotattrs_['coordsys'].lower()+'_ex'],
+				         '--',color=plotattrs_['armcolour'])	
+				                							
+			plt.xlabel('X$_{'+plotattrs_['coordsys']+'}$ [Kpc]')
+			plt.ylabel('Y$_{'+plotattrs_['coordsys']+'}$ [Kpc]')	
+			if plotattrs_['xmin'] == '' or plotattrs_['xmax'] == '' or plotattrs_['ymin'] == '' or plotattrs_['ymax'] == '' :						
+				1+1																			
+			else:
+				xmin,xmax = plotattrs_['xmin'],plotattrs_['xmax']
+				ymin,ymax = plotattrs_['ymin'],plotattrs_['ymax']	
+				plt.xlim([xmin,xmax])	
+				plt.ylim([ymin,ymax])	
+			
+			self.xmin,self.xmax =plt.gca().get_xlim()[0].copy(),plt.gca().get_xlim()[1].copy()				
+			self.ymin,self.ymax =plt.gca().get_ylim()[0].copy(),plt.gca().get_ylim()[1].copy()			
+			
+			if plotattrs_['markSunGC']:
+				self.add2plot(plotattrs_)	
 	def getangular(self,spimod):
 
 		spimod.dout['rgc'] = sqrtsum(ds=[spimod.dout['xgc'],spimod.dout['ygc']])						
@@ -1121,14 +1125,11 @@ class main_(object):
 			spimod.dout['glon4_ex'] = np.degrees(np.arctan2(spimod.dout['yhc_ex'],spimod.dout['xhc_ex']))%360.	
 			spimod.dout['glon_ex'],spimod.dout['glat_ex'],spimod.dout['dhelio_ex'] = xyz2lbr(spimod.dout['xhc_ex'],spimod.dout['yhc_ex'],0)
 	def readout(self,plotattrs={},model='',arm='',print_=False):	
-		
 						
 		if model == '':
 			 raise RuntimeError('model = blank | no model provided \n try self.getino() for list of available models')			 
-	
-		
-		self.modrec.append(model)
-		
+			
+		self.modrec.append(model)		
 		spimod = self.models_class[model]			
 		spimod.xsun = self.xsun
 		spimod.getarmlist()		
@@ -1139,11 +1140,9 @@ class main_(object):
 		for ky in self.plotattrs_default.keys():			
 			if ky not in list(plotattrs.keys()):				
 				plotattrs[ky] = self.plotattrs_default[ky]
-		plotattrs1 = plotattrs.copy()
-		
+		plotattrs1 = plotattrs.copy()		
 		if 'poggio' in model.lower():													
 			spimod.output_(plotattrs1,coordsys=plotattrs1['coordsys'])					
-			add_polargrid(plotattrs1,xmin=spimod.xmin,xmax=spimod.xmax,ymin=spimod.ymin,ymax=spimod.ymax,modrec=self.modrec)					
 		if (('poggio' not in model.lower())&('all' not in arm))  :	
 			
 			plotattrs1 = plotattrs.copy()													
@@ -1152,67 +1151,20 @@ class main_(object):
 			self.dout = spimod.dout.copy() 													
 			if plotattrs1['armcolour'] == '':
 				plotattrs1['armcolour'] = spimod.armcolour[arm]		
-			if plotattrs1['plot'] and plotattrs1['polarproj']==False and plotattrs1['polarproj_hc']==False:				
-				self.xyplot(spimod,plotattrs1)								
-			if plotattrs1['plot'] and plotattrs1['polarproj'] and plotattrs1['polarproj_hc']==False:		
-				plt.plot(0.,0.,marker='*',markersize=plotattrs['markersize'],color='black')	
-				plt.plot(np.radians(180.),abs(self.xsun),marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')
-				plt.plot(np.radians(spimod.dout['phi4']),spimod.dout['rgc'],'.',color=plotattrs1['armcolour'])	
-				try:
-					plt.plot(np.radians(spimod.dout['phi4_ex']),spimod.dout['rgc_ex'],'.',color=plotattrs1['armcolour'])						
-				except KeyError:
-					pass				
-			if plotattrs1['plot'] and plotattrs1['polarproj_hc']:
-				plt.plot(np.radians(0.),abs(self.xsun),marker='*',markersize=plotattrs['markersize'],color='black')
-				plt.plot(0.,0.,marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')															
-				plt.plot(np.radians(spimod.dout['glon4']),spimod.dout['dhelio'],'.',color=plotattrs1['armcolour'])	
-				
-				try:
-					plt.plot(np.radians(spimod.dout['glon4_ex']),spimod.dout['dhelio_ex'],'.',color=plotattrs1['armcolour'])	
-					print('')
-				except KeyError:
-					pass					
-			try:	
-				add_polargrid(plotattrs1,xmin=self.xmin,xmax=self.xmax,ymin=self.ymin,ymax=self.ymax,modrec=self.modrec)			
-			except AttributeError:
-				pass							
-			return 
-						
+				self.xyplot(spimod,plotattrs1)	
+				_polarproj(spimod,plotattrs1)														
 		if (('poggio' not in model.lower())&(arm=='all'))  :	
 													
 			for arm_temp in spimod.arms:			
-				plotattrs1 = plotattrs.copy()
-			
+				plotattrs1 = plotattrs.copy()			
 				spimod.output_(arm_temp)
 				self.getangular(spimod)											
 				if plotattrs1['armcolour'] == '':
-					plotattrs1['armcolour'] = spimod.armcolour[arm_temp]																	
-				if plotattrs1['plot'] and plotattrs1['polarproj']==False and plotattrs1['polarproj_hc']==False:				
-					self.xyplot(spimod,plotattrs1)															
-				if plotattrs1['plot'] and plotattrs1['polarproj'] and plotattrs1['polarproj_hc']==False:												
-					plt.plot(0.,0.,marker='*',markersize=plotattrs['markersize'],color='black')		
-					plt.plot(np.radians(180.),abs(self.xsun),marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')				
-					plt.plot(np.radians(spimod.dout['phi4']),spimod.dout['rgc'],'.',color=plotattrs1['armcolour'])	
-					try:
-						plt.plot(np.radians(spimod.dout['phi4_ex']),spimod.dout['rgc_ex'],'.',color=plotattrs1['armcolour'])	
-					except KeyError:
-						pass
-				if plotattrs1['plot'] and plotattrs1['polarproj_hc']:
-					plt.plot(np.radians(0.),abs(self.xsun),marker='*',markersize=plotattrs['markersize'],color='black')
-					plt.plot(0.,0.,marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')															
-					plt.plot(np.radians(spimod.dout['glon4']),spimod.dout['dhelio'],'.',color=plotattrs1['armcolour'])	
-					print('')
-					try:
-						plt.plot(np.radians(spimod.dout['glon4_ex']),spimod.dout['dhelio_ex'],'.',color=plotattrs1['armcolour'])	
-						print('')
-					except KeyError:
-						pass
-						
-			try:	
-				add_polargrid(plotattrs1,xmin=self.xmin,xmax=self.xmax,ymin=self.ymin,ymax=self.ymax,modrec=self.modrec)	
-			except AttributeError:
-				pass															
-
-			
-										
-			return
+					plotattrs1['armcolour'] = spimod.armcolour[arm_temp]																							
+				self.xyplot(spimod,plotattrs1)															
+				_polarproj(spimod,plotattrs1)																		
+		try:	
+			add_polargrid(plotattrs1,xmin=self.xmin,xmax=self.xmax,ymin=self.ymin,ymax=self.ymax,modrec=self.modrec)	
+		except AttributeError:
+			pass										
+									
