@@ -1096,7 +1096,7 @@ class main_(object):
 			plt.xlabel('X$_{'+plotattrs_['coordsys']+'}$ [Kpc]')
 			plt.ylabel('Y$_{'+plotattrs_['coordsys']+'}$ [Kpc]')	
 			if plotattrs_['xmin'] == '' or plotattrs_['xmax'] == '' or plotattrs_['ymin'] == '' or plotattrs_['ymax'] == '' :						
-				1+1																			
+				print('')																			
 			else:
 				xmin,xmax = plotattrs_['xmin'],plotattrs_['xmax']
 				ymin,ymax = plotattrs_['ymin'],plotattrs_['ymax']	
