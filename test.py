@@ -1,22 +1,15 @@
 
 
+from SpiralMap import *
+import SpiralMap as sp
+
 import imp,SpiralMap, dtools
 imp.reload(SpiralMap)
 imp.reload(dtools)
-# import SpiralMap as sp
-# import matplotlib.pyplot as plt
-# import numpy as np
-# import os
-# import putil
-# import imp,SpiralMap
-# imp.reload(SpiralMap)
-
-# import matplotlib.pyplot as plt
-# import numpy as np
-from SpiralMap import *
-import SpiralMap as sp
-# import os
 import putil
+
+
+
 
 figdir_primer = 'figdir_primer'
 os.system('rm -rf '+figdir_primer); os.system('mkdir '+figdir_primer)
@@ -336,8 +329,8 @@ if single_model:
 	print('plotting figures for primer')
 	xsun=-8.277
 	spirals = sp.main_(xsun=xsun)
-	use_model = 'Drimmel_ceph_2024'
-	use_arm = 'Orion'
+	use_model = 'Drimmel_NIR_2000'
+	use_arm = '2_arm'
 	spirals.getinfo(model=use_model)
 				
 	import matplotlib.gridspec as gridspec
@@ -348,17 +341,17 @@ if single_model:
 	fig.add_subplot(1,3,1)
 	plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'markSunGC':True,'polargrid':True}
 	spirals.readout(plotattrs,model=use_model,arm=use_arm)
-	spirals.readout(plotattrs,model='Poggio_2021')
+	# spirals.readout(plotattrs,model='Poggio_2021')
 	
 	fig.add_subplot(1,3,2)
 	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':False}
 	spirals.readout(plotattrs,model=use_model,arm=use_arm)
-	spirals.readout(plotattrs,model='Poggio_2021')
+	# spirals.readout(plotattrs,model='Poggio_2021')
 
 	fig.add_subplot(1,3,3)
 	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':True}
 	spirals.readout(plotattrs,model=use_model,arm=use_arm)
-	spirals.readout(plotattrs,model='Poggio_2021')
+	# spirals.readout(plotattrs,model='Poggio_2021')
 	
 	fig.suptitle(use_model+'('+use_arm+')')
 	fig.tight_layout()
@@ -409,10 +402,8 @@ if checkpolar:
 				
 	plt.close('all')
 	fig, ax = plt.subplots(figsize=(7.5,7.),subplot_kw=dict(projection="polar"))
-	plotattrs = {'plot':True,'markersize':15,'polarproj':True}	
+	plotattrs = {'plot':True,'coordsys': 'HC','markersize':15,'polarproj':True}	
 	spirals.readout(plotattrs,model=use_model,arm='all')	
-	# spirals.readout(plotattrs,model='Taylor_Cordes_1992',arm='all')	
-	# spirals.readout(plotattrs,model='Levine_2006',arm='all')	
 
 	ax.set_rticks([3., 6.,9.,12,15.])
 	ax.set_thetagrids(list(np.arange(0.,360.,30)))
@@ -423,15 +414,13 @@ if checkpolar:
 	    label.set_size(fontsize=10)
 
 	plt.title(use_model)
-	# ax.set_xlim([np.radians(100),np.radians(260)])
 	ax.set_ylim([0.,15])
 
 	plt.savefig(figdir_primer+'/polar_grid_overplotted1_gc.png')
-	
-	
+		
 	plt.close('all')
 	fig, ax = plt.subplots(figsize=(7.5,7.),subplot_kw=dict(projection="polar"))
-	plotattrs = {'plot':True,'markersize':15,'polarproj_hc':True}	
+	plotattrs = {'plot':True,'coordsys': 'GC','markersize':15,'polarproj':True}	
 	spirals.readout(plotattrs,model=use_model,arm='all')	
 
 	ax.set_rticks([3., 6.,9.,12,15.])
@@ -448,11 +437,10 @@ if checkpolar:
 
 	plt.savefig(figdir_primer+'/polar_grid_overplotted1.png')
 
-	use_model = 'Drimmel_ceph_2024'
 	plt.close('all') 	
 	fig, ax = plt.subplots(figsize=(7.5,7.),subplot_kw=dict(projection="polar"))
-	plotattrs = {'plot':True,'markersize':15,'polarproj_hc':True}	
-	spirals.readout(plotattrs,model=use_model,arm='Sag-Car')	
+	plotattrs = {'plot':True,'coordsys': 'GC','markersize':15,'polarproj':True}	
+	spirals.readout(plotattrs,model=use_model,arm='2_arm')	
 
 	ax.set_rticks([3., 6.,9.,12,15.])
 	ax.set_thetagrids(list(np.arange(0.,360.,30)))
@@ -463,10 +451,27 @@ if checkpolar:
 	    label.set_size(fontsize=10)
 
 	plt.title(use_model)
-	# ax.set_xlim([np.radians(100),np.radians(260)])
 	ax.set_ylim([0.,15])
 
-	plt.savefig(figdir_primer+'/polar_grid_overplotted2.png')
+	plt.savefig(figdir_primer+'/polar_grid_overplotted2_gc.png')
+	
+	plt.close('all') 	
+	fig, ax = plt.subplots(figsize=(7.5,7.),subplot_kw=dict(projection="polar"))
+	plotattrs = {'plot':True,'coordsys': 'HC','markersize':15,'polarproj':True}	
+	spirals.readout(plotattrs,model=use_model,arm='2_arm')	
+
+	ax.set_rticks([3., 6.,9.,12,15.])
+	ax.set_thetagrids(list(np.arange(0.,360.,30)))
+	
+	rlabels = ax.get_ymajorticklabels()
+	for label in rlabels:
+	    label.set_color('blue')
+	    label.set_size(fontsize=10)
+
+	plt.title(use_model)
+	ax.set_ylim([0.,15])
+
+	plt.savefig(figdir_primer+'/polar_grid_overplotted2_hc.png')
 
 
 

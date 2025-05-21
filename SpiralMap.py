@@ -95,12 +95,11 @@ class spiral_poggio(object):
 			self.ymin,self.ymax =plt.gca().get_ylim()[0].copy(),plt.gca().get_ylim()[1].copy()		
 			# add_polargrid(plotattrs,xmin=xmin,xmax=xmax,ymin=ymin,ymax=ymax)					
 		
-		if plotattrs['polarproj']:
+		if plotattrs['polarproj'] and plotattrs['coordsys'].lower() == 'GC':
 			phi4_overdens = np.degrees(np.arctan2(yvalues_overdens,xvalues_overdens+xcorr))%360.							
 			cset1 = plt.contour(np.radians(phi4_overdens),Rgcvalues_dens,over_dens_grid,levels=levels_overdens,colors='black',linewidths=plotattrs['linewidth'])
 			self.xmin,self.xmax =plt.gca().get_xlim()[0].copy(),plt.gca().get_xlim()[1].copy()				
 			self.ymin,self.ymax =plt.gca().get_ylim()[0].copy(),plt.gca().get_ylim()[1].copy()	
-
 							
 class TaylorCordesSpiral(object):	
 	""" Taylor & Cordes (1993) Galactic spiral arm model,	  
@@ -1063,8 +1062,7 @@ class main_(object):
 								'xmax':'',
 								'ymin':'',
 								'ymax':'',
-								'polarproj':False,    
-								'polarproj_hc':False,    
+								'polarproj':False,       
 								'polargrid':False,    
 								'dataloc':dataloc}    
 	def add2plot(self,plotattrs):
@@ -1082,8 +1080,7 @@ class main_(object):
 	def xyplot(self,spimod,plotattrs_):		
 		
 		
-		if plotattrs_['plot'] and plotattrs_['polarproj']==False and plotattrs_['polarproj_hc']==False:	
-				
+		if plotattrs_['plot'] and plotattrs_['polarproj']==False :				
 			
 			plt.plot(spimod.dout['x'+plotattrs_['coordsys'].lower()],
 			         spimod.dout['y'+plotattrs_['coordsys'].lower()],
@@ -1150,8 +1147,8 @@ class main_(object):
 			self.dout = spimod.dout.copy() 													
 			if plotattrs1['armcolour'] == '':
 				plotattrs1['armcolour'] = spimod.armcolour[arm]		
-				self.xyplot(spimod,plotattrs1)
-				_polarproj(spimod,plotattrs1)														
+			self.xyplot(spimod,plotattrs1)
+			_polarproj(spimod,plotattrs1)														
 		if (('poggio' not in model.lower())&(arm=='all'))  :	
 													
 			for arm_temp in spimod.arms:			
