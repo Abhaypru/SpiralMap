@@ -176,6 +176,8 @@ def _polarproj(spimod,plotattrs):
 	
 
 def getangular(spimod):
+	# print(spimod.dout['xhc'])
+	# print(spimod.dout['yhc'])
 
 	spimod.dout['rgc'] = sqrtsum(ds=[spimod.dout['xgc'],spimod.dout['ygc']])						
 	spimod.dout['phi1'] = np.arctan2(spimod.dout['yhc'],-spimod.dout['xgc'])
@@ -183,6 +185,12 @@ def getangular(spimod):
 	spimod.dout['glon4'] = np.degrees(np.arctan2(spimod.dout['yhc'],spimod.dout['xhc']))%360.	
 	spimod.dout['glon'],spimod.dout['glat'],spimod.dout['dhelio'] = xyz2lbr(spimod.dout['xhc'],spimod.dout['yhc'],0)
 	
+	# print(spimod.dout['phi4'])
+	# print(spimod.dout['glon4'])
+
+	# print(spimod.dout['xhc'])
+	# print(spimod.dout['yhc'])
+	# print(spimod.dout['xgc'])
 	
 	if 'xhc_ex' in 	spimod.dout.keys():			
 

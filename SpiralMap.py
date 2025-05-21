@@ -69,10 +69,9 @@ class spiral_poggio(object):
 		phi1_dens=np.arctan2(yvalues_overdens, -xvalues_overdens)
 		Rvalues_dens=sqrtsum(ds=[xvalues_overdens, yvalues_overdens])
 		Rgcvalues_dens=sqrtsum(ds=[xvalues_overdens+xsun, yvalues_overdens])
-	
-	
+		
 		self.dout = {'xhc':xvalues_overdens,'yhc':yvalues_overdens,'xgc':xvalues_overdens+xsun,'ygc':yvalues_overdens}
-		# getangular(self)
+		getangular(self)
 
 		#----overplot spiral arms in overdens----#
 		iniz_overdens= 0  
@@ -83,7 +82,8 @@ class spiral_poggio(object):
 		if plotattrs['polarproj'] == False:			
 			cset1 = plt.contourf(self.dout['x'+plotattrs['coordsys'].lower()],self.dout['y'+plotattrs['coordsys'].lower()],over_dens_grid.T, 
 								levels=levels_overdens1,alpha=0.05,cmap='Greys')	
-							
+			
+			print(cset1)				
 		iniz_overdens= 0. 
 		fin_overdens= 1.5 
 		N_levels_overdens= 4 
@@ -91,6 +91,8 @@ class spiral_poggio(object):
 		if plotattrs['polarproj'] == False:				
 			cset1 = plt.contour(self.dout['x'+plotattrs['coordsys'].lower()],self.dout['y'+plotattrs['coordsys'].lower()],over_dens_grid.T,levels=levels_overdens2,colors='black',linewidths=plotattrs['linewidth'])
 
+
+			print(cset1)
 			self.xmin,self.xmax =plt.gca().get_xlim()[0].copy(),plt.gca().get_xlim()[1].copy()				
 			self.ymin,self.ymax =plt.gca().get_ylim()[0].copy(),plt.gca().get_ylim()[1].copy()		
 			# add_polargrid(plotattrs,xmin=xmin,xmax=xmax,ymin=ymin,ymax=ymax)					
@@ -103,24 +105,49 @@ class spiral_poggio(object):
 			# self.ymin,self.ymax =plt.gca().get_ylim()[0].copy(),plt.gca().get_ylim()[1].copy()	
 
 
-		if plotattrs['plot'] and plotattrs['polarproj'] and plotattrs['coordsys'].lower()=='gc':												
-			plt.plot(0.,0.,marker='*',markersize=plotattrs['markersize'],color='black')		
-			plt.plot(np.radians(180.),abs(xsun),marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')		
+		# if plotattrs['plot'] and plotattrs['polarproj'] and plotattrs['coordsys'].lower()=='gc':												
+			# plt.plot(0.,0.,marker='*',markersize=plotattrs['markersize'],color='black')		
+			# plt.plot(np.radians(180.),abs(xsun),marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')		
 
-			cset1 = plt.contourf(np.radians(self.dout['phi4']),self.dout['rgc'],over_dens_grid, 
-								levels=levels_overdens1,alpha=0.05,cmap='Greys')
-			cset1 = plt.contour(np.radians(self.dout['phi4']),self.dout['rgc'],over_dens_grid,levels=levels_overdens2,colors='black',linewidths=plotattrs['linewidth'])	
-			
-		self.dout['glon4'] = np.degrees(np.arctan2(self.dout['yhc'],self.dout['xhc']))%360.	
-					
-		print(self.dout['glon4'])
+			# cset1 = plt.contourf(np.radians(self.dout['phi4']),self.dout['rgc'],over_dens_grid, 
+								# levels=levels_overdens1,alpha=0.05,cmap='Greys')
+			# cset1 = plt.contour(np.radians(self.dout['phi4']),self.dout['rgc'],over_dens_grid,levels=levels_overdens2,colors='black',linewidths=plotattrs['linewidth'])	
+			# print(cset1)
+		# # self.dout['glon4'] = np.degrees(np.arctan2(self.dout['yhc'],self.dout['xhc']))%360.						
+		# # print(self.dout['glon4'])
 
-		if plotattrs['plot'] and plotattrs['polarproj'] and plotattrs['coordsys'].lower()=='hc':
-			plt.plot(np.radians(0.),abs(xsun),marker='*',markersize=plotattrs['markersize'],color='black')
-			plt.plot(0.,0.,marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')															
-			plt.contour(np.radians(self.dout['glon4']),Rvalues_dens,over_dens_grid,levels=levels_overdens1,alpha=0.05,cmap='Greys')	
-			plt.contour(np.radians(self.dout['glon4']),Rvalues_dens,over_dens_grid,levels=levels_overdens2,colors='black',linewidths=plotattrs['linewidth'])	
+		# if plotattrs['plot'] and plotattrs['polarproj'] and plotattrs['coordsys'].lower()=='hc':
+			# plt.plot(np.radians(0.),abs(xsun),marker='*',markersize=plotattrs['markersize'],color='black')
+			# plt.plot(0.,0.,marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')															
+			# plt.contourf(np.radians(self.dout['glon4']),self.dout['dhelio'],over_dens_grid,levels=levels_overdens1,alpha=0.05,cmap='Greys')	
+			# plt.contourf(np.radians(self.dout['glon4']),self.dout['dhelio'],over_dens_grid,levels=levels_overdens2,colors='black',linewidths=plotattrs['linewidth'])	
 
+		return cset1
+
+plotattrs = {'plot':True,'coordsys': 'HC','markersize':15,'polarproj':False,'linewidth':2}	
+sp = spiral_poggio()
+sp.xsun = -8.275
+cset1 = sp.output_(plotattrs)
+
+plt.ion()
+plt.close('all')
+fig, ax = plt.subplots(figsize=(7.5,7.),subplot_kw=dict(projection="polar"))
+for c,Q in enumerate(cset1.allsegs):
+	if c == 0:
+
+		xc = np.array([q[:,0] for q in Q])
+		yc = np.array([q[:,1] for q in Q])
+		# [plt.plot(xc,yc, c='C%d'%c) for q in Q] 
+		
+		for i in range(len(xc)):
+			# plt.plot(xc[i],yc[i])
+			glon4 = np.degrees(np.arctan2(yc[i],xc[i]))%360.
+			dhelio = sqrtsum(ds=[xc[i],yc[i]])
+			# plt.plot(np.radians(phi4),rgc,'.')
+			plt.plot(np.radians(glon4),dhelio,'.')
+
+
+	
 							
 class TaylorCordesSpiral(object):	
 	""" Taylor & Cordes (1993) Galactic spiral arm model,	  
@@ -1020,14 +1047,14 @@ class main_(object):
 	def listmodels(self):        		
 		self.models = ['Taylor_Cordes_1992','Drimmel_NIR_2000',
 					   'Levine_2006','Hou_Han_2014','Reid_2019',
-					   'Poggio_2021','Drimmel_ceph_2024']        
+					   'Poggio_2021','Drimmel_Ceph_2024']        
 		self.models_class = {'Reid_2019':reid_spiral(),
 							 'Levine_2006':spiral_levine(),
 							 'Poggio_2021':spiral_poggio(),
 							 'Drimmel_NIR_2000':spiral_drimmel_nir(),
 							 'Taylor_Cordes_1992':TaylorCordesSpiral(),
 							 'Hou_Han_2014':spiral_houhan(),
-							 'Drimmel_ceph_2024':spiral_drimmel_cepheids()}
+							 'Drimmel_Ceph_2024':spiral_drimmel_cepheids()}
 	def getinfo(self,model=''):	
 		'''                
 		plotattrs_description:
@@ -1056,6 +1083,7 @@ class main_(object):
 		if model == '':		
 			print('try self.getinfo(model) for more details')
 			print('')
+			print('ADD armcolours!')
 			print('------------------------')			
 			dfmodlist = pd.DataFrame(self.models,columns=['Available models & maps:'])
 			print(dfmodlist)
