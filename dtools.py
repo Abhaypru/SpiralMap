@@ -41,13 +41,9 @@ def fcount(floc,flist=False,nlist=False):
 	else:
 		os.system('ls -lh '+floc)	
 		return 
-
-
-
 def xyz2lbr(x,y,z):
     rc2=x*x+y*y
     return [np.degrees(np.arctan2(y,x)),np.degrees(np.arctan(z/np.sqrt(rc2))),np.sqrt(rc2+z*z)]
-
 
 def fitsread(filename,ext=1):
 	
@@ -156,8 +152,6 @@ def add_polargrid(plotattrs,rlevels=12,xmin=-10,xmax=10,ymin=-10,ymax=10,modrec=
 			
 
 		plt.axis([xmin1,xmax1,ymin1,ymax1])
-
-
 
 def _polarproj(spimod,plotattrs):		
 
