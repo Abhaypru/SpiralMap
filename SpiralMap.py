@@ -1143,15 +1143,14 @@ class main_(object):
 		plotattrs1 = plotattrs.copy()		
 		if 'poggio' in model.lower():													
 			spimod.output_(plotattrs1,coordsys=plotattrs1['coordsys'])					
-		if (('poggio' not in model.lower())&('all' not in arm))  :	
-			
+		if (('poggio' not in model.lower())&('all' not in arm)):				
 			plotattrs1 = plotattrs.copy()													
 			spimod.output_(arm)
-			self.getangular(spimod)																		
+			self.getangular(spimod)
 			self.dout = spimod.dout.copy() 													
 			if plotattrs1['armcolour'] == '':
 				plotattrs1['armcolour'] = spimod.armcolour[arm]		
-				self.xyplot(spimod,plotattrs1)	
+				self.xyplot(spimod,plotattrs1)
 				_polarproj(spimod,plotattrs1)														
 		if (('poggio' not in model.lower())&(arm=='all'))  :	
 													
@@ -1161,7 +1160,7 @@ class main_(object):
 				self.getangular(spimod)											
 				if plotattrs1['armcolour'] == '':
 					plotattrs1['armcolour'] = spimod.armcolour[arm_temp]																							
-				self.xyplot(spimod,plotattrs1)															
+				self.xyplot(spimod,plotattrs1)
 				_polarproj(spimod,plotattrs1)																		
 		try:	
 			add_polargrid(plotattrs1,xmin=self.xmin,xmax=self.xmax,ymin=self.ymin,ymax=self.ymax,modrec=self.modrec)	
