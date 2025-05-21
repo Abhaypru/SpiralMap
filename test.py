@@ -395,15 +395,34 @@ if checkpolar:
 	print('plotting figures for primer')
 	xsun=-8.277
 	spirals = sp.main_(xsun=xsun)
+	use_model1 = 'Poggio_2021'
 	use_model = 'Drimmel_NIR_2000'
 
 
-	spirals.getinfo(model=use_model)
+	spirals.getinfo(model=use_model1)
 				
+	# plt.close('all')
+	# fig, ax = plt.subplots(figsize=(7.5,7.),subplot_kw=dict(projection="polar"))
+	# plotattrs = {'plot':True,'coordsys': 'GC','markersize':15,'polarproj':True}	
+	# spirals.readout(plotattrs,model=use_model1,arm='all')	
+
+	# ax.set_rticks([3., 6.,9.,12,15.])
+	# ax.set_thetagrids(list(np.arange(0.,360.,30)))
+	
+	# rlabels = ax.get_ymajorticklabels()
+	# for label in rlabels:
+	    # label.set_color('blue')
+	    # label.set_size(fontsize=10)
+	# ax.set_ylim([0.,15])
+	
+	# plt.title(use_model1)
+
+
+	# plt.savefig(figdir_primer+'/polar_grid_overplotted1_gc.png')
 	plt.close('all')
 	fig, ax = plt.subplots(figsize=(7.5,7.),subplot_kw=dict(projection="polar"))
 	plotattrs = {'plot':True,'coordsys': 'HC','markersize':15,'polarproj':True}	
-	spirals.readout(plotattrs,model=use_model,arm='all')	
+	spirals.readout(plotattrs,model=use_model1,arm='all')	
 
 	ax.set_rticks([3., 6.,9.,12,15.])
 	ax.set_thetagrids(list(np.arange(0.,360.,30)))
@@ -412,66 +431,67 @@ if checkpolar:
 	for label in rlabels:
 	    label.set_color('blue')
 	    label.set_size(fontsize=10)
-
-	plt.title(use_model)
 	ax.set_ylim([0.,15])
+	
+	plt.title(use_model1)
 
-	plt.savefig(figdir_primer+'/polar_grid_overplotted1_gc.png')
+
+	plt.savefig(figdir_primer+'/polar_grid_overplotted1_hc.png')
 		
-	plt.close('all')
-	fig, ax = plt.subplots(figsize=(7.5,7.),subplot_kw=dict(projection="polar"))
-	plotattrs = {'plot':True,'coordsys': 'GC','markersize':15,'polarproj':True}	
-	spirals.readout(plotattrs,model=use_model,arm='all')	
+	# plt.close('all')
+	# fig, ax = plt.subplots(figsize=(7.5,7.),subplot_kw=dict(projection="polar"))
+	# plotattrs = {'plot':True,'coordsys': 'GC','markersize':15,'polarproj':True}	
+	# spirals.readout(plotattrs,model=use_model,arm='all')	
 
-	ax.set_rticks([3., 6.,9.,12,15.])
-	ax.set_thetagrids(list(np.arange(0.,360.,30)))
+	# ax.set_rticks([3., 6.,9.,12,15.])
+	# ax.set_thetagrids(list(np.arange(0.,360.,30)))
 	
-	rlabels = ax.get_ymajorticklabels()
-	for label in rlabels:
-	    label.set_color('blue')
-	    label.set_size(fontsize=10)
+	# rlabels = ax.get_ymajorticklabels()
+	# for label in rlabels:
+	    # label.set_color('blue')
+	    # label.set_size(fontsize=10)
 
-	plt.title(use_model)
-	# ax.set_xlim([np.radians(100),np.radians(260)])
-	ax.set_ylim([0.,15])
+	# plt.title(use_model)
+	# # ax.set_xlim([np.radians(100),np.radians(260)])
+	# ax.set_ylim([0.,15])
 
-	plt.savefig(figdir_primer+'/polar_grid_overplotted1.png')
+	# plt.savefig(figdir_primer+'/polar_grid_overplotted1.png')
 
-	plt.close('all') 	
-	fig, ax = plt.subplots(figsize=(7.5,7.),subplot_kw=dict(projection="polar"))
-	plotattrs = {'plot':True,'coordsys': 'GC','markersize':15,'polarproj':True}	
-	spirals.readout(plotattrs,model=use_model,arm='2_arm')	
+	# plt.close('all') 	
+	# fig, ax = plt.subplots(figsize=(7.5,7.),subplot_kw=dict(projection="polar"))
+	# plotattrs = {'plot':True,'coordsys': 'GC','markersize':15,'polarproj':True}	
+	# spirals.readout(plotattrs,model=use_model,arm='2_arm')	
 
-	ax.set_rticks([3., 6.,9.,12,15.])
-	ax.set_thetagrids(list(np.arange(0.,360.,30)))
+	# ax.set_rticks([3., 6.,9.,12,15.])
+	# ax.set_thetagrids(list(np.arange(0.,360.,30)))
 	
-	rlabels = ax.get_ymajorticklabels()
-	for label in rlabels:
-	    label.set_color('blue')
-	    label.set_size(fontsize=10)
+	# rlabels = ax.get_ymajorticklabels()
+	# for label in rlabels:
+	    # label.set_color('blue')
+	    # label.set_size(fontsize=10)
 
-	plt.title(use_model)
-	ax.set_ylim([0.,15])
+	# plt.title(use_model)
+	# ax.set_ylim([0.,15])
 
-	plt.savefig(figdir_primer+'/polar_grid_overplotted2_gc.png')
+	# plt.savefig(figdir_primer+'/polar_grid_overplotted2_gc.png')
 	
-	plt.close('all') 	
-	fig, ax = plt.subplots(figsize=(7.5,7.),subplot_kw=dict(projection="polar"))
-	plotattrs = {'plot':True,'coordsys': 'HC','markersize':15,'polarproj':True}	
-	spirals.readout(plotattrs,model=use_model,arm='2_arm')	
+	# plt.close('all') 	
+	# fig, ax = plt.subplots(figsize=(7.5,7.),subplot_kw=dict(projection="polar"))
+	# plotattrs = {'plot':True,'coordsys': 'HC','markersize':15,'polarproj':True}	
+	# spirals.readout(plotattrs,model=use_model,arm='2_arm')	
 
-	ax.set_rticks([3., 6.,9.,12,15.])
-	ax.set_thetagrids(list(np.arange(0.,360.,30)))
+	# ax.set_rticks([3., 6.,9.,12,15.])
+	# ax.set_thetagrids(list(np.arange(0.,360.,30)))
 	
-	rlabels = ax.get_ymajorticklabels()
-	for label in rlabels:
-	    label.set_color('blue')
-	    label.set_size(fontsize=10)
+	# rlabels = ax.get_ymajorticklabels()
+	# for label in rlabels:
+	    # label.set_color('blue')
+	    # label.set_size(fontsize=10)
 
-	plt.title(use_model)
-	ax.set_ylim([0.,15])
+	# plt.title(use_model)
+	# ax.set_ylim([0.,15])
 
-	plt.savefig(figdir_primer+'/polar_grid_overplotted2_hc.png')
+	# plt.savefig(figdir_primer+'/polar_grid_overplotted2_hc.png')
 
 
 

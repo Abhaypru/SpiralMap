@@ -174,4 +174,22 @@ def _polarproj(spimod,plotattrs):
 		except KeyError:
 			pass
 	
+
+def getangular(spimod):
+
+	spimod.dout['rgc'] = sqrtsum(ds=[spimod.dout['xgc'],spimod.dout['ygc']])						
+	spimod.dout['phi1'] = np.arctan2(spimod.dout['yhc'],-spimod.dout['xgc'])
+	spimod.dout['phi4'] = np.degrees(np.arctan2(spimod.dout['yhc'],spimod.dout['xgc']))%360.	
+	spimod.dout['glon4'] = np.degrees(np.arctan2(spimod.dout['yhc'],spimod.dout['xhc']))%360.	
+	spimod.dout['glon'],spimod.dout['glat'],spimod.dout['dhelio'] = xyz2lbr(spimod.dout['xhc'],spimod.dout['yhc'],0)
+	
+	
+	if 'xhc_ex' in 	spimod.dout.keys():			
+
+		spimod.dout['rgc_ex'] = sqrtsum(ds=[spimod.dout['xgc_ex'],spimod.dout['ygc_ex']])						
+		spimod.dout['phi1_ex'] = np.arctan2(spimod.dout['yhc_ex'],-spimod.dout['xgc_ex'])
+		spimod.dout['phi4_ex'] = np.degrees(np.arctan2(spimod.dout['yhc_ex'],spimod.dout['xgc_ex']))%360.	
+		spimod.dout['glon4_ex'] = np.degrees(np.arctan2(spimod.dout['yhc_ex'],spimod.dout['xhc_ex']))%360.	
+		spimod.dout['glon_ex'],spimod.dout['glat_ex'],spimod.dout['dhelio_ex'] = xyz2lbr(spimod.dout['xhc_ex'],spimod.dout['yhc_ex'],0)
+		
 	
