@@ -124,28 +124,47 @@ class spiral_poggio(object):
 
 		return cset1
 
-plotattrs = {'plot':True,'coordsys': 'HC','markersize':15,'polarproj':False,'linewidth':2}	
+plotattrs = {'plot':True,'coordsys': 'GC','markersize':15,'polarproj':False,'linewidth':2}	
 sp = spiral_poggio()
 sp.xsun = -8.275
 cset1 = sp.output_(plotattrs)
 
+# # # check xy projection
+# plt.ion()
+# plt.close('all')
+# [[plt.plot(q[:,0],q[:,1], c='C%d'%c) for q in Q]  for c,Q in enumerate(cset1.allsegs)]
+# plt.savefig(root_+'/test_xy.png')	
+
+
+
+# tst = [[(q[:,0],q[:,1]) for q in Q]  for c,Q in enumerate(cset1.allsegs)]
+
 plt.ion()
 plt.close('all')
 fig, ax = plt.subplots(figsize=(7.5,7.),subplot_kw=dict(projection="polar"))
-for c,Q in enumerate(cset1.allsegs):
-	if c == 0:
 
-		xc = np.array([q[:,0] for q in Q])
-		yc = np.array([q[:,1] for q in Q])
-		# [plt.plot(xc,yc, c='C%d'%c) for q in Q] 
+for inum,Q in enumerate(cset1.allsegs):
+	
+	# [plt.plot(q[:,0],q[:,1], c='C%d'%c) for q in Q] 
+	# if inum == 0:
 		
-		for i in range(len(xc)):
-			# plt.plot(xc[i],yc[i])
-			glon4 = np.degrees(np.arctan2(yc[i],xc[i]))%360.
-			dhelio = sqrtsum(ds=[xc[i],yc[i]])
-			# plt.plot(np.radians(phi4),rgc,'.')
-			plt.plot(np.radians(glon4),dhelio,'.')
+	print('y')
+	# xc = np.array([q[:,0] for q in Q])
+	xc = [q[:,0] for q in Q]
+	yc = [q[:,1] for q in Q]
+	# [plt.plot(xc,yc, c=                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               'C%d'%c) for q in Q] 
 
+	
+	for i in range(len(xc)):
+		# # # plt.plot(xc[i],yc[i])
+		glon4 = np.degrees(np.arctan2(yc[i],xc[i]))%360.
+		dhelio = sqrtsum(ds=[xc[i],yc[i]])
+		phi4 = np.degrees(np.arctan2(yc[i],xc[i]+sp.xsun))%360.	
+		rgc = sqrtsum(ds=[xc[i]+sp.xsun,yc[i]])
+		plt.plot(np.radians(phi4),rgc,'.')
+		# plt.plot(np.radians(glon4),dhelio,'.')
+
+plt.savefig(root_+'/test.png')	
 
 	
 							
