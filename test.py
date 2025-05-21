@@ -421,7 +421,7 @@ if checkpolar:
 	# plt.savefig(figdir_primer+'/polar_grid_overplotted1_gc.png')
 	plt.close('all')
 	fig, ax = plt.subplots(figsize=(7.5,7.),subplot_kw=dict(projection="polar"))
-	plotattrs = {'plot':True,'coordsys': 'HC','markersize':15,'polarproj':True}	
+	plotattrs = {'plot':True,'coordsys': 'hC','markersize':15,'polarproj':True}	
 	spirals.readout(plotattrs,model=use_model1,arm='all')	
 
 	ax.set_rticks([3., 6.,9.,12,15.])

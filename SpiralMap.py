@@ -72,24 +72,24 @@ class spiral_poggio(object):
 	
 	
 		self.dout = {'xhc':xvalues_overdens,'yhc':yvalues_overdens,'xgc':xvalues_overdens+xsun,'ygc':yvalues_overdens}
-		getangular(self)
+		# getangular(self)
 
 		#----overplot spiral arms in overdens----#
 		iniz_overdens= 0  
 		fin_overdens= 1.5 
 		N_levels_overdens= 2
-		levels_overdens= np.linspace(iniz_overdens,fin_overdens,N_levels_overdens)		
+		levels_overdens1= np.linspace(iniz_overdens,fin_overdens,N_levels_overdens)		
 		
 		if plotattrs['polarproj'] == False:			
 			cset1 = plt.contourf(self.dout['x'+plotattrs['coordsys'].lower()],self.dout['y'+plotattrs['coordsys'].lower()],over_dens_grid.T, 
-								levels=levels_overdens,alpha=0.05,cmap='Greys')	
+								levels=levels_overdens1,alpha=0.05,cmap='Greys')	
 							
 		iniz_overdens= 0. 
 		fin_overdens= 1.5 
 		N_levels_overdens= 4 
-		levels_overdens= np.linspace(iniz_overdens,fin_overdens,N_levels_overdens)
+		levels_overdens2= np.linspace(iniz_overdens,fin_overdens,N_levels_overdens)
 		if plotattrs['polarproj'] == False:				
-			cset1 = plt.contour(self.dout['x'+plotattrs['coordsys'].lower()],self.dout['y'+plotattrs['coordsys'].lower()],over_dens_grid.T,levels=levels_overdens,colors='black',linewidths=plotattrs['linewidth'])
+			cset1 = plt.contour(self.dout['x'+plotattrs['coordsys'].lower()],self.dout['y'+plotattrs['coordsys'].lower()],over_dens_grid.T,levels=levels_overdens2,colors='black',linewidths=plotattrs['linewidth'])
 
 			self.xmin,self.xmax =plt.gca().get_xlim()[0].copy(),plt.gca().get_xlim()[1].copy()				
 			self.ymin,self.ymax =plt.gca().get_ylim()[0].copy(),plt.gca().get_ylim()[1].copy()		
@@ -108,16 +108,18 @@ class spiral_poggio(object):
 			plt.plot(np.radians(180.),abs(xsun),marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')		
 
 			cset1 = plt.contourf(np.radians(self.dout['phi4']),self.dout['rgc'],over_dens_grid, 
-								levels=levels_overdens,alpha=0.05,cmap='Greys')
-			cset1 = plt.contour(np.radians(self.dout['phi4']),self.dout['rgc'],over_dens_grid,'.',levels=levels_overdens,colors='black',linewidths=plotattrs['linewidth'])	
+								levels=levels_overdens1,alpha=0.05,cmap='Greys')
+			cset1 = plt.contour(np.radians(self.dout['phi4']),self.dout['rgc'],over_dens_grid,levels=levels_overdens2,colors='black',linewidths=plotattrs['linewidth'])	
 			
-		print(self.dout['dhelio'])
-		print(Rvalues_dens)
+		self.dout['glon4'] = np.degrees(np.arctan2(self.dout['yhc'],self.dout['xhc']))%360.	
+					
+		print(self.dout['glon4'])
+
 		if plotattrs['plot'] and plotattrs['polarproj'] and plotattrs['coordsys'].lower()=='hc':
 			plt.plot(np.radians(0.),abs(xsun),marker='*',markersize=plotattrs['markersize'],color='black')
 			plt.plot(0.,0.,marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')															
-			# plt.contour(np.radians(self.dout['glon4']),self.dout['dhelio'],over_dens_grid,'.',levels=levels_overdens,colors='black',linewidths=plotattrs['linewidth'])	
-			plt.contour(np.radians(self.dout['glon4']),self.dout['dhelio'],over_dens_grid,'.',levels=levels_overdens,colors='black',linewidths=plotattrs['linewidth'])	
+			plt.contour(np.radians(self.dout['glon4']),Rvalues_dens,over_dens_grid,levels=levels_overdens1,alpha=0.05,cmap='Greys')	
+			plt.contour(np.radians(self.dout['glon4']),Rvalues_dens,over_dens_grid,levels=levels_overdens2,colors='black',linewidths=plotattrs['linewidth'])	
 
 							
 class TaylorCordesSpiral(object):	
