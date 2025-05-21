@@ -1159,9 +1159,9 @@ class main_(object):
 				spimod.output_(arm_temp)
 				self.getangular(spimod)											
 				if plotattrs1['armcolour'] == '':
-					plotattrs1['armcolour'] = spimod.armcolour[arm_temp]																							
-				self.xyplot(spimod,plotattrs1)
-				_polarproj(spimod,plotattrs1)																		
+					plotattrs1['armcolour'] = spimod.armcolour[arm_temp]
+					self.xyplot(spimod,plotattrs1)
+					_polarproj(spimod,plotattrs1)																		
 		try:	
 			add_polargrid(plotattrs1,xmin=self.xmin,xmax=self.xmax,ymin=self.ymin,ymax=self.ymax,modrec=self.modrec)	
 		except AttributeError:
