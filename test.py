@@ -176,7 +176,7 @@ if single_model_polar:
 
 	plt.savefig(figdir_primer+'/polar_grid_overplotted.png')
 
-check_poggio = True
+check_poggio = False
 if check_poggio:
 
 	print('testing gaiaPVP')
@@ -199,14 +199,16 @@ test_polar_poggio = False
 if test_polar_poggio:
 	
 	
-	print('plotting figures for primer')
-	xsun=-8.277
-	spirals = sp.main_(xsun=xsun)
-	use_model1 = 'Poggio_2021'
+	plt.close('all')
+	fig, ax = plt.subplots(figsize=(7.5,7.),subplot_kw=dict(projection="polar"))
 	
-	plotattrs = {'plot':True,'coordsys': 'GC','markersize':15}	
-	spirals.readout(plotattrs,model=use_model1,arm='all')	
-	
+	fl = pickleread(dataloc+'/Poggio_2021/Poggio_2021_pproj_contours.pkl')
+	# plt.plot(np.radians(fl['phi4']),fl['rgc'],'.')
+	plt.plot(np.radians(fl['glon4']),fl['dhelio'],'.')
+
+	fl = pickleread(dataloc+'/GaiaPVP_Poggio_2022/GaiaPVP_Poggio_2022_pproj_contours.pkl')
+	# plt.plot(np.radians(fl['phi4']),fl['rgc'],'.')
+	plt.plot(np.radians(fl['glon4']),fl['dhelio'],'.')
 
 checkpolar = False
 if checkpolar:
