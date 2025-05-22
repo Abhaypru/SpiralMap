@@ -33,8 +33,7 @@ def fcount(floc,flist=False,nlist=False):
 	
 	print(str(cnt.size)+' files in total')
 	
-	if flist:
-		# os.system('ls -lh '+floc)	
+	if flist:		
 		return cnt
 	elif nlist:
 		return cnt.size	
@@ -106,34 +105,27 @@ def sqrtsum(ds=[],prnt=False):
 	
 	return resval
 
-def add_polargrid(plotattrs,rlevels=12,xmin=-10,xmax=10,ymin=-10,ymax=10,modrec=[]):
-
+def add_polargrid(plotattrs,rlevels=12,xmin=-10,xmax=10,ymin=-10,ymax=10,modrec=[],xorig = 0.,rmin = 3):
 	coordsys = plotattrs['coordsys']
 
-
 	if ((plotattrs['plot']==True)&(plotattrs['polarproj']==False)&(plotattrs['polargrid'])):
-		
-
-
-		flim = pickleread(plotattrs['dataloc']+'/flim.pkl')
-		
-	
+		flim = pickleread(plotattrs['dataloc']+'/flim.pkl')	
 		xmins = [flim[model]['xmin'+'_'+coordsys] for model in modrec]
 		xmaxs = [flim[model]['xmax'+'_'+coordsys] for model in modrec]
 		ymins = [flim[model]['ymin'+'_'+coordsys] for model in modrec]
 		ymaxs = [flim[model]['ymax'+'_'+coordsys] for model in modrec]
-	
-		
-		xmin1 = np.nanmin(xmins)
-		xmax1 = np.nanmax(xmaxs)
-		ymin1 = np.nanmin(ymins)
-		ymax1 = np.nanmax(ymaxs)
-					
-											
-		xorig = 0.
-		rmin = 3
 
-		# gc r-phi projection (works)
+		try:
+			xmin1 = np.nanmin(xmins)
+			xmax1 = np.nanmax(xmaxs)
+			ymin1 = np.nanmin(ymins)
+			ymax1 = np.nanmax(ymaxs)
+		except ValueError:
+			xmin1 = xmins
+			xmax1 = xmaxs
+			ymin1 = ymins
+			ymax1 = ymaxs				
+
 		rvals = np.array([rmin + rmin*i for i in range(rlevels)])
 		for r in rvals:
 			ang = np.radians(np.linspace(0.,360.,100))
@@ -146,11 +138,8 @@ def add_polargrid(plotattrs,rlevels=12,xmin=-10,xmax=10,ymin=-10,ymax=10,modrec=
 		for l in np.arange(0.,360.,30):		
 			l=np.radians(l)				
 			x = np.array([r*np.cos(l) for r in rvals])
-			y = np.array([r*np.sin(l) for r in rvals])
-								
+			y = np.array([r*np.sin(l) for r in rvals])								
 			plt.plot(x + xorig,y,color='grey',linewidth=0.5)		
-			
-
 		plt.axis([xmin1,xmax1,ymin1,ymax1])
 
 def _polarproj(spimod,plotattrs):		
@@ -176,21 +165,13 @@ def _polarproj(spimod,plotattrs):
 	
 
 def getangular(spimod):
-	# print(spimod.dout['xhc'])
-	# print(spimod.dout['yhc'])
 
 	spimod.dout['rgc'] = sqrtsum(ds=[spimod.dout['xgc'],spimod.dout['ygc']])						
 	spimod.dout['phi1'] = np.arctan2(spimod.dout['yhc'],-spimod.dout['xgc'])
 	spimod.dout['phi4'] = np.degrees(np.arctan2(spimod.dout['yhc'],spimod.dout['xgc']))%360.	
 	spimod.dout['glon4'] = np.degrees(np.arctan2(spimod.dout['yhc'],spimod.dout['xhc']))%360.	
 	spimod.dout['glon'],spimod.dout['glat'],spimod.dout['dhelio'] = xyz2lbr(spimod.dout['xhc'],spimod.dout['yhc'],0)
-	
-	# print(spimod.dout['phi4'])
-	# print(spimod.dout['glon4'])
 
-	# print(spimod.dout['xhc'])
-	# print(spimod.dout['yhc'])
-	# print(spimod.dout['xgc'])
 	
 	if 'xhc_ex' in 	spimod.dout.keys():			
 

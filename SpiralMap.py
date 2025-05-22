@@ -6,10 +6,11 @@ root_ = os.getcwd()
 dataloc = root_+'/datafiles'
 #--------------------------------------------       
 
-class spiral_poggio(object):
+class spiral_poggio_maps(object):
 	"""
-	Class containing spiral arm model from
-		Poggio et al. 2021 (EDR3 OB stars)
+	Class containing spiral arm models from
+		Poggio_2021: Poggio al. 2021 (EDR3 UMS stars)
+		GaiaPVP_2022: Gaia collaboration et al. 2021 (OB stars)
 		
 	Methods
 	-------
@@ -24,7 +25,7 @@ class spiral_poggio(object):
 		09 May 2025: Prusty/Khanna					
 	"""
 	
-	def __init__(self):		
+	def __init__(self,model_='GaiaPVP_2022'):		
 		
 		"""
 		NAME:
@@ -36,7 +37,7 @@ class spiral_poggio(object):
 			object (self.arms = available arms in this model)
 			object (self.armcolour = arm colours in this model)			
 		"""
-		self.loc = dataloc + '/Poggio_OB_EDR3'
+		self.loc = dataloc + '/'+model_
 		self.getarmlist()	
 	def getarmlist(self):
 		"""Initialize the list of available spiral arms 
@@ -62,10 +63,19 @@ class spiral_poggio(object):
 		
 		xsun = self.xsun
 	
-		# read overdensity contours
-		xvalues_overdens=np.load(self.loc+'/xvalues_dens.npy')
-		yvalues_overdens=np.load(self.loc+'/yvalues_dens.npy')
-		over_dens_grid=np.load(self.loc+'/over_dens_grid_threshold_0_003_dens.npy')
+		flist1 = fcount(self.loc,flist=True)	
+		print(flist1)
+		func_ = lambda s: 'grid' in s
+		overdens_file = list(filter(func_,flist1))[0]
+		func_ = lambda s: 'xval' in s
+		xval_file = list(filter(func_,flist1))[0]
+		func_ = lambda s: 'yval' in s
+		yval_file = list(filter(func_,flist1))[0]
+		
+		# # read overdensity contours
+		xvalues_overdens=np.load(self.loc+'/'+xval_file)
+		yvalues_overdens=np.load(self.loc+'/'+yval_file)
+		over_dens_grid=np.load(self.loc+'/'+overdens_file)
 		phi1_dens=np.arctan2(yvalues_overdens, -xvalues_overdens)
 		Rvalues_dens=sqrtsum(ds=[xvalues_overdens, yvalues_overdens])
 		Rgcvalues_dens=sqrtsum(ds=[xvalues_overdens+xsun, yvalues_overdens])
@@ -82,89 +92,67 @@ class spiral_poggio(object):
 		if plotattrs['polarproj'] == False:			
 			cset1 = plt.contourf(self.dout['x'+plotattrs['coordsys'].lower()],self.dout['y'+plotattrs['coordsys'].lower()],over_dens_grid.T, 
 								levels=levels_overdens1,alpha=0.05,cmap='Greys')	
+			iniz_overdens= 0. 
+			fin_overdens= 1.5 
+			N_levels_overdens= 4 
+			levels_overdens2= np.linspace(iniz_overdens,fin_overdens,N_levels_overdens)
+			cset2 = plt.contour(self.dout['x'+plotattrs['coordsys'].lower()],self.dout['y'+plotattrs['coordsys'].lower()],over_dens_grid.T,levels=levels_overdens2,colors=plotattrs['colour_contour'],linewidths=plotattrs['linewidth'])
 			
-			print(cset1)				
-		iniz_overdens= 0. 
-		fin_overdens= 1.5 
-		N_levels_overdens= 4 
-		levels_overdens2= np.linspace(iniz_overdens,fin_overdens,N_levels_overdens)
-		if plotattrs['polarproj'] == False:				
-			cset1 = plt.contour(self.dout['x'+plotattrs['coordsys'].lower()],self.dout['y'+plotattrs['coordsys'].lower()],over_dens_grid.T,levels=levels_overdens2,colors='black',linewidths=plotattrs['linewidth'])
-
-
-			print(cset1)
 			self.xmin,self.xmax =plt.gca().get_xlim()[0].copy(),plt.gca().get_xlim()[1].copy()				
 			self.ymin,self.ymax =plt.gca().get_ylim()[0].copy(),plt.gca().get_ylim()[1].copy()		
-			# add_polargrid(plotattrs,xmin=xmin,xmax=xmax,ymin=ymin,ymax=ymax)					
-		
-		# _polarproj(self,plotattrs)
-		# if plotattrs['polarproj'] and plotattrs['coordsys'].lower() == 'gc':
-			# phi4_overdens = np.degrees(np.arctan2(yvalues_overdens,xvalues_overdens+xcorr))%360.							
-			# cset1 = plt.contour(np.radians(phi4_overdens),Rgcvalues_dens,over_dens_grid,levels=levels_overdens,colors='black',linewidths=plotattrs['linewidth'])
-			# self.xmin,self.xmax =plt.gca().get_xlim()[0].copy(),plt.gca().get_xlim()[1].copy()				
-			# self.ymin,self.ymax =plt.gca().get_ylim()[0].copy(),plt.gca().get_ylim()[1].copy()	
+			# add_polargrid(plotattrs,xmin=self.xmin,xmax=self.xmax,ymin=self.ymin,ymax=self.ymax)					
 
+			plt.xlabel('X$_{'+plotattrs['coordsys']+'}$ [Kpc]')
+			plt.ylabel('Y$_{'+plotattrs['coordsys']+'}$ [Kpc]')	 
 
-		# if plotattrs['plot'] and plotattrs['polarproj'] and plotattrs['coordsys'].lower()=='gc':												
-			# plt.plot(0.,0.,marker='*',markersize=plotattrs['markersize'],color='black')		
-			# plt.plot(np.radians(180.),abs(xsun),marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')		
+		return cset1, cset2
 
-			# cset1 = plt.contourf(np.radians(self.dout['phi4']),self.dout['rgc'],over_dens_grid, 
-								# levels=levels_overdens1,alpha=0.05,cmap='Greys')
-			# cset1 = plt.contour(np.radians(self.dout['phi4']),self.dout['rgc'],over_dens_grid,levels=levels_overdens2,colors='black',linewidths=plotattrs['linewidth'])	
-			# print(cset1)
-		# # self.dout['glon4'] = np.degrees(np.arctan2(self.dout['yhc'],self.dout['xhc']))%360.						
-		# # print(self.dout['glon4'])
-
-		# if plotattrs['plot'] and plotattrs['polarproj'] and plotattrs['coordsys'].lower()=='hc':
-			# plt.plot(np.radians(0.),abs(xsun),marker='*',markersize=plotattrs['markersize'],color='black')
-			# plt.plot(0.,0.,marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')															
-			# plt.contourf(np.radians(self.dout['glon4']),self.dout['dhelio'],over_dens_grid,levels=levels_overdens1,alpha=0.05,cmap='Greys')	
-			# plt.contourf(np.radians(self.dout['glon4']),self.dout['dhelio'],over_dens_grid,levels=levels_overdens2,colors='black',linewidths=plotattrs['linewidth'])	
-
-		return cset1
-
-plotattrs = {'plot':True,'coordsys': 'GC','markersize':15,'polarproj':False,'linewidth':2}	
-sp = spiral_poggio()
-sp.xsun = -8.275
-cset1 = sp.output_(plotattrs)
-
-# # # check xy projection
-# plt.ion()
-# plt.close('all')
-# [[plt.plot(q[:,0],q[:,1], c='C%d'%c) for q in Q]  for c,Q in enumerate(cset1.allsegs)]
-# plt.savefig(root_+'/test_xy.png')	
-
-
-
-# tst = [[(q[:,0],q[:,1]) for q in Q]  for c,Q in enumerate(cset1.allsegs)]
-
-plt.ion()
-plt.close('all')
-fig, ax = plt.subplots(figsize=(7.5,7.),subplot_kw=dict(projection="polar"))
-
-for inum,Q in enumerate(cset1.allsegs):
+def prep_poggio_polar():
+	# # # plotattrs = {'plot':True,'coordsys': 'GC','markersize':15,'polarproj':False,'linewidth':2}	
+	# # # sp = spiral_poggio()
+	# # # sp.xsun = -8.275
+	# # # cset1 = sp.output_(plotattrs)
 	
-	# [plt.plot(q[:,0],q[:,1], c='C%d'%c) for q in Q] 
-	# if inum == 0:
-		
-	print('y')
-	# xc = np.array([q[:,0] for q in Q])
-	xc = [q[:,0] for q in Q]
-	yc = [q[:,1] for q in Q]
-	# [plt.plot(xc,yc, c=                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               'C%d'%c) for q in Q] 
-
+	# # # # # # check xy projection
+	# # # # plt.ion()
+	# # # # plt.close('all')
+	# # # # [[plt.plot(q[:,0],q[:,1], c='C%d'%c) for q in Q]  for c,Q in enumerate(cset1.allsegs)]
+	# # # # plt.savefig(root_+'/test_xy.png')	
 	
-	for i in range(len(xc)):
-		# # # plt.plot(xc[i],yc[i])
-		glon4 = np.degrees(np.arctan2(yc[i],xc[i]))%360.
-		dhelio = sqrtsum(ds=[xc[i],yc[i]])
-		phi4 = np.degrees(np.arctan2(yc[i],xc[i]+sp.xsun))%360.	
-		rgc = sqrtsum(ds=[xc[i]+sp.xsun,yc[i]])
-		plt.plot(np.radians(phi4),rgc,'.')
-		# plt.plot(np.radians(glon4),dhelio,'.')
-
-plt.savefig(root_+'/test.png')	
+	
+	
+	# # # # tst = [[(q[:,0],q[:,1]) for q in Q]  for c,Q in enumerate(cset1.allsegs)]
+	
+	# # # plt.ion()
+	# # # plt.close('all')
+	# # # fig, ax = plt.subplots(figsize=(7.5,7.),subplot_kw=dict(projection="polar"))
+	
+	# # # for inum,Q in enumerate(cset1.allsegs):
+		
+		# # # # [plt.plot(q[:,0],q[:,1], c='C%d'%c) for q in Q] 
+		# # # # if inum == 0:
+			
+	
+		# # # # xc = np.array([q[:,0] for q in Q])
+		# # # xc = [q[:,0] for q in Q]
+		# # # yc = [q[:,1] for q in Q]
+		# # # # [plt.plot(xc,yc, c=                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               'C%d'%c) for q in Q] 
+	
+		
+		# # # for i in range(len(xc)):
+			# # # # # # plt.plot(xc[i],yc[i])
+			# # # glon4 = np.degrees(np.arctan2(yc[i],xc[i]))%360.
+			# # # dhelio = sqrtsum(ds=[xc[i],yc[i]])
+			# # # phi4 = np.degrees(np.arctan2(yc[i],xc[i]+sp.xsun))%360.	
+			# # # rgc = sqrtsum(ds=[xc[i]+sp.xsun,yc[i]])
+			# # # plt.plot(np.radians(phi4),rgc,'.')
+			# # # # plt.plot(np.radians(glon4),dhelio,'.')
+	
+	# # # plt.savefig(root_+'/test.png')		
+			
+	
+	
+	return
 
 	
 							
@@ -196,14 +184,9 @@ class TaylorCordesSpiral(object):
 		Get coordinates in structured format
 	"""
     
-	def __init__(self, R0=8.5):
+	def __init__(self):
 		
-		"""Initialize spiral parameters from Taylor & Cordes (1993)
-		
-		Parameters
-		----------
-		R0 : float, optional
-			Initial solar galactocentric radius (kpc), default 8.5
+		"""Initialize spiral parameters from Taylor & Cordes (1993)		
 		"""		
 		self.getarmlist()        
 	def getarmlist(self):
@@ -280,7 +263,7 @@ class TaylorCordesSpiral(object):
 		rot_ang = np.radians(90)
 		x_gc = (xgc*np.cos(rot_ang)) - (ygc*np.sin(rot_ang)  )
 		y_gc = (xgc*np.sin(rot_ang)) + (ygc*np.cos(rot_ang)  )
-        		
+			
 		# Convert to Heliocentric coordinates
 		x_hc = x_gc + self.R0  # Sun at (-R0, 0) in GC
 		
@@ -1066,10 +1049,11 @@ class main_(object):
 	def listmodels(self):        		
 		self.models = ['Taylor_Cordes_1992','Drimmel_NIR_2000',
 					   'Levine_2006','Hou_Han_2014','Reid_2019',
-					   'Poggio_2021','Drimmel_Ceph_2024']        
+					   'Poggio_2021','GaiaPVP_Poggio_2022','Drimmel_Ceph_2024']        
 		self.models_class = {'Reid_2019':reid_spiral(),
 							 'Levine_2006':spiral_levine(),
-							 'Poggio_2021':spiral_poggio(),
+							 'Poggio_2021':spiral_poggio_maps(model_='Poggio_2021'),
+							 'GaiaPVP_Poggio_2022':spiral_poggio_maps(model_='GaiaPVP_Poggio_2022'),
 							 'Drimmel_NIR_2000':spiral_drimmel_nir(),
 							 'Taylor_Cordes_1992':TaylorCordesSpiral(),
 							 'Hou_Han_2014':spiral_houhan(),
@@ -1132,6 +1116,7 @@ class main_(object):
 								'ymax':'',
 								'polarproj':False,       
 								'polargrid':False,    
+								'colour_contour':'black',    
 								'dataloc':dataloc}    
 	def add2plot(self,plotattrs):
 		
@@ -1159,7 +1144,7 @@ class main_(object):
 				         '--',color=plotattrs_['armcolour'])	
 				                							
 			plt.xlabel('X$_{'+plotattrs_['coordsys']+'}$ [Kpc]')
-			plt.ylabel('Y$_{'+plotattrs_['coordsys']+'}$ [Kpc]')	
+			plt.ylabel('Y$_{'+plotattrs_['coordsys']+'}$ [Kpc]')	 
 			if plotattrs_['xmin'] == '' or plotattrs_['xmax'] == '' or plotattrs_['ymin'] == '' or plotattrs_['ymax'] == '':
 				print('')																			
 			else:
@@ -1192,7 +1177,8 @@ class main_(object):
 				plotattrs[ky] = self.plotattrs_default[ky]
 		plotattrs1 = plotattrs.copy()		
 		if 'poggio' in model.lower():													
-			spimod.output_(plotattrs1)					
+			spimod.output_(plotattrs1)		
+			self.xmin,self.xmax,self.ymin,self.ymax = spimod.xmin,spimod.xmax,spimod.ymin,spimod.ymax
 		if (('poggio' not in model.lower())&('all' not in arm)):				
 			plotattrs1 = plotattrs.copy()													
 			spimod.output_(arm)
@@ -1211,7 +1197,7 @@ class main_(object):
 				if plotattrs1['armcolour'] == '':
 					plotattrs1['armcolour'] = spimod.armcolour[arm_temp]
 					self.xyplot(spimod,plotattrs1)
-					_polarproj(spimod,plotattrs1)																		
+					_polarproj(spimod,plotattrs1)																							
 		try:	
 			add_polargrid(plotattrs1,xmin=self.xmin,xmax=self.xmax,ymin=self.ymin,ymax=self.ymax,modrec=self.modrec)	
 		except AttributeError:
