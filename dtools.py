@@ -105,16 +105,26 @@ def sqrtsum(ds=[],prnt=False):
 	
 	return resval
 
-def add_polargrid(plotattrs,rlevels=12,xmin=-10,xmax=10,ymin=-10,ymax=10,modrec=[],xorig = 0.,rmin = 3):
+def add_polargrid(plotattrs,rlevels=12,xmin=-10,xmax=10,ymin=-10,ymax=10,modrec=[],armrec=[],xorig = 0.,rmin = 3):
 	coordsys = plotattrs['coordsys']
 
 	if ((plotattrs['plot']==True)&(plotattrs['polarproj']==False)&(plotattrs['polargrid'])):
-		flim = pickleread(plotattrs['dataloc']+'/flim.pkl')	
-		xmins = [flim[model]['xmin'+'_'+coordsys] for model in modrec]
-		xmaxs = [flim[model]['xmax'+'_'+coordsys] for model in modrec]
-		ymins = [flim[model]['ymin'+'_'+coordsys] for model in modrec]
-		ymaxs = [flim[model]['ymax'+'_'+coordsys] for model in modrec]
+		
 
+		if armrec == []:						
+			flim = pickleread(plotattrs['dataloc']+'/flim_all.pkl')	
+			xmins = [flim[model]['xmin'+'_'+coordsys] for model in modrec]
+			xmaxs = [flim[model]['xmax'+'_'+coordsys] for model in modrec]
+			ymins = [flim[model]['ymin'+'_'+coordsys] for model in modrec]
+			ymaxs = [flim[model]['ymax'+'_'+coordsys] for model in modrec]
+		else:
+			arm = armrec[0]
+			flim = pickleread(plotattrs['dataloc']+'/flim.pkl')	
+			xmins = [flim[model][arm]['xmin'+'_'+coordsys] for model in modrec]
+			xmaxs = [flim[model][arm]['xmax'+'_'+coordsys] for model in modrec]
+			ymins = [flim[model][arm]['ymin'+'_'+coordsys] for model in modrec]
+			ymaxs = [flim[model][arm]['ymax'+'_'+coordsys] for model in modrec]
+			
 		try:
 			xmin1 = np.nanmin(xmins)
 			xmax1 = np.nanmax(xmaxs)

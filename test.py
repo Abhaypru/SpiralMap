@@ -234,8 +234,6 @@ if single_model_polar_drim:
 
 
 
-
-
 check_poggio = True
 if check_poggio:
 

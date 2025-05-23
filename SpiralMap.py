@@ -9,7 +9,7 @@ dataloc = root_+'/datafiles'
 ### TO do:
 #1 where does the code break
 #2 consistent colours for similar arms
-# save limits for individual arms 
+# save limits for individual arms = done
 # add display for default colours
 # Rsun instead of xsun
 # docstrings cleanup
@@ -1006,6 +1006,7 @@ class main_(object):
 		self.getinfo()	    
 		
 		self.modrec = []
+		self.armrec = []
 	def listmodels(self):        		
 		self.models = ['Taylor_Cordes_1992','Drimmel_NIR_2000',
 					   'Levine_2006','Hou_Han_2014','Reid_2019',
@@ -1091,8 +1092,7 @@ class main_(object):
 			plt.plot(0.,0.,marker='*',markersize=plotattrs['markersize'],color='black')
 			plt.plot(self.xsun,0.,marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')
 	def xyplot(self,spimod,plotattrs_):		
-		
-		
+				
 		if plotattrs_['plot'] and plotattrs_['polarproj']==False :				
 			
 			plt.plot(spimod.dout['x'+plotattrs_['coordsys'].lower()],
@@ -1118,7 +1118,6 @@ class main_(object):
 			
 			if plotattrs_['markSunGC']:
 				self.add2plot(plotattrs_)	
-
 	def readout(self,plotattrs={},model='',arm='',print_=False):	
 						
 		if model == '':
@@ -1139,7 +1138,8 @@ class main_(object):
 		if 'cont' in model.lower():													
 			spimod.output_(plotattrs1)		
 			self.xmin,self.xmax,self.ymin,self.ymax = spimod.xmin,spimod.xmax,spimod.ymin,spimod.ymax
-		if (('cont' not in model.lower())&('all' not in arm)):				
+		if (('cont' not in model.lower())&('all' not in arm)):	
+			self.armrec.append(arm)					
 			plotattrs1 = plotattrs.copy()													
 			spimod.output_(arm)
 			getangular(spimod)
@@ -1148,8 +1148,7 @@ class main_(object):
 				plotattrs1['armcolour'] = spimod.armcolour[arm]		
 			self.xyplot(spimod,plotattrs1)
 			_polarproj(spimod,plotattrs1)														
-		if (('cont' not in model.lower())&(arm=='all'))  :	
-													
+		if (('cont' not in model.lower())&(arm=='all'))  :														
 			for arm_temp in spimod.arms:			
 				plotattrs1 = plotattrs.copy()			
 				spimod.output_(arm_temp)
@@ -1159,7 +1158,7 @@ class main_(object):
 					self.xyplot(spimod,plotattrs1)
 					_polarproj(spimod,plotattrs1)																							
 		try:	
-			add_polargrid(plotattrs1,xmin=self.xmin,xmax=self.xmax,ymin=self.ymin,ymax=self.ymax,modrec=self.modrec)	
+			add_polargrid(plotattrs1,xmin=self.xmin,xmax=self.xmax,ymin=self.ymin,ymax=self.ymax,modrec=self.modrec,armrec=self.armrec)	
 		except AttributeError:
 			pass										
 									
@@ -1173,9 +1172,9 @@ class make_files(object):
 					
 		self.xsun = -8.277	
 	
-		self.prep_poggio_polar()
-		self.savelims()
-	
+		# self.prep_poggio_polar()
+		self.savelims_all()
+		self.savelims()	
 	def prep_poggio_polar(self):	
 		'''
 		saves the poggio contours for polarprojection
@@ -1237,10 +1236,8 @@ class make_files(object):
 			dsave['rad_hc'] = dsave['dhelio'].copy()	
 			
 			
-			picklewrite(dsave,usemodel+'_pproj_contours',dataloc+'/'+usemodel)	
-	
-				
-	def savelims(self):		
+			picklewrite(dsave,usemodel+'_pproj_contours',dataloc+'/'+usemodel)						
+	def savelims_all(self):		
 	
 		print('saving plot limits for all models')
 		xsun=self.xsun
@@ -1278,7 +1275,54 @@ class make_files(object):
 	
 				
 	
+		picklewrite(mylims,'flim_all',dataloc)		
+	def savelims(self):		
+	
+		print('saving plot limits for all models')
+		xsun=self.xsun
+	
+		mylims = {}
+		
+		spirals = main_(xsun=xsun)
+		
+		for inum,use_model in enumerate(spirals.models):	
+						
+				
+			spimod = spirals.models_class[use_model]
+			spimod.getarmlist()
+		
+			mylims[use_model] = {}
+			
+			for jnum, arm in enumerate(spimod.arms):
+				
+				mylims[use_model][arm] = {}
+
+				plt.close('all')
+				plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':False}		
+		
+				coordsys = plotattrs['coordsys']
+		
+				spirals.getinfo(model=use_model)
+				spirals.readout(plotattrs,model=use_model,arm=arm)		
+				mylims[use_model][arm]['xmin'+'_'+coordsys] = spirals.xmin
+				mylims[use_model][arm]['xmax'+'_'+coordsys] = spirals.xmax
+				mylims[use_model][arm]['ymin'+'_'+coordsys] = spirals.ymin
+				mylims[use_model][arm]['ymax'+'_'+coordsys] = spirals.ymax
+		
+				plt.close('all')
+				plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'markSunGC':True,'polargrid':False}		
+				coordsys = plotattrs['coordsys']		
+					
+				spirals.getinfo(model=use_model)
+				spirals.readout(plotattrs,model=use_model,arm=arm)
+				mylims[use_model][arm]['xmin'+'_'+coordsys] = spirals.xmin
+				mylims[use_model][arm]['xmax'+'_'+coordsys] = spirals.xmax
+				mylims[use_model][arm]['ymin'+'_'+coordsys] = spirals.ymin
+				mylims[use_model][arm]['ymax'+'_'+coordsys] = spirals.ymax
+	
+				
+	
 		picklewrite(mylims,'flim',dataloc)	
 	
-
+# make_files()
 
