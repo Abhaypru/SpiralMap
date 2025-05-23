@@ -7,9 +7,12 @@ dataloc = root_+'/datafiles'
 #--------------------------------------------       
 
 ### TO do:
+#1 where does the code break
+#2 consistent colours for similar arms
 # save limits for individual arms 
 # add display for default colours
 # Rsun instead of xsun
+# docstrings cleanup
 ####################################
 
 class spiral_poggio_maps(object):

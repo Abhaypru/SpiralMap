@@ -66,7 +66,7 @@ if single_extract_plot:
 	plt.savefig(figdir_primer+'/single_model_single_arm_demo.png')
 
 
-single_model_single_arm = True
+single_model_single_arm = False
 if single_model_single_arm:
 		
 	print('plotting figures for primer')
@@ -97,7 +97,7 @@ if single_model_single_arm:
 	fig.tight_layout()
 	plt.savefig(figdir_primer+'/single_model_single_arm.png')
 	
-single_model_all_arms = True
+single_model_all_arms = False
 if single_model_all_arms:
 		
 	print('plotting figures for primer')
@@ -129,7 +129,7 @@ if single_model_all_arms:
 	plt.savefig(figdir_primer+'/single_model_all_arms.png')
 	
 
-single_model_polar_hou = True
+single_model_polar_hou = False
 if single_model_polar_hou:
 
 	print('plotting figures for primer')
@@ -240,16 +240,17 @@ check_poggio = True
 if check_poggio:
 
 	print('testing gaiaPVP')
-	xsun=-8.277
+	xsun= -8.277
 	spirals = sp.main_(xsun=xsun)
 	use_model1 = 'Poggio_cont_2021'		
 	use_model2 = 'GaiaPVP_cont_2022'	
 	use_model3 = 'Drimmel_NIR_2000'	
-	
+	use_model4 = 'Levine_2006'	
+	use_arm = 'all'
 	spirals.getinfo(model=use_model1)
 				
 	plt.close('all')
-	plotattrs = {'plot':True,'coordsys': 'GC','markersize':15,'polargrid':True,'colour_contour':'red'}	
+	plotattrs = {'plot':True,'coordsys': 'GC','markersize':15,'polargrid':True}	
 	spirals.readout(plotattrs,model=use_model1,arm='all')	
 	plotattrs = {'plot':True,'coordsys': 'GC','markersize':15,'polargrid':True,'colour_contour':'green'}	
 	spirals.readout(plotattrs,model=use_model2,arm='all')	
@@ -259,19 +260,42 @@ if check_poggio:
 
 	plt.close('all')	
 	fig, ax = plt.subplots(figsize=(7.5,7.),subplot_kw=dict(projection="polar"))
-	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'polarproj':True,'armcolour':'red'}	
-	spirals.readout(plotattrs,model=use_model1,arm='all')
+	# # # plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'polarproj':True,'armcolour':'red'}	
+	# # # spirals.readout(plotattrs,model=use_model1,arm=use_arm)
+	# # # plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polarproj':True,'armcolour':'blue'}
+	# # # spirals.readout(plotattrs,model=use_model2,arm=use_arm)
+	
+	# # # plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polarproj':True}
+	# # # spirals.readout(plotattrs,model=use_model3,arm='1_arm')
 
-	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polarproj':True}
-	spirals.readout(plotattrs,model=use_model3,arm=use_arm)
 
+	plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'markSunGC':True,'polarproj':True,'armcolour':'red'}
+	spirals.readout(plotattrs,model=use_model2,arm=use_arm)
+	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'polarproj':True}	
+	spirals.readout(plotattrs,model=use_model3,arm='all')
 
 	plt.savefig(figdir_primer+'/testgc.png')
 
-	plt.close('all')	
-	fig, ax = plt.subplots(figsize=(7.5,7.),subplot_kw=dict(projection="polar"))
-	plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'polarproj':True,'armcolour':'red'}	
-	spirals.readout(plotattrs,model=use_model2,arm='all')
+	# # plt.close('all')	
+	# # fig, ax = plt.subplots(figsize=(7.5,7.),subplot_kw=dict(projection="polar"))
+	# # plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'polarproj':True,'armcolour':'red'}	
+	# # spirals.readout(plotattrs,model=use_model2,arm='all')
+	# # spirals.readout(plotattrs,model=use_model3,arm='all')
+	
 
-	plt.savefig(figdir_primer+'/testhc.png')
+	# # plt.savefig(figdir_primer+'/testhc.png')
+	
+
+	
+	# # use_model1 = 'Reid_2019'	
+	# # use_model2 = 'Drimmel_Ceph_2024'	
+
+
+	# # plt.close('all')	
+	# # fig, ax = plt.subplots(figsize=(7.5,7.),subplot_kw=dict(projection="polar"))
+	# # plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'polarproj':True}	
+	# # spirals.readout(plotattrs,model=use_model1,arm='all')
+	# # spirals.readout(plotattrs,model=use_model2,arm='all')
+
+	# # plt.savefig(figdir_primer+'/test.png')
 	
