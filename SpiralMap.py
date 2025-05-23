@@ -6,6 +6,12 @@ root_ = os.getcwd()
 dataloc = root_+'/datafiles'
 #--------------------------------------------       
 
+### TO do:
+# save limits for individual arms 
+# add display for default colours
+# Rsun instead of xsun
+####################################
+
 class spiral_poggio_maps(object):
 	"""
 	Class containing spiral arm models from
@@ -112,8 +118,7 @@ class spiral_poggio_maps(object):
 			plt.xlabel('X$_{'+plotattrs['coordsys']+'}$ [Kpc]')
 			plt.ylabel('Y$_{'+plotattrs['coordsys']+'}$ [Kpc]')	 
 
-			return cset1, cset2
-														
+			return cset1, cset2														
 class TaylorCordesSpiral(object):	
 	""" Taylor & Cordes (1993) Galactic spiral arm model,	  
 	based on radio pulsar observations. The model defines four major spiral arms and 
@@ -272,7 +277,6 @@ class TaylorCordesSpiral(object):
 		self.R0 = -xsun  # Solar Galactocentric radius (kpc)					
 		xhc,yhc,xgc,ygc = self.model_(arm);					
 		self.dout = {'xhc':xhc,'yhc':yhc,'xgc':xgc,'ygc':ygc}							 
-
 class spiral_houhan(object):	
 	"""Hou & Han (2014) polynomial-logarithmic spiral arm model
 	
@@ -590,7 +594,6 @@ class spiral_levine(object):
 			'yhc': yhc,
 			'xgc': xgc,
 			'ygc': ygc}
-
 class spiral_drimmel_cepheids(object):
 	
 	def __init__(self):
@@ -648,8 +651,7 @@ class spiral_drimmel_cepheids(object):
 		rgc = np.sqrt(xgc**2. + ygc**2.)
 		rgc_ex = np.sqrt(xgc_ex**2. + ygc_ex**2.)
           
-		self.dout = {'xhc':xhc,'yhc':yhc,'xgc':xgc,'ygc':ygc,'xhc_ex':xhc_ex,'yhc_ex':yhc_ex,'xgc_ex':xgc_ex,'ygc_ex':ygc_ex}	
-		
+		self.dout = {'xhc':xhc,'yhc':yhc,'xgc':xgc,'ygc':ygc,'xhc_ex':xhc_ex,'yhc_ex':yhc_ex,'xgc_ex':xgc_ex,'ygc_ex':ygc_ex}			
 class spiral_drimmel_nir(object):
 	"""Drimmel (2000) Near-Infrared (NIR) spiral arm model
 	
@@ -794,7 +796,6 @@ class spiral_drimmel_nir(object):
 			xgc = xhc + xsun			
 			ygc = yhc                     
 			self.dout = {'xhc':xhc,'yhc':yhc,'xgc':xgc,'ygc':ygc}					
-
 class reid_spiral(object):
 	"""Reid et al. (2019) kinked logarithmic spiral arm model
 	
@@ -989,7 +990,6 @@ class reid_spiral(object):
 		xhc2 = xgc2 - xsun	
 		yhc = ygc			
 		self.dout = {'xhc':xhc,'yhc':yhc,'xgc':xgc,'ygc':ygc}													
-
 class main_(object):
 	'''
 	To do: find a way to reset modrec using plot axis
