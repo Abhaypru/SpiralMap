@@ -182,8 +182,8 @@ if check_poggio:
 	print('testing gaiaPVP')
 	xsun=-8.277
 	spirals = sp.main_(xsun=xsun)
-	use_model1 = 'Poggio_2021'	
-	use_model2 = 'GaiaPVP_Poggio_2022'	
+	use_model1 = 'Poggio_cont_2021'		
+	use_model2 = 'GaiaPVP_cont_2022'	
 	
 	spirals.getinfo(model=use_model1)
 				
@@ -193,7 +193,23 @@ if check_poggio:
 	plotattrs = {'plot':True,'coordsys': 'GC','markersize':15,'polargrid':True,'colour_contour':'green'}	
 	spirals.readout(plotattrs,model=use_model2,arm='all')	
 
-	
+	plt.savefig(figdir_primer+'/test.png')
+
+
+	plt.close('all')	
+	fig, ax = plt.subplots(figsize=(7.5,7.),subplot_kw=dict(projection="polar"))
+	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'polarproj':True,'armcolour':'red'}	
+	spirals.readout(plotattrs,model=use_model2,arm='all')
+
+	plt.savefig(figdir_primer+'/testgc.png')
+
+	plt.close('all')	
+	fig, ax = plt.subplots(figsize=(7.5,7.),subplot_kw=dict(projection="polar"))
+	plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'polarproj':True,'armcolour':'red'}	
+	spirals.readout(plotattrs,model=use_model2,arm='all')
+
+	plt.savefig(figdir_primer+'/testhc.png')
+
 
 test_polar_poggio = False
 if test_polar_poggio:

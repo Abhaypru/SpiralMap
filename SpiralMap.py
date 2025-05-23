@@ -25,7 +25,7 @@ class spiral_poggio_maps(object):
 		09 May 2025: Prusty/Khanna					
 	"""
 	
-	def __init__(self,model_='GaiaPVP_2022'):		
+	def __init__(self,model_='GaiaPVP_cont_2022'):		
 		
 		"""
 		NAME:
@@ -37,6 +37,7 @@ class spiral_poggio_maps(object):
 			object (self.arms = available arms in this model)
 			object (self.armcolour = arm colours in this model)			
 		"""
+		self.model_ = model_
 		self.loc = dataloc + '/'+model_
 		self.getarmlist()	
 	def getarmlist(self):
@@ -80,14 +81,22 @@ class spiral_poggio_maps(object):
 		Rvalues_dens=sqrtsum(ds=[xvalues_overdens, yvalues_overdens])
 		Rgcvalues_dens=sqrtsum(ds=[xvalues_overdens+xsun, yvalues_overdens])
 		
+		fl = pickleread(self.loc+'/'+self.model_+'_pproj_contours.pkl')
 		self.dout = {'xhc':xvalues_overdens,'yhc':yvalues_overdens,'xgc':xvalues_overdens+xsun,'ygc':yvalues_overdens}
-		getangular(self)
+		self.dout['phi4'] =fl['phi4'].copy()	
+		self.dout['glon4'] =fl['glon4'].copy()	
+		self.dout['rgc'] =fl['rgc'].copy()	
+		self.dout['dhelio'] =fl['dhelio'].copy()	
+		
+		# # # # getangular(self)
 
 		#----overplot spiral arms in overdens----#
 		iniz_overdens= 0  
 		fin_overdens= 1.5 
 		N_levels_overdens= 2
 		levels_overdens1= np.linspace(iniz_overdens,fin_overdens,N_levels_overdens)		
+		
+		_polarproj(self,plotattrs)	
 		
 		if plotattrs['polarproj'] == False:			
 			cset1 = plt.contourf(self.dout['x'+plotattrs['coordsys'].lower()],self.dout['y'+plotattrs['coordsys'].lower()],over_dens_grid.T, 
@@ -105,21 +114,21 @@ class spiral_poggio_maps(object):
 			plt.ylabel('Y$_{'+plotattrs['coordsys']+'}$ [Kpc]')	 
 
 			return cset1, cset2
-
+										
 def prep_poggio_polar():	
 	'''
 	saves the poggio contours for polarprojection
 	prep_poggio_polar()		'''
 
 	xsun=-8.277	
-	usemodels = ['Poggio_2021','GaiaPVP_Poggio_2022']	
+	usemodels = ['Poggio_cont_2021','GaiaPVP_cont_2022']	
 	
 	for usemodel in usemodels:
 		
 		plt.close('all')
-		plotattrs = {'plot':True,'coordsys': 'GC','markersize':15,'linewidth':1,'polarproj':False,'colour_contour':'black'}	
+		plotattrs = {'plot':True,'coordsys': 'HC','markersize':15,'linewidth':1,'polarproj':False,'colour_contour':'black'}	
 		sp = spiral_poggio_maps(model_=usemodel)
-		sp.xsun = -8.275
+		sp.xsun = xsun
 		cset1,cset2 = sp.output_(plotattrs)
 		
 		# # check xy projection
@@ -159,8 +168,15 @@ def prep_poggio_polar():
 		
 		for ky in dsave.keys():
 			dsave[ky] = np.concatenate(dsave[ky]).ravel()	
+			
+		dsave['ang_gc'] = dsave['phi4'].copy()	
+		dsave['ang_hc'] = dsave['glon4'].copy()	
+		
+		dsave['rad_gc'] = dsave['rgc'].copy()	
+		dsave['rad_hc'] = dsave['dhelio'].copy()	
+		
+		
 		picklewrite(dsave,usemodel+'_pproj_contours',dataloc+'/'+usemodel)	
-
 
 							
 class TaylorCordesSpiral(object):	
@@ -1056,11 +1072,11 @@ class main_(object):
 	def listmodels(self):        		
 		self.models = ['Taylor_Cordes_1992','Drimmel_NIR_2000',
 					   'Levine_2006','Hou_Han_2014','Reid_2019',
-					   'Poggio_2021','GaiaPVP_Poggio_2022','Drimmel_Ceph_2024']        
+					   'Poggio_cont_2021','GaiaPVP_cont_2022','Drimmel_Ceph_2024']        
 		self.models_class = {'Reid_2019':reid_spiral(),
 							 'Levine_2006':spiral_levine(),
-							 'Poggio_2021':spiral_poggio_maps(model_='Poggio_2021'),
-							 'GaiaPVP_Poggio_2022':spiral_poggio_maps(model_='GaiaPVP_Poggio_2022'),
+							 'Poggio_cont_2021':spiral_poggio_maps(model_='Poggio_cont_2021'),
+							 'GaiaPVP_cont_2022':spiral_poggio_maps(model_='GaiaPVP_cont_2022'),
 							 'Drimmel_NIR_2000':spiral_drimmel_nir(),
 							 'Taylor_Cordes_1992':TaylorCordesSpiral(),
 							 'Hou_Han_2014':spiral_houhan(),
@@ -1183,10 +1199,10 @@ class main_(object):
 			if ky not in list(plotattrs.keys()):				
 				plotattrs[ky] = self.plotattrs_default[ky]
 		plotattrs1 = plotattrs.copy()		
-		if 'poggio' in model.lower():													
+		if 'cont' in model.lower():													
 			spimod.output_(plotattrs1)		
 			self.xmin,self.xmax,self.ymin,self.ymax = spimod.xmin,spimod.xmax,spimod.ymin,spimod.ymax
-		if (('poggio' not in model.lower())&('all' not in arm)):				
+		if (('cont' not in model.lower())&('all' not in arm)):				
 			plotattrs1 = plotattrs.copy()													
 			spimod.output_(arm)
 			getangular(spimod)
@@ -1195,7 +1211,7 @@ class main_(object):
 				plotattrs1['armcolour'] = spimod.armcolour[arm]		
 			self.xyplot(spimod,plotattrs1)
 			_polarproj(spimod,plotattrs1)														
-		if (('poggio' not in model.lower())&(arm=='all'))  :	
+		if (('cont' not in model.lower())&(arm=='all'))  :	
 													
 			for arm_temp in spimod.arms:			
 				plotattrs1 = plotattrs.copy()			
