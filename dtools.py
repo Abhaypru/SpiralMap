@@ -6,7 +6,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.interpolate import CubicSpline
 
-def fcount(floc,flist=False,nlist=False):
+def fcount(floc,flist=False,nlist=False,prnt=True):
 	
 	'''
     NAME: fcount
@@ -30,8 +30,8 @@ def fcount(floc,flist=False,nlist=False):
 		
 	cnt = np.array(cnt)	
 	
-	
-	print(str(cnt.size)+' files in total')
+	if prnt:
+		print(str(cnt.size)+' files in total')
 	
 	if flist:		
 		return cnt

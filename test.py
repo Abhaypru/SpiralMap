@@ -14,53 +14,8 @@ os.system('rm -rf '+figdir_primer); os.system('mkdir '+figdir_primer)
 plt.ion()
 	
 
-savelims = False
-if savelims:		
-
-	print('saving plot limits for all models')
-	xsun=-8.277
-
-	mylims = {}
-	
-	spirals = sp.main_(xsun=xsun)
-	for inum,use_model in enumerate(spirals.models):				
-		
-		plt.close('all')
-		plm=putil.Plm2(10,10,xsize=8.0,ysize=4.5,xmulti=False,ymulti=False,full=True,slabelx=0.7,slabely=0.07)			
-
-		mylims[use_model] = {}
-		
-		plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':False}		
-
-		coordsys = plotattrs['coordsys']
-
-		plm.next()			
-		spirals.getinfo(model=use_model)
-		spirals.readout(plotattrs,model=use_model,arm='all')		
-		mylims[use_model]['xmin'+'_'+coordsys] = spirals.xmin
-		mylims[use_model]['xmax'+'_'+coordsys] = spirals.xmax
-		mylims[use_model]['ymin'+'_'+coordsys] = spirals.ymin
-		mylims[use_model]['ymax'+'_'+coordsys] = spirals.ymax
-
-
-		plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'markSunGC':True,'polargrid':False}		
-		coordsys = plotattrs['coordsys']
-		plm.next()
-			
-		spirals.getinfo(model=use_model)
-		spirals.readout(plotattrs,model=use_model,arm='all')
-		mylims[use_model]['xmin'+'_'+coordsys] = spirals.xmin
-		mylims[use_model]['xmax'+'_'+coordsys] = spirals.xmax
-		mylims[use_model]['ymin'+'_'+coordsys] = spirals.ymin
-		mylims[use_model]['ymax'+'_'+coordsys] = spirals.ymax
-
-			
-
-	dtools.picklewrite(mylims,'flim',sp.dataloc)	
-
 #------------------------------------------------------------	
 ############## figures for documentation ####################
-
 
 
 single_extract_plot = False
@@ -176,7 +131,7 @@ if single_model_polar:
 
 	plt.savefig(figdir_primer+'/polar_grid_overplotted.png')
 
-check_poggio = False
+check_poggio = True
 if check_poggio:
 
 	print('testing gaiaPVP')

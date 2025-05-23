@@ -64,8 +64,7 @@ class spiral_poggio_maps(object):
 		
 		xsun = self.xsun
 	
-		flist1 = fcount(self.loc,flist=True)	
-		print(flist1)
+		flist1 = fcount(self.loc,flist=True,prnt=False)		
 		func_ = lambda s: 'grid' in s
 		overdens_file = list(filter(func_,flist1))[0]
 		func_ = lambda s: 'xval' in s
@@ -114,71 +113,7 @@ class spiral_poggio_maps(object):
 			plt.ylabel('Y$_{'+plotattrs['coordsys']+'}$ [Kpc]')	 
 
 			return cset1, cset2
-										
-def prep_poggio_polar():	
-	'''
-	saves the poggio contours for polarprojection
-	prep_poggio_polar()		'''
-
-	xsun=-8.277	
-	usemodels = ['Poggio_cont_2021','GaiaPVP_cont_2022']	
-	
-	for usemodel in usemodels:
-		
-		plt.close('all')
-		plotattrs = {'plot':True,'coordsys': 'HC','markersize':15,'linewidth':1,'polarproj':False,'colour_contour':'black'}	
-		sp = spiral_poggio_maps(model_=usemodel)
-		sp.xsun = xsun
-		cset1,cset2 = sp.output_(plotattrs)
-		
-		# # check xy projection
-		# plt.ion()
-		# plt.close('all')
-		# [[plt.plot(q[:,0],q[:,1], c='C%d'%c) for q in Q]  for c,Q in enumerate(cset1.allsegs)]
-		# # # # plt.savefig(root_+'/test_xy.png')	
-		
-			
-		tst = [[(q[:,0],q[:,1]) for q in Q]  for c,Q in enumerate(cset1.allsegs)]
-		
-		plt.ion()
-		plt.close('all')
-		fig, ax = plt.subplots(figsize=(7.5,7.),subplot_kw=dict(projection="polar"))
-		
-		dsave = {}
-		dsave['glon4'] = []
-		dsave['dhelio'] = []
-		dsave['phi4'] = []
-		dsave['rgc'] = []
-		for inum,Q in enumerate(cset1.allsegs):
-			xc = [q[:,0] for q in Q]
-			yc = [q[:,1] for q in Q]
-			
-			for i in range(len(xc)):
-				glon4 = np.degrees(np.arctan2(yc[i],xc[i]))%360.
-				dhelio = sqrtsum(ds=[xc[i],yc[i]])
-				phi4 = np.degrees(np.arctan2(yc[i],xc[i]+sp.xsun))%360.	
-				rgc = sqrtsum(ds=[xc[i]+sp.xsun,yc[i]])
-				# plt.plot(np.radians(phi4),rgc,'.') # gc frame
-				# plt.plot(np.radians(glon4),dhelio,'.') # hc frame
-				dsave['phi4'].append(phi4)
-				dsave['rgc'].append(rgc)
-				dsave['glon4'].append(glon4)
-				dsave['dhelio'].append(dhelio)
-
-		
-		for ky in dsave.keys():
-			dsave[ky] = np.concatenate(dsave[ky]).ravel()	
-			
-		dsave['ang_gc'] = dsave['phi4'].copy()	
-		dsave['ang_hc'] = dsave['glon4'].copy()	
-		
-		dsave['rad_gc'] = dsave['rgc'].copy()	
-		dsave['rad_hc'] = dsave['dhelio'].copy()	
-		
-		
-		picklewrite(dsave,usemodel+'_pproj_contours',dataloc+'/'+usemodel)	
-
-							
+														
 class TaylorCordesSpiral(object):	
 	""" Taylor & Cordes (1993) Galactic spiral arm model,	  
 	based on radio pulsar observations. The model defines four major spiral arms and 
@@ -1055,7 +990,6 @@ class reid_spiral(object):
 		yhc = ygc			
 		self.dout = {'xhc':xhc,'yhc':yhc,'xgc':xgc,'ygc':ygc}													
 
-
 class main_(object):
 	'''
 	To do: find a way to reset modrec using plot axis
@@ -1226,3 +1160,122 @@ class main_(object):
 		except AttributeError:
 			pass										
 									
+class make_files(object):
+	"""
+	is run to save supporting files
+	
+	"""
+	
+	def __init__(self):
+					
+		self.xsun = -8.277	
+	
+		self.prep_poggio_polar()
+		self.savelims()
+	
+	def prep_poggio_polar(self):	
+		'''
+		saves the poggio contours for polarprojection
+		prep_poggio_polar()		'''
+	
+		xsun=self.xsun
+		usemodels = ['Poggio_cont_2021','GaiaPVP_cont_2022']	
+		
+		for usemodel in usemodels:
+			
+			plt.close('all')
+			plotattrs = {'plot':True,'coordsys': 'HC','markersize':15,'linewidth':1,'polarproj':False,'colour_contour':'black'}	
+			sp = spiral_poggio_maps(model_=usemodel)
+			sp.xsun = xsun
+			cset1,cset2 = sp.output_(plotattrs)
+			
+			# # check xy projection
+			# plt.ion()
+			# plt.close('all')
+			# [[plt.plot(q[:,0],q[:,1], c='C%d'%c) for q in Q]  for c,Q in enumerate(cset1.allsegs)]
+			# # # # plt.savefig(root_+'/test_xy.png')	
+			
+				
+			tst = [[(q[:,0],q[:,1]) for q in Q]  for c,Q in enumerate(cset1.allsegs)]
+			
+			plt.ion()
+			plt.close('all')
+			fig, ax = plt.subplots(figsize=(7.5,7.),subplot_kw=dict(projection="polar"))
+			
+			dsave = {}
+			dsave['glon4'] = []
+			dsave['dhelio'] = []
+			dsave['phi4'] = []
+			dsave['rgc'] = []
+			for inum,Q in enumerate(cset1.allsegs):
+				xc = [q[:,0] for q in Q]
+				yc = [q[:,1] for q in Q]
+				
+				for i in range(len(xc)):
+					glon4 = np.degrees(np.arctan2(yc[i],xc[i]))%360.
+					dhelio = sqrtsum(ds=[xc[i],yc[i]])
+					phi4 = np.degrees(np.arctan2(yc[i],xc[i]+sp.xsun))%360.	
+					rgc = sqrtsum(ds=[xc[i]+sp.xsun,yc[i]])
+					# plt.plot(np.radians(phi4),rgc,'.') # gc frame
+					# plt.plot(np.radians(glon4),dhelio,'.') # hc frame
+					dsave['phi4'].append(phi4)
+					dsave['rgc'].append(rgc)
+					dsave['glon4'].append(glon4)
+					dsave['dhelio'].append(dhelio)
+	
+			
+			for ky in dsave.keys():
+				dsave[ky] = np.concatenate(dsave[ky]).ravel()	
+				
+			dsave['ang_gc'] = dsave['phi4'].copy()	
+			dsave['ang_hc'] = dsave['glon4'].copy()	
+			
+			dsave['rad_gc'] = dsave['rgc'].copy()	
+			dsave['rad_hc'] = dsave['dhelio'].copy()	
+			
+			
+			picklewrite(dsave,usemodel+'_pproj_contours',dataloc+'/'+usemodel)	
+	
+				
+	def savelims(self):		
+	
+		print('saving plot limits for all models')
+		xsun=self.xsun
+	
+		mylims = {}
+		
+		spirals = main_(xsun=xsun)
+		for inum,use_model in enumerate(spirals.models):				
+			
+			plt.close('all')
+		
+			mylims[use_model] = {}
+			
+			plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':False}		
+	
+			coordsys = plotattrs['coordsys']
+	
+			spirals.getinfo(model=use_model)
+			spirals.readout(plotattrs,model=use_model,arm='all')		
+			mylims[use_model]['xmin'+'_'+coordsys] = spirals.xmin
+			mylims[use_model]['xmax'+'_'+coordsys] = spirals.xmax
+			mylims[use_model]['ymin'+'_'+coordsys] = spirals.ymin
+			mylims[use_model]['ymax'+'_'+coordsys] = spirals.ymax
+	
+			plt.close('all')
+			plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'markSunGC':True,'polargrid':False}		
+			coordsys = plotattrs['coordsys']		
+				
+			spirals.getinfo(model=use_model)
+			spirals.readout(plotattrs,model=use_model,arm='all')
+			mylims[use_model]['xmin'+'_'+coordsys] = spirals.xmin
+			mylims[use_model]['xmax'+'_'+coordsys] = spirals.xmax
+			mylims[use_model]['ymin'+'_'+coordsys] = spirals.ymin
+			mylims[use_model]['ymax'+'_'+coordsys] = spirals.ymax
+	
+				
+	
+		picklewrite(mylims,'flim',dataloc)	
+	
+
+
