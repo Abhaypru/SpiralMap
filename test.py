@@ -18,13 +18,14 @@ plt.ion()
 ############## figures for documentation ####################
 
 
+
 single_extract_plot = False
 if single_extract_plot:	
 	
 	#
-	xsun=-8.277
-	spirals = sp.main_(xsun=xsun)
-	use_model = 'Drimmel_ceph_2024'
+	Rsun=8.277
+	spirals = sp.main_(Rsun=Rsun)
+	use_model = 'Drimmel_Ceph_2024'
 	use_arm = 'Orion'
 	spirals.getinfo(model=use_model)	
 	plotattrs = {'plot':False}
@@ -38,9 +39,9 @@ if single_extract_plot:
 
 
 	#
-	xsun=-8.277
-	spirals = sp.main_(xsun=xsun)
-	use_model = 'Drimmel_ceph_2024'
+	Rsun=8.277
+	spirals = sp.main_(Rsun=Rsun)
+	use_model = 'Drimmel_Ceph_2024'
 	use_arm = 'Orion'
 	spirals.getinfo(model=use_model)	
 
@@ -234,7 +235,7 @@ if single_model_polar_drim:
 
 
 
-check_poggio = True
+check_poggio = False
 if check_poggio:
 
 	print('testing gaiaPVP')

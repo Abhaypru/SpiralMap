@@ -9,9 +9,7 @@ dataloc = root_+'/datafiles'
 ### TO do:
 #1 where does the code break
 #2 consistent colours for similar arms
-# save limits for individual arms = done
-# add display for default colours
-# Rsun instead of xsun
+# raise warning for armcolour
 # docstrings cleanup
 ####################################
 
@@ -54,11 +52,13 @@ class spiral_poggio_maps(object):
 		and their corresponding plot colors. """
 		self.arms = np.array(['all'])
 		self.armcolour = {'all': 'black'}	
+		self.armcolours= [self.armcolour[ky]  for ky in self.arms  ]			
 	def info(self):
 		"""Collate arm information """
 		print('')
-		print('------------------------')
-		dfmodlist = pd.DataFrame(self.arms, columns=['Arm list'])
+		print('------------------------')	
+		d = {'Arm list': self.arms, 'Colour': self.armcolours}
+		dfmodlist = pd.DataFrame(d)			
 		print(dfmodlist)
 		print('------------------------')	
 	def output_(self,plotattrs):
@@ -160,6 +160,8 @@ class TaylorCordesSpiral(object):
 		
 		self.arms = np.array(['Arm1','Arm2','Arm3','Arm4'])
 		self.armcolour = {'Arm1':'yellow','Arm2':'green','Arm3':'blue','Arm4':'purple'}
+		self.armcolours= [self.armcolour[ky]  for ky in self.arms  ]
+	
 		self.getparams()        
 	def info(self):        
 		'''
@@ -167,7 +169,8 @@ class TaylorCordesSpiral(object):
 		'''		
 		print('')
 		print('------------------------')	
-		dfmodlist = pd.DataFrame(self.arms,columns=['Arm list'])
+		d = {'Arm list': self.arms, 'Colour': self.armcolours}
+		dfmodlist = pd.DataFrame(d)			
 		print(dfmodlist)
 		print('------------------------')						
 	def getparams(self):	   
@@ -323,7 +326,8 @@ class spiral_houhan(object):
 	
 		self.arms = np.array(['Norma','Scutum-Centaurus','Sagittarius-Carina','Perseus','Local','Outer'])
 		self.armcolour = {'Norma':'black','Scutum-Centaurus':'red','Sagittarius-Carina':'green','Perseus':'blue','Local':'purple','Outer':'gold'}
-	
+
+		self.armcolours= [self.armcolour[ky]  for ky in self.arms  ]	
 	def info(self):
 		
 		'''
@@ -332,7 +336,8 @@ class spiral_houhan(object):
 	
 		print('')
 		print('------------------------')	
-		dfmodlist = pd.DataFrame(self.arms,columns=['Arm list'])
+		d = {'Arm list': self.arms, 'Colour': self.armcolours}
+		dfmodlist = pd.DataFrame(d)		
 		print(dfmodlist)
 		print('------------------------')		
 		
@@ -466,7 +471,8 @@ class spiral_levine(object):
 		self.arms = np.array(['Arm1','Arm2','Arm3','Arm4'])
 		self.armcolour = {'Arm1':'yellow','Arm2':'green','Arm3':'blue','Arm4':'purple'}
 		self.getparams()
-	
+		self.armcolours= [self.armcolour[ky]  for ky in self.arms  ]
+		
 	def info(self):
 		
 		'''
@@ -476,7 +482,8 @@ class spiral_levine(object):
 	
 		print('')
 		print('------------------------')	
-		dfmodlist = pd.DataFrame(self.arms,columns=['Arm list'])
+		d = {'Arm list': self.arms, 'Colour': self.armcolours}
+		dfmodlist = pd.DataFrame(d)			
 		print(dfmodlist)
 		print('------------------------')		
 	
@@ -608,15 +615,16 @@ class spiral_drimmel_cepheids(object):
 		self.arms= np.array(list(self.spirals['0']['arm_attributes'].keys()))
 		self.armcolour = {'Scutum':'C3','Sag-Car':'C0',
 						  'Orion':'C1','Perseus':'C2'}   
-	def info(self):
-		
+						  
+		self.armcolours= [self.armcolour[ky]  for ky in self.arms  ]			  
+	def info(self):		
 		'''
 		here goes basic info for the user about this model
-		'''
-	
+		'''				
 		print('')
 		print('------------------------')	
-		dfmodlist = pd.DataFrame(self.arms,columns=['Arm list'])
+		d = {'Arm list': self.arms, 'Colour': self.armcolours}
+		dfmodlist = pd.DataFrame(data=d)
 		print(dfmodlist)
 		print('------------------------')		        
 
@@ -696,7 +704,8 @@ class spiral_drimmel_nir(object):
 		- armcolour: Color mapping dictionary
 		"""
 		self.arms = np.array(['1_arm','2_arm','3_interarm','4_interarm'])
-		self.armcolour = {'1_arm':'black','2_arm':'black','3_interarm':'red','4_interarm':'red'}
+		self.armcolour = {'1_arm':'black','2_arm':'black','3_interarm':'red','4_interarm':'red'}		
+		self.armcolours= [self.armcolour[ky]  for ky in self.arms  ]			
 	def info(self):
 		
 		"""Display basic model information and arm components.
@@ -706,7 +715,8 @@ class spiral_drimmel_nir(object):
 	
 		print('')
 		print('------------------------')	
-		dfmodlist = pd.DataFrame(self.arms,columns=['Arm list'])
+		d = {'Arm list': self.arms, 'Colour': self.armcolours}
+		dfmodlist = pd.DataFrame(d)			
 		print(dfmodlist)
 		print('------------------------')		        
 	def getdata(self):
@@ -842,14 +852,17 @@ class reid_spiral(object):
 		self.arms = np.array(['3-kpc','Norma','Sct-Cen','Sgr-Car','Local','Perseus','Outer'])      				
 		self.armcolour = {'3-kpc':'C6','Norma':'C5','Sct-Cen':'C4',
 		                  'Sgr-Car':'C3','Local':'C2','Perseus':'C1',
-		                  'Outer':'C0'}		  		
+		                  'Outer':'C0'}	
+		self.armcolours= [self.armcolour[ky]  for ky in self.arms  ]
+			                  	  		
 	def info(self):		
 		'''
 		here goes basic info for the user about this model
 		'''	
 		print('')
 		print('------------------------')	
-		dfmodlist = pd.DataFrame(self.arms,columns=['Arm list'])
+		d = {'Arm list': self.arms, 'Colour': self.armcolours}
+		dfmodlist = pd.DataFrame(d)			
 		print(dfmodlist)
 		print('------------------------')				
 		
@@ -997,11 +1010,11 @@ class main_(object):
 	'''
 	To do: find a way to reset modrec using plot axis
 	'''
-	def __init__(self,xsun=-8.277):       	
+	def __init__(self,Rsun=8.277):       	
 		self.root_ = root_
 		self.dataloc = dataloc        
-		self.xsun = xsun
-		self.Rsun = -self.xsun        
+		self.xsun = -Rsun
+		self.Rsun = Rsun        
 		self.listmodels()
 		self.getinfo()	    
 		
@@ -1047,7 +1060,6 @@ class main_(object):
 		if model == '':		
 			print('try self.getinfo(model) for more details')
 			print('')
-			print('ADD armcolours!')
 			print('------------------------')			
 			dfmodlist = pd.DataFrame(self.models,columns=['Available models & maps:'])
 			print(dfmodlist)
@@ -1162,7 +1174,7 @@ class main_(object):
 		except AttributeError:
 			pass										
 									
-class make_files(object):
+class _make_supportfiles(object):
 	"""
 	is run to save supporting files
 	
@@ -1324,5 +1336,5 @@ class make_files(object):
 	
 		picklewrite(mylims,'flim',dataloc)	
 	
-# make_files()
+
 
