@@ -1,4 +1,3 @@
-
 import os, sys
 import numpy as np
 from astropy.table import Table
@@ -40,6 +39,7 @@ def fcount(floc,flist=False,nlist=False,prnt=True):
 	else:
 		os.system('ls -lh '+floc)	
 		return 
+
 def xyz2lbr(x,y,z):
     rc2=x*x+y*y
     return [np.degrees(np.arctan2(y,x)),np.degrees(np.arctan(z/np.sqrt(rc2))),np.sqrt(rc2+z*z)]
@@ -157,10 +157,7 @@ def _polarproj(spimod,plotattrs):
 	useclr = plotattrs['armcolour']
 	if plotattrs['armcolour'] == '':
 		useclr = 'grey'
-
-		
-		
-
+			
 	if plotattrs['plot'] and plotattrs['polarproj'] and plotattrs['coordsys'].lower()=='gc':	
 													
 		plt.plot(0.,0.,marker='*',markersize=plotattrs['markersize'],color='black')		
@@ -181,7 +178,6 @@ def _polarproj(spimod,plotattrs):
 		except KeyError:
 			pass
 	
-
 def getangular(spimod):
 
 	spimod.dout['rgc'] = sqrtsum(ds=[spimod.dout['xgc'],spimod.dout['ygc']])						

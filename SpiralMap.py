@@ -9,7 +9,6 @@ dataloc = root_+'/datafiles'
 ### TO do:
 #1 where does the code break
 #2 consistent colours for similar arms
-# raise warning for armcolour
 # docstrings cleanup
 ####################################
 
@@ -1149,7 +1148,7 @@ class main_(object):
 		plotattrs1 = plotattrs.copy()		
 		if 'cont' in model.lower():													
 			spimod.output_(plotattrs1)		
-			self.xmin,self.xmax,self.ymin,self.ymax = spimod.xmin,spimod.xmax,spimod.ymin,spimod.ymax
+			# self.xmin,self.xmax,self.ymin,self.ymax = spimod.xmin,spimod.xmax,spimod.ymin,spimod.ymax
 		if (('cont' not in model.lower())&('all' not in arm)):	
 			self.armrec.append(arm)					
 			plotattrs1 = plotattrs.copy()													
