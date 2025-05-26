@@ -1,6 +1,6 @@
 [project]
 name = "SpiralMap"
-version = "0.0.0"
+version = "0.0.4"
 authors = [
   { name="Prusty & Khanna", email="shourya.khanna@inaf.it" },
 ]
