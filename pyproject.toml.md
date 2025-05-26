@@ -15,5 +15,5 @@ license = "MIT"
 license-files = ["LICEN[CS]E*"]
 
 [project.urls]
-Homepage = "https://github.com/pypa/sampleproject"
-Issues = "https://github.com/pypa/sampleproject/issues"
+Homepage = "https://github.com/Abhaypru/SpiralMap"
+Issues = "https://github.com/Abhaypru/SpiralMap/issues"
