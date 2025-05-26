@@ -1,4 +1,4 @@
-# SpiralMapping_package
+# SpiralMap
 A Python library of the major spiral arm models of the Milky Way
 # Acknowledging SpiralMap
 If you make use of this package, please cite (), as well as the particular spiral models used. A BibTex file with the relevant citations is provided under 'datafiles'.
