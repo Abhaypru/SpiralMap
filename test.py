@@ -107,6 +107,58 @@ if single_model_all_arms:
 	fig.suptitle(use_model+'('+use_arm+')')
 	fig.tight_layout()
 	plt.savefig(figdir_primer+'/single_model_all_arms.png')
+
+
+multiple_models_cartesian = True
+if multiple_models_cartesian:
+
+	Rsun=8.277
+	spirals = sp.main_(Rsun=Rsun)
+	use_model = 'Taylor_Cordes_1992'
+	use_arm = 'all'
+	use_model2 = 'Poggio_cont_2021'
+		
+	spirals.getinfo(model=use_model)				
+	
+	plt.close('all')	
+	fig = plt.figure(figsize=(7.,6.))	
+	ax = plt.subplot(221)
+	plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'markSunGC':True,'polargrid':True}
+	spirals.readout(plotattrs,model=use_model,arm=use_arm)	
+	plotattrs = {'plot':True,'coordsys':'HC','markersize':3,'armcolour':'red'}	
+	spirals.readout(plotattrs,model=use_model2,arm='all')	
+	
+	#	
+	ax = plt.subplot(222)
+	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':True}
+	spirals.readout(plotattrs,model=use_model,arm=use_arm)	
+	plotattrs = {'plot':True,'coordsys':'GC','markersize':3,'armcolour':'red'}	
+	spirals.readout(plotattrs,model=use_model2,arm='all')
+	
+	# 
+	spirals = sp.main_(Rsun=Rsun)
+	use_model = 'Drimmel_NIR_2000'
+	use_arm = 'all'
+	use_model2 = 'Poggio_cont_2021' 	
+	spirals.getinfo(model=use_model)						
+	ax = plt.subplot(223)
+	plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'markSunGC':True,'polargrid':True}
+	spirals.readout(plotattrs,model=use_model,arm=use_arm)	
+	plotattrs = {'plot':True,'coordsys':'HC','markersize':3,'armcolour':'grey'}	
+	spirals.readout(plotattrs,model=use_model2,arm='all')
+	
+
+	#	
+	ax = plt.subplot(224)		
+	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':True}
+	spirals.readout(plotattrs,model=use_model,arm=use_arm)	
+	plotattrs = {'plot':True,'coordsys':'GC','markersize':3,'armcolour':'grey'}	
+	spirals.readout(plotattrs,model=use_model2,arm='all')
+	plt.tight_layout()
+
+	# plt.savefig(figdir_primer+'/multiple_models_cartesian.png')
+
+
 	
 
 single_model_polar_hou = False
@@ -147,51 +199,44 @@ if single_model_polar_hou:
 
 	plt.savefig(figdir_primer+'/polar_proj_single_model.png')
 
-multiple_models_polar = True
+
+multiple_models_polar = False
 if multiple_models_polar:
 
 	Rsun=8.277
 	spirals = sp.main_(Rsun=Rsun)
 	use_model = 'Taylor_Cordes_1992'
 	use_arm = 'all'
-	use_model2 = 'Poggio_cont_2021' #'GaiaPVP_cont_2022'
+	use_model2 = 'Poggio_cont_2021'
 		
 	spirals.getinfo(model=use_model)				
 	
-	plt.close('all')
-	
-	fig = plt.figure(figsize=(7.,7.))
-	
+	plt.close('all')	
+	fig = plt.figure(figsize=(7.,6.))	
+	# 
 	ax = plt.subplot(221, projection='polar')
 	plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'markSunGC':True,'polarproj':True}
 	spirals.readout(plotattrs,model=use_model,arm=use_arm)	
 	plotattrs = {'plot':True,'coordsys':'HC','markersize':3,'polarproj':True,'armcolour':'red'}	
-	spirals.readout(plotattrs,model=use_model2,arm='all')
-	
+	spirals.readout(plotattrs,model=use_model2,arm='all')	
 	polar_style(ax,title=use_model+' (HC)')
-	ax.set_ylim([0.,8])
-
+	ax.set_ylim([0.,8])	
 	
-		
+	#	
 	ax = plt.subplot(222, projection='polar')
 	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polarproj':True}
-	spirals.readout(plotattrs,model=use_model,arm=use_arm)
-	
+	spirals.readout(plotattrs,model=use_model,arm=use_arm)	
 	plotattrs = {'plot':True,'coordsys':'GC','markersize':3,'polarproj':True,'armcolour':'red'}	
 	spirals.readout(plotattrs,model=use_model2,arm='all')
-
 	polar_style(ax,title='(GC)')
-
 	ax.set_ylim([4.,12])	
 
+	# 
 	spirals = sp.main_(Rsun=Rsun)
 	use_model = 'Drimmel_NIR_2000'
 	use_arm = 'all'
-	use_model2 = 'Poggio_cont_2021' #'GaiaPVP_cont_2022'
-		
-	spirals.getinfo(model=use_model)				
-	
-	
+	use_model2 = 'Poggio_cont_2021' 	
+	spirals.getinfo(model=use_model)						
 	ax = plt.subplot(223, projection='polar')
 	plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'markSunGC':True,'polarproj':True}
 	spirals.readout(plotattrs,model=use_model,arm=use_arm)	
@@ -201,19 +246,14 @@ if multiple_models_polar:
 	polar_style(ax,title=use_model+' (HC)')
 	ax.set_ylim([0.,8])
 
-	
-		
+	#		
 	ax = plt.subplot(224, projection='polar')
 	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polarproj':True}
-	spirals.readout(plotattrs,model=use_model,arm=use_arm)
-	
+	spirals.readout(plotattrs,model=use_model,arm=use_arm)	
 	plotattrs = {'plot':True,'coordsys':'GC','markersize':3,'polarproj':True,'armcolour':'grey'}	
 	spirals.readout(plotattrs,model=use_model2,arm='all')
-
 	polar_style(ax,title='(GC)')
-
-	ax.set_ylim([4.,12])
-	
+	ax.set_ylim([4.,12])	
 	plt.tight_layout()
 
 	plt.savefig(figdir_primer+'/polar_proj_multiple_models2.png')
@@ -299,8 +339,7 @@ if single_model_polar_drim:
 
 	plt.title(use_model)
 	ax.yaxis.grid(linewidth=1.5)		
-	# ax.set_xlim([np.radians(100),np.radians(260)])
-	# ax.set_ylim([0.,8])
+
 
 
 

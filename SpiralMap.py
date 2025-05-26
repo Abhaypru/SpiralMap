@@ -54,12 +54,9 @@ class spiral_poggio_maps(object):
 		self.armcolours= [self.armcolour[ky]  for ky in self.arms  ]			
 	def info(self):
 		"""Collate arm information """
-		print('')
-		print('------------------------')	
-		d = {'Arm list': self.arms, 'Colour': self.armcolours}
-		dfmodlist = pd.DataFrame(d)			
-		print(dfmodlist)
-		print('------------------------')	
+		d = {'Arm list': self.arms, 'Colour': self.armcolours}		
+		dfmodlist = pd.DataFrame(d)	
+		print(tabulate(dfmodlist, headers = 'keys', tablefmt = 'psql'))		
 	def output_(self,plotattrs):
 		"""
 		Generate and display spiral arm density contours from OB star data.
@@ -166,12 +163,9 @@ class TaylorCordesSpiral(object):
 		'''
 		here goes basic info for the user about this model
 		'''		
-		print('')
-		print('------------------------')	
 		d = {'Arm list': self.arms, 'Colour': self.armcolours}
 		dfmodlist = pd.DataFrame(d)			
-		print(dfmodlist)
-		print('------------------------')						
+		print(tabulate(dfmodlist, headers = 'keys', tablefmt = 'psql'))									
 	def getparams(self):	   
 		"""Load original spiral parameters from Taylor & Cordes (1993) Table 1.
 		
@@ -331,14 +325,10 @@ class spiral_houhan(object):
 		
 		'''
 		Prints formatted table of arm names to stdout.
-		'''
-	
-		print('')
-		print('------------------------')	
+		'''	
 		d = {'Arm list': self.arms, 'Colour': self.armcolours}
 		dfmodlist = pd.DataFrame(d)		
-		print(dfmodlist)
-		print('------------------------')		
+		print(tabulate(dfmodlist, headers = 'keys', tablefmt = 'psql'))			
 		
 	def getparams(self):		
 		# Taken value from the table 4 from Hou & Han (2014)
@@ -478,13 +468,9 @@ class spiral_levine(object):
 	  Displays basic informations about the models
 		Prints a formatted table showing all arm identifiers to stdout.
 		'''
-	
-		print('')
-		print('------------------------')	
 		d = {'Arm list': self.arms, 'Colour': self.armcolours}
 		dfmodlist = pd.DataFrame(d)			
-		print(dfmodlist)
-		print('------------------------')		
+		print(tabulate(dfmodlist, headers = 'keys', tablefmt = 'psql'))			
 	
 	def getparams(self):
 		# Pitch angle and Solar crossing angle
@@ -619,13 +605,10 @@ class spiral_drimmel_cepheids(object):
 	def info(self):		
 		'''
 		here goes basic info for the user about this model
-		'''				
-		print('')
-		print('------------------------')	
+		'''					
 		d = {'Arm list': self.arms, 'Colour': self.armcolours}
 		dfmodlist = pd.DataFrame(data=d)
-		print(dfmodlist)
-		print('------------------------')		        
+		print(tabulate(dfmodlist, headers = 'keys', tablefmt = 'psql'))			        
 
 	def output_(self,arm):		
 		
@@ -712,12 +695,10 @@ class spiral_drimmel_nir(object):
 		Prints formatted table of arm identifiers to stdout.
 		"""
 	
-		print('')
-		print('------------------------')	
 		d = {'Arm list': self.arms, 'Colour': self.armcolours}
 		dfmodlist = pd.DataFrame(d)			
-		print(dfmodlist)
-		print('------------------------')		        
+		print(tabulate(dfmodlist, headers = 'keys', tablefmt = 'psql'))		
+	        
 	def getdata(self):
 		"""Load and preprocess spiral arm data from FITS file.
 		
@@ -858,12 +839,10 @@ class reid_spiral(object):
 		'''
 		here goes basic info for the user about this model
 		'''	
-		print('')
-		print('------------------------')	
+
 		d = {'Arm list': self.arms, 'Colour': self.armcolours}
 		dfmodlist = pd.DataFrame(d)			
-		print(dfmodlist)
-		print('------------------------')				
+		print(tabulate(dfmodlist, headers = 'keys', tablefmt = 'psql'))				
 		
 	def getparams(self,arm):
 		"""Load spiral parameters for specified arm from Reid et al. (2019) Table 4.
@@ -1031,6 +1010,11 @@ class main_(object):
 							 'Taylor_Cordes_1992':TaylorCordesSpiral(),
 							 'Hou_Han_2014':spiral_houhan(),
 							 'Drimmel_Ceph_2024':spiral_drimmel_cepheids()}
+							 
+		self.models_desc = 	['HII','NIR emission',
+					   'HI','HII/GMC/Masers','MASER parallax',
+					   'Upper main sequence (map)','OB stars (map)','Cepheids']  			 
+							 
 	def getinfo(self,model=''):	
 		'''                
 		plotattrs_description:
@@ -1057,12 +1041,12 @@ class main_(object):
 		'''
 	
 		if model == '':		
-			print('try self.getinfo(model) for more details')
-			print('')
-			print('------------------------')			
-			dfmodlist = pd.DataFrame(self.models,columns=['Available models & maps:'])
-			print(dfmodlist)
-			print('------------------------')
+			print('try self.getinfo(model) for more details')		
+			dfmodlist = pd.DataFrame(self.models,columns=['Available models & maps:'])			
+			d = {'Available models & maps:': self.models, 'Description': self.models_desc}
+			dfmodlist = pd.DataFrame(d)					
+			print(tabulate(dfmodlist, headers = 'keys', tablefmt = 'psql'))
+
 		else:
 			
 			try:
