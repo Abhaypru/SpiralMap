@@ -984,21 +984,21 @@ class reid_spiral(object):
 		xhc2 = xgc2 - xsun	
 		yhc = ygc			
 		self.dout = {'xhc':xhc,'yhc':yhc,'xgc':xgc,'ygc':ygc}													
-class main_(object,print_=False):
+class main_(object):
 	'''
 	To do: find a way to reset modrec using plot axis
 	'''
-	def __init__(self,Rsun=8.277):       	
+	def __init__(self,Rsun=8.277,print_=True):       	
 		self.root_ = root_
 		self.dataloc = dataloc        
 		self.xsun = -Rsun
 		self.Rsun = Rsun        
-		self.listmodels(print_=print_)
-		self.getinfo()	    
+		self.listmodels()
+		self.getinfo(print_=print_)	    
 		
 		self.modrec = []
 		self.armrec = []
-	def listmodels(self,print_=True):        		
+	def listmodels(self):        		
 		self.models = ['Taylor_Cordes_1992','Drimmel_NIR_2000',
 					   'Levine_2006','Hou_Han_2014','Reid_2019',
 					   'Poggio_cont_2021','GaiaPVP_cont_2022','Drimmel_Ceph_2024']        
@@ -1015,7 +1015,7 @@ class main_(object,print_=False):
 					   'HI','HII/GMC/Masers','MASER parallax',
 					   'Upper main sequence (map)','OB stars (map)','Cepheids']  			 
 							 
-	def getinfo(self,model=''):	
+	def getinfo(self,model='',print_=True):	
 		'''                
 		plotattrs_description:
 		
@@ -1045,7 +1045,9 @@ class main_(object,print_=False):
 			dfmodlist = pd.DataFrame(self.models,columns=['Available models & maps:'])			
 			d = {'Available models & maps:': self.models, 'Description': self.models_desc}
 			dfmodlist = pd.DataFrame(d)					
-			print(tabulate(dfmodlist, headers = 'keys', tablefmt = 'psql'))
+			
+			if print_:			
+				print(tabulate(dfmodlist, headers = 'keys', tablefmt = 'psql'))
 
 		else:
 			
