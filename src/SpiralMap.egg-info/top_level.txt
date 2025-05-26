@@ -1,8 +1,0 @@
-__init__
-datafiles
-example
-figdir_primer
-models_
-mytools
-test
-version
