@@ -1,9 +1,11 @@
 
 #--------------------------------------------
 # import utilities package / set root 
-exec(open("./mytools.py").read()) 
-root_ = os.getcwd()
+import os
+from os.path import dirname
+root_ = dirname(__file__)
 dataloc = root_+'/datafiles'
+exec(open(root_+"/mytools.py").read())
 #--------------------------------------------       
 
 ### TO do:

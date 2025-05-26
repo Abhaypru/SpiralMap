@@ -1,7 +1,7 @@
 
 
-from SpiralMap import *
-import SpiralMap as sp
+from models_ import *
+import models_ as sp
 import matplotlib  as mpl
 Rsun= 8.277
 
@@ -156,7 +156,7 @@ if multiple_models_cartesian:
 	spirals.readout(plotattrs,model=use_model2,arm='all')
 	plt.tight_layout()
 
-	# plt.savefig(figdir_primer+'/multiple_models_cartesian.png')
+	plt.savefig(figdir_primer+'/multiple_models_cartesian.png')
 
 
 	
