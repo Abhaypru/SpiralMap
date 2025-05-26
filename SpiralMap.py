@@ -984,7 +984,7 @@ class reid_spiral(object):
 		xhc2 = xgc2 - xsun	
 		yhc = ygc			
 		self.dout = {'xhc':xhc,'yhc':yhc,'xgc':xgc,'ygc':ygc}													
-class main_(object):
+class main_(object,print_=False):
 	'''
 	To do: find a way to reset modrec using plot axis
 	'''
@@ -993,12 +993,12 @@ class main_(object):
 		self.dataloc = dataloc        
 		self.xsun = -Rsun
 		self.Rsun = Rsun        
-		self.listmodels()
+		self.listmodels(print_=print_)
 		self.getinfo()	    
 		
 		self.modrec = []
 		self.armrec = []
-	def listmodels(self):        		
+	def listmodels(self,print_=True):        		
 		self.models = ['Taylor_Cordes_1992','Drimmel_NIR_2000',
 					   'Levine_2006','Hou_Han_2014','Reid_2019',
 					   'Poggio_cont_2021','GaiaPVP_cont_2022','Drimmel_Ceph_2024']        
