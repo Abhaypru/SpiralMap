@@ -1,7 +1,7 @@
 
 #--------------------------------------------
 # import utilities package / set root 
-exec(open("./dtools.py").read()) 
+exec(open("./mytools.py").read()) 
 root_ = os.getcwd()
 dataloc = root_+'/datafiles'
 #--------------------------------------------       
