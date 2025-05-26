@@ -162,7 +162,7 @@ def _polarproj(spimod,plotattrs):
 													
 		plt.plot(0.,0.,marker='*',markersize=plotattrs['markersize'],color='black')		
 		plt.plot(np.radians(180.),abs(spimod.xsun),marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')				
-		plt.plot(np.radians(spimod.dout['phi4']),spimod.dout['rgc'],'.',color=useclr)	
+		plt.plot(np.radians(spimod.dout['phi4']),spimod.dout['rgc'],'.',markersize=plotattrs['markersize'],color=useclr)	
 		try:
 			plt.plot(np.radians(spimod.dout['phi4_ex']),spimod.dout['rgc_ex'],'.',color=useclr)	
 		except KeyError:
@@ -170,11 +170,9 @@ def _polarproj(spimod,plotattrs):
 	if plotattrs['plot'] and plotattrs['polarproj'] and plotattrs['coordsys'].lower()=='hc':
 		plt.plot(np.radians(0.),abs(spimod.xsun),marker='*',markersize=plotattrs['markersize'],color='black')
 		plt.plot(0.,0.,marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')															
-		plt.plot(np.radians(spimod.dout['glon4']),spimod.dout['dhelio'],'.',color=useclr)	
-		print('')
+		plt.plot(np.radians(spimod.dout['glon4']),spimod.dout['dhelio'],'.',markersize=plotattrs['markersize'],color=useclr)			
 		try:
-			plt.plot(np.radians(spimod.dout['glon4_ex']),spimod.dout['dhelio_ex'],'.',color=useclr)	
-			print('')
+			plt.plot(np.radians(spimod.dout['glon4_ex']),spimod.dout['dhelio_ex'],'.',color=useclr)				
 		except KeyError:
 			pass
 	
@@ -196,3 +194,13 @@ def getangular(spimod):
 		spimod.dout['glon_ex'],spimod.dout['glat_ex'],spimod.dout['dhelio_ex'] = xyz2lbr(spimod.dout['xhc_ex'],spimod.dout['yhc_ex'],0)
 		
 	
+def polar_style(ax,title='',rticks=[3., 6.,9.,12,15.,20.]):
+	
+	ax.set_rticks(rticks)	
+	rlabels = ax.get_ymajorticklabels()
+	for label in rlabels:
+	    label.set_color('blue')
+	    label.set_size(fontsize=10)
+	ax.yaxis.grid(linewidth=1.5)	    
+	plt.title(title)
+	return
