@@ -1,6 +1,10 @@
+[build-system]
+requires = ["hatchling >= 1.26"]
+build-backend = "hatchling.build"
+
 [project]
 name = "SpiralMap"
-version = "0.0.4"
+version = "0.0.0.0"
 authors = [
   { name="Prusty & Khanna", email="shourya.khanna@inaf.it" },
 ]
@@ -17,3 +21,6 @@ license-files = ["LICEN[CS]E*"]
 [project.urls]
 Homepage = "https://github.com/Abhaypru/SpiralMap"
 Issues = "https://github.com/Abhaypru/SpiralMap/issues"
+
+[tool.setuptools.package-data]
+datafiles = ["/*"]
