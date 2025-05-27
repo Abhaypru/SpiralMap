@@ -35,20 +35,20 @@ To be used as a Python module,
 %============================ 
 %TABLE: list of available models
 \begin{table}
-\caption{Basic summary of the spiral arm models included in \spiralmap{}. \label{tab:modsummary}}
+\caption{Basic summary of the spiral arm models included in spiralmap. \label{tab:modsummary}}
 \begin{tabular}{lll}
 \hline
 \hline
 Model	& Reference	& Description \\
 \hline
-\taylorcordes & \cite{Taylor:1993} &  Based on free-electron density distributions fitted to pulsar dispersion measures to trace spiral arms. \\ 
-\drimmelnir & \cite{drimmel2000} & Based on Galactic plane emission in the NIR. \\ 
-\levine &\cite{Levine:2006} & Based on HI (21 cm) survey line data to trace the gaseous structure of the Milky Way spiral arms. \\
-\houhan & \cite{Hou:2014} &  Adopts a logarithmic spiral framework , based on HII/ GMC/methanol Maser observations.  \\ 
-\reid & \cite{Reid:2019} 
+taylorcordes & Taylor:1993 &  Based on free-electron density distributions fitted to pulsar dispersion measures to trace spiral arms. \\ 
+drimmelnir & drimmel2000 & Based on Galactic plane emission in the NIR. \\ 
+levine & Levine:2006 & Based on HI (21 cm) survey line data to trace the gaseous structure of the Milky Way spiral arms. \\
+houhan & Hou:2014 &  Adopts a logarithmic spiral framework , based on HII/ GMC/methanol Maser observations.  \\ 
+reid & Reid:2019
  & Based on high-precision parallax measurements of MASERS.  \\ 
-\poggio & \cite{Poggio:2021} & \textit{Gaia}-based model tracing stellar over-densities in the Galactic disk. \\ 
-Drimmel\_ceph\_2024 & \cite{Drimmel:2024} & Uses Cepheid variables to model the young stellar spiral structure. \\ 
+poggio & Poggio:2021 & \textit{Gaia}-based model tracing stellar over-densities in the Galactic disk. \\ 
+Drimmel\_ceph\_2024 & Drimmel:2024 & Uses Cepheid variables to model the young stellar spiral structure. \\ 
 \hline
 \end{tabular}
 \end{table}
