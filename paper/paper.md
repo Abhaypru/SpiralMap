@@ -31,6 +31,8 @@ To be used as a Python module,
 
 ![Left: posterior distribution of an event in log10(timescale)-log10(parallax) space, overlaid on 'star', 'white dwarf', 'neutron star' and 'black hole' contours. Right: bars showing probabilities of that event belonging to each of the lens populations.\label{spiral}](spiral.png)
 
+@Drimmel:2024
+
 
 # Availability
 
