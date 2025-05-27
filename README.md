@@ -25,9 +25,11 @@ Installation
 
 Install the latest released version using ``pip``:
 
-..  code-block::
+```python
+ pip install mwdust
+```
 
-   pip install mwdust
+  
 
 To install the latest development version, clone the repository and do
 
