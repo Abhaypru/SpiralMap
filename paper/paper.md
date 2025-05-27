@@ -26,29 +26,11 @@ The Milky Way is known
 
 
 # SpiralMap as a Python module
-To be used as a Python module, 
+To be used as a Python module, \cite{Taylor:1993}
 
 
 ![Left: posterior distribution of an event in log10(timescale)-log10(parallax) space, overlaid on 'star', 'white dwarf', 'neutron star' and 'black hole' contours. Right: bars showing probabilities of that event belonging to each of the lens populations.\label{spiral}](spiral.png)
 
-\begin{table}
-\caption{Basic summary of the spiral arm models included in \textit{SpiralMap} . \label{tab:modsummary}}
-\begin{tabular}{lll}
-\hline
-\hline
-Model	& Reference	& Description \\
-\hline
-taylorcordes & \cite{Taylor:1993} &  Based on free-electron density distributions fitted to pulsar dispersion measures to trace spiral arms. \\ 
-drimmelnir &  & Based on Galactic plane emission in the NIR. \\ 
-levine & & Based on HI (21 cm) survey line data to trace the gaseous structure of the Milky Way spiral arms. \\
-houhan &  &  Adopts a logarithmic spiral framework , based on HII/ GMC/methanol Maser observations.  \\ 
-reid &  & Based on high-precision parallax measurements of MASERS.  \\ 
-poggio &  & \textit{Gaia}-based model tracing stellar over-densities in the Galactic disk. \\ 
-Gaia collaboration &  & \textit{Gaia}-based model tracing stellar over-densities in the Galactic disk. \\ 
-Drimmel\_ceph\_2024 & & Uses Cepheid variables to model the young stellar spiral structure. \\ 
-\hline
-\end{tabular}
-\end{table}
 
 
 # Availability
