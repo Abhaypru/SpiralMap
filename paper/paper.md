@@ -1,5 +1,5 @@
 ---
-title: 'SpiralMap: implementation in python'
+title: 'SpiralMap: A python library of the implementation in python'
 tags:
   - galactic structure
   - Python
