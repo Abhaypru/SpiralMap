@@ -1,12 +1,19 @@
-# SpiralMap
-A Python library of the major spiral arm models of the Milky Way
-# Acknowledging SpiralMap
-If you make use of this package, please cite (), as well as the particular spiral models used. A BibTex file with the relevant citations is provided under 'datafiles'.
+SpiralMap
+======
 
-@software{spiralmap,  
-  author = {Prusty, Abhay Kumar and Khanna, Shourya},  
-  title = {SpiralMap: A Python library of the Milky Way's spiral structure},  
-  year = {2025},  
-  publisher = {GitHub},  
-  url = {[https://github.com/Abhaypru/SpiralMapping_package](https://github.com/Abhaypru/SpiralMapping_package)}  
-}  
+**Spiral arm maps and models of the Milky Way**
+
+Installation
+-------------
+
+Install the latest released version using ``pip``:
+
+..  code-block::
+
+   pip install SpiralMap
+
+Acknowledging ``SpiralMap``
+---------------------------------------
+
+Please cite the accompanying JOSS paper (arxiv link), as well as the individual spiral models used. We provide a BibTex file with the relevant citations in 'datafiles/spiral.bib'.
+
