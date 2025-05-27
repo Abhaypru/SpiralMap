@@ -8,7 +8,13 @@ Installation
 
 Install the latest released version using ``pip``:
 
-..  code-block::
+..  code-block:: python
+
+   import mwdust
+   drimmel= mwdust.Drimmel03(filter='2MASS H')
+   combined= mwdust.Combined15(filter='2MASS H')
+   combined19= mwdust.Combined19(filter='2MASS H')
+   sfd= mwdust.SFD(filter='2MASS H')
 
    pip install SpiralMap
 
