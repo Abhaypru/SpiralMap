@@ -27,18 +27,18 @@ The Milky Way is known
 # dfitspy as a Python module
 To be used as a Python module, ``dfitspy`` must be imported. Then a set of command have to be used in order to produce the final list of filenames/keywords/values. In short, three main commands must be used:
 
-``+----+----------------------------+---------------------------+``
-``|    | Available models & maps:   | Description               |``
-``|----+----------------------------+---------------------------|``
-``|  0 | Taylor_Cordes_1992         | HII                       |``
-``|  1 | Drimmel_NIR_2000           | NIR emission              |``
-``|  2 | Levine_2006                | HI                        |``
-``|  3 | Hou_Han_2014               | HII/GMC/Masers            |``
-``|  4 | Reid_2019                  | MASER parallax            |``
-``|  5 | Poggio_cont_2021           | Upper main sequence (map) |``
-``|  6 | GaiaPVP_cont_2022          | OB stars (map)            |``
-``|  7 | Drimmel_Ceph_2024          | Cepheids                  |``
-``+----+----------------------------+---------------------------+``
++----+----------------------------+---------------------------+
+|    | Available models & maps:   | Description               |
+|----+----------------------------+---------------------------|
+|  0 | Taylor_Cordes_1992         | HII                       |
+|  1 | Drimmel_NIR_2000           | NIR emission              |
+|  2 | Levine_2006                | HI                        |
+|  3 | Hou_Han_2014               | HII/GMC/Masers            |
+|  4 | Reid_2019                  | MASER parallax            |
+|  5 | Poggio_cont_2021           | Upper main sequence (map) |
+|  6 | GaiaPVP_cont_2022          | OB stars (map)            |
+|  7 | Drimmel_Ceph_2024          | Cepheids                  |
++----+----------------------------+---------------------------+
 
 
 And the list of keywords must be prepared, and eventually the grepping values:\
