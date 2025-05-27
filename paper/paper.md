@@ -1,5 +1,5 @@
 ---
-title: 'SpiralMap: a Python library of the Milky Way's spiral arms'
+title: 'dfitspy: a dfits|fitsort implementation in python'
 tags:
   - galactic structure
   - Python
