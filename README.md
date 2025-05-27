@@ -8,10 +8,6 @@ Installation
 
 Install the latest released version using ``pip``:
 
-```python
-   pip install SpiralMap
-```
-
 ```
    pip install SpiralMap
 ```
