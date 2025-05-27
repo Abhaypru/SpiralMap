@@ -1,20 +1,17 @@
 ---
-title: 'SpiralMap: A Python library of the Milky Way's spiral arms'
+title: 'dfitspy: a dfits|fitsort implementation in python'
 tags:
+  - fits files
   - Python
-  - astronomy
-  - galactic structure
-  - galactic dynamics
-  - milky way
+  - Astronomy
 authors:
-  - name: Abhay Kumar Prusty 
-    orcid: 0009-0009-6412-4460
-    equal-contrib: true
+  - name: Romain Thomas
+    orcid: 0000-0001-8385-3276
     affiliation: 1
 affiliations:
- - name: IISER Kolkata, India
+ - name: European Southern Observatory, Av. Alonso de Córdoa 3107, 7630355 Vitacura, Santiago, Chile
    index: 1
-date: 28 May 2025
+date: 28 January 2019
 bibliography: paper.bib
 ---
 
