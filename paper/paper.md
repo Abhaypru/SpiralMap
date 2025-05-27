@@ -46,7 +46,7 @@ reid & \cite{Reid:2019}
  & Based on high-precision parallax measurements of MASERS.  \\ 
 poggio & \cite{Poggio:2021} & \textit{Gaia}-based model tracing stellar over-densities in the Galactic disk. \\ 
 Gaia collaboration &  & \textit{Gaia}-based model tracing stellar over-densities in the Galactic disk. \\ 
-Drimmel\_ceph\_2024 & \cite{Drimmel:2024} & Uses Cepheid variables to model the young stellar spiral structure. \\ 
+Drimmel_ceph_2024 & \cite{Drimmel:2024} & Uses Cepheid variables to model the young stellar spiral structure. \\ 
 \hline
 \end{tabular}
 \end{table}
