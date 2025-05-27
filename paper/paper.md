@@ -1,17 +1,17 @@
 ---
 title: 'dfitspy: a dfits|fitsort implementation in python'
 tags:
-  - fits files
+  - galactic structure
   - Python
   - Astronomy
 authors:
-  - name: Romain Thomas
-    orcid: 0000-0001-8385-3276
+  - name: Abhay Kumar Prusty 
+    orcid: 0009-0009-6412-4460
     affiliation: 1
 affiliations:
- - name: European Southern Observatory, Av. Alonso de Córdoa 3107, 7630355 Vitacura, Santiago, Chile
+ - name: IISER Kolkata, India
    index: 1
-date: 28 January 2019
+date: 28 May 2025
 bibliography: paper.bib
 ---
 
