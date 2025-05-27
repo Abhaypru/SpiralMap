@@ -19,7 +19,7 @@ affiliations:
  - name: IISER Kolkata, India
    index: 1
  - name: INAF Torino, Italy
-   index: 2   
+   index: 2 
 date: 28 May 2025
 bibliography: paper.bib
 ---
