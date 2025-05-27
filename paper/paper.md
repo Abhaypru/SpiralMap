@@ -24,29 +24,21 @@ bibliography: paper.bib
 The Milky Way is known 
 
 
-# dfitspy as a Python module
-To be used as a Python module, ``dfitspy`` must be imported. Then a set of command have to be used in order to produce the final list of filenames/keywords/values. In short, three main commands must be used:
+# SpiralMap as a Python module
+To be used as a Python module, 
 
 
 ![Left: posterior distribution of an event in log10(timescale)-log10(parallax) space, overlaid on 'star', 'white dwarf', 'neutron star' and 'black hole' contours. Right: bars showing probabilities of that event belonging to each of the lens populations.\label{spiral}](spiral.png)
 
 
-And the list of keywords must be prepared, and eventually the grepping values:\
-``listkeys = ['author', 'number', 'type']``\
-``grepping = ['2dspec']``
-
-Finally, we can fitsort the files and eventually grep.\
-``fitsortgrep = dfitspy.dfitsort(listfiles, listkeys, grepping)``
-
-The final output is stored as a dictionnary of files for which each keywords/values is given. It can also be displayed in the same way as for the terminal output (see above).
-
 # Availability
 
-``dfitspy`` is a GPL licensed software and the source code is available at https://github.com/astrom-tom/dfitspy. The full documentation is available at https://astrom-tom.github.io/dfitspy/build/html/index.html .
+``dfitspy`` is a GPL licensed software and the source code is available at https://github.com/Abhaypru/SpiralMap. The full documentation is available at https://astrom-tom.github.io/dfitspy/build/html/index.html .
 
 # Acknowledgements
 
-The author would like to thank the Journal of Open Source Software to give the opportunity to researchers to publish their softwares and to the referee of this paper for helpful comments.
+SK acknowledges support from the European Union's Horizon 2020 research and innovation program under the GaiaUnlimited project (grant agreement No 101004110).
+`SpiralMap` depends on NumPy [@Harris2020], SciPy [@Virtanen2020], ASDF [@Greenfield2015], Matplotlib [@Hunter2007]
 
 # References
 
