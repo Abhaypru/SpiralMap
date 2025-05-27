@@ -1,5 +1,5 @@
 ---
-title: 'SpiralMap: a dfits|fitsort implementation in python'
+title: 'SpiralMap: implementation in python'
 tags:
   - galactic structure
   - Python
