@@ -12,6 +12,10 @@ Install the latest released version using ``pip``:
    pip install SpiralMap
 ```
 
+```
+   pip install SpiralMap
+```
+
 Acknowledging ``SpiralMap``
 ---------------------------------------
 
