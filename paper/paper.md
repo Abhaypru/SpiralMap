@@ -1,5 +1,5 @@
 ---
-title: 'SpiralMap: A python library of the implementation in python'
+title: 'SpiralMap: A python library of the Milky Way's spiral arms implementation in python'
 tags:
   - galactic structure
   - Python
