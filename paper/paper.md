@@ -32,7 +32,7 @@ To be used as a Python module,
 ![Left: posterior distribution of an event in log10(timescale)-log10(parallax) space, overlaid on 'star', 'white dwarf', 'neutron star' and 'black hole' contours. Right: bars showing probabilities of that event belonging to each of the lens populations.\label{spiral}](spiral.png)
 
 \begin{table}
-\caption{Basic summary of the spiral arm models included in \texit{SpiralMap} . \label{tab:modsummary}}
+\caption{Basic summary of the spiral arm models included in \textit{SpiralMap} . \label{tab:modsummary}}
 \begin{tabular}{lll}
 \hline
 \hline
@@ -45,6 +45,7 @@ houhan & \cite{Hou:2014} &  Adopts a logarithmic spiral framework , based on HII
 reid & \cite{Reid:2019} 
  & Based on high-precision parallax measurements of MASERS.  \\ 
 poggio & \cite{Poggio:2021} & \textit{Gaia}-based model tracing stellar over-densities in the Galactic disk. \\ 
+Gaia collaboration & \cite{gaia22} & \textit{Gaia}-based model tracing stellar over-densities in the Galactic disk. \\ 
 Drimmel\_ceph\_2024 & \cite{Drimmel:2024} & Uses Cepheid variables to model the young stellar spiral structure. \\ 
 \hline
 \end{tabular}
