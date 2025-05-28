@@ -1,3 +1,9 @@
+#######################################################################
+# SpiralMap: a library of the Milky Way's spiral arms
+# History:  	
+# May 2025: Prusty (IISER Kolkata) & Shourya Khanna (INAF Torino)
+#######################################################################
+
 
 #--------------------------------------------
 # import utilities package / set root 

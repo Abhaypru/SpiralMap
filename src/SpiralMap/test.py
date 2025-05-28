@@ -1,15 +1,13 @@
+#####################
+# testing the scripts here...
+
+
 
 
 from models_ import *
 import models_ as sp
 import matplotlib  as mpl
 Rsun= 8.277
-
-# import imp,SpiralMap, dtools
-# # imp.reload(SpiralMap)
-# imp.reload(dtools)
-# import putil
-
 
 figdir_primer = 'figdir_primer'
 os.system('rm -rf '+figdir_primer); os.system('mkdir '+figdir_primer)
@@ -108,8 +106,7 @@ if single_model_all_arms:
 	fig.tight_layout()
 	plt.savefig(figdir_primer+'/single_model_all_arms.png')
 
-
-multiple_models_cartesian = True
+multiple_models_cartesian = False
 if multiple_models_cartesian:
 
 	Rsun=8.277
@@ -158,7 +155,6 @@ if multiple_models_cartesian:
 
 	plt.savefig(figdir_primer+'/multiple_models_cartesian.png')
 
-	
 
 single_model_polar_hou = False
 if single_model_polar_hou:
@@ -256,68 +252,4 @@ if multiple_models_polar:
 	plt.tight_layout()
 
 	plt.savefig(figdir_primer+'/polar_proj_multiple_models2.png')
-
-
-
-
-
-single_model_polar_drim = False
-if single_model_polar_drim:
-
-
-	print('plotting figures for primer')
-	Rsun=8.277
-	spirals = sp.main_(Rsun=Rsun)
-	use_model = 'Drimmel_NIR_2000'
-	use_arm = 'all'
-	use_model2 = 'Poggio_cont_2021'		
-	use_model2 = 'GaiaPVP_cont_2022'		
-	spirals.getinfo(model=use_model)
-				
-	plt.close('all')
-	fig, ax = plt.subplots(figsize=(7.5,7.),subplot_kw=dict(projection="polar"))
-	
-	plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'markSunGC':True,'polarproj':True}
-	spirals.readout(plotattrs,model=use_model,arm=use_arm)
-
-	plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'markSunGC':True,'polarproj':True} #,'armcolour':'red'}
-	spirals.readout(plotattrs,model=use_model2,arm=use_arm)
-	
-	
-	rlabels = ax.get_ymajorticklabels()
-	for label in rlabels:
-	    label.set_color('blue')
-	    label.set_size(fontsize=10)
-
-	plt.title(use_model)
-	ax.grid(linewidth=1.5)	
-	ax.yaxis.grid(linewidth=1.5)	
-	# ax.set_xlim([np.radians(100),np.radians(260)])
-	# ax.set_ylim([0.,8])
-
-	plt.savefig(figdir_primer+'/polar_proj_single_model_single_arm_hc_hou.png')
-	
-	plt.close('all')
-	fig, ax = plt.subplots(figsize=(7.5,7.),subplot_kw=dict(projection="polar"))
-	
-	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polarproj':True}
-	spirals.readout(plotattrs,model=use_model,arm=use_arm)
-
-	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polarproj':True} #,'armcolour':'red'}
-	spirals.readout(plotattrs,model=use_model2,arm=use_arm)
-
-	ax.set_rticks([3., 6.,9.,12,15.,20.])
-	
-	rlabels = ax.get_ymajorticklabels()
-	for label in rlabels:
-	    label.set_color('blue')
-	    label.set_size(fontsize=10)
-
-	plt.title(use_model)
-	ax.yaxis.grid(linewidth=1.5)		
-
-
-
-
-	plt.savefig(figdir_primer+'/polar_proj_single_model_single_arm_gc_drim.png')
 
