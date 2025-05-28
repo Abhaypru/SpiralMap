@@ -125,14 +125,14 @@ if multiple_models_cartesian:
 	ax = plt.subplot(221)
 	plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'markSunGC':True,'polargrid':True}
 	spirals.readout(plotattrs,model=use_model,arm=use_arm)	
-	plotattrs = {'plot':True,'coordsys':'HC','markersize':3}	
+	plotattrs = {'plot':True,'coordsys':'HC','markersize':2}	
 	spirals.readout(plotattrs,model=use_model2,arm='all')	
 	
 	#	
 	ax = plt.subplot(222)
 	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':True}
 	spirals.readout(plotattrs,model=use_model,arm=use_arm)	
-	plotattrs = {'plot':True,'coordsys':'GC','markersize':3,'armcolour':'red'}	
+	plotattrs = {'plot':True,'coordsys':'GC','markersize':2}	
 	spirals.readout(plotattrs,model=use_model2,arm='all')
 	
 	# 
@@ -144,7 +144,7 @@ if multiple_models_cartesian:
 	ax = plt.subplot(223)
 	plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'markSunGC':True,'polargrid':True}
 	spirals.readout(plotattrs,model=use_model,arm=use_arm)	
-	plotattrs = {'plot':True,'coordsys':'HC','markersize':1,'armcolour':'grey'}	
+	plotattrs = {'plot':True,'coordsys':'HC','markersize':1}	
 	spirals.readout(plotattrs,model=use_model2,arm='all')
 	
 
@@ -152,7 +152,7 @@ if multiple_models_cartesian:
 	ax = plt.subplot(224)		
 	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':True}
 	spirals.readout(plotattrs,model=use_model,arm=use_arm)	
-	plotattrs = {'plot':True,'coordsys':'GC','markersize':1,'armcolour':'grey'}	
+	plotattrs = {'plot':True,'coordsys':'GC','markersize':1}	
 	spirals.readout(plotattrs,model=use_model2,arm='all')
 	plt.tight_layout()
 

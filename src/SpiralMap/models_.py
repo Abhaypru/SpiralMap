@@ -9,9 +9,7 @@ exec(open(root_+"/mytools.py").read())
 #--------------------------------------------       
 
 ### TO do:
-#1 where does the code break
-#2 consistent colours for similar arms
-# docstrings cleanup
+#1 consistent colours for similar arms
 ####################################
 
 class spiral_poggio_maps(object):
@@ -19,32 +17,13 @@ class spiral_poggio_maps(object):
 	Class containing spiral arm models from
 		Poggio_2021: Poggio al. 2021 (EDR3 UMS stars)
 		GaiaPVP_2022: Gaia collaboration et al. 2021 (OB stars)
-		
-	Methods
-	-------
-	getarmlist()
-		Initialize arm names and colors
-	info()
-		Print basic model information
-	output_(coordsys='HC')
-		Generate spiral arm contours in specified coordinate system   
-			
+					
 	HISTORY:
 		09 May 2025: Prusty/Khanna					
 	"""
 	
 	def __init__(self,model_='GaiaPVP_cont_2022'):		
 		
-		"""
-		NAME:
-			__init__
-		PURPOSE:
-			Initialize the Poggio 2021 spiral arm model	
-		OUTPUT:
-			object (self.loc = model directory)
-			object (self.arms = available arms in this model)
-			object (self.armcolour = arm colours in this model)			
-		"""
 		self.model_ = model_
 		self.loc = dataloc + '/'+model_
 		self.getarmlist()	
@@ -60,14 +39,6 @@ class spiral_poggio_maps(object):
 		dfmodlist = pd.DataFrame(d)	
 		print(tabulate(dfmodlist, headers = 'keys', tablefmt = 'psql'))		
 	def output_(self,plotattrs):
-		"""
-		Generate and display spiral arm density contours from OB star data.
-	
-		Parameters
-		----------
-		coordsys : str, optional
-			Coordinate system: 'HC' (heliocentric) or 'GC' (galactocentric).
-		 """
 		
 		xsun = self.xsun
 	
@@ -125,36 +96,10 @@ class spiral_poggio_maps(object):
 			return cset1, cset2														
 class TaylorCordesSpiral(object):	
 	""" Taylor & Cordes (1993) Galactic spiral arm model,	  
-	based on radio pulsar observations. The model defines four major spiral arms and 
-	provides both Galactocentric and Heliocentric coordinates for the arm segments.
-	
-	Attributes
-	----------
-	arms : ndarray
-		Array of arm identifiers ['Arm1', 'Arm2', 'Arm3', 'Arm4']
-	armcolour : dict
-		Color mapping for visualization {'Arm1': 'yellow', ...}
-	params : dict
-		Original parameters from paper (angles in deg, radii in kpc)
-	R0 : float
-		Solar galactocentric radius (kpc), set from xsun parameter
-	
-	Methods
-	-------
-	info()
-		Display basic model information
-	model_(arm_name)
-		Generate coordinates for specified arm
-	plot_arms(coord_system)
-		Visualize arms in chosen coordinate system
-	output_(arm, typ_)
-		Get coordinates in structured format
+	based on radio pulsar observations. The model defines four major spiral arms.	
 	"""
     
-	def __init__(self):
-		
-		"""Initialize spiral parameters from Taylor & Cordes (1993)		
-		"""		
+	def __init__(self):		
 		self.getarmlist()        
 	def getarmlist(self):
 		"""Set arm names and colours"""
@@ -165,9 +110,7 @@ class TaylorCordesSpiral(object):
 	
 		self.getparams()        
 	def info(self):        
-		'''
-		here goes basic info for the user about this model
-		'''		
+
 		d = {'Arm list': self.arms, 'Colour': self.armcolours}
 		dfmodlist = pd.DataFrame(d)			
 		print(tabulate(dfmodlist, headers = 'keys', tablefmt = 'psql'))									
@@ -204,11 +147,6 @@ class TaylorCordesSpiral(object):
 			(x_hc, y_hc, x_gc, y_gc) coordinate arrays where:
 			- hc = heliocentric coordinates
 			- gc = galactocentric coordinates
-		
-		Raises
-		------
-		ValueError
-			If invalid arm_name is provided
 		"""	
 		
 		self.getparams()
@@ -235,47 +173,21 @@ class TaylorCordesSpiral(object):
 		x_hc = x_gc + self.R0  # Sun at (-R0, 0) in GC
 		
 		return x_hc, y_gc, x_gc, y_gc	
-	def plot_arms(self, coord_system='HC'):
-		"""Visualize spiral arms in specified coordinate system.
-		
-		Parameters
-		----------
-		coord_system : {'HC', 'GC'}, default 'HC'
-			Coordinate system for visualization:
-		Notes
-		-----
-		Creates matplotlib figure with arms plotted in predefined colors
-		"""
-		plt.figure(figsize=(10, 10))
-		frame_label = "Galacto-Centric" if coord_system == 'GC' else "Helio-Centric"
-		plt.title(f"Taylor & Cordes (1993) Spiral Arm Model - {frame_label}", fontsize=14)
-		plt.grid(True, alpha=0.3)
-		
-		for arm in self.arms:
-			x_hc, y_gc, x_gc, y_gc = self.generate_arm(arm)
-			x, y = (x_gc, y_gc) if coord_system == 'GC' else (x_hc, y_hc)
-			plt.plot(x, y, color=arm['color'], label=arm['label'])	
+
 	def output_(self,arm):			
 		"""Get arm coordinates in structured format.
 		
 		Parameters
 		----------
 		arm : str
-			Arm identifier (e.g., 'Arm1')
-		typ_ : {'cartesian', 'polar'}, default 'cartesian'
-			Output coordinate type
-		
+			Arm identifier (e.g., 'Arm1')		
 		Returns
 		-------
 		dict
 			Contains coordinate arrays under keys:
 			- 'xhc', 'yhc' (heliocentric)
-			- 'xgc', 'ygc' (galactocentric)
-			- Additional keys for polar coordinates if requested
-		
-		Notes
-		-----
-		Requires prior setting of xsun attribute for coordinate conversion
+			- 'xgc', 'ygc' (galactocentric)		
+
 		"""		
 		xsun = self.xsun
 		self.R0 = -xsun  # Solar Galactocentric radius (kpc)					
@@ -286,58 +198,27 @@ class spiral_houhan(object):
 	
 	Implements the Milky Way spiral structure model from:
 	"The spiral structure of the Milky Way from classical Cepheids" (Hou & Han 2014)
-	using polynomial-logarithmic spiral functions. Provides 6 major arm segments.
-	
-	Attributes
-	----------
-	arms : ndarray
-		Array of arm names ['Norma', 'Scutum-Centaurus', ...]
-	armcolour : dict
-		Visualization colors for each arm
-	R0 : float
-		Solar galactocentric radius (kpc), calculated from xsun
-	params : dict
-		Spiral parameters from Table 4 of Hou & Han (2014)
-	
-	Methods
-	-------
-	info()
-		Display available spiral arms
-	model_(arm_name)
-		Generate coordinates for specified arm
-	output_(arm)
-		Get structured coordinate data
+	using polynomial-logarithmic spiral functions. Provides 6 major arm segments.	
 	"""
 	
-	def __init__(self):
-		
-	
+	def __init__(self):			
 		self.getarmlist()
 	
 	def getarmlist(self):
-		"""Initialize arm names and visualization colors.
-		
+		"""Initialize arm names and visualization colors.		
 		Sets:
 		- arms: List of 6 spiral arm segments
-		- armcolour: Color mapping dictionary with hex/RGB values
-		"""
-	
+		"""	
 		self.arms = np.array(['Norma','Scutum-Centaurus','Sagittarius-Carina','Perseus','Local','Outer'])
 		self.armcolour = {'Norma':'black','Scutum-Centaurus':'red','Sagittarius-Carina':'green','Perseus':'blue','Local':'purple','Outer':'gold'}
 
 		self.armcolours= [self.armcolour[ky]  for ky in self.arms  ]	
-	def info(self):
-		
-		'''
-		Prints formatted table of arm names to stdout.
-		'''	
+	def info(self):		
 		d = {'Arm list': self.arms, 'Colour': self.armcolours}
 		dfmodlist = pd.DataFrame(d)		
 		print(tabulate(dfmodlist, headers = 'keys', tablefmt = 'psql'))			
 		
-	def getparams(self):		
-		# Taken value from the table 4 from Hou & Han (2014)
-		
+	def getparams(self):				
 		"""Load spiral parameters from Hou & Han (2014) Table 4.
 		
 		Returns
@@ -389,7 +270,6 @@ class spiral_houhan(object):
 		return np.exp(a + b*np.radians(θ) + c*np.radians(θ)**2 + d*np.radians(θ)**3)
 	
 	def model_(self, arm_name, n_points=500):
-		"""Generate spiral arm coordinates in both coordinate systems."""
 		
 		params_ = self.getparams()
 		params = params_[arm_name]
@@ -408,7 +288,6 @@ class spiral_houhan(object):
 		return x_hc, y_gc, x_gc, y_gc
 	
 	def output_(self, arm):			
-		"""Get structured coordinate data for analysis/plotting."""	
 		xsun = self.xsun
 		self.R0 = -xsun  # Solar Galactocentric radius (kpc)	
 		# Generate spiral arm coordinates
@@ -429,56 +308,26 @@ class spiral_levine(object):
 	
 	The model provides both galactocentric (GC) and heliocentric (HC) coordinates
 	for each spiral arm segment with fixed pitch angles.
-	
-	Attributes
-	----------
-	arms : numpy.ndarray
-		Array of arm identifiers ['Arm1', 'Arm2', 'Arm3', 'Arm4']
-	armcolour : dict
-		Color mapping for visualization purposes:
-		{'Arm1':'yellow', 'Arm2':'green', 'Arm3':'blue', 'Arm4':'purple'}
-	arms_model : dict
-		Dictionary containing spiral parameters for each arm:
-		- pitch: Pitch angle in degrees
-		- phi0: Solar crossing angle in degrees
-	R0 : float
-		Solar galactocentric radius in kpc (derived from xsun)
-	
-	Methods
-	-------
-	info()
-		Display basic information about available arms
-	model_(arm_name, R_max=25, n_points=1000)
-		Generate coordinates for a specified arm
-	plot_arms(coord_system='HC', R_max=25, show_sun=True)
-		Visualize spiral arms in chosen coordinate system
-	output_(arm, typ_='cartesian')
-		Get structured coordinate data for analysis
+		
 	"""
 	
-	def __init__(self):
-		"""Initialize spiral parameters from Levine et al. 2006"""        
+	def __init__(self):   
 		self.getarmlist()
 	
-	def getarmlist(self):
-				
+	def getarmlist(self):				
 		self.arms = np.array(['Arm1','Arm2','Arm3','Arm4'])
 		self.armcolour = {'Arm1':'yellow','Arm2':'green','Arm3':'blue','Arm4':'purple'}
 		self.getparams()
 		self.armcolours= [self.armcolour[ky]  for ky in self.arms  ]
 		
 	def info(self):
-		
-		'''
-	  Displays basic informations about the models
-		Prints a formatted table showing all arm identifiers to stdout.
-		'''
+
 		d = {'Arm list': self.arms, 'Colour': self.armcolours}
 		dfmodlist = pd.DataFrame(d)			
 		print(tabulate(dfmodlist, headers = 'keys', tablefmt = 'psql'))			
 	
 	def getparams(self):
-		# Pitch angle and Solar crossing angle
+		''' Pitch angle and Solar crossing angle '''
 		self.arms_model = {
 			'Arm1': {'pitch': 24, 'phi0': 56},   
 			'Arm2': {'pitch': 24, 'phi0': 135},
@@ -540,54 +389,13 @@ class spiral_levine(object):
 		y_gc = R * np.sin(phi)
 		
 		# Convert to Heliocentric coordinates
-		x_hc = x_gc + self.R0  # Sun at (-R0, 0) in GC
+		x_hc = x_gc + self.R0  
 	
 		return x_hc, y_gc,x_gc, y_gc
-	
-	def plot_arms(self, coord_system='HC', R_max=25, show_sun=True):
-		"""Plot spiral arms in specified coordinate system"""
-		plt.figure(figsize=(10, 10))
-		colors = plt.cm.viridis(np.linspace(0, 1, len(self.arms)))
 		
-		for arm, color in zip(self.arms_model.keys(), colors):
-			x_gc, y_gc, x_hc, y_hc = self.generate_arm(arm, R_max)
-			
-			if coord_system.upper() == 'GC':
-				plt.plot(x_gc, y_gc, color=color, label=arm)
-				plt.plot(-self.R0, 0, 'o', markersize=8, color='orange', label='Sun') if show_sun else None
-				plt.xlabel('X (GC) [kpc]')
-				plt.ylabel('Y (GC) [kpc]')
-			elif coord_system.upper() == 'HC':
-				plt.plot(x_hc, y_hc, color=color, label=arm)
-				plt.plot(0, 0, 'o', markersize=8, color='orange', label='Sun') if show_sun else None
-				plt.xlabel('X (HC) [kpc]')
-				plt.ylabel('Y (HC) [kpc]')
-			else:
-				raise ValueError("Coordinate system must be 'GC' or 'HC'")
-	
 	def output_(self, arm):				
-		"""Get structured coordinate data for analysis.
-		
-		Parameters
-		----------
-		arm : str
-			Name of arm to output (must be in self.arms)
-		typ_ : {'cartesian'}, default 'cartesian'
-			Output coordinate type (currently only cartesian supported)
-		
-		Returns
-		-------
-		dict
-			Dictionary containing coordinate arrays:
-			- 'xhc', 'yhc': Heliocentric coordinates (kpc)
-			- 'xgc', 'ygc': Galactocentric coordinates (kpc)
-		
-		Notes
-		-----
-		Requires xsun attribute to be set for coordinate conversion
-		"""    
 		xsun = self.xsun
-		self.R0 = -xsun  # Solar Galactocentric radius (kpc)    
+		self.R0 = -xsun  
 		xhc, yhc, xgc, ygc = self.model_(arm)   
 		self.dout = {
 			'xhc': xhc,
@@ -664,18 +472,7 @@ class spiral_drimmel_nir(object):
 	armcolour : dict
 		Color mapping for visualization:
 		- Main arms: black
-		- Interarms: red
-	data : dict
-		Dictionary containing arm coordinates and parameters
-	
-	Methods
-	-------
-	info()
-		Display available arm components
-	getdata()
-		Load and preprocess spiral arm data
-	output_(arm, typ_)
-		Retrieve coordinate data in specified format
+		- Interarms: red	
 	"""
 	def __init__(self):
 		"""Initialize Drimmel NIR spiral model with default parameters"""
@@ -695,9 +492,7 @@ class spiral_drimmel_nir(object):
 		self.armcolours= [self.armcolour[ky]  for ky in self.arms  ]			
 	def info(self):
 		
-		"""Display basic model information and arm components.
-		
-		Prints formatted table of arm identifiers to stdout.
+		"""Display basic model information and arm components.	
 		"""
 	
 		d = {'Arm list': self.arms, 'Colour': self.armcolours}
@@ -717,7 +512,6 @@ class spiral_drimmel_nir(object):
 		-----
 		- Original data scaled by solar galactocentric distance
 		- Phase-shifted arms loaded from separate numpy files
-		- Calculates R_GC = sqrt((x + X_sun)^2 + y^2)
 		"""
 	
 		dt = fitsread(self.loc+'/'+self.fname)
@@ -804,22 +598,7 @@ class reid_spiral(object):
 	Attributes
 	----------
 	arms : ndarray
-		Array of arm identifiers ['3-kpc', 'Norma', 'Sct-Cen', 'Sgr-Car', 'Local', 'Perseus', 'Outer']
-	armcolour : dict
-		Color mapping for visualization purposes
-	kcor : bool
-		Flag for kinematic distance correction adjustment
-	params : dict
-		Dictionary containing spiral parameters for each arm
-	
-	Methods
-	-------
-	info()
-		Display basic information about available arms
-	model_(params)
-		Generate spiral coordinates with kink parameters
-	output_(arm, typ_)
-		Get structured coordinate data
+		Array of arm identifiers ['3-kpc', 'Norma', 'Sct-Cen', 'Sgr-Car', 'Local', 'Perseus', 'Outer']	
 	"""
 	
 	def __init__(self, kcor=False):
@@ -838,13 +617,8 @@ class reid_spiral(object):
 		self.armcolour = {'3-kpc':'C6','Norma':'C5','Sct-Cen':'C4',
 		                  'Sgr-Car':'C3','Local':'C2','Perseus':'C1',
 		                  'Outer':'C0'}	
-		self.armcolours= [self.armcolour[ky]  for ky in self.arms  ]
-			                  	  		
+		self.armcolours= [self.armcolour[ky]  for ky in self.arms  ]			                  	  		
 	def info(self):		
-		'''
-		here goes basic info for the user about this model
-		'''	
-
 		d = {'Arm list': self.arms, 'Colour': self.armcolours}
 		dfmodlist = pd.DataFrame(d)			
 		print(tabulate(dfmodlist, headers = 'keys', tablefmt = 'psql'))				
@@ -968,18 +742,6 @@ class reid_spiral(object):
 						
 		return x,y, x1,y1,x2,y2	
 	def output_(self,arm):	
-		"""Get structured coordinate data for analysis/plotting.
-		Returns
-		-------
-		dict
-			For 'cartesian' type contains:
-			- xhc, yhc: Heliocentric coordinates (kpc)
-			- xgc, ygc: Galactocentric coordinates (kpc)
-	
-		Notes
-		-----
-		Polar modes create matplotlib plots directly
-		"""
 		xsun = self.xsun
 		params = self.getparams(arm)		
 		
@@ -990,9 +752,6 @@ class reid_spiral(object):
 		yhc = ygc			
 		self.dout = {'xhc':xhc,'yhc':yhc,'xgc':xgc,'ygc':ygc}													
 class main_(object):
-	'''
-	To do: find a way to reset modrec using plot axis
-	'''
 	def __init__(self,Rsun=8.277,print_=True):       	
 		self.root_ = root_
 		self.dataloc = dataloc        
@@ -1003,7 +762,13 @@ class main_(object):
 		
 		self.modrec = []
 		self.armrec = []
-	def listmodels(self):        		
+	def listmodels(self):     
+		'''
+		defines list of available models/maps
+		constructs dictionaries to initialise individual model classes
+		
+		'''
+		   		
 		self.models = ['Taylor_Cordes_1992','Drimmel_NIR_2000',
 					   'Levine_2006','Hou_Han_2014','Reid_2019',
 					   'Poggio_cont_2021','GaiaPVP_cont_2022','Drimmel_Ceph_2024']        
@@ -1021,29 +786,10 @@ class main_(object):
 					   'Upper main sequence (map)','OB stars (map)','Cepheids']  			 
 							 
 	def getinfo(self,model='',print_=True):	
-		'''                
-		plotattrs_description:
-		
-		
-		'plot': 
-		setting this True/False allows plotting or not
-				
-		'markersize':
-		used for some models 
-		
-		'coordsys':
-		'HC' (heliocentric) or 'GC' (galactocentric)
-		'linewidth':0.8,
-		'linestyle': '-',
-		'armcolour':'',
-		'markSunGC':True,
-		'xmin':'',
-		'xmax':'',
-		'ymin':'',
-		'ymax':'',
-		'polargrid':False}		
-		
 		'''
+		prints to screen the list of available models, and basic information such as tracers used to construct these
+		'''
+
 	
 		if model == '':		
 			print('try self.getinfo(model) for more details')		
@@ -1081,21 +827,24 @@ class main_(object):
 								'polargrid':False,    
 								'dataloc':dataloc}    
 	def add2plot(self,plotattrs):
+		'''
+		overplots positions of the Galactic center and the Sun
+		'''
+	
 		
-		if plotattrs['coordsys'] =='HC':						
-			# plt.axvline(0,linewidth=plotattrs['linewidth'],linestyle='--')			
-			# plt.axhline(0,linewidth=plotattrs['linewidth'],linestyle='--')		
+		if plotattrs['coordsys'] =='HC':								
 			plt.plot(0.,0.,marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')
 			plt.plot(-self.xsun,0.,marker='*',markersize=plotattrs['markersize'],color='black')		
 		if plotattrs['coordsys'] =='GC':										
-			# plt.axvline(self.xsun,linewidth=plotattrs['linewidth'],linestyle='--')			
-			# plt.axhline(0,linewidth=plotattrs['linewidth'],linestyle='--')			
 			plt.plot(0.,0.,marker='*',markersize=plotattrs['markersize'],color='black')
 			plt.plot(self.xsun,0.,marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')
 	def xyplot(self,spimod,plotattrs_):		
+
+		'''
+		handles cartesian frame plots
+		'''
 				
-		if plotattrs_['plot'] and plotattrs_['polarproj']==False :				
-			
+		if plotattrs_['plot'] and plotattrs_['polarproj']==False :							
 			plt.plot(spimod.dout['x'+plotattrs_['coordsys'].lower()],
 			         spimod.dout['y'+plotattrs_['coordsys'].lower()],
 			         '.',color=plotattrs_['armcolour'])			
@@ -1120,6 +869,9 @@ class main_(object):
 			if plotattrs_['markSunGC']:
 				self.add2plot(plotattrs_)	
 	def readout(self,plotattrs={},model='',arm='',print_=False):	
+		'''
+		main class which reads out individual models, makes plots etc.
+		'''
 						
 		if model == '':
 			 raise RuntimeError('model = blank | no model provided \n try self.getino() for list of available models')			 
@@ -1165,7 +917,7 @@ class main_(object):
 									
 class _make_supportfiles(object):
 	"""
-	is run to save supporting files
+	was run to save supporting files
 	
 	"""
 	
@@ -1179,7 +931,7 @@ class _make_supportfiles(object):
 	def prep_poggio_polar(self):	
 		'''
 		saves the poggio contours for polarprojection
-		prep_poggio_polar()		'''
+		'''
 	
 		xsun=self.xsun
 		usemodels = ['Poggio_cont_2021','GaiaPVP_cont_2022']	
@@ -1273,9 +1025,7 @@ class _make_supportfiles(object):
 			mylims[use_model]['xmax'+'_'+coordsys] = spirals.xmax
 			mylims[use_model]['ymin'+'_'+coordsys] = spirals.ymin
 			mylims[use_model]['ymax'+'_'+coordsys] = spirals.ymax
-	
-				
-	
+						
 		picklewrite(mylims,'flim_all',dataloc)		
 	def savelims(self):		
 	
@@ -1320,9 +1070,7 @@ class _make_supportfiles(object):
 				mylims[use_model][arm]['xmax'+'_'+coordsys] = spirals.xmax
 				mylims[use_model][arm]['ymin'+'_'+coordsys] = spirals.ymin
 				mylims[use_model][arm]['ymax'+'_'+coordsys] = spirals.ymax
-	
-				
-	
+						
 		picklewrite(mylims,'flim',dataloc)	
 	
 
