@@ -125,7 +125,7 @@ if multiple_models_cartesian:
 	ax = plt.subplot(221)
 	plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'markSunGC':True,'polargrid':True}
 	spirals.readout(plotattrs,model=use_model,arm=use_arm)	
-	plotattrs = {'plot':True,'coordsys':'HC','markersize':3,'armcolour':'red'}	
+	plotattrs = {'plot':True,'coordsys':'HC','markersize':3}	
 	spirals.readout(plotattrs,model=use_model2,arm='all')	
 	
 	#	
@@ -144,7 +144,7 @@ if multiple_models_cartesian:
 	ax = plt.subplot(223)
 	plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'markSunGC':True,'polargrid':True}
 	spirals.readout(plotattrs,model=use_model,arm=use_arm)	
-	plotattrs = {'plot':True,'coordsys':'HC','markersize':3,'armcolour':'grey'}	
+	plotattrs = {'plot':True,'coordsys':'HC','markersize':1,'armcolour':'grey'}	
 	spirals.readout(plotattrs,model=use_model2,arm='all')
 	
 
@@ -152,12 +152,11 @@ if multiple_models_cartesian:
 	ax = plt.subplot(224)		
 	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':True}
 	spirals.readout(plotattrs,model=use_model,arm=use_arm)	
-	plotattrs = {'plot':True,'coordsys':'GC','markersize':3,'armcolour':'grey'}	
+	plotattrs = {'plot':True,'coordsys':'GC','markersize':1,'armcolour':'grey'}	
 	spirals.readout(plotattrs,model=use_model2,arm='all')
 	plt.tight_layout()
 
 	plt.savefig(figdir_primer+'/multiple_models_cartesian.png')
-
 
 	
 
@@ -217,7 +216,7 @@ if multiple_models_polar:
 	ax = plt.subplot(221, projection='polar')
 	plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'markSunGC':True,'polarproj':True}
 	spirals.readout(plotattrs,model=use_model,arm=use_arm)	
-	plotattrs = {'plot':True,'coordsys':'HC','markersize':3,'polarproj':True,'armcolour':'red'}	
+	plotattrs = {'plot':True,'coordsys':'HC','markersize':3,'polarproj':True}	
 	spirals.readout(plotattrs,model=use_model2,arm='all')	
 	polar_style(ax,title=use_model+' (HC)')
 	ax.set_ylim([0.,8])	
@@ -258,29 +257,6 @@ if multiple_models_polar:
 
 	plt.savefig(figdir_primer+'/polar_proj_multiple_models2.png')
 
-
-
-check_poggio = False
-if check_poggio:
-
-	print('testing gaiaPVP')
-	Rsun= 8.277
-	spirals = sp.main_(Rsun=Rsun)
-	use_model1 = 'Poggio_cont_2021'		
-	use_model2 = 'GaiaPVP_cont_2022'	
-	use_model3 = 'Drimmel_NIR_2000'	
-	use_model4 = 'Levine_2006'	
-	use_arm = 'all'
-	spirals.getinfo(model=use_model1)
-				
-
-	plt.close('all')	
-	fig, ax = plt.subplots(figsize=(7.5,7.),subplot_kw=dict(projection="polar"))
-
-	plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'polarproj':True}	
-	spirals.readout(plotattrs,model=use_model1,arm='all')
-
-	plt.savefig(figdir_primer+'/testgc.png')
 
 
 

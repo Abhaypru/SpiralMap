@@ -104,14 +104,17 @@ class spiral_poggio_maps(object):
 		
 		_polarproj(self,plotattrs)	
 		
-		if plotattrs['polarproj'] == False:			
+		if plotattrs['polarproj'] == False:	
+			useclr = plotattrs['armcolour']					
+			if plotattrs['armcolour'] == '':
+				useclr = 'grey'
 			cset1 = plt.contourf(self.dout['x'+plotattrs['coordsys'].lower()],self.dout['y'+plotattrs['coordsys'].lower()],over_dens_grid.T, 
 								levels=levels_overdens1,alpha=0.05,cmap='Greys')	
 			iniz_overdens= 0. 
 			fin_overdens= 1.5 
 			N_levels_overdens= 4 
 			levels_overdens2= np.linspace(iniz_overdens,fin_overdens,N_levels_overdens)
-			cset2 = plt.contour(self.dout['x'+plotattrs['coordsys'].lower()],self.dout['y'+plotattrs['coordsys'].lower()],over_dens_grid.T,levels=levels_overdens2,colors=plotattrs['colour_contour'],linewidths=plotattrs['linewidth'])
+			cset2 = plt.contour(self.dout['x'+plotattrs['coordsys'].lower()],self.dout['y'+plotattrs['coordsys'].lower()],over_dens_grid.T,levels=levels_overdens2,colors=useclr,linewidths=plotattrs['markersize'])
 	
 			self.xmin,self.xmax =plt.gca().get_xlim()[0].copy(),plt.gca().get_xlim()[1].copy()				
 			self.ymin,self.ymax =plt.gca().get_ylim()[0].copy(),plt.gca().get_ylim()[1].copy()								
@@ -1076,7 +1079,6 @@ class main_(object):
 								'ymax':'',
 								'polarproj':False,       
 								'polargrid':False,    
-								'colour_contour':'black',    
 								'dataloc':dataloc}    
 	def add2plot(self,plotattrs):
 		
@@ -1185,7 +1187,7 @@ class _make_supportfiles(object):
 		for usemodel in usemodels:
 			
 			plt.close('all')
-			plotattrs = {'plot':True,'coordsys': 'HC','markersize':15,'linewidth':1,'polarproj':False,'colour_contour':'black'}	
+			plotattrs = {'plot':True,'coordsys': 'HC','markersize':15,'linewidth':1,'polarproj':False,'armcolour':'black'}	
 			sp = spiral_poggio_maps(model_=usemodel)
 			sp.xsun = xsun
 			cset1,cset2 = sp.output_(plotattrs)
