@@ -79,8 +79,6 @@ class spiral_poggio_maps(object):
 		N_levels_overdens= 2
 		levels_overdens1= np.linspace(iniz_overdens,fin_overdens,N_levels_overdens)		
 		
-		_polarproj(self,plotattrs)	
-		
 		if plotattrs['polarproj'] == False:	
 			useclr = plotattrs['armcolour']					
 			if plotattrs['armcolour'] == '':
@@ -100,6 +98,11 @@ class spiral_poggio_maps(object):
 			plt.ylabel('Y$_{'+plotattrs['coordsys']+'}$ [Kpc]')	 
 
 			return cset1, cset2														
+		else:
+			plotattrs['linestyle'] = '.'
+			_polarproj(self,plotattrs)	
+				
+			
 class TaylorCordesSpiral(object):	
 	""" Taylor & Cordes (1993) Galactic spiral arm model,	  
 	based on radio pulsar observations. The model defines four major spiral arms.	

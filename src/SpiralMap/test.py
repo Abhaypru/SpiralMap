@@ -28,7 +28,7 @@ mpl.rcParams.update(params)
 #------------------------------------------------------------	
 ############## figures/code for documentation ####################
 
-initialise_ = False
+initialise_ = True
 if initialise_:
 	
 	spirals = sp.main_(Rsun=Rsun)
@@ -46,7 +46,7 @@ if initialise_:
 	spirals.readout(plotattrs,model=use_model,arm='Sag-Car')
 	
 
-single_model_single_arm = False
+single_model_single_arm = True
 if single_model_single_arm:
 
 	Rsun=8.277
@@ -76,7 +76,7 @@ if single_model_single_arm:
 	fig.tight_layout()
 	plt.savefig(figdir_primer+'/single_model_single_arm.png')
 	
-single_model_all_arms = False
+single_model_all_arms = True
 if single_model_all_arms:
 		
 	Rsun=8.277
@@ -106,7 +106,7 @@ if single_model_all_arms:
 	fig.tight_layout()
 	plt.savefig(figdir_primer+'/single_model_all_arms.png')
 
-multiple_models_cartesian = False
+multiple_models_cartesian = True
 if multiple_models_cartesian:
 
 	Rsun=8.277
@@ -156,7 +156,7 @@ if multiple_models_cartesian:
 	plt.savefig(figdir_primer+'/multiple_models_cartesian.png')
 
 
-single_model_polar_hou = False
+single_model_polar_hou = True
 if single_model_polar_hou:
 
 	Rsun=8.277
@@ -195,7 +195,7 @@ if single_model_polar_hou:
 	plt.savefig(figdir_primer+'/polar_proj_single_model.png')
 
 
-multiple_models_polar = False
+multiple_models_polar = True
 if multiple_models_polar:
 
 	Rsun=8.277
