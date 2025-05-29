@@ -11,7 +11,8 @@ build:
   tools:
     python: "3.11"
 
-paper
+paper:
+      path: paper/paper.pdf
 
 
 python:
