@@ -853,7 +853,7 @@ class main_(object):
 		if plotattrs_['plot'] and plotattrs_['polarproj']==False :							
 			plt.plot(spimod.dout['x'+plotattrs_['coordsys'].lower()],
 			         spimod.dout['y'+plotattrs_['coordsys'].lower()],
-			         '.',color=plotattrs_['armcolour'])			
+			         plotattrs_['linestyle'],color=plotattrs_['armcolour'])			
 			if 'xhc_ex' in 	spimod.dout.keys():
 				plt.plot(spimod.dout['x'+plotattrs_['coordsys'].lower()+'_ex'],
 				         spimod.dout['y'+plotattrs_['coordsys'].lower()+'_ex'],
