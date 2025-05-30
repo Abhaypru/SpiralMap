@@ -3,22 +3,17 @@
 # See https://docs.readthedocs.io/en/stable/config-file/v2.html for details
 
 # Required
-version: 2
 
-# Set the version of Python and other tools you might need
+version: "2"
+
 build:
-  os: ubuntu-22.04
+  os: "ubuntu-22.04"
   tools:
-    python: "3.11"
-
-#paper:
-      #path: paper/paper.pdf
-
+    python: "3.10"
 
 python:
-    install:
+  install:
     - requirements: docs/requirements.txt
 
 sphinx:
-  # Path to your Sphinx configuration file.
-  configuration: docs/conf.py
+  configuration: docs/source/conf.py
