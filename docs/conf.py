@@ -1,1 +1,4 @@
+sphinx:
+  # Path to your Sphinx configuration file.
+  configuration: docs/conf.py
 
