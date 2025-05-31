@@ -8,24 +8,33 @@ Welcome to SpiralMap's documentation!
 .. _PyPI: https://test.pypi.org/project/SpiralMap/
 .. _GitHub: https://github.com/Abhaypru/SpiralMap
 
-.. sidebar-links::
-   :home:
-   :pypi:
+The documentation of *SpiralMap* is spread out over several sections:
+
+* :ref:`user-guide`
+* :ref:`api-docs`
+
+.. _user-guide:
 
 .. toctree::
-   :maxdepth: 1
-   :hidden:
+    :maxdepth: 3
+    :caption: User Guide
 
-   User guide <userguide/index>
+    user/introduction
+    user/Installation
+    user/Statement of Need
+    user/model descriptions
+    user/walkthrough
+
+.. _api-docs:
 
 .. toctree::
-   :caption: Project
-   :maxdepth: 1
-   :hidden:
+    :maxdepth: 4
+    :caption: API Reference
+
+    api/SpiralMap
+    api/SpiralMap.models
+
+.. role:: pycode(code)
+    :language: python3
+    :class: highlight
  
-
-   Installation
-   statement of need
-   model descriptions
-   walkthrough
-   API documentation
