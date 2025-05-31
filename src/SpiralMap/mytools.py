@@ -194,6 +194,46 @@ def getangular(spimod):
 		spimod.dout['glon4_ex'] = np.degrees(np.arctan2(spimod.dout['yhc_ex'],spimod.dout['xhc_ex']))%360.	
 		spimod.dout['glon_ex'],spimod.dout['glat_ex'],spimod.dout['dhelio_ex'] = xyz2lbr(spimod.dout['xhc_ex'],spimod.dout['yhc_ex'],0)
 		
+		
+
+def png2movie(readdir,savdir,flname='movie',fmt='gif',duration=1.):
+	'''
+	Note: works with the older version of imageio (2.27)
+	Purpose: make a gif from set of images
+	readdir = directory where set of images are
+	savdir = directory where to save the final movie
+	flname = filename
+	
+	#dtools.png2movie(desktop+'/snaps/',desktop)	
+	
+	'''
+	
+	from PIL import Image as image
+	import imageio	
+	print(imageio.__version__)
+	import natsort
+	from natsort import natsorted, ns
+	
+	images = [] 
+	filenames = os.listdir(readdir)
+	filenames = natsorted(filenames)
+	filenames = np.array(filenames)
+	
+	fps = 1./duration
+	
+	for filename in filenames:
+		filename = readdir+'/'+filename 
+		images.append(imageio.imread(filename))
+		
+	if fmt == 'gif':	
+		imageio.mimsave(savdir+'/'+flname+'.gif', images,duration=duration)	
+
+	elif fmt == 'mp4':
+		imageio.mimsave(savdir+'/'+flname+'.mp4', images,fps=fps)	
+	
+	
+	return
+		
 	
 def polar_style(ax,title='',rticks=[3., 6.,9.,12,15.,20.]):
 	
