@@ -1,29 +1,28 @@
 Welcome to SpiralMap's documentation!
-=====================================
+===================================
 
-**SpiralMap** is a Python package that provides a collection of major models of the Milky Way's spiral arms.  
-It allows users to extract and plot the spatial distribution of various spiral arm models available in the literature, in **Heliocentric**, **Galactocentric**, and **Polar** coordinates.
+**SpiralMap**, a package written in python that provides a collection of the major models of the Milky Way's spiral arms.This package allows the user to extract and plot spatial distribution of the various spiral models available in literature, in Heliocentric, Galactocentric, and Polar coordinates. This is written in `Python 3`_ and publicly available on `PyPI`_ \& `GitHub`_ .
 
-This package is written in `Python 3`_ and is publicly available on `PyPI`_ and `GitHub`_.
-
+.. _@Abhaypru:https://github.com/Abhaypru
 .. _Python 3: https://www.python.org
-.. _PyPI: https://pypi.org/project/SpiralMap/
+.. _PyPI: https://test.pypi.org/project/SpiralMap/
 .. _GitHub: https://github.com/Abhaypru/SpiralMap
 
-The documentation for *SpiralMap* is organized into the following sections:
+The documentation of *SpiralMap* is spread out over several sections:
 
 * :ref:`User Guide <user_guide>`
-  
-  A comprehensive guide including installation instructions, a statement of need, available spiral arm models, and a walkthrough of features.
 
+   This section provides a comprehensive user guide, including installation instructions, a statement of need, model descriptions, and a walkthrough of the package's features.
 * :ref:`API Documentation <api-docs>`
 
-  In-depth API reference for all classes and functions within the SpiralMap package.
-
-
+   This section provides detailed API documentation for the SpiralMap package, including its classes and methods. 
+   
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Contents:
 
-   user_guide/index
-   api_docs/index
+   user_guide
+   api_docs
+
+
+
