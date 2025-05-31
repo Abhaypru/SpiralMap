@@ -10,7 +10,7 @@ Welcome to SpiralMap's documentation!
 
 The documentation of *SpiralMap* is spread out over several sections:
 
-* :ref:`User Guide <user_guide>`
+* :ref:`User Guide <user>`
 
    This section provides a comprehensive user guide, including installation instructions, a statement of need, model descriptions, and a walkthrough of the package's features.
 * :ref:`API Documentation <api-docs>`
@@ -23,6 +23,8 @@ The documentation of *SpiralMap* is spread out over several sections:
 
    user_guide
    api_docs
+
+
 
 
 
