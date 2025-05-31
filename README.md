@@ -5,6 +5,11 @@ SpiralMap is a Python library of the Milky Way's spiral arms. It can be used to 
 Documentation is hosted on [Read the docs](https://spiralmap.readthedocs.io/en/latest/#api-docs)
 To get started please refer to the accompanying Jupyter notebook
 
+
+
+![image info](src/movie_.gif)
+
+
 Installation
 -------------
 
@@ -13,6 +18,9 @@ Install the latest released version using ``pip``:
 ```
    pip install SpiralMap
 ```
+
+
+
 
 Acknowledging ``SpiralMap``
 ---------------------------------------

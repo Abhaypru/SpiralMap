@@ -28,7 +28,7 @@ mpl.rcParams.update(params)
 #------------------------------------------------------------	
 ############## figures/code for documentation ####################
 
-initialise_ = True
+initialise_ = False
 if initialise_:
 	
 	spirals = sp.main_(Rsun=Rsun)
@@ -46,7 +46,7 @@ if initialise_:
 	spirals.readout(plotattrs,model=use_model,arm='Sag-Car')
 	
 
-single_model_single_arm = True
+single_model_single_arm = False
 if single_model_single_arm:
 
 	Rsun=8.277
@@ -76,7 +76,7 @@ if single_model_single_arm:
 	fig.tight_layout()
 	plt.savefig(figdir_primer+'/single_model_single_arm.png')
 	
-single_model_all_arms = True
+single_model_all_arms = False
 if single_model_all_arms:
 		
 	Rsun=8.277
@@ -106,7 +106,7 @@ if single_model_all_arms:
 	fig.tight_layout()
 	plt.savefig(figdir_primer+'/single_model_all_arms.png')
 
-multiple_models_cartesian = True
+multiple_models_cartesian = False
 if multiple_models_cartesian:
 
 	Rsun=8.277
@@ -156,7 +156,7 @@ if multiple_models_cartesian:
 	plt.savefig(figdir_primer+'/multiple_models_cartesian.png')
 
 
-single_model_polar_hou = True
+single_model_polar_hou = False
 if single_model_polar_hou:
 
 	Rsun=8.277
@@ -195,7 +195,7 @@ if single_model_polar_hou:
 	plt.savefig(figdir_primer+'/polar_proj_single_model.png')
 
 
-multiple_models_polar = True
+multiple_models_polar = False
 if multiple_models_polar:
 
 	Rsun=8.277
@@ -252,4 +252,40 @@ if multiple_models_polar:
 	plt.tight_layout()
 
 	plt.savefig(figdir_primer+'/polar_proj_multiple_models2.png')
+
+
+
+makegif = True
+if makegif:
+
+	plt.close('all')
+
+	Rsun=8.277
+	spirals = sp.main_(Rsun=Rsun)
+	use_arm = 'all'
+		
+	
+	for inum, use_model in enumerate(spirals.models):
+
+		plt.close('all')
+		
+		fig = plt.figure(figsize=(7,7.))
+		
+		ax = plt.subplot(111, projection='polar')
+		plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'markSunGC':True,'polarproj':True}
+		spirals.readout(plotattrs,model=use_model,arm=use_arm)	
+		polar_style(ax,title=use_model+' (HC)')
+		
+		plt.savefig(figdir_primer+'/map_'+str(inum)+'png')
+
+	import mytools
+	curdir = os.getcwd()
+	mytools.png2movie(figdir_primer,curdir,flname='movie_',duration=1,fmt='gif')
+	
+	
+	
+	
+	
+	
+	
 
