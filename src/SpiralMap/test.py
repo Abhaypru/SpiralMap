@@ -262,21 +262,27 @@ if makegif:
 
 	Rsun=8.277
 	spirals = sp.main_(Rsun=Rsun)
+	use_model2 = 'Poggio_cont_2021' 
 	use_arm = 'all'
 		
 	
 	for inum, use_model in enumerate(spirals.models):
+		
+		if 'cont' not in use_model:
 
-		plt.close('all')
-		
-		fig = plt.figure(figsize=(7,7.))
-		
-		ax = plt.subplot(111, projection='polar')
-		plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'markSunGC':True,'polarproj':True}
-		spirals.readout(plotattrs,model=use_model,arm=use_arm)	
-		polar_style(ax,title=use_model+' (HC)')
-		
-		plt.savefig(figdir_primer+'/map_'+str(inum)+'png')
+			plt.close('all')
+			
+			fig = plt.figure(figsize=(5,5.))
+			
+			ax = plt.subplot(111, projection='polar')
+			plotattrs = {'plot':True,'coordsys':'GC','linewidth':5,'markersize':15,'markSunGC':True,'polarproj':True}
+			spirals.readout(plotattrs,model=use_model,arm=use_arm)	
+			plotattrs = {'plot':True,'coordsys':'GC','markersize':3,'polarproj':True}
+			spirals.readout(plotattrs,model=use_model2,arm=use_arm)	
+			polar_style(ax,title=use_model+' (GC)')
+			ax.set_ylim([0.,15])	
+			
+			plt.savefig(figdir_primer+'/map_'+str(inum)+'png')
 
 	import mytools
 	curdir = os.getcwd()

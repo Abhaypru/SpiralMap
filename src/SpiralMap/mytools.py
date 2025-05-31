@@ -163,15 +163,25 @@ def _polarproj(spimod,plotattrs):
 													
 		plt.plot(0.,0.,marker='*',markersize=plotattrs['markersize'],color='black')		
 		plt.plot(np.radians(180.),abs(spimod.xsun),marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')				
-		plt.plot(np.radians(spimod.dout['phi4']),spimod.dout['rgc'],plotattrs['linestyle'],markersize=plotattrs['markersize'],color=useclr)	
+
+		if plotattrs['linestyle'] == '-': 
+			plt.plot(np.radians(spimod.dout['phi4']),spimod.dout['rgc'],plotattrs['linestyle'],linewidth=plotattrs['linewidth'],color=useclr)	
+		if plotattrs['linestyle'] == '.': 
+			plt.plot(np.radians(spimod.dout['phi4']),spimod.dout['rgc'],plotattrs['linestyle'],markersize=plotattrs['markersize'],color=useclr)			
+
 		try:
 			plt.plot(np.radians(spimod.dout['phi4_ex']),spimod.dout['rgc_ex'],'.',color=useclr)	
 		except KeyError:
 			pass
 	if plotattrs['plot'] and plotattrs['polarproj'] and plotattrs['coordsys'].lower()=='hc':
 		plt.plot(np.radians(0.),abs(spimod.xsun),marker='*',markersize=plotattrs['markersize'],color='black')
-		plt.plot(0.,0.,marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')															
-		plt.plot(np.radians(spimod.dout['glon4']),spimod.dout['dhelio'],plotattrs['linestyle'],markersize=plotattrs['markersize'],color=useclr)			
+		plt.plot(0.,0.,marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')																
+
+		if plotattrs['linestyle'] == '-': 
+			plt.plot(np.radians(spimod.dout['glon4']),spimod.dout['dhelio'],plotattrs['linestyle'],linewidth=plotattrs['linewidth'],color=useclr)	
+		if plotattrs['linestyle'] == '.': 
+			plt.plot(np.radians(spimod.dout['glon4']),spimod.dout['dhelio'],plotattrs['linestyle'],markersize=plotattrs['markersize'],color=useclr)	
+			
 		try:
 			plt.plot(np.radians(spimod.dout['glon4_ex']),spimod.dout['dhelio_ex'],'--',color=useclr)				
 		except KeyError:
