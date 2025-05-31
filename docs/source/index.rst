@@ -13,30 +13,9 @@ The documentation of *SpiralMap* is spread out over several sections:
 * :ref:`User Guide <user-guide>`
 
    This section provides a comprehensive user guide, including installation instructions, a statement of need, model descriptions, and a walkthrough of the package's features.
-* :ref:`api-docs`
+* :ref:`API Documentation <api-docs>`
 
 .. _user-guide:
-
-.. toctree::
-    :maxdepth: 3
-    :caption: User Guide
-
-    user/Introduction
-    user/Installation
-    user/Statement of Need
-    user/model descriptions
-    user/walkthrough
-
 .. _api-docs:
 
-.. toctree::
-    :maxdepth: 4
-    :caption: API Reference
 
-    api/SpiralMap
-    api/SpiralMap.models
-
-.. role:: pycode(code)
-    :language: python3
-    :class: highlight
- 
