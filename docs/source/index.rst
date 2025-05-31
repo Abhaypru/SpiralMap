@@ -1,22 +1,31 @@
-Welcome to Lumache's documentation!
+Welcome to SpiralMap's documentation!
 ===================================
 
-**Lumache** (/lu'make/) is a Python library for cooks and food lovers
-that creates recipes mixing random ingredients.
-It pulls data from the `Open Food Facts database <https://world.openfoodfacts.org/>`_
-and offers a *simple* and *intuitive* API.
+**SpiralMap**, a package written in python that provides a collection of the major models of the Milky Way's spiral arms.This package allows the user to extract and plot spatial distribution of the various spiral models available in literature, in Heliocentric, Galactocentric, and Polar coordinates. This is written in `Python 3`_ and publicly available on `PyPI`_ \& `GitHub`_ .
 
-Check out the :doc:`usage` section for further information, including
-how to :ref:`installation` the project.
+.. _@Abhaypru:https://github.com/Abhaypru
+.. _Python 3: https://www.python.org
+.. _PyPI: https://test.pypi.org/project/SpiralMap/
+.. _GitHub: https://github.com/Abhaypru/SpiralMap
 
-.. note::
-
-   This project is under active development.
-
-Contents
---------
+.. sidebar-links::
+   :home:
+   :pypi:
 
 .. toctree::
+   :maxdepth: 1
+   :hidden:
 
-   usage
-   api
+   User guide <userguide/index>
+
+.. toctree::
+   :caption: Project
+   :maxdepth: 1
+   :hidden:
+ 
+
+   Installation
+   statement of need
+   model descriptions
+   walkthrough
+   API documentation
