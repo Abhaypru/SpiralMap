@@ -1,26 +1,28 @@
 Welcome to SpiralMap's documentation!
-===================================
+=====================================
 
-**SpiralMap**, a package written in python that provides a collection of the major models of the Milky Way's spiral arms.This package allows the user to extract and plot spatial distribution of the various spiral models available in literature, in Heliocentric, Galactocentric, and Polar coordinates. This is written in `Python 3`_ and publicly available on `PyPI`_ \& `GitHub`_ .
+**SpiralMap** is a Python package that provides a collection of major models of the Milky Way's spiral arms.  
+This package allows users to extract and plot the spatial distribution of various spiral arm models from the literature, in **Heliocentric**, **Galactocentric**, and **Polar** coordinates.  
 
-.. _@Abhaypru:https://github.com/Abhaypru
+It is written in `Python 3`_ and is publicly available on `PyPI`_ and `GitHub`_.
+
 .. _Python 3: https://www.python.org
-.. _PyPI: https://test.pypi.org/project/SpiralMap/
+.. _PyPI: https://pypi.org/project/SpiralMap/
 .. _GitHub: https://github.com/Abhaypru/SpiralMap
 
-The documentation of *SpiralMap* is spread out over several sections:
+The documentation of *SpiralMap* is organized into the following sections:
 
-* :ref:`User Guide <user_guide>`
+* **User Guide**
 
-   This section provides a comprehensive user guide, including installation instructions, a statement of need, model descriptions, and a walkthrough of the package's features.
-* :ref:`API Documentation <api-docs>`
+  A comprehensive guide including installation instructions, statement of need, description of available models, and a walkthrough of features.
 
-   This section provides detailed API documentation for the SpiralMap package, including its classes and methods. 
-   
+* **API Documentation**
+
+  Detailed reference of all classes and functions included in the SpiralMap package.
+
 .. toctree::
    :maxdepth: 1
    :caption: Contents:
 
-   user
-   api_docs
-
+   user_guide
+   api
