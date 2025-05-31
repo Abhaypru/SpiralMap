@@ -1,5 +1,8 @@
-SpiralMap
+# SpiralMap
 ======
+[![pypi status](https://img.shields.io/pypi/v/gaiaunlimited.svg)](https://test.pypi.org/project/SpiralMap/)
+
+
 
 **Spiral arm maps and models of the Milky Way**
 
