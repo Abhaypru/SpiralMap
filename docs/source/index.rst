@@ -21,6 +21,6 @@ The documentation of *SpiralMap* is spread out over several sections:
    :maxdepth: 1
    :caption: Contents:
 
-   user_guide
+   user
    api_docs
 
