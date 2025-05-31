@@ -286,7 +286,7 @@ if makegif:
 
 	import mytools
 	curdir = os.getcwd()
-	mytools.png2movie(figdir_primer,curdir,flname='movie_',duration=1,fmt='gif')
+	mytools.png2movie(figdir_primer,curdir,flname='movie_',duration=1.5,fmt='gif')
 	
 	
 	
