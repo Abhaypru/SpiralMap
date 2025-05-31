@@ -8,8 +8,8 @@ This section provides a comprehensive user guide, including installation instruc
 .. toctree::
    :maxdepth: 2
 
-   user/Introduction
-   user/Installation
-   user/Statement of Need
-   user/model descriptions
-   user/walkthrough
+   user-guide/Introduction
+   user-guide/Installation
+   user-guide/Statement of Need
+   user-guide/model descriptions
+   user-guide/walkthrough
