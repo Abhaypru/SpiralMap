@@ -13,8 +13,7 @@ The following table provides a summary of the spiral arm models included in **Sp
 +------------------------+---------------------------------------------------------------+
 | Levine_2006            | Based on HI (21 cm) data :cite:`Levine:2006`.                 |
 +------------------------+---------------------------------------------------------------+
-| Hou_Han_2014           | Logarithmic spiral using HII/GMC/Maser data                  |
-|                        | :cite:`Hou:2014`.                                             |
+| Hou_Han_2014           | Logarithmic spiral using HII/GMC/Maser data :cite:`Hou:2014`.|
 +------------------------+---------------------------------------------------------------+
 | Reid_2019              | MASER parallax model :cite:`Reid:2019`.                       |
 +------------------------+---------------------------------------------------------------+
@@ -24,4 +23,3 @@ The following table provides a summary of the spiral arm models included in **Sp
 +------------------------+---------------------------------------------------------------+
 | Drimmel_Ceph_2024      | Based on Cepheid variables :cite:`Drimmel:2024`.              |
 +------------------------+---------------------------------------------------------------+
-
