@@ -7,7 +7,7 @@ To get started please refer to the accompanying Jupyter notebook
 
 
 
-![image info](src/movie_.gif)
+![image info](src/SpiralMap/movie_.gif)
 
 
 Installation
