@@ -1,7 +1,10 @@
-API
-===
+.. _api-docs:
 
-.. autosummary::
-   :toctree: generated
+API Documentation
+=================
 
-   lumache
+.. toctree::
+   :maxdepth: 3
+
+   api/SpiralMap
+   api/SpiralMap.models

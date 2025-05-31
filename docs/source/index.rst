@@ -10,12 +10,19 @@ Welcome to SpiralMap's documentation!
 
 The documentation of *SpiralMap* is spread out over several sections:
 
-* :ref:`User Guide <user-guide>`
+* :ref:`User Guide <user>`
 
    This section provides a comprehensive user guide, including installation instructions, a statement of need, model descriptions, and a walkthrough of the package's features.
 * :ref:`API Documentation <api-docs>`
 
-.. _user-guide:
-.. _api-docs:
+   This section provides detailed API documentation for the SpiralMap package, including its classes and methods. 
+   
+.. toctree::
+   :maxdepth: 1
+   :caption: Contents:
+
+   user_guide
+   api_docs
+
 
 
