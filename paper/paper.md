@@ -35,13 +35,7 @@ Other models can easily be included on request. In the near future, we anticipat
 
 A few example plots that can be generated using the package are included below, for a full demonstration please take a look at the accompanying [`Jupyter` notebook](https://github.com/Abhaypru/SpiralMap/blob/main/demo_spiralmap.ipynb) hosted on `GitHub`.
 
-
-![Left: posterior distribution of an event in log10(timescale)-log10(parallax) space, overlaid on 'star', 'white dwarf', 'neutron star' and 'black hole' contours. Right: bars showing probabilities of that event belonging to each of the lens populations.\label{lensclass}](figures/single_arm_single_model.png).
-
-![Left: posterior distribution of an event in log10(timescale)-log10(parallax) space, overlaid on 'star', 'white dwarf', 'neutron star' and 'black hole' contours. Right: bars showing probabilities of that event belonging to each of the lens populations.\label{lensclass}](figures/single_arm_single_model.png)
-
-![Left: posterior distribution of an event in log10(timescale)-log10(parallax) space, overlaid on 'star', 'white dwarf', 'neutron star' and 'black hole' contours. Right: bars showing probabilities of that event belonging to each of the lens populations.\label{lensclass}](figures/single_arm_single_model.png)
-
+![:Cartesian projection of the `Drimmel_Ceph_2024` model shown for a particular arm (`Sag-Car`). We show this arm in HC (a), HC with a polar grid in the background (b), and in GC frame with a polar grid in the background (c).\label{single_arm_single_model}](figures/single_arm_single_model.png).
 
 
 
