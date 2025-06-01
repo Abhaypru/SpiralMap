@@ -35,6 +35,16 @@ Other models can easily be included on request. In the near future, we anticipat
 
 A few example plots that can be generated using the package are included below, for a full demonstration please take a look at the accompanying [`Jupyter` notebook](https://github.com/Abhaypru/SpiralMap/blob/main/demo_spiralmap.ipynb) hosted on `GitHub`.
 
+
+
+
+
+
+
+
+
+
+
 ![:Cartesian projection of the `Drimmel_Ceph_2024` model shown for a particular arm (`Sag-Car`). We show this arm in HC (a), HC with a polar grid in the background (b), and in GC frame with a polar grid in the background (c).\label{single_arm_single_model}](figures/single_arm_single_model.png).
 
 
