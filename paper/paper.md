@@ -25,7 +25,7 @@ bibliography: paper.bib
 Mapping the structure of the Galaxy has been an ongoing endeavour for several decades, thanks to which we have come to piece together the components it is made up of such as the discs/bulge/halo and so on [@jbhreview2016]. 
 Of particular interest is also the signature of non-axisymmetry in the disc, principally present in the form of the central Galactic bar, the warp, and various spiral like features fanning across a large portion of the disc.
  Over the years, various groups have surveyed the Galaxy across wavelengths (Radio to optical) and have deduced the rich variety of spiral structure present in the disc. 
-While some of the papers in literature provide machine readable data to trace out the spiral arms in their model, often this can be a cumbersome exercise for a user simply interested in extracting the coordinates and/or overplotting the spiral arms on another plot of interest, such as while comparing the locations of the arms to features in the velocity field [@Khanna:2023,@Poggio:2024]. 
+While some of the papers in literature provide machine readable data to trace out the spiral arms in their model, often this can be a cumbersome exercise for a user simply interested in extracting the coordinates and/or overplotting the spiral arms on another plot of interest, such as while comparing the locations of the arms to features in the velocity field [@Khanna:2023; @Poggio:2024]. 
 
 
 With `SpiralMap` we present a library of the major spiral arm models (and maps) of the Galaxy. 
@@ -35,18 +35,20 @@ Other models can easily be included on request. In the near future, we anticipat
 
 A few example plots that can be generated using the package are included below, for a full demonstration please take a look at the accompanying [`Jupyter` notebook](https://github.com/Abhaypru/SpiralMap/blob/main/demo_spiralmap.ipynb) hosted on `GitHub`.
 
-![: .\label{spiral}](spiral.png)
+![: .\label{spiral}](figures/single_arm_single_model.png)
+![: .\label{spiral}](figures/multiple_models_cartesian.png)
+![: .\label{spiral}](figures/multiple_models_polar.png)
 
 
 
 # Availability
 
-``SpiralMap`` is a GPL licensed software and the source code is available at https://github.com/Abhaypru/SpiralMap. The full documentation is available at https://astrom-tom.github.io/dfitspy/build/html/index.html .
+``SpiralMap`` is a GPL licensed software and the source code is available at https://github.com/Abhaypru/SpiralMap. 
+The full documentation is available at [Read the docs](https://spiralmap.readthedocs.io/en/latest/#api-docs).
 
 # Acknowledgements
 
-SK acknowledges support from the European Union's Horizon 2020 research and innovation program under the GaiaUnlimited project (grant agreement No 101004110).
-
-
+SK acknowledges support from the European Union's Horizon 2020 research and innovation program under the GaiaUnlimited project (grant agreement No 101004110). 
+We thank Ronald Drimmel \& Eloisa Poggio for useful suggestions.
 # References
 
