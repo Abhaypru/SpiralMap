@@ -7,7 +7,7 @@ The package can be used to extract and/or plot the 2D trace of the major spiral 
 
 The detailed documentation is hosted on [Read the docs](https://spiralmap.readthedocs.io/en/latest/#api-docs).
 
-For a quickstart please refer to the accompanying [Jupyter notebook][https://github.com/Abhaypru/SpiralMap/blob/main/demo_spiralmap.ipynb]
+For a quickstart please refer to the accompanying [Jupyter notebook](https://github.com/Abhaypru/SpiralMap/blob/main/demo_spiralmap.ipynb)
 
 
 ![image info](src/SpiralMap/movie_.gif).
