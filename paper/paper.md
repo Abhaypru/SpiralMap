@@ -36,8 +36,8 @@ Other models can easily be included on request. In the near future, we anticipat
 A few example plots that can be generated using the package are included below, for a full demonstration please take a look at the accompanying [`Jupyter` notebook](https://github.com/Abhaypru/SpiralMap/blob/main/demo_spiralmap.ipynb) hosted on `GitHub`.
 
 ![:Cartesian projection of the `Drimmel_Ceph_2024` model shown for a particular arm (`Sag-Car`). We show this arm in HC (a), HC with a polar grid in the background (b), and in GC frame with a polar grid in the background (c).\label{single_arm_single_model}](figures/single_arm_single_model.png)
-![: .\label{spiral}](figures/multiple_models_cartesian.png)
-![: .\label{spiral}](figures/multiple_models_polar.png)
+![:Cartesian projections of  multiple models plotted together with a polar grid in the background. We show in the `Taylor_Cordes_1992` \& `Poggio_2021` models in HC (a) and GC (b) frames, and similarly, the `Drimmel_NIR_2000` \& `Poggio_2021` models in HC (c) and GC (d) frames .\label{multiple_models_cartesian}](figures/multiple_models_cartesian.png)
+![: .\label{multiple_models_polar}](figures/multiple_models_polar.png)
 
 
 
