@@ -255,7 +255,7 @@ if multiple_models_polar:
 
 
 
-makegif = True
+makegif = False
 if makegif:
 
 	plt.close('all')
