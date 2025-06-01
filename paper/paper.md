@@ -33,8 +33,6 @@ The package is written in `Python`, and allows the user to both extract the 2D t
 A summary of the models currently included is provided in Table (), where we have tried to include models from across the electromagnetic spectrum, and based on various tracers (gas/stars etc.). 
 Other models can easily be included on request. In the near future, we anticipate the availability of 3D spiral arm traces for the Galaxy in literature which can also be included in `SpiralMap`.
 
-A few example plots that can be generated using the package are included below, for a full demonstration please take a look at the accompanying [`Jupyter` notebook](https://github.com/Abhaypru/SpiralMap/blob/main/demo_spiralmap.ipynb) hosted on `GitHub`.
-
 | Model  | Description   |
 |----------|------------------------------------|
 | `Taylor_Cordes_1992`  | Model based on HII [@Taylor:1993].  |
@@ -47,15 +45,10 @@ A few example plots that can be generated using the package are included below, 
 | `Drimmel_Ceph_2024`  | Model based on Cepheid variables  [@Drimmel:2024].  |
 
 
-testing captions
+A few example plots that can be generated using the package are included below, for a full demonstration please take a look at the accompanying [`Jupyter` notebook](https://github.com/Abhaypru/SpiralMap/blob/main/demo_spiralmap.ipynb) hosted on `GitHub`.
 
 ![:Cartesian projection of the `Drimmel_Ceph_2024` model shown for a particular arm (`Sag-Car`). We show this arm in HC (a), HC with a polar grid in the background (b), and in GC frame with a polar grid in the background (c).\label{single_arm_single_model}](single_arm_single_model.png).
 
-testing captions
-
-![:Cartesian projection of the `Drimmel_Ceph_2024` model shown for a particular arm (`Sag-Car`). We show this arm in HC (a), HC with a polar grid in the background (b), and in GC frame with a polar grid in the background (c).\label{single_arm_single_model}](single_arm_single_model.png).
-
-testing captions
 
 
 
