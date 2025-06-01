@@ -48,11 +48,11 @@ A few example plots that can be generated using the package are included below, 
 
 testing captions
 
-![:Cartesian projection of the `Drimmel_Ceph_2024` model shown for a particular arm (`Sag-Car`). We show this arm in HC (a), HC with a polar grid in the background (b), and in GC frame with a polar grid in the background (c).\label{single_arm_single_model}](figures/single_arm_single_model.png).
+![:Cartesian projection of the `Drimmel_Ceph_2024` model shown for a particular arm (`Sag-Car`). We show this arm in HC (a), HC with a polar grid in the background (b), and in GC frame with a polar grid in the background (c).\label{single_arm_single_model}](single_arm_single_model.png).
 
 testing captions
 
-![:Cartesian projection of the `Drimmel_Ceph_2024` model shown for a particular arm (`Sag-Car`). We show this arm in HC (a), HC with a polar grid in the background (b), and in GC frame with a polar grid in the background (c).\label{single_arm_single_model}](figures/single_arm_single_model.png).
+![:Cartesian projection of the `Drimmel_Ceph_2024` model shown for a particular arm (`Sag-Car`). We show this arm in HC (a), HC with a polar grid in the background (b), and in GC frame with a polar grid in the background (c).\label{single_arm_single_model}](single_arm_single_model.png).
 
 testing captions
 
