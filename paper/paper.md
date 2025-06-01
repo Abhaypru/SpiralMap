@@ -38,13 +38,13 @@ A few example plots that can be generated using the package are included below, 
 | Model  | Description   |
 |---|---|
 | `Taylor_Cordes_1992`  | Model based on HII [@Taylor:1993]  |
-| ``  | Model based on Galactic plane emission in the NIR [@drimmel2000]  |
-| ``  | Model based on HI (21 cm) [@Levine:2006].  |
-| ``  | Logarithmic spiral model based on HII/ GMC/methanol Maser observations [@Hou:2014].  |
-| ``  | Model based on high-precision parallax measurements of MASERS [@Reid:2019].  |
-| ``  | Map based on Upper Main sequence stars [@Poggio:2021].  |
-| ``  | Map based on OB stars [@gaiacollab22].  |
-| ``  | Model based on Cepheid variables  [@Drimmel:2024].  |
+| `Drimmel_NIR_2000`  | Model based on Galactic plane emission in the NIR [@drimmel2000]  |
+| `Levine_2006`  | Model based on HI (21 cm) [@Levine:2006].  |
+| `Hou_Han_2014`  | Logarithmic spiral model based on HII/ GMC/methanol Maser observations [@Hou:2014].  |
+| `Reid_2019`  | Model based on high-precision parallax measurements of MASERS [@Reid:2019].  |
+| `Poggio_2021`  | Map based on Upper Main sequence stars [@Poggio:2021].  |
+| `Gaia_2022`  | Map based on OB stars [@gaiacollab22].  |
+| `Drimmel_Ceph_2024`  | Model based on Cepheid variables  [@Drimmel:2024].  |
 
 
 testing captions
