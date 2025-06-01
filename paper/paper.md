@@ -36,9 +36,9 @@ Other models can easily be included on request. In the near future, we anticipat
 A few example plots that can be generated using the package are included below, for a full demonstration please take a look at the accompanying [`Jupyter` notebook](https://github.com/Abhaypru/SpiralMap/blob/main/demo_spiralmap.ipynb) hosted on `GitHub`.
 
 | Model  | Description   |
-|--------------------|------------------------------------|
-| `Taylor_Cordes_1992`  | Model based on HII [@Taylor:1993]  |
-| `Drimmel_NIR_2000`  | Model based on Galactic plane emission in the NIR [@drimmel2000]  |
+|----------|------------------------------------|
+| `Taylor_Cordes_1992`  | Model based on HII [@Taylor:1993].  |
+| `Drimmel_NIR_2000`  | Model based on Galactic plane emission in the NIR [@drimmel2000].  |
 | `Levine_2006`  | Model based on HI (21 cm) [@Levine:2006].  |
 | `Hou_Han_2014`  | Logarithmic spiral model based on HII/ GMC/methanol Maser observations [@Hou:2014].  |
 | `Reid_2019`  | Model based on high-precision parallax measurements of MASERS [@Reid:2019].  |
