@@ -48,7 +48,7 @@ Other models can easily be included on request. In the near future, we anticipat
 
 follow-up observations such as space-based astrometry or ground-based adaptive optics imaging  to confirm their nature.
 
-![Left: posterior distribution of an event in log10(timescale)-log10(parallax) space, overlaid on 'star', 'white dwarf', 'neutron star' and 'black hole' contours. Right: bars showing probabilities of that event belonging to each of the lens populations.\label{lensclass}](figures/single_arm_single_model.png)
+![Left: Cartesian projection of the Drimmel Ceph model shown for a particular arm (Sag-Car). We show this arm in HC (a), HC with a polar grid in the background (b), and in GC frame with a polar grid in the background (c). in log10(timescale)-log10(parallax) space, overlaid on 'star', 'white dwarf', 'neutron star' and 'black hole' contours. Right: bars showing probabilities of that event belonging to each of the lens populations.\label{lensclass}](figures/single_arm_single_model.png)
 
 Current microlensing software packages such as DarkLensCode
 
