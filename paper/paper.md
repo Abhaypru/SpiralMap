@@ -25,9 +25,13 @@ bibliography: paper.bib
 Mapping the structure of the Galaxy has been an ongoing endeavour for several decades, thanks to which we have come to piece together the components it is made up of such as the discs/bulge/halo and so on [@jbhreview2016]. 
 Of particular interest is also the signature of non-axisymmetry in the disc, principally present in the form of the central Galactic bar, the warp, and various spiral like features fanning across a large portion of the disc.
  Over the years, various groups have surveyed the Galaxy across wavelengths (Radio to optical) and have deduced the rich variety of spiral structure present in the disc. 
-While some of the papers in literature provide machine readable data to trace out the spiral arms in their model, often this can be a cumbersome exercise for a user simply interested in extracting the coordinates and/or overplotting the spiral arms on another plot of interest, such as while comparing the locations of the arms to features in the velocity field (@Khanna:2023,@Poggio:2024). 
+While some of the papers in literature provide machine readable data to trace out the spiral arms in their model, often this can be a cumbersome exercise for a user simply interested in extracting the coordinates and/or overplotting the spiral arms on another plot of interest, such as while comparing the locations of the arms to features in the velocity field [@Khanna:2023,@Poggio:2024]. 
 
 
+With \texttt{SpiralMap} we present a library of the major spiral arm models (and maps) of the Galaxy. 
+The package is written in \texttt{Python}, and allows the user to both extract the 2D trace and overplot the spiral arms in cartesian/polar coordinates in both Heliocentric (HC) and Galactocentric (GC) frames.
+A summary of the models currently included is provided in Table (), where we have tried to include models from across the electromagnetic spectrum, and based on various tracers (gas/stars etc.). 
+Other models can easily be included on request. In the near future, we anticipate the availability of 3D spiral arm traces for the Galaxy in literature which can also be included in \texttt{SpiralMap}.
 
 ![: .\label{spiral}](spiral.png)
 
