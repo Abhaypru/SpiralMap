@@ -39,15 +39,16 @@ Other models can easily be included on request. In the near future, we anticipat
 | `Drimmel_NIR_2000`  | Model based on Galactic plane emission in the NIR [@drimmel2000].  |
 | `Levine_2006`  | Model based on HI (21 cm) [@Levine:2006].  |
 | `Hou_Han_2014`  | Logarithmic spiral model based on HII/ GMC/methanol Maser observations [@Hou:2014].  |
-| `Reid_2019`  | Model based on high-precision parallax measurements of MASERS [@Reid:2019].  |
+| `Reid_2019`  | Model based on parallax measurements of MASERS [@Reid:2019].  |
 | `Poggio_2021`  | Map based on Upper Main sequence stars [@Poggio:2021].  |
 | `Gaia_2022`  | Map based on OB stars [@gaiacollab22].  |
 | `Drimmel_Ceph_2024`  | Model based on Cepheid variables  [@Drimmel:2024].  |
 
 
+
 A few example plots that can be generated using the package are included below, for a full demonstration please take a look at the accompanying [`Jupyter` notebook](https://github.com/Abhaypru/SpiralMap/blob/main/demo_spiralmap.ipynb) hosted on `GitHub`.
 
-![:Cartesian projection of the `Drimmel_Ceph_2024` model shown for a particular arm (`Sag-Car`). We show this arm in HC (a), HC with a polar grid in the background (b), and in GC frame with a polar grid in the background (c).\label{single_arm_single_model}](single_arm_single_model.png).
+![:Cartesian projection of the `Drimmel_Ceph_2024` model shown for a particular arm (`Sag-Car`). We show this arm in HC (a), HC with a polar grid in the background (b), and in GC frame with a polar grid in the background (c). \label{figures/single_arm_single_model}](single_arm_single_model.png).
 
 
 
