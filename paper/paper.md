@@ -46,9 +46,14 @@ Other models can easily be included on request. In the near future, we anticipat
 
 
 
+follow-up observations such as space-based astrometry or ground-based adaptive optics imaging  to confirm their nature.
+
+![Left: posterior distribution of an event in log10(timescale)-log10(parallax) space, overlaid on 'star', 'white dwarf', 'neutron star' and 'black hole' contours. Right: bars showing probabilities of that event belonging to each of the lens populations.\label{lensclass}](single_arm_single_model.png)
+
+Current microlensing software packages such as DarkLensCode
+
 A few example plots that can be generated using the package are included below, for a full demonstration please take a look at the accompanying [`Jupyter` notebook](https://github.com/Abhaypru/SpiralMap/blob/main/demo_spiralmap.ipynb) hosted on `GitHub`.
 
-![:Cartesian projection of the `Drimmel_Ceph_2024` model shown for a particular arm (`Sag-Car`). We show this arm in HC (a), HC with a polar grid in the background (b), and in GC frame with a polar grid in the background (c). \label{figures/single_arm_single_model}](single_arm_single_model.png).
 
 
 
