@@ -30,10 +30,9 @@ While some of the papers in literature provide machine readable data to trace ou
 
 With `SpiralMap` we present a library of the major spiral arm models (and maps) of the Galaxy. 
 The package is written in `Python`, and allows the user to both extract the 2D trace and overplot the spiral arms in cartesian/polar coordinates in both Heliocentric (HC) and Galactocentric (GC) frames.
-A summary of the models currently included is provided in  Table (), where we have tried to include models from across the electromagnetic spectrum, and based on various tracers (gas/stars etc.). 
+A summary of the models currently included is provided in the Table below, where we have tried to include models from across the electromagnetic spectrum, and based on various tracers (gas/stars etc.). 
 Other models can easily be included on request. In the near future, we anticipate the availability of 3D spiral arm traces for the Galaxy in literature which can also be included in `SpiralMap`.
 
-```{list-table}
 | Model  | Description   |
 |----------|------------------------------------|
 | `Taylor_Cordes_1992`  | Model based on HII [@Taylor:1993].  |
@@ -44,7 +43,6 @@ Other models can easily be included on request. In the near future, we anticipat
 | `Poggio_2021`  | Map based on Upper Main sequence stars [@Poggio:2021].  |
 | `Gaia_2022`  | Map based on OB stars [@gaiacollab22].  |
 | `Drimmel_Ceph_2024`  | Model based on Cepheid variables  [@Drimmel:2024].  |
-```
 
 A few example plots that can be generated using the package are included below, for a full demonstration please take a look at the accompanying [`Jupyter` notebook](https://github.com/Abhaypru/SpiralMap/blob/main/demo_spiralmap.ipynb) hosted on `GitHub`.
 
@@ -53,15 +51,14 @@ A few example plots that can be generated using the package are included below, 
 
 ![Cartesian projections of multiple models plotted together with a polar grid in the background. We show the `Taylor_Cordes_1992` & `Poggio_2021` models in HC (a) and GC (b) frames, and similarly, the `Drimmel_NIR_2000` & `Poggio_2021` models in HC (c) and GC (d) frames.\label{multiple_models_cartesian}](figures/multiple_models_cartesian.png)
 
-![Cartesian projections of multiple models plotted together with a polar grid in the background. We show the `Taylor_Cordes_1992` & `Poggio_2021` models in HC (a) and GC (b) frames, and similarly, the `Drimmel_NIR_2000` & `Poggio_2021` models in HC (c) and GC (d) frames.\label{multiple_models_cartesian}](figures/multiple_models_cartesian.png)
-
+![Polar projections of multiple models plotted together. We show the `Taylor_Cordes_1992` & `Poggio_2021` models in HC (a) and GC (b) frames, and similarly the tiple models plotted together with a polar grid in the background and similarly, the `Drimmel_NIR_2000` & `Poggio_2021` models in HC (c) and GC (d) frames.\label{multiple_models_polar}](figures/multiple_models_polar.png)
 
 
 
 # Availability
 
-``SpiralMap`` is a GPL licensed software and the source code is available at https://github.com/Abhaypru/SpiralMap. 
-The full documentation is available at [Read the docs](https://spiralmap.readthedocs.io/en/latest/#api-docs).
+The source code for ``SpiralMap`` is available on [GitHub](https://github.com/Abhaypru/SpiralMap), and the 
+full documentation is hosted on [Read the docs](https://spiralmap.readthedocs.io/en/latest/#api-docs).
 
 # Acknowledgements
 
