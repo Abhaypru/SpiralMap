@@ -64,5 +64,6 @@ full documentation is hosted on [Read the docs](https://spiralmap.readthedocs.io
 
 SK acknowledges support from the European Union's Horizon 2020 research and innovation program under the GaiaUnlimited project (grant agreement No 101004110). 
 We thank Ronald Drimmel \& Eloisa Poggio for useful suggestions.
+
 # References
 
