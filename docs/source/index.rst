@@ -1,7 +1,7 @@
 
 
 
-   Welcome to SpiralMap's documentation!
+**Welcome to SpiralMap's documentation!**
 =====================================
 
 **SpiralMap** is a Python package that provides a collection of major models of the Milky Way's spiral arms.  
@@ -27,6 +27,7 @@ The documentation of *SpiralMap* is organized into the following sections:
    :maxdepth: 1
    :caption: Contents:
 
-   SpiralMap
-   modules
+  user_guide
+  SpiralMap
+   
 
