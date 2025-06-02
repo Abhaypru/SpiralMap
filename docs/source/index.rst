@@ -1,17 +1,13 @@
-.. SpiralMap documentation master file, created by
-   sphinx-quickstart on Mon Jun  2 15:58:56 2025.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+Welcome to SpiralMap's documentation!
+=====================================
 
-SpiralMap documentation
-=======================
+**SpiralMap** is a Python package for visualizing and comparing spiral arm models of the Milky Way.
 
-Add your content using ``reStructuredText`` syntax. See the
-`reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
-documentation for details.
-
+Contents:
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
+   modules
+   SpiralMap
