@@ -4,13 +4,14 @@
 Welcome to the gaiaunlimited documentation!
 ===========================================
 
-`SpiralMap` is a Python package for querying and constructing selection functions for the `Gaia
-<https://www.cosmos.esa.int/web/gaia/home>`_ survey. 
+`SpiralMap` is a Python library of the Milky Way's major spiral arm models and maps. 
 
 Features
 --------
 
-+ test.
++ Access 8 independent spiral arm models from literature. 
++ Extract the trace of individual or all spiral arms from a particular model.
++ Directly overplot spiral arms with choice of Cartesian or Polar coordinates, and in Heliocentric or Galactocentric frames.
 
 
 Acknowledgements
