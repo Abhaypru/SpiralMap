@@ -18,11 +18,9 @@ Acknowledgements
 ----------------
 
 If you make use of `SpiralMap`, please cite the accompanying paper (link). Additionally, please also cite the individual spiral arm model/map used. We provide a .bib file containing the relevant bibliography. 
-Team members
-------------
 
-Main contributors
-`````````````````
+Contributors
+------------
 
 Abhay Kumar Prusty (IISER Kolkata),
 Shourya Khanna (INAF-Torino)
