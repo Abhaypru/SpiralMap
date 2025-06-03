@@ -68,7 +68,7 @@ nbsphinx_prompt_width = "0"
 html_theme = "sphinx_book_theme"
 html_theme_options = {
     "path_to_docs": "docs",
-    "repository_url": "https://github.com/gaia-unlimited/gaiaunlimited",
+    "repository_url": "https://github.com/Abhaypru/SpiralMap",
     "repository_branch": "main",
     "launch_buttons": {
         "binderhub_url": "https://mybinder.org",
