@@ -30,9 +30,7 @@ The documentation of *SpiralMap* is organized into the following sections:
    user_guide
 
 .. toctree::
-   :maxdepth: 2
-  
-
+   :maxdepth: 4
    SpiralMap   
 
 
