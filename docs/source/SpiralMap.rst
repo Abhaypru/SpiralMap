@@ -1,45 +1,30 @@
-SpiralMap package
+SpiralMap Package
 =================
-
-Submodules
-----------
-
-SpiralMap.models\_ module
--------------------------
-
-.. automodule:: SpiralMap.models_
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-SpiralMap.mytools module
-------------------------
-
-.. automodule:: SpiralMap.mytools
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-SpiralMap.test module
----------------------
-
-.. automodule:: SpiralMap.test
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-SpiralMap.version module
-------------------------
-
-.. automodule:: SpiralMap.version
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-Module contents
----------------
 
 .. automodule:: SpiralMap
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
+
+Modules
+-------
+
+.. automodule:: SpiralMap.models
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: SpiralMap.mytools
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: SpiralMap.test
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: SpiralMap.version
+   :members:
+   :undoc-members:
+   :show-inheritance:

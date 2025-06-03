@@ -12,7 +12,10 @@ build:
     python: "3.10"
 
 python:
+  path: ["src"]
   install:
+    - method: pip
+      path: .
     - requirements: docs/requirements.txt
 
 sphinx:
