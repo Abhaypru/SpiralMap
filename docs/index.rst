@@ -38,14 +38,5 @@ Shourya Khanna (INAF-Torino)
    :maxdepth: 1
    :caption: Tutorials and illustrated examples:
 
-   notebooks/SubsampleSF_Tutorial.ipynb
-   notebooks/SubsampleSF_HMLE_Tutorial.ipynb
-   notebooks/rave_ratios.ipynb
-   notebooks/APOGEE_selection_function.ipynb
-   notebooks/RedClump_GSP-Spec_SF.ipynb
-   notebooks/Aurora/README.md
-   notebooks/RedClumpGaiaAllWISE/README.md
-   notebooks/cube_galaxy_sky.ipynb
-   community-examples
+   demo_spiralmap.ipynb
 
-.. _Gaia: https://www.cosmos.esa.int/web/gaia/home
