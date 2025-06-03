@@ -17,8 +17,7 @@ Features
 Acknowledgements
 ----------------
 
-This work 
-
+If you make use of `SpiralMap`, please cite the accompanying paper (link). Additionally, please also cite the individual spiral arm model/map used. We provide a .bib file containing the relevant bibliography. 
 Team members
 ------------
 
