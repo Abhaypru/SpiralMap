@@ -24,10 +24,10 @@ The documentation of *SpiralMap* is organized into the following sections:
   Detailed reference of all classes and functions included in the SpiralMap package.
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :caption: Contents:
 
-  user_guide
-  SpiralMap
-   
+   user_guide
+   SpiralMap   # This is the API doc
+
 

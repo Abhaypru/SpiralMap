@@ -8,7 +8,7 @@
 
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../..'))  # Adjust path to your SpiralMap package
+sys.path.insert(0, os.path.abspath('../../src'))  # so `spiralmap` can be found
 
 
 project = 'SpiralMap'
