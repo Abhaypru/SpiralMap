@@ -22,7 +22,7 @@ If you make use of `SpiralMap`, please cite the accompanying paper (link). Addit
 Contributors
 ------------
 
-Abhay Kumar Prusty (IISER Kolkata),
+Abhay Kumar Prusty (IISER Kolkata) &
 Shourya Khanna (INAF-Torino)
 
 
