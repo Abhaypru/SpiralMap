@@ -28,6 +28,11 @@ The documentation of *SpiralMap* is organized into the following sections:
    :caption: Contents:
 
    user_guide
-   SpiralMap   # This is the API doc
+
+.. toctree::
+   :maxdepth: 3
+   :caption: Contents:
+
+   SpiralMap   
 
 
