@@ -31,6 +31,6 @@ The documentation of *SpiralMap* is organized into the following sections:
 
 .. toctree::
    :maxdepth: 4
-   SpiralMap   
+    api/SpiralMap   
 
 
