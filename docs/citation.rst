@@ -34,7 +34,20 @@ To cite this **SpiralMap** package, please use:
 	      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
 	}
 	
-.. code-block:: bibtex
+
+	@ARTICLE{Taylor:1993,
+	       author = {{Taylor}, J.~H. and {Cordes}, J.~M.},
+	        title = "{Pulsar Distances and the Galactic Distribution of Free Electrons}",
+	      journal = {\apj},
+	     keywords = {Astrometry, Electron Density (Concentration), Free Electrons, Galactic Structure, H Ii Regions, Pulsars, Astronomical Models, Extragalactic Radio Sources, Interstellar Matter, Milky Way Galaxy, Astrophysics, GALAXY: STRUCTURE, ISM: GENERAL, STARS: PULSARS: GENERAL, STARS: DISTANCES},
+	         year = 1993,
+	        month = jul,
+	       volume = {411},
+	        pages = {674},
+	          doi = {10.1086/172870},
+	       adsurl = {https://ui.adsabs.harvard.edu/abs/1993ApJ...411..674T},
+	      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+	}
 
  
 	@ARTICLE{Reid:2019,
