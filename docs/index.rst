@@ -34,6 +34,7 @@ Shourya Khanna (INAF-Torino)
    models_available
    install
    walkthrough
+   citation
 
 
 
