@@ -30,6 +30,7 @@ Shourya Khanna (INAF-Torino)
    :maxdepth: 1
    :caption: Contents:
 
+   introduction
    install
 
 
