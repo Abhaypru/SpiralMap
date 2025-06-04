@@ -1,61 +1,55 @@
-Installation and quickstart
-------------
+Installation and Quickstart
+===========================
 
-The package is available through PyPI and Github.
+The **SpiralMap** package is available through **PyPI** and **GitHub**.
 
-To install gaiaunlimited with pip, run:
-
-.. code-block:: bash
-
-   pip install gaiaunlimited
-
-To install gaiaunlimited through github, run:
+To install SpiralMap with pip from PyPI, run:
 
 .. code-block:: bash
 
-   pip install gaiaunlimited@git+https://github.com/gaia-unlimited/gaiaunlimited@<latest release>
+   pip install SpiralMap
 
-Alternatively, clone the repository and install:
+To install SpiralMap directly from GitHub, run:
 
 .. code-block:: bash
 
-   git clone https://github.com/gaia-unlimited/gaiaunlimited.git
-   cd gaiaunlimited
+   pip install git+https://github.com/Abhaypru/SpiralMap.git
+
+Alternatively, clone the repository and install locally:
+
+.. code-block:: bash
+
+   git clone https://github.com/Abhaypru/SpiralMap.git
+   cd SpiralMap
    python -m pip install .
 
-In case a local installation is not possible, the package can also be installed inside a Google Colab notebook by executing the command ``!pip install gaiaunlimited`` or  ``%pip install gaiaunlimited``.
+(Optional) Create a virtual environment before installation to avoid dependency conflicts:
 
 
-Plotting the Gaia DR3 selection function on the sky
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Quickstart: Plotting Spiral Arm Models
+--------------------------------------
 
-This code queries a precomputed all-sky map and displays the completeness at magnitude 21:
+Here's a minimal example that demonstrates how to load and visualize a spiral arm model using **SpiralMap**:
 
-.. code-block:: bash
+.. code-block:: python
 
-   from gaiaunlimited.selectionfunctions import DR3SelectionFunctionTCG
-   from gaiaunlimited.utils import get_healpix_centers
-   import numpy as np
-   import healpy as hp
+   import SpiralMap as sp
+   import matplotlib.pyplot as plt
+   import os
+   Rsun=8.277
+   spirals = sp.main_(Rsun=Rsun,print_=False)
+
+   # Load a specific spiral arm model (e.g., 'Taylor_Cordes_1992')
    
-   mapHpx7 = DR3SelectionFunctionTCG()
-   coords_of_centers = get_healpix_centers(5)
-   gmag = np.ones_like(coords_of_centers) * 21.
-   completeness = mapHpx7.query(coords_of_centers,gmag)
-   hp.mollview(completeness,coord=['Celestial','Galactic'],
-               title='Gaia DR3 selection function at G=21',
-               min=0,max=1)
+   use_model = 'Taylor_Cordes_1992'
 
-.. image:: notebooks/_static/dr3_tcg_g21.png
+   # Plot in Galactocentric coordinates
+   spirals = sp.main_(xsun=xsun)
+   plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'polargrid':True}
+   spirals.readout(plotattrs,model=use_model,arm='all')  
+
+This will generate a 3d projection of the Milky Way spiral arms based on the selected model.
+
+.. image:: /home/abhayprusty/Desktop/projects/SpiralMap/src/SpiralMap/figdir_primer/map_0png.png
    :width: 600
 
-
-Optional: setting the data directory
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Gaiaunlimited downloads and caches large binary data files. To set the data directory to store these files,
-set the environment variable ``GAIAUNLIMITED_DATADIR`` to the desired location. By default, this will be ``~/.gaiaunlimited``.
-
-.. code-block:: bash
-
-    export GAIAUNLIMITED_DATADIR="/path/to/directory"
