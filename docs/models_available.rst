@@ -1,3 +1,6 @@
+.. bibliography:: refs.bib
+   :style: unsrt
+
 Available Spiral Arm Models
 ===========================
 
@@ -23,5 +26,4 @@ The following table provides a summary of the spiral arm models included in **Sp
 | Drimmel_Ceph_2024      | Based on Cepheid variables :cite:`Drimmel2024`.                          |
 +------------------------+--------------------------------------------------------------------------+
 
-.. bibliography:: refs.bib
-   :style: unsrt
+
