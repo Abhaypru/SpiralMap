@@ -119,40 +119,75 @@ A full description of each attribute is provided in :ref:`tab:plotattrs`.
      'colour_contour': 'black',
      'dataloc': '/Users/shouryapro/Documents/GitHub/SpiralMapping_package/datafiles'}
 
-+----------------+---------------------+---------+---------------------------------------------+
-| Column         | Options (type)      | Default | Description                                 |
-+================+=====================+=========+=============================================+
-| plot           | Boolean             | False   | Whether to generate a plot or just extract data |
-+----------------+---------------------+---------+---------------------------------------------+
-| markersize     | float               | 3       | Marker size for plotting                    |
-+----------------+---------------------+---------+---------------------------------------------+
-| coordsys       | ``HC`` / ``GC`` (str)| HC      | Coordinate system: heliocentric or galactocentric |
-+----------------+---------------------+---------+---------------------------------------------+
-| linewidth      | float               | 0.5     | Line width for plotting arms                |
-+----------------+---------------------+---------+---------------------------------------------+
-| linestyle      | string              | '-'     | Line style for plotting arms                |
-+----------------+---------------------+---------+---------------------------------------------+
-| armcolour      | string              | ''      | Color override for arms                      |
-+----------------+---------------------+---------+---------------------------------------------+
-| markSunGC      | Boolean             | True    | Whether to mark the Sun in GC plots         |
-+----------------+---------------------+---------+---------------------------------------------+
-| xmin           | string              | ''      | Minimum x-axis limit                         |
-+----------------+---------------------+---------+---------------------------------------------+
-| xmax           | string              | ''      | Maximum x-axis limit                         |
-+----------------+---------------------+---------+---------------------------------------------+
-| ymin           | string              | ''      | Minimum y-axis limit                         |
-+----------------+---------------------+---------+---------------------------------------------+
-| ymax           | string              | ''      | Maximum y-axis limit                         |
-+----------------+---------------------+---------+---------------------------------------------+
-| polarproj      | Boolean             | False   | Whether to use polar projection (R vs. ϕ)  |
-+----------------+---------------------+---------+---------------------------------------------+
-| polargrid      | Boolean             | False   | Whether to overplot a polar grid             |
-+----------------+---------------------+---------+---------------------------------------------+
-| colour_contour | string              | 'black' | Contour line color                           |
-+----------------+---------------------+---------+---------------------------------------------+
-| dataloc        | string              | os.getcwd()+'/datafiles' | Directory location for data files |
-+----------------+---------------------+---------+---------------------------------------------+
+.. list-table::
+   :caption: Plot attributes
+   :name: tab:plotattrs
+   :widths: 15 20 10 55
 
+   * - Column
+     - Options (type)
+     - Default
+     - Description
+   * - plot
+     - Boolean
+     - False
+     - Whether to generate a plot or just extract data
+   * - markersize
+     - float
+     - 3
+     - Marker size for plots
+   * - coordsys
+     - 'HC' / 'GC' (string)
+     - 'HC'
+     - Coordinate system: Heliocentric (HC) or Galactocentric (GC)
+   * - linewidth
+     - float
+     - 0.5
+     - Line width for plotting arms
+   * - linestyle
+     - string
+     - '-'
+     - Line style for plotting arms
+   * - armcolour
+     - string
+     - ''
+     - Color override for arms
+   * - markSunGC
+     - Boolean
+     - True
+     - Whether to mark the Sun in GC plots
+   * - xmin
+     - string
+     - ''
+     - Minimum x-axis limit
+   * - xmax
+     - string
+     - ''
+     - Maximum x-axis limit
+   * - ymin
+     - string
+     - ''
+     - Minimum y-axis limit
+   * - ymax
+     - string
+     - ''
+     - Maximum y-axis limit
+   * - polarproj
+     - Boolean
+     - False
+     - Whether to use polar projection (R vs. ϕ)
+   * - polargrid
+     - Boolean
+     - False
+     - Whether to overplot a polar grid
+   * - colour_contour
+     - string
+     - 'black'
+     - Contour line color
+   * - dataloc
+     - string
+     - os.getcwd()+'/datafiles'
+     - Directory location for data files
 
 The most important attributes to set here are:
 
