@@ -17,7 +17,7 @@ To cite this **SpiralMap** package, please use:
 .. code-block:: bibtex
 
 
-.. 	@ARTICLE{Taylor_Cordes_1992,
+ 	@ARTICLE{Taylor_Cordes_1992,
 	       author = {{Taylor}, J.~H. and {Cordes}, J.~M.},
 	        title = "{Pulsar Distances and the Galactic Distribution of Free Electrons}",
 	      journal = {\apj},
