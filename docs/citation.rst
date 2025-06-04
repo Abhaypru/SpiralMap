@@ -16,26 +16,8 @@ To cite this **SpiralMap** package, please use:
 
 .. code-block:: bibtex
 
- 
-	@ARTICLE{Drimmel:2024,
-	       author = {{Drimmel}, Ronald and {Khanna}, Shourya and {Poggio}, Eloisa and {Skowron}, Dorota M.},
-	        title = "{The Milky Way as Seen by Classical Cepheids II: Spiral Structure}",
-	      journal = {arXiv e-prints},
-	     keywords = {Astrophysics - Astrophysics of Galaxies},
-	         year = 2024,
-	        month = jun,
-	          eid = {arXiv:2406.09127},
-	        pages = {arXiv:2406.09127},
-	          doi = {10.48550/arXiv.2406.09127},
-	archivePrefix = {arXiv},
-	       eprint = {2406.09127},
-	 primaryClass = {astro-ph.GA},
-	       adsurl = {https://ui.adsabs.harvard.edu/abs/2024arXiv240609127D},
-	      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
-	}
-	
 
-	@ARTICLE{Taylor:1993,
+.. 	@ARTICLE{Taylor_Cordes_1992,
 	       author = {{Taylor}, J.~H. and {Cordes}, J.~M.},
 	        title = "{Pulsar Distances and the Galactic Distribution of Free Electrons}",
 	      journal = {\apj},
@@ -48,8 +30,63 @@ To cite this **SpiralMap** package, please use:
 	       adsurl = {https://ui.adsabs.harvard.edu/abs/1993ApJ...411..674T},
 	      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
 	}
+	
+	@ARTICLE{Drimmel_NIR_2000,
+	       author = {{Drimmel}, R.},
+	        title = "{Evidence for a two-armed spiral in the Milky Way}",
+	      journal = {\aap},
+	     keywords = {GALAXY: STRUCTURE, INFRARED: GALAXIES, Astrophysics},
+	         year = 2000,
+	        month = jun,
+	       volume = {358},
+	        pages = {L13-L16},
+	          doi = {10.48550/arXiv.astro-ph/0005241},
+	archivePrefix = {arXiv},
+	       eprint = {astro-ph/0005241},
+	 primaryClass = {astro-ph},
+	       adsurl = {https://ui.adsabs.harvard.edu/abs/2000A&A...358L..13D},
+	      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+	}
+	
+	@ARTICLE{Levine_2006,
+	       author = {{Levine}, E.~S. and {Blitz}, Leo and {Heiles}, Carl},
+	        title = "{The Spiral Structure of the Outer Milky Way in Hydrogen}",
+	      journal = {Science},
+	     keywords = {ASTRONOMY, Astrophysics},
+	         year = 2006,
+	        month = jun,
+	       volume = {312},
+	       number = {5781},
+	        pages = {1773-1777},
+	          doi = {10.1126/science.1128455},
+	archivePrefix = {arXiv},
+	       eprint = {astro-ph/0605728},
+	 primaryClass = {astro-ph},
+	       adsurl = {https://ui.adsabs.harvard.edu/abs/2006Sci...312.1773L},
+	      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+	} 
+	 
 
- 
+
+	@ARTICLE{Hou:2014,
+	       author = {{Hou}, L.~G. and {Han}, J.~L.},
+	        title = "{The observed spiral structure of the Milky Way}",
+	      journal = {\aap},
+	     keywords = {Galaxy: disk, Galaxy: structure, Galaxy: kinematics and dynamics, HII regions, ISM: clouds, Astrophysics - Astrophysics of Galaxies},
+	         year = 2014,
+	        month = sep,
+	       volume = {569},
+	          eid = {A125},
+	        pages = {A125},
+	          doi = {10.1051/0004-6361/201424039},
+	archivePrefix = {arXiv},
+	       eprint = {1407.7331},
+	 primaryClass = {astro-ph.GA},
+	       adsurl = {https://ui.adsabs.harvard.edu/abs/2014A&A...569A.125H},
+	      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+	}
+
+
 	@ARTICLE{Reid:2019,
 	       author = {{Reid}, M.~J. and {Menten}, K.~M. and {Brunthaler}, A. and {Zheng}, X.~W. and {Dame}, T.~M. and {Xu}, Y. and {Li}, J. and {Sakai}, N. and {Wu}, Y. and {Immer}, K. and {Zhang}, B. and {Sanna}, A. and {Moscadelli}, L. and {Rygl}, K.~L.~J. and {Bartkiewicz}, A. and {Hu}, B. and {Quiroga-Nu{\~n}ez}, L.~H. and {van Langevelde}, H.~J.},
 	        title = "{Trigonometric Parallaxes of High-mass Star-forming Regions: Our View of the Milky Way}",
@@ -68,4 +105,66 @@ To cite this **SpiralMap** package, please use:
 	       adsurl = {https://ui.adsabs.harvard.edu/abs/2019ApJ...885..131R},
 	      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
 	}
+
+
+	@ARTICLE{Poggio_2021,
+	       author = {{Poggio}, E. and {Drimmel}, R. and {Cantat-Gaudin}, T. and {Ramos}, P. and {Ripepi}, V. and {Zari}, E. and {Andrae}, R. and {Blomme}, R. and {Chemin}, L. and {Clementini}, G. and {Figueras}, F. and {Fouesneau}, M. and {Fr{\'e}mat}, Y. and {Lobel}, A. and {Marshall}, D.~J. and {Muraveva}, T. and {Romero-G{\'o}mez}, M.},
+	        title = "{Galactic spiral structure revealed by Gaia EDR3}",
+	      journal = {\aap},
+	     keywords = {Galaxy: disk, Galaxy: structure, Galaxy: stellar content, Astrophysics - Astrophysics of Galaxies},
+	         year = 2021,
+	        month = jul,
+	       volume = {651},
+	          eid = {A104},
+	        pages = {A104},
+	          doi = {10.1051/0004-6361/202140687},
+	archivePrefix = {arXiv},
+	       eprint = {2103.01970},
+	 primaryClass = {astro-ph.GA},
+	       adsurl = {https://ui.adsabs.harvard.edu/abs/2021A&A...651A.104P},
+	      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+	}
+
+
+	@ARTICLE{Gaia_2022,
+	       author = {{Gaia Collaboration} and {Drimmel}, R. and {Romero-G{\'o}mez}, M. and {Chemin}, L. and {Ramos}, P. and {Poggio}, E. and {Ripepi}, V. and {Andrae}, R. and {Blomme}, R. and {Cantat-Gaudin}, T. and {Castro-Ginard}, A. and {Clementini}, G. and {Figueras}, F. and {Fouesneau}, M. and {Fr{\'e}mat}, Y. and {Jardine}, K. and {Khanna}, S. and {Lobel}, A. and {Marshall}, D.~J. and {Muraveva}, T. and {Brown}, A.~G.~A. and {Vallenari}, A. and {Prusti}, T. and {de Bruijne}, J.~H.~J. and {Arenou}, F. and {Babusiaux}, C. and {Biermann}, M. and {Creevey}, O.~L. and {Ducourant}, C. and {Evans}, D.~W. and {Eyer}, L. and {Guerra}, R. and {Hutton}, A. and {Jordi}, C. and {Klioner}, S.~A. and {Lammers}, U.~L. and {Lindegren}, L. and {Luri}, X. and {Mignard}, F. and {Panem}, C. and {Pourbaix}, D. and {Randich}, S. and {Sartoretti}, P. and {Soubiran}, C. and {Tanga}, P. and {Walton}, N.~A. and {Bailer-Jones}, C.~A.~L. and {Bastian}, U. and {Jansen}, F. and {Katz}, D. and {Lattanzi}, M.~G. and {van Leeuwen}, F. and {Bakker}, J. and {Cacciari}, C. and {Casta{\~n}eda}, J. and {De Angeli}, F. and {Fabricius}, C. and {Galluccio}, L. and {Guerrier}, A. and {Heiter}, U. and {Masana}, E. and {Messineo}, R. and {Mowlavi}, N. and {Nicolas}, C. and {Nienartowicz}, K. and {Pailler}, F. and {Panuzzo}, P. and {Riclet}, F. and {Roux}, W. and {Seabroke}, G.~M. and {Sordo}, R. and {Th{\'e}venin}, F. and {Gracia-Abril}, G. and {Portell}, J. and {Teyssier}, D. and {Altmann}, M. and {Audard}, M. and {Bellas-Velidis}, I. and {Benson}, K. and {Berthier}, J. and {Burgess}, P.~W. and {Busonero}, D. and {Busso}, G. and {C{\'a}novas}, H. and {Carry}, B. and {Cellino}, A. and {Cheek}, N. and {Damerdji}, Y. and {Davidson}, M. and {de Teodoro}, P. and {Nu{\~n}ez Campos}, M. and {Delchambre}, L. and {Dell'Oro}, A. and {Esquej}, P. and {Fern{\'a}ndez-Hern{\'a}ndez}, J. and {Fraile}, E. and {Garabato}, D. and {Garc{\'\i}a-Lario}, P. and {Gosset}, E. and {Haigron}, R. and {Halbwachs}, J. -L. and {Hambly}, N.~C. and {Harrison}, D.~L. and {Hern{\'a}ndez}, J. and {Hestroffer}, D. and {Hodgkin}, S.~T. and {Holl}, B. and {Jan{\ss}en}, K. and {Jevardat de Fombelle}, G. and {Jordan}, S. and {Krone-Martins}, A. and {Lanzafame}, A.~C. and {L{\"o}ffler}, W. and {Marchal}, O. and {Marrese}, P.~M. and {Moitinho}, A. and {Muinonen}, K. and {Osborne}, P. and {Pancino}, E. and {Pauwels}, T. and {Recio-Blanco}, A. and {Reyl{\'e}}, C. and {Riello}, M. and {Rimoldini}, L. and {Roegiers}, T. and {Rybizki}, J. and {Sarro}, L.~M. and {Siopis}, C. and {Smith}, M. and {Sozzetti}, A. and {Utrilla}, E. and {van Leeuwen}, M. and {Abbas}, U. and {{\'A}brah{\'a}m}, P. and {Abreu Aramburu}, A. and {Aerts}, C. and {Aguado}, J.~J. and {Ajaj}, M. and {Aldea-Montero}, F. and {Altavilla}, G. and {{\'A}lvarez}, M.~A. and {Alves}, J. and {Anders}, F. and {Anderson}, R.~I. and {Anglada Varela}, E. and {Antoja}, T. and {Baines}, D. and {Baker}, S.~G. and {Balaguer-N{\'u}{\~n}ez}, L. and {Balbinot}, E. and {Balog}, Z. and {Barache}, C. and {Barbato}, D. and {Barros}, M. and {Barstow}, M.~A. and {Bartolom{\'e}}, S. and {Bassilana}, J. -L. and {Bauchet}, N. and {Becciani}, U. and {Bellazzini}, M. and {Berihuete}, A. and {Bernet}, M. and {Bertone}, S. and {Bianchi}, L. and {Binnenfeld}, A. and {Blanco-Cuaresma}, S. and {Boch}, T. and {Bombrun}, A. and {Bossini}, D. and {Bouquillon}, S. and {Bragaglia}, A. and {Bramante}, L. and {Breedt}, E. and {Bressan}, A. and {Brouillet}, N. and {Brugaletta}, E. and {Bucciarelli}, B. and {Burlacu}, A. and {Butkevich}, A.~G. and {Buzzi}, R. and {Caffau}, E. and {Cancelliere}, R. and {Carballo}, R. and {Carlucci}, T. and {Carnerero}, M.~I. and {Carrasco}, J.~M. and {Casamiquela}, L. and {Castellani}, M. and {Chaoul}, L. and {Charlot}, P. and {Chiaramida}, V. and {Chiavassa}, A. and {Chornay}, N. and {Comoretto}, G. and {Contursi}, G. and {Cooper}, W.~J. and {Cornez}, T. and {Cowell}, S. and {Crifo}, F. and {Cropper}, M.},
+	        title = "{Gaia Data Release 3. Mapping the asymmetric disc of the Milky Way}",
+	      journal = {\aap},
+	     keywords = {Galaxy: kinematics and dynamics, Galaxy: structure, Galaxy: disk, Galaxy: bulge, catalogs, Astrophysics - Astrophysics of Galaxies},
+	         year = 2023,
+	        month = jun,
+	       volume = {674},
+	          eid = {A37},
+	        pages = {A37},
+	          doi = {10.1051/0004-6361/202243797},
+	archivePrefix = {arXiv},
+	       eprint = {2206.06207},
+	 primaryClass = {astro-ph.GA},
+	       adsurl = {https://ui.adsabs.harvard.edu/abs/2023A&A...674A..37G},
+	      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+	}
+
+
+ 
+	@ARTICLE{Drimmel_Ceph_2024,
+	       author = {{Drimmel}, Ronald and {Khanna}, Shourya and {Poggio}, Eloisa and {Skowron}, Dorota M.},
+	        title = "{The Milky Way as Seen by Classical Cepheids II: Spiral Structure}",
+	      journal = {arXiv e-prints},
+	     keywords = {Astrophysics - Astrophysics of Galaxies},
+	         year = 2024,
+	        month = jun,
+	          eid = {arXiv:2406.09127},
+	        pages = {arXiv:2406.09127},
+	          doi = {10.48550/arXiv.2406.09127},
+	archivePrefix = {arXiv},
+	       eprint = {2406.09127},
+	 primaryClass = {astro-ph.GA},
+	       adsurl = {https://ui.adsabs.harvard.edu/abs/2024arXiv240609127D},
+	      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+	}
+	
+ 
+
+
+
 
