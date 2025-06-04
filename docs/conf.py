@@ -36,6 +36,10 @@ extensions = [
     "sphinx_copybutton",
     "myst_nb",
 ]
+
+extensions.append('sphinxcontrib.bibtex')
+bibtex_bibfiles = ['refs.bib']
+
 numpydoc_show_class_members = False
 
 # myst_nb configurations
