@@ -31,6 +31,7 @@ Shourya Khanna (INAF-Torino)
    :caption: Contents:
 
    introduction
+   models_available
    install
 
 

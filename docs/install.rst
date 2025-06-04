@@ -1,8 +1,7 @@
 Installation and Quickstart
 ===========================
 
-The **SpiralMap** package is available through **`PyPI <https://test.pypi.org/project/SpiralMap/>`_** and **`GitHub <https://github.com/Abhaypru/SpiralMap>`_**.
-
+The **SpiralMap** package is available through  `PyPI <https://test.pypi.org/project/SpiralMap/>`_and `GitHub <https://github.com/Abhaypru/SpiralMap>`_ .
 To install SpiralMap with pip from PyPI, run:
 
 .. code-block:: bash
