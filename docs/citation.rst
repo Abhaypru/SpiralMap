@@ -24,6 +24,9 @@ To cite this **SpiralMap** package, please use:
       note         = {Version 1.0}
     }
 
+
+Drimmel
+
 .. code-block:: bibtex
 	@ARTICLE{Drimmel:2024,
 	       author = {{Drimmel}, Ronald and {Khanna}, Shourya and {Poggio}, Eloisa and {Skowron}, Dorota M.},
