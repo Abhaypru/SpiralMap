@@ -33,6 +33,7 @@ Shourya Khanna (INAF-Torino)
    introduction
    models_available
    install
+   walkthrough
 
 
 
