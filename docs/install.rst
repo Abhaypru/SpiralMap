@@ -1,7 +1,7 @@
 Installation and Quickstart
 ===========================
 
-The **SpiralMap** package is available through **PyPI** and **GitHub**.
+The **SpiralMap** package is available through **`PyPI <https://test.pypi.org/project/SpiralMap/>`_** and **`GitHub <https://github.com/Abhaypru/SpiralMap>`_**.
 
 To install SpiralMap with pip from PyPI, run:
 
@@ -50,6 +50,6 @@ Here's a minimal example that demonstrates how to load and visualize a spiral ar
 
 This will generate a 3d projection of the Milky Way spiral arms based on the selected model.
 
-.. image:: /home/abhayprusty/Desktop/projects/SpiralMap/src/SpiralMap/figdir_primer/map_0png.png
+.. image:: src/SpiralMap/figdir_primer/map_0png.png
    :width: 600
 
