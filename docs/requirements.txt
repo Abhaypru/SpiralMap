@@ -6,3 +6,4 @@ myst-nb==0.16.0
 # for syntax highlighting (https://nbsphinx.readthedocs.io/en/0.8.0/installation.html#Pygments-Lexer-for-Syntax-Highlighting)
 IPython>=8.0
 matplotlib
+sphinxcontrib-bibtex
