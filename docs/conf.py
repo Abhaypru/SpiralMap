@@ -27,17 +27,15 @@ release = "0.1.0"
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-
 extensions = [
-    "sphinx_rtd_theme",
-    "sphinx.ext.mathjax",
-    "sphinxcontrib.bibtex",
     "sphinx.ext.autodoc",
+    "sphinx.ext.autosummary",
+    "sphinx_automodapi.automodapi",
     "sphinx.ext.napoleon",
-    "sphinx.ext.viewcode",
-    "nbsphinx",
+    "matplotlib.sphinxext.plot_directive",
+    "sphinx_copybutton",
+    "myst_nb",
 ]
-
 
 extensions.append('sphinxcontrib.bibtex')
 bibtex_bibfiles = ['refs.bib']
