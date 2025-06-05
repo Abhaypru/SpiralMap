@@ -4,17 +4,16 @@
 SpiralMap
 ===========================================
 
-`SpiralMap` is a Python library of the Milky Way's major spiral arm models and maps. Over the years several independent studies conducted across wavelengths have revealed rich spiral structure in the Galaxy. Here, we have tried to compile the major models and maps in a user friendly manner. 
+We present a Python library of the Milky Way's major spiral arm models and maps. Over the years several independent studies conducted across wavelengths have revealed rich spiral structure in the Galaxy. Here, we have tried to compile the major models and maps in a user friendly manner. 
 Most users are interested in simply extracting the trace or overplotting the spiral arms on another plot of interest, for example while comparing substructure in the velocity field to the location of spiral arms. 
-
-
-Features
---------
+To this end, with **SpiralMap** one can:
 
 + Access 8 independent spiral arm models from literature. 
 + Extract the trace of individual or all spiral arms from a particular model.
 + Directly overplot spiral arms with choice of Cartesian or Polar coordinates, and in Heliocentric or Galactocentric frames.
 
+
+![image info](src/SpiralMap/movie_.gif).
 
 Acknowledgements
 ----------------
