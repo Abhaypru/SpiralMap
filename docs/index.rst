@@ -17,12 +17,7 @@ Features
 Acknowledgements
 ----------------
 
-.. _My target:
-
-Explicit targets
-~~~~~~~~~~~~~~~~
-
-citation `citation`_.
+:doc:`Custom title </citation>`
 
 If you make use of `SpiralMap`, please cite the accompanying paper (submitted to JOSS). Additionally, please also cite the individual spiral arm model/map used. 
 Relevant references are provided in BibTeX form (citation)
