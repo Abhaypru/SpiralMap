@@ -39,6 +39,7 @@ extensions = [
 
 extensions.append('sphinxcontrib.bibtex')
 bibtex_bibfiles = ['refs.bib']
+bibtex_reference_style = "author_year"
 
 numpydoc_show_class_members = False
 

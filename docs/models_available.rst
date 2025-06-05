@@ -25,4 +25,3 @@ The following table provides a summary of the spiral arm models included in **Sp
 +------------------------+--------------------------------------------------------------------------+
 
 
-.. bibliography:: refs.bib
