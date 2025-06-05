@@ -19,7 +19,7 @@ To this end, with `SpiralMap` one can:
    A gallery of the various models included in this version, in this case in polar projection and in Galactocentric coordinates with 
    the locations of the Sun and the Galactic center (star) marked.
    
-The models included are described in :doc:` here </models_available>`.
+The models included are described in:doc:`How to cite </citation>` section. testing :doc:` here </models_available>`.
    
 
 Acknowledgements
