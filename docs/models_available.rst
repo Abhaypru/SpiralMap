@@ -1,5 +1,3 @@
-.. bibliography:: refs.bib
-   :style: unsrt
 
 Available Spiral Arm Models
 ===========================
@@ -11,19 +9,19 @@ The following table provides a summary of the spiral arm models included in **Sp
 +========================+==========================================================================+
 | Taylor_Cordes_1992     | Model based on HII regions :cite:`Taylor_Cordes_1992`.                   |
 +------------------------+--------------------------------------------------------------------------+
-| Drimmel_NIR_2000       | Based on Galactic plane emission in NIR             |
+| Drimmel_NIR_2000       | Based on Galactic plane emission in NIR                                  |
 +------------------------+--------------------------------------------------------------------------+
-| Levine_2006            | Based on HI (21 cm) data                              |
+| Levine_2006            | Based on HI (21 cm) data                                                 |
 +------------------------+--------------------------------------------------------------------------+
-| Hou_Han_2014           | Logarithmic spiral using HII/GMC/Maser data              |
+| Hou_Han_2014           | Logarithmic spiral using HII/GMC/Maser data                              |
 +------------------------+--------------------------------------------------------------------------+
-| Reid_2019              | MASER parallax model                                    |
+| Reid_2019              | MASER parallax model                                                     |
 +------------------------+--------------------------------------------------------------------------+
-| Poggio_cont_2021       | Map based on Upper Main Sequence stars                |
+| Poggio_cont_2021       | Map based on Upper Main Sequence stars                                   |
 +------------------------+--------------------------------------------------------------------------+
-| GaiaPVP_cont_2022      | OB star map from Gaia Collaboration              |
+| GaiaPVP_cont_2022      | OB star map from Gaia Collaboration                                      |
 +------------------------+--------------------------------------------------------------------------+
-| Drimmel_Ceph_2024      | Based on Cepheid variables                           |
+| Drimmel_Ceph_2024      | Based on Cepheid variables                                               |
 +------------------------+--------------------------------------------------------------------------+
 
 
