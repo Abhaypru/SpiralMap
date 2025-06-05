@@ -14,13 +14,12 @@ To this end, with `SpiralMap` one can:
 
 
 
-
 .. figure:: ../src/SpiralMap/movie_.gif
 
    A gallery of the various models included in this version, in this case in polar projection and in Galactocentric coordinates with 
    the locations of the Sun and the Galactic center (star) marked.
    
-
+A list of the available models is  :doc:`here </models_available>`.
    
 
 Acknowledgements
@@ -28,9 +27,7 @@ Acknowledgements
 
 
 If you make use of `SpiralMap`, please cite the accompanying paper (submitted to JOSS). Additionally, please also cite the individual spiral arm model/map used. 
-Relevant references are provided in BibTeX form in the :doc:`How to cite </models_available>` section.
-
-
+Relevant references are provided in BibTeX form in the :doc:`How to cite </citation>` section.
 
 Contributors
 ------------
