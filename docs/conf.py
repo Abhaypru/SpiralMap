@@ -19,8 +19,8 @@
 
 project = "SpiralMap"
 copyright = "2025, SpiralMap"
-author = "SpiralMap"
-
+author = "Prusty & Khanna"
+release = "0.1.0"
 
 # -- General configuration ---------------------------------------------------
 
@@ -34,8 +34,10 @@ extensions = [
     "sphinx.ext.napoleon",
     "matplotlib.sphinxext.plot_directive",
     "sphinx_copybutton",
+    "sphinx_rtd_theme",
     "myst_nb",
 ]
+
 
 extensions.append('sphinxcontrib.bibtex')
 bibtex_bibfiles = ['refs.bib']
