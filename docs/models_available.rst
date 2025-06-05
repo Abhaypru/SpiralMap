@@ -24,7 +24,7 @@ The following table provides a summary of the spiral arm models included in **Sp
 | Drimmel_Ceph_2024      | Based on Cepheid variables                                               |
 +------------------------+--------------------------------------------------------------------------+
 
-   
+  
 
 Taylor_Cordes_1992
 ------------------
@@ -39,4 +39,4 @@ This formulation uses empirical fits to pulsar dispersion measures to delineate 
 
 
 .. bibliography:: refs.bib   
-   :style: "author_year"
+
