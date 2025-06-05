@@ -16,12 +16,6 @@ The models included are described in:doc:`How to cite </citation>` section.
 
 
 
-.. figure:: ../src/SpiralMap/movie_.gif
-
-   A gallery of the various models included in this version, in this case in polar projection and in Galactocentric coordinates with 
-   the locations of the Sun and the Galactic center (star) marked.
-   
-
    
 
 Acknowledgements
