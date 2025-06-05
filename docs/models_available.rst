@@ -31,3 +31,12 @@ Taylor_Cordes_1992
 This class implements the model from :cite:`Taylor_Cordes_1992` which is based on free-electron density distributions in the Milky Way. 
 This formulation uses empirical fits to pulsar dispersion measures to delineate the spiral arms, and we have utilized the data presented in Table 1 of :cite:`Taylor_Cordes_1992`
  to generate the corresponding plots.
+
+
+
+
+
+
+
+.. bibliography:: refs.bib   
+   :style: "author_year"
