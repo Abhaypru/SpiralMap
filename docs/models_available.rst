@@ -24,7 +24,10 @@ The following table provides a summary of the spiral arm models included in **Sp
 | Drimmel_Ceph_2024      | Based on Cepheid variables                                               |
 +------------------------+--------------------------------------------------------------------------+
 
+   
 
-The **{Taylor_Cordes_1992}** class implements the model from :cite:`Taylor_Cordes_1992` which is based on free-electron density distributions in the Milky Way. 
+Taylor_Cordes_1992
+------------------
+This class implements the model from :cite:`Taylor_Cordes_1992` which is based on free-electron density distributions in the Milky Way. 
 This formulation uses empirical fits to pulsar dispersion measures to delineate the spiral arms, and we have utilized the data presented in Table 1 of :cite:`Taylor_Cordes_1992`
  to generate the corresponding plots.

@@ -19,7 +19,6 @@ To this end, with `SpiralMap` one can:
    the locations of the Sun and the Galactic center (star) marked.
    
    
-
 Acknowledgements
 ----------------
 
