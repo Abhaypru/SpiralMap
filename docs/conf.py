@@ -34,7 +34,6 @@ extensions = [
     "sphinx.ext.napoleon",
     "matplotlib.sphinxext.plot_directive",
     "sphinx_copybutton",
-    "sphinx_rtd_theme",
     "myst_nb",
 ]
 
