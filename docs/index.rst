@@ -28,9 +28,9 @@ Acknowledgements
 
 
 If you make use of `SpiralMap`, please cite the accompanying paper (submitted to JOSS). Additionally, please also cite the individual spiral arm model/map used. 
-Relevant references are provided in BibTeX form in the :doc:`How to cite </citation>` section.
+Relevant references are provided in BibTeX form in the :doc:`How to cite </models_available>` section.
 
-The models included are described in:doc:`How to cite </citation>` section.
+
 
 Contributors
 ------------
