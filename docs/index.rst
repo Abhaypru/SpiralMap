@@ -16,7 +16,8 @@ To this end, with **SpiralMap** one can:
 
 .. figure:: ../src/SpiralMap/movie_.gif
 
-   A gallery of the various models included in this version, in this case in polar projection and in Galactocentric coordinates with the locations of the Sun and the Galactic center (star) marked.
+   A gallery of the various models included in this version, in this case in polar projection and in Galactocentric coordinates with 
+   the locations of the Sun and the Galactic center (star) marked.
    
 The models included are described in :doc:`</models_available>`.
    
