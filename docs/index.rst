@@ -16,12 +16,10 @@ To this end, with **SpiralMap** one can:
 
 .. figure:: ../src/SpiralMap/movie_.gif
 
-   Example of popclass classifying a microlensing event
-   with a range of different posterior distributions.
-   Left panel shows a population simulation used to classify
-   the event. Right panel shows the output lens classification
-   from popclass which is calculated by combining the event posterior
-   information with the simulation.
+   A gallery of the various models included in this version, in this case in polar projection and in Galactocentric coordinates with the locations of the Sun and the Galactic center (star) marked.
+   
+The models included are described in :doc:`</models_available>`.
+   
 
 Acknowledgements
 ----------------
