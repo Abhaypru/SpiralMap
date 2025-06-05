@@ -83,6 +83,7 @@ html_theme_options = {
     "use_issues_button": True,
     "use_repository_button": True,
     "use_download_button": True,
+	"navbar_end": ["navbar-icon-links"],    
     "default_mode": "light"
 }
 html_baseurl = "https://spiralmap.readthedocs.io/en/latest/"
