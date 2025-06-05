@@ -2,16 +2,12 @@ How to Cite
 ===========
 
 If you use **SpiralMap**, please cite the accompanying paper (link). 
-Pleae also cite the particular models used, we provide below the references in BibTeX format.
 
-Spiral Model References
------------------------
+Pleae also cite the particular models used, we provide below the references in BibTeX format.
 
 .. bibliography:: ref.bib
    :style: unsrt
    :filter: docname in docnames
-
-To cite this **SpiralMap** package, please use:
 
 .. code-block:: bibtex
 
