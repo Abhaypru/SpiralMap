@@ -9,7 +9,7 @@ The following table provides a summary of the spiral arm models included in **Sp
 +========================+==========================================================================+
 | Taylor_Cordes_1992     | Model based on HII regions :cite:`Taylor_Cordes_1992`.                   |
 +------------------------+--------------------------------------------------------------------------+
-| Drimmel_NIR_2000       | Based on Galactic plane emission in NIR                                  |
+| Drimmel_NIR_2000       | Based on Galactic plane emission in NIR.                                 |
 +------------------------+--------------------------------------------------------------------------+
 | Levine_2006            | Based on HI (21 cm) data                                                 |
 +------------------------+--------------------------------------------------------------------------+
