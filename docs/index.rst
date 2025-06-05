@@ -13,7 +13,15 @@ To this end, with **SpiralMap** one can:
 + Directly overplot spiral arms with choice of Cartesian or Polar coordinates, and in Heliocentric or Galactocentric frames.
 
 
-![image info](src/SpiralMap/movie_.gif).
+
+.. figure:: ../src/SpiralMap/movie_.gif
+
+   Example of popclass classifying a microlensing event
+   with a range of different posterior distributions.
+   Left panel shows a population simulation used to classify
+   the event. Right panel shows the output lens classification
+   from popclass which is calculated by combining the event posterior
+   information with the simulation.
 
 Acknowledgements
 ----------------
