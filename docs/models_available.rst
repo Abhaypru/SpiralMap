@@ -28,10 +28,15 @@ The following table provides a summary of the spiral arm models included in **Sp
 
 Taylor_Cordes_1992
 ------------------
-This class implements the model from `Taylor & Cordes et al. 1993 <https://ui.adsabs.harvard.edu/abs/1993ApJ...411..674T/abstract>`_ 
-which is based on free-electron density distributions in the Milky Way. 
-This formulation uses empirical fits to pulsar dispersion measures to delineate the spiral arms,
-and we have utilized the data presented in their Table 1 to generate the corresponding plots.
+
+
+#. Step 1.
+
+    * This class implements the model from `Taylor & Cordes et al. 1993 <https://ui.adsabs.harvard.edu/abs/1993ApJ...411..674T/abstract>`_ 
+      which is based on radio and optical observations of H II regions. 
+
+    * This formulation uses empirical fits to pulsar dispersion measures to delineate the spiral arms,
+      and we have utilized the data presented in their Table 1 to generate the corresponding plots.
 
 Drimmel_NIR_2000
 ----------------
