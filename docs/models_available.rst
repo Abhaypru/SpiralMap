@@ -25,13 +25,20 @@ The following table provides a summary of the spiral arm models included in **Sp
 +------------------------+--------------------------------------------------------------------------+
 
 
-`Castro-Ginard et al. 2023 <https://ui.adsabs.harvard.edu/abs/2023arXiv230317738C/abstract>`_
-
-
 `Taylor & Cordes et al. 1993 <https://ui.adsabs.harvard.edu/abs/1993ApJ...411..674T/abstract>`_
+
+`Drimmel 2000 <https://iopscience.iop.org/article/10.1086/321556>`_
 
 `Levine et al. 2006 <https://www.science.org/doi/10.1126/science.1128455>`_
 `Hou et al. 2014 <https://ui.adsabs.harvard.edu/abs/2014A%26A...569A.125H/abstract>`_
+
+`Reid et al. 2019 <https://ui.adsabs.harvard.edu/abs/2019ApJ...885..131R/abstract>`_ 
+
+`Poggio et al. 2021 <https://www.aanda.org/articles/aa/abs/2021/07/aa40687-21/aa40687-21.html>`_ 
+
+`Gaia collaboration et al. 2022 <https://www.aanda.org/articles/aa/full_html/2023/06/aa43797-22/aa43797-22.html>`_
+
+`Drimmel et al. 2024 <https://ui.adsabs.harvard.edu/abs/2024arXiv240609127D/abstract>`_
 
 
 Taylor_Cordes_1992
