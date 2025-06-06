@@ -28,17 +28,19 @@ The following table provides a summary of the spiral arm models included in **Sp
 
 `Taylor_Cordes_1992`
 -------------------
-
-* This class implements the model from `Taylor & Cordes et al. 1993 <https://ui.adsabs.harvard.edu/abs/1993ApJ...411..674T/abstract>`_ 
+* Class implementing the model from `Taylor & Cordes et al. 1993 <https://ui.adsabs.harvard.edu/abs/1993ApJ...411..674T/abstract>`_ 
   which is based on radio and optical observations of H II regions. 
   
 * We use the model parameters presented in their Table 1.
 
-* There are four arms in this model: 'Arm1','Arm2','Arm3','Arm4'
+* There are four arms in this model: Arm1, Arm2, Arm3, Arm4.
 
-Drimmel_NIR_2000
-----------------
-`Drimmel 2000 <https://iopscience.iop.org/article/10.1086/321556>`_. Model publicly available 
+`Drimmel_NIR_2000`
+-----------------
+* Class implementing the model from `Drimmel 2000 <https://iopscience.iop.org/article/10.1086/321556>`_, which is based on Galactic plane emission profiles in the K band using COBE data.
+ 
+* There are two arms (1_arm, 2_arm) and two inter-arm regions (3_interarm,4_interarm) in this model. 
+* Model publicly available 
 
 Levine_2006
 -----------
