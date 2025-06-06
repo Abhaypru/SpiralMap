@@ -31,6 +31,7 @@ The following table provides a summary of the spiral arm models included in **Sp
 `Taylor & Cordes et al. 1993 <https://ui.adsabs.harvard.edu/abs/1993ApJ...411..674T/abstract>`_
 
 `Levine et al. 2006 <https://www.science.org/doi/10.1126/science.1128455>`_
+`Hou et al. 2014 <https://ui.adsabs.harvard.edu/abs/2014A%26A...569A.125H/abstract>`_
 
 
 Taylor_Cordes_1992
@@ -53,6 +54,6 @@ This class adopts a logarithmic spiral framework as described in `Levine et al. 
 Hou_Han_2014 
 -------------
 
-This class is built upon the polynomial-logarithmic formulation introduced by `Hou et al. 2014 <https://ui.adsabs.harvard.edu/abs/2014A%26A...569A.125H/abstract>_`. 
+This class is built upon the polynomial-logarithmic formulation introduced by `Hou et al. 2014 <https://ui.adsabs.harvard.edu/abs/2014A%26A...569A.125H/abstract>`_. 
 Its flexible parameterization allows for a detailed reconstruction of the spiral structure, making it particularly useful for studies of Galactic dynamics and morphology. 
-The resulting plots are consistent with the visualizations presented in \cite{Hou_Han_2014}.
+The resulting plots are consistent with the visualizations presented in `Hou et al. 2014 <https://ui.adsabs.harvard.edu/abs/2014A%26A...569A.125H/abstract>`_.
