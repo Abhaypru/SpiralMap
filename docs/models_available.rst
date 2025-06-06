@@ -24,23 +24,17 @@ The following table provides a summary of the spiral arm models included in **Sp
 | Drimmel_Ceph_2024      | Based on Cepheid variables                                               |
 +------------------------+--------------------------------------------------------------------------+
 
-dummy text in this spot
-test text here :cite:p:`Taylor_Cordes_1992`
 
-please cite `Taylor & Cordes-Ginard et al. 2023 <https://ui.adsabs.harvard.edu/abs/1993ApJ...411..674T/abstract>`_.
 
 Taylor_Cordes_1992
 ------------------
-This class implements the model from :raw-tex:`\cite{Taylor_Cordes_1992}`  which is based on free-electron density distributions in the Milky Way. 
-This formulation uses empirical fits to pulsar dispersion measures to delineate the spiral arms, and we have utilized the data presented in Table 1 of :cite:`Taylor_Cordes_1992`
- to generate the corresponding plots.
+This class implements the model from `Taylor & Cordes et al. 1993 <https://ui.adsabs.harvard.edu/abs/1993ApJ...411..674T/abstract>`_`  which is based on free-electron density distributions in the Milky Way. 
+This formulation uses empirical fits to pulsar dispersion measures to delineate the spiral arms, and we have utilized the data presented in their Table 1 to generate the corresponding plots.
 
 Levine_2006
 -----------
 
-This class adopts a logarithmic spiral framework as described in :raw-tex:`\cite{Levine_2006}` ,
+This class adopts a logarithmic spiral framework as described in `Levine et al. 2006 <https://www.science.org/doi/10.1126/science.1128455>_`,
  based on HI observations. This classical approach robustly represents the four major spiral arms, providing a structural framework anchored in the neutral hydrogen distribution.
-
-
 
 
