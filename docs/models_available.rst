@@ -47,15 +47,18 @@ The following table provides a summary of the spiral arm models included in **Sp
 
 `Hou_Han_2014`
 -------------
-* This class is built upon the polynomial-logarithmic formulation introduced by `Hou et al. 2014 <https://ui.adsabs.harvard.edu/abs/2014A%26A...569A.125H/abstract>`_, based on a combination of 
-  H II, giant molecular clouds, and methanol MASER catalogs. 	
-* Model publicly available.
+	* Class built upon the polynomial-logarithmic formulation introduced by `Hou et al. 2014 <https://ui.adsabs.harvard.edu/abs/2014A%26A...569A.125H/abstract>`_, based on a combination of 
+	  H II, giant molecular clouds, and methanol MASER catalogs. 	
+	* Model publicly available.
+	* There are six arms in this model with names: (Norma, Scutum-Centaurus, Sagittarius-Carina, Perseus, Local,Outer).
 
 `Reid_2019`
 ---------
-This class implements `Reid et al. 2019 <https://ui.adsabs.harvard.edu/abs/2019ApJ...885..131R/abstract>`_ .  This model leverages high-precision maser parallax measurements.
-Model taken from their Table 2.
-
+	* Class implementing the model by `Reid et al. 2019 <https://ui.adsabs.harvard.edu/abs/2019ApJ...885..131R/abstract>`_ based on radio astrometry of MASERS. 
+	* Model taken from their Table 2.
+	* There are seven arms in this model with names: ('3-kpc','Norma','Sct-Cen','Sgr-Car','Local','Perseus','Outer').
+	
+	
 `Poggio_cont_2021`
 -------------
 This class is based on the EDR3 map UMS stars by `Poggio et al. 2021 <https://www.aanda.org/articles/aa/abs/2021/07/aa40687-21/aa40687-21.html>`_. 
