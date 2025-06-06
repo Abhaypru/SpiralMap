@@ -24,7 +24,7 @@ The following table provides a summary of the spiral arm models included in **Sp
 | Drimmel_Ceph_2024      | Based on Cepheid variables                                               |
 +------------------------+--------------------------------------------------------------------------+
 
-
+dummy text in this spot
 test text here :cite:p:`Taylor_Cordes_1992`
 
 Taylor_Cordes_1992
@@ -41,9 +41,4 @@ This class adopts a logarithmic spiral framework as described in :raw-tex:`\cite
 
 
 
-
-.. raw:: latex
-
- \bibliographystyle{plain}
- \bibliography{refs.bib}
 
