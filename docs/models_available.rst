@@ -27,6 +27,8 @@ The following table provides a summary of the spiral arm models included in **Sp
 dummy text in this spot
 test text here :cite:p:`Taylor_Cordes_1992`
 
+please cite `Taylor & Cordes-Ginard et al. 2023 <https://ui.adsabs.harvard.edu/abs/1993ApJ...411..674T/abstract>`_.
+
 Taylor_Cordes_1992
 ------------------
 This class implements the model from :raw-tex:`\cite{Taylor_Cordes_1992}`  which is based on free-electron density distributions in the Milky Way. 
