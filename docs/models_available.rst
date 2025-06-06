@@ -26,8 +26,8 @@ The following table provides a summary of the spiral arm models included in **Sp
 
 
 
-`Taylor_Cordes_1992`
------------------
+*  `Taylor_Cordes_1992`
+*   -----------------
 	* Class implementing the model from `Taylor & Cordes et al. 1993 <https://ui.adsabs.harvard.edu/abs/1993ApJ...411..674T/abstract>`_ 
 	  which is based on radio and optical observations of H II regions. 	  
 	* We use the model parameters presented in their Table 1.	
