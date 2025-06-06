@@ -31,19 +31,20 @@ The following table provides a summary of the spiral arm models included in **Sp
 	* Class implementing the model from `Taylor & Cordes et al. 1993 <https://ui.adsabs.harvard.edu/abs/1993ApJ...411..674T/abstract>`_ 
 	  which is based on radio and optical observations of H II regions. 	  
 	* We use the model parameters presented in their Table 1.	
-	* There are four arms in this model: Arm1, Arm2, Arm3, Arm4.
+	* There are four arms in this model (Arm1, Arm2, Arm3, Arm4).
 
 `Drimmel_NIR_2000`
 -----------------
 	* Class implementing the model from `Drimmel 2000 <https://iopscience.iop.org/article/10.1086/321556>`_, which is based on Galactic plane emission profiles in the K band using COBE data. 
-	* There are two arms (1_arm, 2_arm) and two inter-arm regions (3_interarm,4_interarm) in this model. 
 	* Model publicly available. 
+	* There are two arms (1_arm, 2_arm) and two inter-arm regions (3_interarm,4_interarm) in this model. 
 
 `Levine_2006`
 -----------
-* This class adopts a logarithmic spiral framework as described in `Levine et al. 2006 <https://www.science.org/doi/10.1126/science.1128455>`_
-based on HI observations. This classical approach robustly represents the four major spiral arms, providing a structural framework anchored in the neutral hydrogen distribution.
-* Model taken from their Table 1.
+	* Class implementing the logarithmic spiral framework as described in `Levine et al. 2006 <https://www.science.org/doi/10.1126/science.1128455>`_
+	based on HI observations. 
+	* Model taken from their Table 1.
+	* There are four arms in this model (Arm1, Arm2, Arm3, Arm4).
 
 `Hou_Han_2014`
 -------------
