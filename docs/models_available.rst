@@ -25,42 +25,45 @@ The following table provides a summary of the spiral arm models included in **Sp
 +------------------------+--------------------------------------------------------------------------+
 
 
-`Taylor & Cordes et al. 1993 <https://ui.adsabs.harvard.edu/abs/1993ApJ...411..674T/abstract>`_
-
-`Drimmel 2000 <https://iopscience.iop.org/article/10.1086/321556>`_
-
-`Levine et al. 2006 <https://www.science.org/doi/10.1126/science.1128455>`_
-`Hou et al. 2014 <https://ui.adsabs.harvard.edu/abs/2014A%26A...569A.125H/abstract>`_
-
-`Reid et al. 2019 <https://ui.adsabs.harvard.edu/abs/2019ApJ...885..131R/abstract>`_ 
-
-`Poggio et al. 2021 <https://www.aanda.org/articles/aa/abs/2021/07/aa40687-21/aa40687-21.html>`_ 
-
-`Gaia collaboration et al. 2022 <https://www.aanda.org/articles/aa/full_html/2023/06/aa43797-22/aa43797-22.html>`_
-
-`Drimmel et al. 2024 <https://ui.adsabs.harvard.edu/abs/2024arXiv240609127D/abstract>`_
-
 
 Taylor_Cordes_1992
 ------------------
-This class implements the model from `Taylor & Cordes et al. 1993 <https://ui.adsabs.harvard.edu/abs/1993ApJ...411..674T/abstract>`_ which is based on free-electron density distributions in the Milky Way. 
-This formulation uses empirical fits to pulsar dispersion measures to delineate the spiral arms, and we have utilized the data presented in their Table 1 to generate the corresponding plots.
-
+This class implements the model from `Taylor & Cordes et al. 1993 <https://ui.adsabs.harvard.edu/abs/1993ApJ...411..674T/abstract>`_ 
+which is based on free-electron density distributions in the Milky Way. 
+This formulation uses empirical fits to pulsar dispersion measures to delineate the spiral arms,
+and we have utilized the data presented in their Table 1 to generate the corresponding plots.
 
 Drimmel_NIR_2000
 ----------------
-
+`Drimmel 2000 <https://iopscience.iop.org/article/10.1086/321556>`_
 
 Levine_2006
 -----------
-
 This class adopts a logarithmic spiral framework as described in `Levine et al. 2006 <https://www.science.org/doi/10.1126/science.1128455>`_
- based on HI observations. This classical approach robustly represents the four major spiral arms, providing a structural framework anchored in the neutral hydrogen distribution.
+based on HI observations. This classical approach robustly represents the four major spiral arms, providing a structural framework anchored in the neutral hydrogen distribution.
 
 
 Hou_Han_2014 
 -------------
-
 This class is built upon the polynomial-logarithmic formulation introduced by `Hou et al. 2014 <https://ui.adsabs.harvard.edu/abs/2014A%26A...569A.125H/abstract>`_. 
 Its flexible parameterization allows for a detailed reconstruction of the spiral structure, making it particularly useful for studies of Galactic dynamics and morphology. 
-The resulting plots are consistent with the visualizations presented in `Hou et al. 2014 <https://ui.adsabs.harvard.edu/abs/2014A%26A...569A.125H/abstract>`_.
+
+
+Reid_2019
+---------
+
+This class implements `Reid et al. 2019 <https://ui.adsabs.harvard.edu/abs/2019ApJ...885..131R/abstract>`_ .  This model leverages high-precision maser parallax measurements
+
+Poggio_cont_2021
+-------------
+This class is based on the EDR3 map UMS stars by `Poggio et al. 2021 <https://www.aanda.org/articles/aa/abs/2021/07/aa40687-21/aa40687-21.html>`_. Data is included in the package with their permission.
+
+GaiaPVP_cont_2022
+-------------
+This class is based on the map of OB stars `Gaia collaboration et al. 2022 <https://www.aanda.org/articles/aa/full_html/2023/06/aa43797-22/aa43797-22.html>`_. Data is included in the package with their permission.
+
+
+Drimmel_Ceph_2024
+-------------
+
+This class implements the model by `Drimmel et al. 2024 <https://ui.adsabs.harvard.edu/abs/2024arXiv240609127D/abstract>`_. It is based on Cepheids.
