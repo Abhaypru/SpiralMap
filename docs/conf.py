@@ -40,6 +40,7 @@ extensions = [
 extensions.append('sphinxcontrib.bibtex')
 bibtex_bibfiles = ['refs.bib']
 bibtex_reference_style = "author_year"
+bibtex_default_style = 'latin'
 
 numpydoc_show_class_members = False
 
