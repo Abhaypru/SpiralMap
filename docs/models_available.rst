@@ -74,7 +74,8 @@ The following table provides a summary of the spiral arm models included in **Sp
 
 `Drimmel_Ceph_2024`
 -------------
-* This class implements the model by `Drimmel et al. 2024 <https://ui.adsabs.harvard.edu/abs/2024arXiv240609127D/abstract>`_. 
-  It is based on a sample of 2857 dynamically young Milky Way Cepheids.
-* Model is publicly available but also included in the package as a userfriendly pickle file, with their permission.
-* There are four arms in this model (Scutum, Sag-Car, Orion, Perseus).
+	* This class implements the model by `Drimmel et al. 2024 <https://ui.adsabs.harvard.edu/abs/2024arXiv240609127D/abstract>`_. 
+	  It is based on a sample of 2857 dynamically young Milky Way Cepheids.
+	* Model is publicly available but also included in the package as a userfriendly pickle file, with their permission.
+	* There are four arms in this model (Scutum, Sag-Car, Orion, Perseus).
+	
