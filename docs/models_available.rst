@@ -31,9 +31,10 @@ The following table provides a summary of the spiral arm models included in **Sp
 
 * This class implements the model from `Taylor & Cordes et al. 1993 <https://ui.adsabs.harvard.edu/abs/1993ApJ...411..674T/abstract>`_ 
   which is based on radio and optical observations of H II regions. 
+  
+* We use the model parameters presented in their Table 1.
 
-* This formulation uses empirical fits to pulsar dispersion measures to delineate the spiral arms,
-  and we have utilized the data presented in their Table 1 to generate the corresponding plots.
+* There are four arms in this model: 'Arm1','Arm2','Arm3','Arm4'
 
 Drimmel_NIR_2000
 ----------------
