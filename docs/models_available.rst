@@ -41,16 +41,15 @@ The following table provides a summary of the spiral arm models included in **Sp
 
 `Levine_2006`
 -----------
-	* Class implementing the logarithmic spiral framework as described in `Levine et al. 2006 <https://www.science.org/doi/10.1126/science.1128455>`_
-	based on HI observations. 
+	* Class implementing the logarithmic spiral framework as described in `Levine et al. 2006 <https://www.science.org/doi/10.1126/science.1128455>`_ based on HI observations. 
 	* Model taken from their Table 1.
 	* There are four arms in this model (Arm1, Arm2, Arm3, Arm4).
 
 `Hou_Han_2014`
 -------------
-This class is built upon the polynomial-logarithmic formulation introduced by `Hou et al. 2014 <https://ui.adsabs.harvard.edu/abs/2014A%26A...569A.125H/abstract>`_. 
-Its flexible parameterization allows for a detailed reconstruction of the spiral structure, making it particularly useful for studies of Galactic dynamics and morphology. 
-Model taken from 
+* This class is built upon the polynomial-logarithmic formulation introduced by `Hou et al. 2014 <https://ui.adsabs.harvard.edu/abs/2014A%26A...569A.125H/abstract>`_, based on a combination of 
+  H II, giant molecular clouds, and methanol MASER catalogs. 	
+* Model publicly available.
 
 `Reid_2019`
 ---------
