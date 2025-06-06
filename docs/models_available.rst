@@ -25,8 +25,7 @@ The following table provides a summary of the spiral arm models included in **Sp
 +------------------------+--------------------------------------------------------------------------+
 
 
-test text here 
-
+test text here :cite:p:`Taylor_Cordes_1992`
 
 Taylor_Cordes_1992
 ------------------
