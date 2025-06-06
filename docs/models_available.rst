@@ -50,27 +50,32 @@ The following table provides a summary of the spiral arm models included in **Sp
 	* Class built upon the polynomial-logarithmic formulation introduced by `Hou et al. 2014 <https://ui.adsabs.harvard.edu/abs/2014A%26A...569A.125H/abstract>`_, based on a combination of 
 	  H II, giant molecular clouds, and methanol MASER catalogs. 	
 	* Model publicly available.
-	* There are six arms in this model with names: (Norma, Scutum-Centaurus, Sagittarius-Carina, Perseus, Local,Outer).
+	* There are six arms in this model (Norma, Scutum-Centaurus, Sagittarius-Carina, Perseus, Local,Outer).
 
 `Reid_2019`
 ---------
 	* Class implementing the model by `Reid et al. 2019 <https://ui.adsabs.harvard.edu/abs/2019ApJ...885..131R/abstract>`_ based on radio astrometry of MASERS. 
 	* Model taken from their Table 2.
-	* There are seven arms in this model with names: ('3-kpc','Norma','Sct-Cen','Sgr-Car','Local','Perseus','Outer').
+	* There are seven arms in this model (3-kpc, Norma, Sct-Cen, Sgr-Car, Local, Perseus, Outer).
 	
 	
 `Poggio_cont_2021`
 -------------
-This class is based on the EDR3 map UMS stars by `Poggio et al. 2021 <https://www.aanda.org/articles/aa/abs/2021/07/aa40687-21/aa40687-21.html>`_. 
-Data is included in the package with their permission.
+	* Class used to extract the 2D contour maps of upper-main sequence stars by `Poggio et al. 2021 <https://www.aanda.org/articles/aa/abs/2021/07/aa40687-21/aa40687-21.html>`_.
+	  The maps are based on Gaia EDR3 astrometry.
+	* Data is available publicly, and also included in the package with their permission.
 
 `GaiaPVP_cont_2022`
 -------------
-This class is based on the map of OB stars `Gaia collaboration et al. 2022 <https://www.aanda.org/articles/aa/full_html/2023/06/aa43797-22/aa43797-22.html>`_. 
-Data is included in the package with their permission.
+	* Class used to extract the 2D contour maps of OB  stars by `Gaia collaboration et al. 2022 <https://www.aanda.org/articles/aa/full_html/2023/06/aa43797-22/aa43797-22.html>`_.
+	  The maps are based on Gaia DR3 astrometry & astrophysical parameters.
+	* Data is available publicly, and also included in the package with their permission.
 
 
 `Drimmel_Ceph_2024`
 -------------
-This class implements the model by `Drimmel et al. 2024 <https://ui.adsabs.harvard.edu/abs/2024arXiv240609127D/abstract>`_. It is based on Cepheids.
-Model taken from their Table 1 and made available as a userfriendly pickle file with their permission.
+* This class implements the model by `Drimmel et al. 2024 <https://ui.adsabs.harvard.edu/abs/2024arXiv240609127D/abstract>`_. 
+  It is based on a sample of 2857 dynamically young Milky Way Cepheids.
+* Model is publicly available but also included in the package as a userfriendly pickle file, with their permission.
+* There are Scutum':'C3','Sag-Car':'C0',
+						  'Orion':'C1','Perseus':'C2'
