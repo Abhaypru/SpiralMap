@@ -37,7 +37,7 @@ The following table provides a summary of the spiral arm models included in **Sp
 -----------------
 	* Class implementing the model from `Drimmel 2000 <https://iopscience.iop.org/article/10.1086/321556>`_, which is based on Galactic plane emission profiles in the K band using COBE data. 
 	* Model publicly available. 
-	* There are two arms (1_arm, 2_arm) and two inter-arm regions (3_interarm,4_interarm) in this model. 
+	* There are two arms (1_arm, 2_arm) and two inter-arm regions (3_interarm, 4_interarm) in this model. 
 
 `Levine_2006`
 -----------
@@ -50,7 +50,7 @@ The following table provides a summary of the spiral arm models included in **Sp
 	* Class built upon the polynomial-logarithmic formulation introduced by `Hou et al. 2014 <https://ui.adsabs.harvard.edu/abs/2014A%26A...569A.125H/abstract>`_, based on a combination of 
 	  H II, giant molecular clouds, and methanol MASER catalogs. 	
 	* Model publicly available.
-	* There are six arms in this model (Norma, Scutum-Centaurus, Sagittarius-Carina, Perseus, Local,Outer).
+	* There are six arms in this model (Norma, Scutum-Centaurus, Sagittarius-Carina, Perseus, Local, Outer).
 
 `Reid_2019`
 ---------

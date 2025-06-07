@@ -1,6 +1,10 @@
 Demonstration
 ===========
 
+For a quick demonstration please see the accompanying `Jupyter Notebook <https://github.com/Abhaypru/SpiralMap/blob/main/demo_spiralmap.ipynb>`_.
+
+
+
 Import Packages
 ---------------
 
