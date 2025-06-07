@@ -29,8 +29,8 @@ Relevant references are provided in BibTeX form in the :doc:`How to cite </citat
 Contributors
 ------------
 
-Abhay Kumar Prusty (IISER Kolkata) &
-Shourya Khanna (INAF-Torino)
+| Abhay Kumar Prusty (IISER Kolkata) 
+| Shourya Khanna (INAF-Torino)
 
 
 .. toctree::
