@@ -37,9 +37,9 @@ Contributors
    :maxdepth: 1
    :caption: Contents:
 
+   install
    introduction
    models_available
-   install
    walkthrough
    citation
 
