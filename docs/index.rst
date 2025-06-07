@@ -40,7 +40,7 @@ Contributors
    install
    introduction
    models_available
-   walkthrough
+   Demonstration
    citation
 
 
