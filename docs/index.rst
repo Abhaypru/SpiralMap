@@ -13,6 +13,8 @@ To this end, with `SpiralMap` one can:
 + Directly overplot spiral arms with choice of Cartesian or Polar coordinates, and in Heliocentric or Galactocentric frames.
 
 
+For a quick demonstration please see the accompanying `Jupyter Notebook <https://github.com/Abhaypru/SpiralMap/blob/main/demo_spiralmap.ipynb>`_. here
+
 .. figure:: ../src/SpiralMap/movie_.gif
 
    A gallery of the various models included in this version, in this case in polar projection and in Galactocentric coordinates with 
@@ -40,9 +42,7 @@ Contributors
    install
    introduction
    models_available
-   Demonstration
    citation
-
 
 
 .. toctree::
