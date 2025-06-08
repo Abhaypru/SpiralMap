@@ -43,6 +43,7 @@ Contributors
    introduction
    models_available
    citation
+   api
 
 
 .. toctree::
