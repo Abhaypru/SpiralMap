@@ -788,7 +788,23 @@ class main_(object):
     * lok (specific, see below)
     """	
 
-	def __init__(self,Rsun=8.277,print_=True):      
+	def __init__(self,Rsun=8.277,print_=True):   
+
+        """
+        Get test distribution for some ordered subset of parameters in ``Posterior``
+
+        Args:
+            parameter_list (list[str]):
+                List of parameters for generating a marginal distribution.
+                Should be a subset of ``Posterior.parameter_labels()``.
+
+        Returns:
+            New instance of the ``Posterior`` object only containing
+            samples determined and ordered by `parameter_list`.
+
+        Raises:
+            ValueError: if the number of parameters is not less than the number of samples.
+        """				   
 		 	
 		self.root_ = root_
 		self.dataloc = dataloc        
