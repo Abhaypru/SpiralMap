@@ -52,27 +52,21 @@ def fitsread(filename,ext=1):
 	return data
 
 def picklewrite(data,nam,loc,prnt=True):
-	'''
-	write files using pickle
-	'''
-	
-	
-	
-	import pickle
-	
+	# # '''
+	# # write files using pickle
+	# # '''	
+	import pickle	
 	pickle.dump(data,open(loc+'/'+nam+'.pkl','wb'))	
 	if prnt:
 		print(nam+' .pkl written to '+loc)	
 		
 	return 
 
-def pickleread(file1):
-	
-	'''
-	read pickle files
-	input: fileloc+'/'+filename
-	
-	'''
+def pickleread(file1):	
+	# # '''
+	# # read pickle files
+	# # input: fileloc+'/'+filename	
+	# # '''
 	import pickle	
 	data = pickle.load(open(file1,'rb'))	
 	
