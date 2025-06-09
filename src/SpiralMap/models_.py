@@ -789,11 +789,19 @@ class main_(object):
 		self.modrec = []
 		self.armrec = []
 	def listmodels(self):     
-		'''
-		defines list of available models/maps
-		constructs dictionaries to initialise individual model classes
-		
-		'''
+
+        """
+        defines list of available models/maps
+        constructs dictionaries to initialise individual model classes
+
+        Args:
+            Rsun (float):
+                The Galactocentric R(kpc) of the Sun, by default set to 8.277.
+            print_ (Boolean):
+                if set to False it does not print out the model attributes to screen.
+        """
+
+
 		   		
 		self.models = ['Taylor_Cordes_1992','Drimmel_NIR_2000',
 					   'Levine_2006','Hou_Han_2014','Reid_2019',
