@@ -1,45 +1,10 @@
 import os, sys
 import numpy as np
-from astropy.table import Table
-import pandas as pd
 import matplotlib.pyplot as plt
-from scipy.interpolate import CubicSpline
+import pandas as pd 
 from tabulate import tabulate
-
-def fcount(floc,flist=False,nlist=False,prnt=True):
-	
-	'''
-    NAME: fcount
-
-    PURPOSE: counts the number of files in a given directory
-
-
-    INPUT: file location 
-
-    OUTPUT: number count 
-       
-    HISTORY: October 27, 2022 (INAF Torino)
-    	
-	'''
-	
-	
-	cnt = []
-	
-	for fl in os.listdir(floc):
-		cnt.append(fl)
-		
-	cnt = np.array(cnt)	
-	
-	if prnt:
-		print(str(cnt.size)+' files in total')
-	
-	if flist:		
-		return cnt
-	elif nlist:
-		return cnt.size	
-	else:
-		os.system('ls -lh '+floc)	
-		return 
+from astropy.table import Table
+from scipy.interpolate import CubicSpline
 
 def xyz2lbr(x,y,z):
     rc2=x*x+y*y
@@ -85,26 +50,7 @@ def pickleread(file1):
 	
 	return data
 
-def sqrtsum(ds=[],prnt=False):
-	'''
-	handy function to sum up the squares and return the square-root
-	'''
-	
-	if prnt:
-		print(len(ds))
-	
-	mysum = 0
-	for i in range(len(ds)):
-		
-		
-		tmp = ds[i]**2.
-		mysum+=tmp
-	
-	
-	resval = np.sqrt(mysum)
-	
-	
-	return resval
+
 
 def add_polargrid(plotattrs,rlevels=12,xmin=-10,xmax=10,ymin=-10,ymax=10,modrec=[],armrec=[],xorig = 0.,rmin = 3):
 	coordsys = plotattrs['coordsys']
@@ -255,3 +201,65 @@ def polar_style(ax,title='',rticks=[3., 6.,9.,12,15.,20.]):
 	ax.yaxis.grid(linewidth=1.5)	    
 	plt.title(title)
 	return
+
+
+
+def sqrtsum(ds=[],prnt=False):
+	'''
+	handy function to sum up the squares and return the square-root
+	'''
+	
+	if prnt:
+		print(len(ds))
+	
+	mysum = 0
+	for i in range(len(ds)):
+		
+		
+		tmp = ds[i]**2.
+		mysum+=tmp
+	
+	
+	resval = np.sqrt(mysum)
+	
+	
+	return resval
+
+
+
+
+def fcount(floc,flist=False,nlist=False,prnt=True):
+	
+	'''
+    NAME: fcount
+
+    PURPOSE: counts the number of files in a given directory
+
+
+    INPUT: file location 
+
+    OUTPUT: number count 
+       
+    HISTORY: October 27, 2022 (INAF Torino)
+    	
+	'''
+	
+	
+	cnt = []
+	
+	for fl in os.listdir(floc):
+		cnt.append(fl)
+		
+	cnt = np.array(cnt)	
+	
+	if prnt:
+		print(str(cnt.size)+' files in total')
+	
+	if flist:		
+		return cnt
+	elif nlist:
+		return cnt.size	
+	else:
+		os.system('ls -lh '+floc)	
+		return 
+

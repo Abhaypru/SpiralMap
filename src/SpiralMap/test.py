@@ -195,7 +195,7 @@ if single_model_polar_hou:
 	plt.savefig(figdir_primer+'/polar_proj_single_model.png')
 
 
-multiple_models_polar = False
+multiple_models_polar = True
 if multiple_models_polar:
 
 	Rsun=8.277
