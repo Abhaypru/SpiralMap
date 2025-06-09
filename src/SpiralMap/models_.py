@@ -30,7 +30,8 @@ class spiral_poggio_maps(object):
 	"""
 	
 	def __init__(self,model_='GaiaPVP_cont_2022'):		
-		
+		"""Initialize the list of available spiral arms 
+		and their corresponding plot colors. """		
 		self.model_ = model_
 		self.loc = dataloc + '/'+model_
 		self.getarmlist()	
