@@ -2,6 +2,6 @@
 API
 ===
 
-.. automodule:: SpiralMap.models_
+.. automodule:: SpiralMap.mytools
    :members:
    :exclude-members: Intermediate

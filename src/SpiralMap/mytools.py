@@ -11,6 +11,9 @@ from astropy.table import Table
 from scipy.interpolate import CubicSpline
 
 def sqrtsum(ds=[],prnt=False):	
+	'''
+	helper function
+	'''
 	if prnt:
 		print(len(ds))	
 	mysum = 0
