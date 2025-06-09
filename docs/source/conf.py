@@ -12,7 +12,8 @@ from pathlib import Path
 
 # sys.path.insert(0, os.path.abspath('/Users/shouryapro/Documents/GitHub/SpiralMap'))
 
-sys.path.insert(0, os.path.abspath('../..'))
+sys.path.insert(0, os.path.abspath('../../src'))
+# sys.path.insert(0, os.path.abspath('../../src/SpiralMap'))
 
 project = 'SpiralMap'
 copyright = '2025, Prusty & Khanna'

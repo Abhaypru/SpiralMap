@@ -48,7 +48,21 @@
 <li class="toctree-l1"><a class="reference internal" href="models_available.html">Available Spiral Arm Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="citation.html">How to Cite</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#posterior">posterior</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-SpiralMap.models_">posterior</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#SpiralMap.models_.spiral_houhan"><code class="docutils literal notranslate"><span class="pre">spiral_houhan</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#SpiralMap.models_.spiral_houhan.getarmlist"><code class="docutils literal notranslate"><span class="pre">spiral_houhan.getarmlist()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#SpiralMap.models_.spiral_houhan.getparams"><code class="docutils literal notranslate"><span class="pre">spiral_houhan.getparams()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#SpiralMap.models_.spiral_houhan.polynomial_log_spiral"><code class="docutils literal notranslate"><span class="pre">spiral_houhan.polynomial_log_spiral()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#SpiralMap.models_.spiral_poggio_maps"><code class="docutils literal notranslate"><span class="pre">spiral_poggio_maps</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#SpiralMap.models_.spiral_poggio_maps.getarmlist"><code class="docutils literal notranslate"><span class="pre">spiral_poggio_maps.getarmlist()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#SpiralMap.models_.spiral_poggio_maps.info"><code class="docutils literal notranslate"><span class="pre">spiral_poggio_maps.info()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#SpiralMap.models_.sqrtsum"><code class="docutils literal notranslate"><span class="pre">sqrtsum()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -79,8 +93,106 @@
              
   <section id="api">
 <h1>API<a class="headerlink" href="#api" title="Link to this heading"></a></h1>
-<section id="posterior">
-<h2>posterior<a class="headerlink" href="#posterior" title="Link to this heading"></a></h2>
+<section id="module-SpiralMap.models_">
+<span id="posterior"></span><h2>posterior<a class="headerlink" href="#module-SpiralMap.models_" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="SpiralMap.models_.spiral_houhan">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">SpiralMap.models_.</span></span><span class="sig-name descname"><span class="pre">spiral_houhan</span></span><a class="reference internal" href="_modules/SpiralMap/models_.html#spiral_houhan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.spiral_houhan" title="Link to this definition"></a></dt>
+<dd><p>Hou &amp; Han (2014) polynomial-logarithmic spiral arm model</p>
+<p>Implements the Milky Way spiral structure model from:
+“The spiral structure of the Milky Way from classical Cepheids” (Hou &amp; Han 2014)
+using polynomial-logarithmic spiral functions. Provides 6 major arm segments.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="SpiralMap.models_.spiral_houhan.getarmlist">
+<span class="sig-name descname"><span class="pre">getarmlist</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/SpiralMap/models_.html#spiral_houhan.getarmlist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.spiral_houhan.getarmlist" title="Link to this definition"></a></dt>
+<dd><p>Initialize arm names and visualization colors.
+Sets:
+- arms: List of 6 spiral arm segments</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SpiralMap.models_.spiral_houhan.getparams">
+<span class="sig-name descname"><span class="pre">getparams</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/SpiralMap/models_.html#spiral_houhan.getparams"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.spiral_houhan.getparams" title="Link to this definition"></a></dt>
+<dd><p>Load spiral parameters from Hou &amp; Han (2014) Table 4.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Nested dictionary containing for each arm:
+- a, b, c, d: Polynomial coefficients
+- θ_start: Start angle in degrees (Galactic longitude)
+- θ_end: End angle in degrees</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;Scutum-Centaurus&#39;</span><span class="p">]</span>
+<span class="go">{&#39;a&#39;: 5.8002, &#39;b&#39;: -1.8188, &#39;c&#39;: 0.2352, &#39;d&#39;: -0.008999,</span>
+<span class="go"> &#39;θ_start&#39;: 275, &#39;θ_end&#39;: 620}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SpiralMap.models_.spiral_houhan.polynomial_log_spiral">
+<span class="sig-name descname"><span class="pre">polynomial_log_spiral</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">θ</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SpiralMap/models_.html#spiral_houhan.polynomial_log_spiral"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.spiral_houhan.polynomial_log_spiral" title="Link to this definition"></a></dt>
+<dd><p>Calculate radius using polynomial-logarithmic spiral equation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>θ</strong> (<em>float</em><em> or </em><em>ndarray</em>) – Galactic longitude angle in degrees</p></li>
+<li><p><strong>a</strong> (<em>float</em>) – Polynomial coefficients from Hou &amp; Han Table 4</p></li>
+<li><p><strong>b</strong> (<em>float</em>) – Polynomial coefficients from Hou &amp; Han Table 4</p></li>
+<li><p><strong>c</strong> (<em>float</em>) – Polynomial coefficients from Hou &amp; Han Table 4</p></li>
+<li><p><strong>d</strong> (<em>float</em>) – Polynomial coefficients from Hou &amp; Han Table 4</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Galactocentric radius in kiloparsecs</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float or ndarray</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Implements equation:
+R(θ) = exp(a + bθ_rad + cθ_rad² + dθ_rad³)
+where θ_rad = np.radians(θ)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="SpiralMap.models_.spiral_poggio_maps">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">SpiralMap.models_.</span></span><span class="sig-name descname"><span class="pre">spiral_poggio_maps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'GaiaPVP_cont_2022'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SpiralMap/models_.html#spiral_poggio_maps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.spiral_poggio_maps" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Class containing spiral arm models from</dt><dd><p>Poggio_2021: Poggio al. 2021 (EDR3 UMS stars)
+GaiaPVP_2022: Gaia collaboration et al. 2021 (OB stars)</p>
+</dd>
+<dt>HISTORY:</dt><dd><p>09 May 2025: Prusty/Khanna</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="SpiralMap.models_.spiral_poggio_maps.getarmlist">
+<span class="sig-name descname"><span class="pre">getarmlist</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/SpiralMap/models_.html#spiral_poggio_maps.getarmlist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.spiral_poggio_maps.getarmlist" title="Link to this definition"></a></dt>
+<dd><p>Initialize the list of available spiral arms
+and their corresponding plot colors.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SpiralMap.models_.spiral_poggio_maps.info">
+<span class="sig-name descname"><span class="pre">info</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/SpiralMap/models_.html#spiral_poggio_maps.info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.spiral_poggio_maps.info" title="Link to this definition"></a></dt>
+<dd><p>Collate arm information</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="SpiralMap.models_.sqrtsum">
+<span class="sig-prename descclassname"><span class="pre">SpiralMap.models_.</span></span><span class="sig-name descname"><span class="pre">sqrtsum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prnt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#SpiralMap.models_.sqrtsum" title="Link to this definition"></a></dt>
+<dd><p>helper function</p>
+</dd></dl>
+
 </section>
 </section>
 

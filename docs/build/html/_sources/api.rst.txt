@@ -5,5 +5,5 @@ API
 posterior
 ---------
 
-.. automodule:: src.SpiralMap
+.. automodule:: SpiralMap.models_
    :members:
