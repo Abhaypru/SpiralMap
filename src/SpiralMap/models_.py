@@ -768,16 +768,15 @@ class main_(object):
 	
 	"""
 	def __init__(self,Rsun=8.277,print_=True):      
-
-        """
-        Initialize main object.
-
-        Args:
-            Rsun (float):
-                The Galactocentric R(kpc) of the Sun, by default set to 8.277.
-            print_ (Boolean):
-                if set to False it does not print out the model attributes to screen.
-        """
+		"""
+		Initialize main object.
+		
+		Args:
+			Rsun (float):
+				The Galactocentric R(kpc) of the Sun, by default set to 8.277.
+			print_ (Boolean):
+				if set to False it does not print out the model attributes to screen.
+		"""
 		 	
 		self.root_ = root_
 		self.dataloc = dataloc        
