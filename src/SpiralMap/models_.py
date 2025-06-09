@@ -775,19 +775,7 @@ class reid_spiral(object):
 		self.dout = {'xhc':xhc,'yhc':yhc,'xgc':xgc,'ygc':ygc}													
 
 
-class main_(object):
-	
-
-    """
-    ``test`` object containing the user's  information.
-    This object can either be initialized from data arrays, or come from outside libraries in a
-    compatible format. Acceptable formats from outside sources are listed below.
-
-    **Supported Formats**:
-
-    * nit
-    * lok (specific, see below)
-    """	
+class main_(object):	
 
 	def __init__(self,Rsun=8.277,print_=True):   
 

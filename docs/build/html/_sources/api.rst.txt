@@ -2,9 +2,8 @@
 API
 ===
 
-docs
+Numerical output (.. py:module:: `SpiralMap.models_`)
 ---------
 
-.. .. automodule:: SpiralMap.models_
-..   :members:
 
+test stuff
