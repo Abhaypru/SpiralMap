@@ -1,11 +1,11 @@
-API documentation
-=================
+API reference
+=============================
 
+.. automodule:: SpiralMap
+   :members:
 
-.. .. automodule:: SpiralMap.models_.spiral_poggio_maps
-..      :members:
+The “shape” module
+------------------
 
-
-
-.. automodapi:: SpiralMap.models_.spiral_poggio_maps
-     :no-inheritance-diagram:
+.. automodule:: SpiralMap.spiral_poggio_maps
+   :members:
