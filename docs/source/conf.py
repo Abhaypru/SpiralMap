@@ -6,12 +6,13 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-import os 
+import os
 import sys
-# sys.path.insert(0,os.path.abspath("/Users/shouryapro/Documents/GitHub"))
-sys.path.insert(0,os.path.abspath("../../.."))
+from pathlib import Path
 
-import SpiralMap
+# sys.path.insert(0, os.path.abspath('/Users/shouryapro/Documents/GitHub/SpiralMap'))
+
+sys.path.insert(0, os.path.abspath('../..'))
 
 project = 'SpiralMap'
 copyright = '2025, Prusty & Khanna'

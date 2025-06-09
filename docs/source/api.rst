@@ -1,9 +1,9 @@
 ===
 API
 ===
-
-Numerical output (.. py:module:: `SpiralMap.models_`)
+ 
+posterior
 ---------
 
-
-test stuff
+.. automodule:: src.SpiralMap
+   :members:

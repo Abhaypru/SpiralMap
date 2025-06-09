@@ -18,6 +18,9 @@ classifiers = [
 license = "MIT"
 license-files = ["LICEN[CS]E*"]
 
+[project.optional-dependencies]
+docs = ["sphinx","sphinx_rtd_theme", "sphinxcontrib-bibtex"]
+
 [project.urls]
 Homepage = "https://github.com/Abhaypru/SpiralMap"
 Issues = "https://github.com/Abhaypru/SpiralMap/issues"
