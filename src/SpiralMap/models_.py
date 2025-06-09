@@ -761,6 +761,11 @@ class reid_spiral(object):
 		yhc = ygc			
 		self.dout = {'xhc':xhc,'yhc':yhc,'xgc':xgc,'ygc':ygc}													
 class main_(object):
+	"""
+	The main executor that calls the individual models to grab the spiral traces.
+	It is also used to set plot preferences and make plots.
+	
+	"""
 	def __init__(self,Rsun=8.277,print_=True):       	
 		self.root_ = root_
 		self.dataloc = dataloc        
