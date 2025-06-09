@@ -79,8 +79,6 @@ def pickleread(file1):
 	
 	return data
 
-
-
 def add_polargrid(plotattrs,rlevels=12,xmin=-10,xmax=10,ymin=-10,ymax=10,modrec=[],armrec=[],xorig = 0.,rmin = 3):
 	coordsys = plotattrs['coordsys']
 
@@ -178,20 +176,16 @@ def getangular(spimod):
 		spimod.dout['phi4_ex'] = np.degrees(np.arctan2(spimod.dout['yhc_ex'],spimod.dout['xgc_ex']))%360.	
 		spimod.dout['glon4_ex'] = np.degrees(np.arctan2(spimod.dout['yhc_ex'],spimod.dout['xhc_ex']))%360.	
 		spimod.dout['glon_ex'],spimod.dout['glat_ex'],spimod.dout['dhelio_ex'] = xyz2lbr(spimod.dout['xhc_ex'],spimod.dout['yhc_ex'],0)
-		
-		
 
 def png2movie(readdir,savdir,flname='movie',fmt='gif',duration=1.):
-	'''
-	Note: works with the older version of imageio (2.27)
-	Purpose: make a gif from set of images
-	readdir = directory where set of images are
-	savdir = directory where to save the final movie
-	flname = filename
-	
+	####
+	# Note: works with the older version of imageio (2.27)
+	# Purpose: make a gif from set of images
+	# readdir = directory where set of images are
+	# savdir = directory where to save the final movie
+	# flname = filename	
 	#dtools.png2movie(desktop+'/snaps/',desktop)	
-	
-	'''
+	####
 	
 	from PIL import Image as image
 	import imageio	
@@ -218,8 +212,7 @@ def png2movie(readdir,savdir,flname='movie',fmt='gif',duration=1.):
 	
 	
 	return
-		
-	
+
 def polar_style(ax,title='',rticks=[3., 6.,9.,12,15.,20.]):
 	
 	ax.set_rticks(rticks)	
