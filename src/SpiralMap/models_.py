@@ -20,14 +20,14 @@ exec(open(root_+"/mytools.py").read())
 ####################################
 
 class spiral_poggio_maps(object):
-	# """
-	# Class containing spiral arm models from
-		# Poggio_2021: Poggio al. 2021 (EDR3 UMS stars)
-		# GaiaPVP_2022: Gaia collaboration et al. 2021 (OB stars)
+	"""
+	Class containing spiral arm models from
+		Poggio_2021: Poggio al. 2021 (EDR3 UMS stars)
+		GaiaPVP_2022: Gaia collaboration et al. 2021 (OB stars)
 					
-	# HISTORY:
-		# 09 May 2025: Prusty/Khanna					
-	# """
+	HISTORY:
+		09 May 2025: Prusty/Khanna					
+	"""
 	
 	def __init__(self,model_='GaiaPVP_cont_2022'):		
 		
@@ -207,12 +207,12 @@ class TaylorCordesSpiral(object):
 
 
 class spiral_houhan(object):	
-	# # """Hou & Han (2014) polynomial-logarithmic spiral arm model
+	"""Hou & Han (2014) polynomial-logarithmic spiral arm model
 	
-	# # Implements the Milky Way spiral structure model from:
-	# # "The spiral structure of the Milky Way from classical Cepheids" (Hou & Han 2014)
-	# # using polynomial-logarithmic spiral functions. Provides 6 major arm segments.	
-	# # """
+	Implements the Milky Way spiral structure model from:
+	"The spiral structure of the Milky Way from classical Cepheids" (Hou & Han 2014)
+	using polynomial-logarithmic spiral functions. Provides 6 major arm segments.	
+	"""
 	
 	def __init__(self):			
 		self.getarmlist()
