@@ -3,6 +3,7 @@ API
 *****************
 
 .. automodapi:: SpiralMap
+..   :no-inheritance-diagram:
 ..   :members:
 
 .. automodapi:: SpiralMap.models_
