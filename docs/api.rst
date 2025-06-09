@@ -1,8 +1,9 @@
 *****************
-ndcube (`ndcube`)
+API 
 *****************
 
 .. automodapi:: SpiralMap
-   :inherited-members:
+..   :members:
 
 .. automodapi:: SpiralMap.models_
+..   :no-inheritance-diagram:
