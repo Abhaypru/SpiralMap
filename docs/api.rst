@@ -5,5 +5,5 @@ API
 Main
 ---------
 
-automodule:: SpiralMap
+.. automodule:: SpiralMap.models_
    :members:
