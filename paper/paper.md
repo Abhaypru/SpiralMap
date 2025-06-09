@@ -45,7 +45,7 @@ Other models can easily be included on request. In the near future, we anticipat
 | `Drimmel_Ceph_2024`  | Model based on Cepheid variables  [@Drimmel:2024].  |
 
 A few example plots that can be generated using the package are included below. For more details, we point to the following links:
-a) Documentation: [`readthedocs](https://spiralmap.readthedocs.io/en/latest/), b) Demonstration: [Jupyter notebook](https://github.com/Abhaypru/SpiralMap/blob/main/demo_spiralmap.ipynb), and c) [Github repository](https://github.com/Abhaypru/SpiralMap).
+a) Documentation: [`readthedocs`](https://spiralmap.readthedocs.io/en/latest/), b) Demonstration: [`Jupyter notebook`](https://github.com/Abhaypru/SpiralMap/blob/main/demo_spiralmap.ipynb), and c) [`Github repository`](https://github.com/Abhaypru/SpiralMap).
 
 ![Cartesian projection of the `Drimmel_Ceph_2024` model shown for a particular arm (`Sag-Car`). We show this arm in HC (a), HC with a polar grid in the background (b), and in GC frame with a polar grid in the background (c).\label{single_arm_single_model}](figures/single_arm_single_model.png)
 
