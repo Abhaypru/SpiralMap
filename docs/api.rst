@@ -2,10 +2,10 @@ API documentation
 =================
 
 
-.. .. automodule:: SpiralMap.spiral_poggio_maps
+.. .. automodule:: SpiralMap.models_
 ..      :members:
 
 
 
-.. automodapi:: SpiralMap.spiral_poggio_maps
+.. automodapi:: SpiralMap.models_
      :no-inheritance-diagram:
