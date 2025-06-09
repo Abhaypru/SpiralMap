@@ -775,21 +775,21 @@ class reid_spiral(object):
 
 
 class main_(object):
-	'''
+    """
 	The main executor that calls the individual models to grab the spiral traces.
 	It is also used to set plot preferences and make plots.
 	
-	'''
+    """
 	def __init__(self,Rsun=8.277,print_=True):      
-		'''
-		Initialize main object.
+		"""
+		Initialize the main_ object.
 		
 		Args:
 			Rsun (float):
 				The Galactocentric R(kpc) of the Sun, by default set to 8.277.
 			print_ (Boolean):
 				if set to False it does not print out the model attributes to screen.
-		'''
+		"""
 		 	
 		self.root_ = root_
 		self.dataloc = dataloc        
@@ -802,16 +802,16 @@ class main_(object):
 		self.armrec = []
 	def listmodels(self):     
 
-		"""
-		defines list of available models/maps
-		constructs dictionaries to initialise individual model classes
+		# # """
+		# # defines list of available models/maps
+		# # constructs dictionaries to initialise individual model classes
 		
-		Args:
-			Rsun (float):
-				The Galactocentric R(kpc) of the Sun, by default set to 8.277.
-			print_ (Boolean):
-				if set to False it does not print out the model attributes to screen.
-		"""
+		# # Args:
+			# # Rsun (float):
+				# # The Galactocentric R(kpc) of the Sun, by default set to 8.277.
+			# # print_ (Boolean):
+				# # if set to False it does not print out the model attributes to screen.
+		# # """
 
 
 		   		
@@ -832,9 +832,9 @@ class main_(object):
 					   'Upper main sequence (map)','OB stars (map)','Cepheids']  			 
 							 
 	def getinfo(self,model='',print_=True):	
-		'''
-		prints to screen the list of available models, and basic information such as tracers used to construct these
-		'''
+		# # '''
+		# # prints to screen the list of available models, and basic information such as tracers used to construct these
+		# # '''
 
 	
 		if model == '':		
@@ -873,9 +873,9 @@ class main_(object):
 								'polargrid':False,    
 								'dataloc':dataloc}    
 	def add2plot(self,plotattrs):
-		'''
-		overplots positions of the Galactic center and the Sun
-		'''
+		# # '''
+		# # overplots positions of the Galactic center and the Sun
+		# # '''
 	
 		
 		if plotattrs['coordsys'] =='HC':								
@@ -886,9 +886,9 @@ class main_(object):
 			plt.plot(self.xsun,0.,marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')
 	def xyplot(self,spimod,plotattrs_):		
 
-		'''
-		handles cartesian frame plots
-		'''
+		# # '''
+		# # handles cartesian frame plots
+		# # '''
 				
 		if plotattrs_['plot'] and plotattrs_['polarproj']==False :							
 			plt.plot(spimod.dout['x'+plotattrs_['coordsys'].lower()],
@@ -915,9 +915,9 @@ class main_(object):
 			if plotattrs_['markSunGC']:
 				self.add2plot(plotattrs_)	
 	def readout(self,plotattrs={},model='',arm='',print_=False):	
-		'''
-		main class which reads out individual models, makes plots etc.
-		'''
+		# # '''
+		# # main class which reads out individual models, makes plots etc.
+		# # '''
 						
 		if model == '':
 			 raise RuntimeError('model = blank | no model provided \n try self.getino() for list of available models')			 
@@ -962,10 +962,10 @@ class main_(object):
 			pass										
 									
 class _make_supportfiles(object):
-	"""
-	was run to save supporting files
+	# # """
+	# # was run to save supporting files
 	
-	"""
+	# # """
 	
 	def __init__(self):
 					
@@ -975,9 +975,9 @@ class _make_supportfiles(object):
 		self.savelims_all()
 		self.savelims()	
 	def prep_poggio_polar(self):	
-		'''
-		saves the poggio contours for polarprojection
-		'''
+		# # '''
+		# # saves the poggio contours for polarprojection
+		# # '''
 	
 		xsun=self.xsun
 		usemodels = ['Poggio_cont_2021','GaiaPVP_cont_2022']	
