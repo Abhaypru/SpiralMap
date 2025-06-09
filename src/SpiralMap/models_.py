@@ -20,14 +20,14 @@ exec(open(root_+"/mytools.py").read())
 ####################################
 
 class spiral_poggio_maps(object):
-	"""
-	Class containing spiral arm models from
-		Poggio_2021: Poggio al. 2021 (EDR3 UMS stars)
-		GaiaPVP_2022: Gaia collaboration et al. 2021 (OB stars)
+	# # """
+	# # Class containing spiral arm models from
+		# # Poggio_2021: Poggio al. 2021 (EDR3 UMS stars)
+		# # GaiaPVP_2022: Gaia collaboration et al. 2021 (OB stars)
 					
-	HISTORY:
-		09 May 2025: Prusty/Khanna					
-	"""
+	# # HISTORY:
+		# # 09 May 2025: Prusty/Khanna					
+	# # """
 	
 	def __init__(self,model_='GaiaPVP_cont_2022'):		
 		
@@ -204,13 +204,15 @@ class TaylorCordesSpiral(object):
 		self.R0 = -xsun  # Solar Galactocentric radius (kpc)					
 		xhc,yhc,xgc,ygc = self.model_(arm);					
 		self.dout = {'xhc':xhc,'yhc':yhc,'xgc':xgc,'ygc':ygc}							 
+
+
 class spiral_houhan(object):	
-	"""Hou & Han (2014) polynomial-logarithmic spiral arm model
+	# # """Hou & Han (2014) polynomial-logarithmic spiral arm model
 	
-	Implements the Milky Way spiral structure model from:
-	"The spiral structure of the Milky Way from classical Cepheids" (Hou & Han 2014)
-	using polynomial-logarithmic spiral functions. Provides 6 major arm segments.	
-	"""
+	# # Implements the Milky Way spiral structure model from:
+	# # "The spiral structure of the Milky Way from classical Cepheids" (Hou & Han 2014)
+	# # using polynomial-logarithmic spiral functions. Provides 6 major arm segments.	
+	# # """
 	
 	def __init__(self):			
 		self.getarmlist()
@@ -309,18 +311,20 @@ class spiral_houhan(object):
 			'xgc': xgc,
 			'ygc': ygc
 		}
+
+
 class spiral_levine(object):
 	
-	"""Levine et al. (2006) logarithmic spiral arm model for the Milky Way.
+	# # """Levine et al. (2006) logarithmic spiral arm model for the Milky Way.
 	
-	Implements a four-arm logarithmic spiral model based on:
-	Levine, E. S., Blitz, L., & Heiles, C. (2006). "The Spiral Structure 
-	of the Outer Milky Way in Hydrogen". Astrophysical Journal.
+	# # Implements a four-arm logarithmic spiral model based on:
+	# # Levine, E. S., Blitz, L., & Heiles, C. (2006). "The Spiral Structure 
+	# # of the Outer Milky Way in Hydrogen". Astrophysical Journal.
 	
-	The model provides both galactocentric (GC) and heliocentric (HC) coordinates
-	for each spiral arm segment with fixed pitch angles.
+	# # The model provides both galactocentric (GC) and heliocentric (HC) coordinates
+	# # for each spiral arm segment with fixed pitch angles.
 		
-	"""
+	# # """
 	
 	def __init__(self):   
 		self.getarmlist()
@@ -413,6 +417,8 @@ class spiral_levine(object):
 			'yhc': yhc,
 			'xgc': xgc,
 			'ygc': ygc}
+
+
 class spiral_drimmel_cepheids(object):
 	
 	def __init__(self):
@@ -469,22 +475,24 @@ class spiral_drimmel_cepheids(object):
 		rgc_ex = np.sqrt(xgc_ex**2. + ygc_ex**2.)
           
 		self.dout = {'xhc':xhc,'yhc':yhc,'xgc':xgc,'ygc':ygc,'xhc_ex':xhc_ex,'yhc_ex':yhc_ex,'xgc_ex':xgc_ex,'ygc_ex':ygc_ex}			
+
+
 class spiral_drimmel_nir(object):
-	"""Drimmel (2000) Near-Infrared (NIR) spiral arm model
+	# # """Drimmel (2000) Near-Infrared (NIR) spiral arm model
 	
-	Implements the 2-arm spiral structure model from:
-	Drimmel, R. (2000) "Evidence for a two-armed spiral in the Milky Way"
-	using COBE/DIRBE near-infrared data. Includes main arms and phase-shifted interarms.
+	# # Implements the 2-arm spiral structure model from:
+	# # Drimmel, R. (2000) "Evidence for a two-armed spiral in the Milky Way"
+	# # using COBE/DIRBE near-infrared data. Includes main arms and phase-shifted interarms.
 	
-	Attributes
-	----------
-	arms : ndarray
-		Array of arm identifiers ['1_arm', '2_arm', '3_interarm', '4_interarm']
-	armcolour : dict
-		Color mapping for visualization:
-		- Main arms: black
-		- Interarms: red	
-	"""
+	# # Attributes
+	# # ----------
+	# # arms : ndarray
+		# # Array of arm identifiers ['1_arm', '2_arm', '3_interarm', '4_interarm']
+	# # armcolour : dict
+		# # Color mapping for visualization:
+		# # - Main arms: black
+		# # - Interarms: red	
+	# # """
 	def __init__(self):
 		"""Initialize Drimmel NIR spiral model with default parameters"""
 	 
@@ -599,18 +607,20 @@ class spiral_drimmel_nir(object):
 			xgc = xhc + xsun			
 			ygc = yhc                     
 			self.dout = {'xhc':xhc,'yhc':yhc,'xgc':xgc,'ygc':ygc}					
+
+
 class reid_spiral(object):
-	"""Reid et al. (2019) kinked logarithmic spiral arm model
+	# # """Reid et al. (2019) kinked logarithmic spiral arm model
 	
-	Implements the Milky Way spiral structure model from:
-	"Trigonometric Parallaxes of High Mass Star Forming Regions: The Structure and Kinematics of the Milky Way"
-	using kinked logarithmic spirals with varying pitch angles. Models 7 major arm features.
+	# # Implements the Milky Way spiral structure model from:
+	# # "Trigonometric Parallaxes of High Mass Star Forming Regions: The Structure and Kinematics of the Milky Way"
+	# # using kinked logarithmic spirals with varying pitch angles. Models 7 major arm features.
 	
-	Attributes
-	----------
-	arms : ndarray
-		Array of arm identifiers ['3-kpc', 'Norma', 'Sct-Cen', 'Sgr-Car', 'Local', 'Perseus', 'Outer']	
-	"""
+	# # Attributes
+	# # ----------
+	# # arms : ndarray
+		# # Array of arm identifiers ['3-kpc', 'Norma', 'Sct-Cen', 'Sgr-Car', 'Local', 'Perseus', 'Outer']	
+	# # """
 	
 	def __init__(self, kcor=False):
 		"""Initialize Reid et al. (2019) spiral model
@@ -762,6 +772,8 @@ class reid_spiral(object):
 		xhc2 = xgc2 - xsun	
 		yhc = ygc			
 		self.dout = {'xhc':xhc,'yhc':yhc,'xgc':xgc,'ygc':ygc}													
+
+
 class main_(object):
 	'''
 	The main executor that calls the individual models to grab the spiral traces.
