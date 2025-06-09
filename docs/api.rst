@@ -2,8 +2,6 @@
 API
 ===
 
-main
------
-
 .. automodapi:: SpiralMap.models_
      :members:
+     :no-inheritance-diagram:
