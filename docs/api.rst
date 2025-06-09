@@ -9,5 +9,5 @@ API
 model
 -----
 
-.. automodapi:: SpiralMap.models_.main_
+.. automodapi:: SpiralMap.models_
      :members:
