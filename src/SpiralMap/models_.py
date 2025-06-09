@@ -776,6 +776,17 @@ class reid_spiral(object):
 
 class main_(object):
 
+    """
+    ``test`` object containing the user's  information.
+    This object can either be initialized from data arrays, or come from outside libraries in a
+    compatible format. Acceptable formats from outside sources are listed below.
+
+    **Supported Formats**:
+
+    * nit
+    * lok (specific, see below)
+    """	
+
 	def __init__(self,Rsun=8.277,print_=True):      
 		 	
 		self.root_ = root_
