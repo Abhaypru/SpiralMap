@@ -9,3 +9,7 @@ sphinx-rtd-theme
 IPython>=8.0
 matplotlib
 astropy
+pandas
+scipy
+tabulate
+
