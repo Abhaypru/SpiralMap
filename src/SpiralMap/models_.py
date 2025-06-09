@@ -20,14 +20,14 @@ exec(open(root_+"/mytools.py").read())
 ####################################
 
 class spiral_poggio_maps(object):
-	"""
-	Class containing spiral arm models from
-		Poggio_2021: Poggio al. 2021 (EDR3 UMS stars)
-		GaiaPVP_2022: Gaia collaboration et al. 2021 (OB stars)
+	# """
+	# Class containing spiral arm models from
+		# Poggio_2021: Poggio al. 2021 (EDR3 UMS stars)
+		# GaiaPVP_2022: Gaia collaboration et al. 2021 (OB stars)
 					
-	HISTORY:
-		09 May 2025: Prusty/Khanna					
-	"""
+	# HISTORY:
+		# 09 May 2025: Prusty/Khanna					
+	# """
 	
 	def __init__(self,model_='GaiaPVP_cont_2022'):		
 		
@@ -775,6 +775,7 @@ class reid_spiral(object):
 
 
 class main_(object):
+	
 
     """
     ``test`` object containing the user's  information.
@@ -799,6 +800,22 @@ class main_(object):
 		self.modrec = []
 		self.armrec = []
 	def listmodels(self):     
+
+        """
+        Get marginal distribution for some ordered subset of parameters in ``Posterior``
+
+        Args:
+            parameter_list (list[str]):
+                List of parameters for generating a marginal distribution.
+                Should be a subset of ``Posterior.parameter_labels()``.
+
+        Returns:
+            New instance of the ``Posterior`` object only containing
+            samples determined and ordered by `parameter_list`.
+
+        Raises:
+            ValueError: if the number of parameters is not less than the number of samples.
+        """		
 
 		   		
 		self.models = ['Taylor_Cordes_1992','Drimmel_NIR_2000',
