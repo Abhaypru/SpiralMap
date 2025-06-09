@@ -104,11 +104,12 @@ class spiral_poggio_maps(object):
 				
 			
 class TaylorCordesSpiral(object):	
-	""" Taylor & Cordes (1993) Galactic spiral arm model,	  
-	based on radio pulsar observations. The model defines four major spiral arms.	
-	"""
     
 	def __init__(self):		
+
+		""" Taylor & Cordes (1993) Galactic spiral arm model,	  
+		based on radio pulsar observations. The model defines four major spiral arms.	
+		"""		
 		self.getarmlist()        
 	def getarmlist(self):
 		"""Set arm names and colours"""
