@@ -1,7 +1,8 @@
 API reference
 =============================
 
-
+.. automodule:: SpiralMap
+   :members:
 
 Main
 ------------------
