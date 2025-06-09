@@ -781,7 +781,7 @@ class main_(object):
 	
     """
 	def __init__(self,Rsun=8.277,print_=True):      
-		"""
+		'''
 		Initialize the main_ object.
 		
 		Args:
@@ -789,7 +789,7 @@ class main_(object):
 				The Galactocentric R(kpc) of the Sun, by default set to 8.277.
 			print_ (Boolean):
 				if set to False it does not print out the model attributes to screen.
-		"""
+		'''
 		 	
 		self.root_ = root_
 		self.dataloc = dataloc        
@@ -873,9 +873,9 @@ class main_(object):
 								'polargrid':False,    
 								'dataloc':dataloc}    
 	def add2plot(self,plotattrs):
-		# # '''
-		# # overplots positions of the Galactic center and the Sun
-		# # '''
+		'''
+		overplots positions of the Galactic center and the Sun
+		'''
 	
 		
 		if plotattrs['coordsys'] =='HC':								
