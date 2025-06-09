@@ -20,14 +20,14 @@ exec(open(root_+"/mytools.py").read())
 ####################################
 
 class spiral_poggio_maps(object):
-	# # """
-	# # Class containing spiral arm models from
-		# # Poggio_2021: Poggio al. 2021 (EDR3 UMS stars)
-		# # GaiaPVP_2022: Gaia collaboration et al. 2021 (OB stars)
+	"""
+	Class containing spiral arm models from
+		Poggio_2021: Poggio al. 2021 (EDR3 UMS stars)
+		GaiaPVP_2022: Gaia collaboration et al. 2021 (OB stars)
 					
-	# # HISTORY:
-		# # 09 May 2025: Prusty/Khanna					
-	# # """
+	HISTORY:
+		09 May 2025: Prusty/Khanna					
+	"""
 	
 	def __init__(self,model_='GaiaPVP_cont_2022'):		
 		
