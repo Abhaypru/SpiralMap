@@ -776,11 +776,7 @@ class main_(object):
                 The Galactocentric R(kpc) of the Sun, by default set to 8.277.
             print_ (Boolean):
                 if set to False it does not print out the model attributes to screen.
-
-        Raises:
-            ValueError:
         """
-
 		 	
 		self.root_ = root_
 		self.dataloc = dataloc        
