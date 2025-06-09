@@ -1,7 +1,8 @@
-# APIs
+*****************
+ndcube (`ndcube`)
+*****************
 
-```{toctree}
----
-maxdepth: 3
----
-SpiralMap.models_ <SpiralMap.models_>
+.. automodapi:: SpiralMap
+   :inherited-members:
+
+.. automodapi:: SpiralMap.models_
