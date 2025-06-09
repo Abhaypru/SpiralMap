@@ -7,4 +7,5 @@ API documentation
 
 
 
-
+.. automodapi:: gaiaunlimited.spiral_poggio_maps
+     :no-inheritance-diagram:
