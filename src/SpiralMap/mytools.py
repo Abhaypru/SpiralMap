@@ -1,3 +1,7 @@
+#######################################################################
+# Helper functions
+#######################################################################
+
 import os, sys
 import numpy as np
 import matplotlib.pyplot as plt
@@ -5,6 +9,31 @@ import pandas as pd
 from tabulate import tabulate
 from astropy.table import Table
 from scipy.interpolate import CubicSpline
+
+def sqrtsum(ds=[],prnt=False):	
+	if prnt:
+		print(len(ds))	
+	mysum = 0
+	for i in range(len(ds)):		
+		tmp = ds[i]**2.
+		mysum+=tmp	
+	resval = np.sqrt(mysum)	
+	return resval
+
+def fcount(floc,flist=False,nlist=False,prnt=True):
+	cnt = []	
+	for fl in os.listdir(floc):
+		cnt.append(fl)		
+	cnt = np.array(cnt)		
+	if prnt:
+		print(str(cnt.size)+' files in total')	
+	if flist:		
+		return cnt
+	elif nlist:
+		return cnt.size	
+	else:
+		os.system('ls -lh '+floc)	
+		return 
 
 def xyz2lbr(x,y,z):
     rc2=x*x+y*y
@@ -203,63 +232,4 @@ def polar_style(ax,title='',rticks=[3., 6.,9.,12,15.,20.]):
 	return
 
 
-
-def sqrtsum(ds=[],prnt=False):
-	'''
-	handy function to sum up the squares and return the square-root
-	'''
-	
-	if prnt:
-		print(len(ds))
-	
-	mysum = 0
-	for i in range(len(ds)):
-		
-		
-		tmp = ds[i]**2.
-		mysum+=tmp
-	
-	
-	resval = np.sqrt(mysum)
-	
-	
-	return resval
-
-
-
-
-def fcount(floc,flist=False,nlist=False,prnt=True):
-	
-	'''
-    NAME: fcount
-
-    PURPOSE: counts the number of files in a given directory
-
-
-    INPUT: file location 
-
-    OUTPUT: number count 
-       
-    HISTORY: October 27, 2022 (INAF Torino)
-    	
-	'''
-	
-	
-	cnt = []
-	
-	for fl in os.listdir(floc):
-		cnt.append(fl)
-		
-	cnt = np.array(cnt)	
-	
-	if prnt:
-		print(str(cnt.size)+' files in total')
-	
-	if flist:		
-		return cnt
-	elif nlist:
-		return cnt.size	
-	else:
-		os.system('ls -lh '+floc)	
-		return 
 
