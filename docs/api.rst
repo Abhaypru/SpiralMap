@@ -1,8 +1,7 @@
 API reference
 =============================
 
-.. automodule:: SpiralMap
-   :members:
+
 
 The “shape” module
 ------------------
