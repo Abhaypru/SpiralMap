@@ -3,16 +3,11 @@ API reference
 
 
 
-The “shape” module
+Main
 ------------------
 
-.. automodule:: SpiralMap.spiral_poggio_maps
+.. automodule:: SpiralMap.main_
    :members:
    
-The “shape” module
-------------------
-
-.. automodule:: SpiralMap.TaylorCordesSpiral
-   :members:
 
 
