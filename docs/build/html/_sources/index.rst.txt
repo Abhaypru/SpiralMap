@@ -31,6 +31,9 @@ For a quick demonstration please see the accompanying `Jupyter Notebook <https:/
    :caption: Contents:
    
    install
+   models_available
+   citation  
+   api
 
 
 
