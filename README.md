@@ -3,6 +3,7 @@ A Python library of the Milky Way's spiral arms.
 
 [![pypi status](https://img.shields.io/pypi/v/SpiralMap.svg?logo=pypi&logoColor=white&label=PyPI)](https://pypi.org/project/SpiralMap/)
 [![Documentation Status](https://app.readthedocs.org/projects/spiralmap/badge/?version=latest)](https://spiralmap.readthedocs.io/en/latest/?badge=latest)
+
 The detailed documentation is hosted on [Read the docs](https://spiralmap.readthedocs.io/en/latest/#api-docs).
 
 For a quickstart please refer to the accompanying [Jupyter notebook](https://github.com/Abhaypru/SpiralMap/blob/main/demo_spiralmap.ipynb)
