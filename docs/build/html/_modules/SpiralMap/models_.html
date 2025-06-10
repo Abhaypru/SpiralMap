@@ -192,13 +192,11 @@
 			
 <div class="viewcode-block" id="TaylorCordesSpiral">
 <a class="viewcode-back" href="../../api.html#SpiralMap.models_.TaylorCordesSpiral">[docs]</a>
-<span class="k">class</span> <span class="nc">TaylorCordesSpiral</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>	
-<span class="w">	</span>
+<span class="k">class</span> <span class="nc">TaylorCordesSpiral</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>		
 <span class="w">	</span><span class="sd">&quot;&quot;&quot;	</span>
 <span class="sd">	Taylor &amp; Cordes (1993) Galactic spiral arm model,	  </span>
 <span class="sd">	based on radio pulsar observations. The model defines four major spiral arms.		</span>
 <span class="sd">	&quot;&quot;&quot;</span>	
-
 	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>		
 		<span class="bp">self</span><span class="o">.</span><span class="n">getarmlist</span><span class="p">()</span>        
 <div class="viewcode-block" id="TaylorCordesSpiral.getarmlist">
@@ -222,13 +220,11 @@
 	<span class="k">def</span> <span class="nf">getparams</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>	   
 <span class="w">		</span><span class="sd">&quot;&quot;&quot;Load original spiral parameters from Taylor &amp; Cordes (1993) Table 1.</span>
 <span class="sd">		</span>
-<span class="sd">	   :return: self.params[&#39;Arm1&#39;,&#39;Arm2&#39;,&#39;Arm3&#39;,&#39;Arm4&#39;] </span>
-<span class="sd">				Nested dictionary such that, </span>
+<span class="sd">	   :return: self.params[&#39;Arm1&#39;,&#39;Arm2&#39;,&#39;Arm3&#39;,&#39;Arm4&#39;], </span>
+<span class="sd">				nested dictionary such that, </span>
 <span class="sd">				self.params[&#39;Arm&#39;][&#39;theta_deg&#39;] -&gt; Anchor points in galactic longitude (degrees). \</span>
-<span class="sd">				self.params[&#39;Arm&#39;][&#39;r_kpc&#39;] -&gt;Corresponding galactocentric radii (kiloparsecs). \</span>
+<span class="sd">				self.params[&#39;Arm&#39;][&#39;r_kpc&#39;] -&gt;Corresponding galactocentric radii (kiloparsecs). </span>
 <span class="sd">	   :rtype: dict</span>
-
-<span class="sd">		</span>
 <span class="sd">		&quot;&quot;&quot;</span>		
 		<span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="p">{</span>	<span class="s1">&#39;Arm1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;theta_deg&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">164</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">280</span><span class="p">,</span> <span class="mi">290</span><span class="p">,</span> <span class="mi">315</span><span class="p">,</span> <span class="mi">330</span><span class="p">],</span>
 					<span class="s1">&#39;r_kpc&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">3.53</span><span class="p">,</span> <span class="mf">3.76</span><span class="p">,</span> <span class="mf">4.44</span><span class="p">,</span> <span class="mf">5.24</span><span class="p">,</span> <span class="mf">5.36</span><span class="p">,</span> <span class="mf">5.81</span><span class="p">,</span> <span class="mf">5.81</span><span class="p">]},</span>
@@ -246,20 +242,15 @@
 <div class="viewcode-block" id="TaylorCordesSpiral.model_">
 <a class="viewcode-back" href="../../api.html#SpiralMap.models_.TaylorCordesSpiral.model_">[docs]</a>
 	<span class="k">def</span> <span class="nf">model_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arm_name</span><span class="p">):</span>			
-<span class="w">		</span><span class="sd">&quot;&quot;&quot;Generate arm coordinates using cubic spline interpolation.</span>
+<span class="w">		</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;			</span>
+<span class="sd">		   Generate arm coordinates using cubic spline interpolation.</span>
 <span class="sd">		</span>
-<span class="sd">		Parameters</span>
-<span class="sd">		----------</span>
-<span class="sd">		arm_name : str</span>
-<span class="sd">			Must be one of: &#39;Arm1&#39;, &#39;Arm2&#39;, &#39;Arm3&#39;, &#39;Arm4&#39;</span>
-<span class="sd">		</span>
-<span class="sd">		Returns</span>
-<span class="sd">		-------</span>
-<span class="sd">		tuple</span>
-<span class="sd">			(x_hc, y_hc, x_gc, y_gc) coordinate arrays where:</span>
-<span class="sd">			- hc = heliocentric coordinates</span>
-<span class="sd">			- gc = galactocentric coordinates</span>
-<span class="sd">		&quot;&quot;&quot;</span>	
+<span class="sd">		   :param arm_name: Must be one of: &#39;Arm1&#39;, &#39;Arm2&#39;, &#39;Arm3&#39;, &#39;Arm4&#39;.	</span>
+<span class="sd">		   :type arm_name: String </span>
+<span class="sd">		   :return: (x_hc, y_hc, x_gc, y_gc)</span>
+<span class="sd">		   :rtype: tuple </span>
+<span class="sd">		&quot;&quot;&quot;</span>		
 		
 		<span class="bp">self</span><span class="o">.</span><span class="n">getparams</span><span class="p">()</span>
 		<span class="n">arm_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">arm_name</span><span class="p">]</span>
@@ -272,10 +263,10 @@
 		<span class="n">r_fine</span> <span class="o">=</span> <span class="n">cs</span><span class="p">(</span><span class="n">theta_fine</span><span class="p">)</span>
 		
 		<span class="c1"># Convert to Cartesian coordinates (Galacto-Centric)</span>
-
+		
 		<span class="n">xgc</span> <span class="o">=</span> <span class="n">r_fine</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta_fine</span><span class="p">)</span>
 		<span class="n">ygc</span> <span class="o">=</span> <span class="o">-</span><span class="n">r_fine</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta_fine</span><span class="p">)</span>
-
+		
 		<span class="c1"># rotate by 90 anti-clockwise to match with our convention </span>
 		<span class="n">rot_ang</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
 		<span class="n">x_gc</span> <span class="o">=</span> <span class="p">(</span><span class="n">xgc</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">rot_ang</span><span class="p">))</span> <span class="o">-</span> <span class="p">(</span><span class="n">ygc</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">rot_ang</span><span class="p">)</span>  <span class="p">)</span>
@@ -286,7 +277,7 @@
 		
 		<span class="k">return</span> <span class="n">x_hc</span><span class="p">,</span> <span class="n">y_gc</span><span class="p">,</span> <span class="n">x_gc</span><span class="p">,</span> <span class="n">y_gc</span>	</div>
 
-
+	
 <div class="viewcode-block" id="TaylorCordesSpiral.output_">
 <a class="viewcode-back" href="../../api.html#SpiralMap.models_.TaylorCordesSpiral.output_">[docs]</a>
 	<span class="k">def</span> <span class="nf">output_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">arm</span><span class="p">):</span>			

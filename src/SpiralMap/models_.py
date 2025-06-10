@@ -157,29 +157,15 @@ class TaylorCordesSpiral(object):
 					'r_kpc': [5.92, 7.06, 7.86, 9.68, 10.37, 11.39, 12.08]}					  
 								  }    
 	def model_(self, arm_name):			
-		"""Generate arm coordinates using cubic spline interpolation.
 		
-		Parameters
-		----------
-		arm_name : str
-			Must be one of: 'Arm1', 'Arm2', 'Arm3', 'Arm4'
+		"""			
+		   Generate arm coordinates using cubic spline interpolation.
 		
-		Returns
-		-------
-		tuple
-			(x_hc, y_hc, x_gc, y_gc) coordinate arrays where:
-			- hc = heliocentric coordinates
-			- gc = galactocentric coordinates
-		"""	
-
-
-	   Generate arm coordinates using cubic spline interpolation.
-	
-	   :param arm_name: Optional - Galactocentric R(kpc) of the Sun, default=8.277.	
-	   :type arm_name: String 
-	   :param print\_: Optional - if set to False does not print to screen.
-	   :type print\_: Boolean 
-
+		   :param arm_name: Must be one of: 'Arm1', 'Arm2', 'Arm3', 'Arm4'.	
+		   :type arm_name: String 
+		   :return: (x_hc, y_hc, x_gc, y_gc)
+		   :rtype: tuple 
+		"""		
 		
 		self.getparams()
 		arm_data = self.params[arm_name]
@@ -192,10 +178,10 @@ class TaylorCordesSpiral(object):
 		r_fine = cs(theta_fine)
 		
 		# Convert to Cartesian coordinates (Galacto-Centric)
-
+		
 		xgc = r_fine * np.sin(theta_fine)
 		ygc = -r_fine * np.cos(theta_fine)
-
+		
 		# rotate by 90 anti-clockwise to match with our convention 
 		rot_ang = np.radians(90)
 		x_gc = (xgc*np.cos(rot_ang)) - (ygc*np.sin(rot_ang)  )
@@ -205,7 +191,7 @@ class TaylorCordesSpiral(object):
 		x_hc = x_gc + self.R0  # Sun at (-R0, 0) in GC
 		
 		return x_hc, y_gc, x_gc, y_gc	
-
+	
 	def output_(self,arm):			
 		"""Get arm coordinates in structured format.
 		
