@@ -4,11 +4,11 @@ build-backend = "hatchling.build"
 
 [project]
 name = "SpiralMap"
-version = "0.0.1"
+version = "0.0.0.0.1"
 authors = [
   { name="Prusty & Khanna", email="shourya.khanna@inaf.it" },
 ]
-description = "A small example package"
+description = "Python Library of Milky Way's Spiral Arms"
 readme = "README.md"
 requires-python = ">=3.9"
 classifiers = [
