@@ -13,7 +13,9 @@ For a quickstart please refer to the accompanying [Jupyter notebook](https://git
 + Extract the 2D trace of individual or all spiral arms from a particular model.
 + Directly overplot spiral arms with choice of Cartesian or Polar coordinates, and in Heliocentric or Galactocentric frames.
 
+![image info](src/SpiralMap/movie_.gif).
 
+Shown above is a gallery of the spiral models & maps included in the current version. 
 
 Installation
 -------------
