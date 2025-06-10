@@ -90,6 +90,16 @@
 
 <span class="c1">#--------------------------------------------       </span>
 
+
+<span class="c1"># # &quot;&quot;&quot;			</span>
+   <span class="c1"># # Initialize main object.</span>
+
+   <span class="c1"># # :param Rsun: Optional - Galactocentric R(kpc) of the Sun, default=8.277.	</span>
+   <span class="c1"># # :type Rsun: float </span>
+   <span class="c1"># # :param print\_: Optional - if set to False does not print to screen.</span>
+   <span class="c1"># # :type print\_: Boolean </span>
+<span class="c1"># # &quot;&quot;&quot;		</span>
+
 <span class="c1">### TO do:</span>
 <span class="c1">#1 consistent colours for similar arms</span>
 <span class="c1">####################################</span>
@@ -212,9 +222,13 @@
 	<span class="k">def</span> <span class="nf">getparams</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>	   
 <span class="w">		</span><span class="sd">&quot;&quot;&quot;Load original spiral parameters from Taylor &amp; Cordes (1993) Table 1.</span>
 <span class="sd">		</span>
-<span class="sd">		Sets params dictionary with:</span>
-<span class="sd">		- theta_deg: Anchor points in galactic longitude (degrees).</span>
-<span class="sd">		- r_kpc: Corresponding galactocentric radii (kiloparsecs).</span>
+<span class="sd">	   :return: self.params[&#39;Arm1&#39;,&#39;Arm2&#39;,&#39;Arm3&#39;,&#39;Arm4&#39;] </span>
+<span class="sd">				Nested dictionary such that, </span>
+<span class="sd">				self.params[&#39;Arm&#39;][&#39;theta_deg&#39;] -&gt; Anchor points in galactic longitude (degrees). \</span>
+<span class="sd">				self.params[&#39;Arm&#39;][&#39;r_kpc&#39;] -&gt;Corresponding galactocentric radii (kiloparsecs). \</span>
+<span class="sd">	   :rtype: dict</span>
+
+<span class="sd">		</span>
 <span class="sd">		&quot;&quot;&quot;</span>		
 		<span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="p">{</span>	<span class="s1">&#39;Arm1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;theta_deg&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">164</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">280</span><span class="p">,</span> <span class="mi">290</span><span class="p">,</span> <span class="mi">315</span><span class="p">,</span> <span class="mi">330</span><span class="p">],</span>
 					<span class="s1">&#39;r_kpc&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">3.53</span><span class="p">,</span> <span class="mf">3.76</span><span class="p">,</span> <span class="mf">4.44</span><span class="p">,</span> <span class="mf">5.24</span><span class="p">,</span> <span class="mf">5.36</span><span class="p">,</span> <span class="mf">5.81</span><span class="p">,</span> <span class="mf">5.81</span><span class="p">]},</span>
@@ -417,18 +431,16 @@
 
 
 
-<span class="k">class</span> <span class="nc">spiral_levine</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">spiral_levine</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>	
+	<span class="c1"># &quot;&quot;&quot;Levine et al. (2006) logarithmic spiral arm model for the Milky Way.</span>
 	
-	<span class="c1"># # &quot;&quot;&quot;Levine et al. (2006) logarithmic spiral arm model for the Milky Way.</span>
+	<span class="c1"># Implements a four-arm logarithmic spiral model based on:</span>
+	<span class="c1"># Levine, E. S., Blitz, L., &amp; Heiles, C. (2006). &quot;The Spiral Structure </span>
+	<span class="c1"># of the Outer Milky Way in Hydrogen&quot;. Astrophysical Journal.</span>
 	
-	<span class="c1"># # Implements a four-arm logarithmic spiral model based on:</span>
-	<span class="c1"># # Levine, E. S., Blitz, L., &amp; Heiles, C. (2006). &quot;The Spiral Structure </span>
-	<span class="c1"># # of the Outer Milky Way in Hydrogen&quot;. Astrophysical Journal.</span>
-	
-	<span class="c1"># # The model provides both galactocentric (GC) and heliocentric (HC) coordinates</span>
-	<span class="c1"># # for each spiral arm segment with fixed pitch angles.</span>
-		
-	<span class="c1"># # &quot;&quot;&quot;</span>
+	<span class="c1"># The model provides both galactocentric (GC) and heliocentric (HC) coordinates</span>
+	<span class="c1"># for each spiral arm segment with fixed pitch angles.		</span>
+	<span class="c1"># &quot;&quot;&quot;</span>
 	
 	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>   
 		<span class="bp">self</span><span class="o">.</span><span class="n">getarmlist</span><span class="p">()</span>
@@ -885,15 +897,15 @@
 <span class="sd">	The main executor that calls the individual models to grab the spiral traces.</span>
 <span class="sd">	It is also used to set plot preferences and make plots.		</span>
 <span class="sd">	&quot;&quot;&quot;</span>
-	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Rsun</span><span class="o">=</span><span class="mf">8.277</span><span class="p">,</span><span class="n">print_</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>  
-<span class="w">		</span>
-<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">	    PURPOSE:</span>
-<span class="sd">	       1. Initialize main object.</span>
-<span class="sd">	    INPUT:</span>
-<span class="sd">	       1. Rsun (float) - Galactocentric R(kpc) of the Sun, default=8.277.</span>
-<span class="sd">	       2. print_ (Boolean) - to print or not to screen.	</span>
-<span class="sd">		&quot;&quot;&quot;</span>
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Rsun</span><span class="o">=</span><span class="mf">8.277</span><span class="p">,</span><span class="n">print_</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>  		
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;			</span>
+<span class="sd">		   Initialize main object.</span>
+<span class="sd">		</span>
+<span class="sd">		   :param Rsun: Optional - Galactocentric R(kpc) of the Sun, default=8.277.	</span>
+<span class="sd">		   :type Rsun: float </span>
+<span class="sd">		   :param print\_: Optional - if set to False does not print to screen.</span>
+<span class="sd">		   :type print\_: Boolean </span>
+<span class="sd">		&quot;&quot;&quot;</span>		
 		 		   		 	
 		<span class="bp">self</span><span class="o">.</span><span class="n">root_</span> <span class="o">=</span> <span class="n">root_</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">dataloc</span> <span class="o">=</span> <span class="n">dataloc</span>        
@@ -907,10 +919,9 @@
 <div class="viewcode-block" id="main_.listmodels">
 <a class="viewcode-back" href="../../api.html#SpiralMap.models_.main_.listmodels">[docs]</a>
 	<span class="k">def</span> <span class="nf">listmodels</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-<span class="w">		</span><span class="sd">&quot;&quot;&quot;	</span>
-<span class="sd">		PURPOSE:</span>
-<span class="sd">			1. defines list of available models/maps</span>
-<span class="sd">			2. constructs dictionaries to initialise individual model classes</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;			</span>
+<span class="sd">		   	Defines list of available models/maps</span>
+<span class="sd">		   	Constructs dictionaries to initialise individual model classes</span>
 <span class="sd">		&quot;&quot;&quot;</span>	
 		   		
 		<span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Taylor_Cordes_1992&#39;</span><span class="p">,</span><span class="s1">&#39;Drimmel_NIR_2000&#39;</span><span class="p">,</span>
@@ -927,22 +938,20 @@
 							 
 		<span class="bp">self</span><span class="o">.</span><span class="n">models_desc</span> <span class="o">=</span> 	<span class="p">[</span><span class="s1">&#39;HII&#39;</span><span class="p">,</span><span class="s1">&#39;NIR emission&#39;</span><span class="p">,</span>
 					   <span class="s1">&#39;HI&#39;</span><span class="p">,</span><span class="s1">&#39;HII/GMC/Masers&#39;</span><span class="p">,</span><span class="s1">&#39;MASER parallax&#39;</span><span class="p">,</span>
-					   <span class="s1">&#39;Upper main sequence (map)&#39;</span><span class="p">,</span><span class="s1">&#39;OB stars (map)&#39;</span><span class="p">,</span><span class="s1">&#39;Cepheids&#39;</span><span class="p">]</span>  			 </div>
+					   <span class="s1">&#39;Upper main sequence (map)&#39;</span><span class="p">,</span><span class="s1">&#39;OB stars (map)&#39;</span><span class="p">,</span><span class="s1">&#39;Cepheids&#39;</span><span class="p">]</span>  			 							 </div>
 
-							 
 <div class="viewcode-block" id="main_.getinfo">
 <a class="viewcode-back" href="../../api.html#SpiralMap.models_.main_.getinfo">[docs]</a>
 	<span class="k">def</span> <span class="nf">getinfo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">model</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">print_</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>	
-<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">	    PURPOSE:</span>
-<span class="sd">	       1. prints (model list, tracers)</span>
-<span class="sd">	       2. default plot attributes are defined here. </span>
-<span class="sd">	    INPUT:</span>
-<span class="sd">			1. model (string)- &#39;&#39; by default so prints lists all models.</span>
-<span class="sd">			   otherwise provide a model (ex: Drimmel_Ceph_2024) to list</span>
-<span class="sd">			   out all arms and default colours.			          </span>
-<span class="sd">			2. print_ (Boolean) - if set to False does not print to screen.	                         </span>
-<span class="sd">		&quot;&quot;&quot;</span>	
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;			</span>
+<span class="sd">		   prints (model list, tracers) &amp; default plot attributes are defined here.</span>
+<span class="sd">		</span>
+<span class="sd">		   :param model: Optional - &#39;&#39; by default so lists all models. otherwise provide a model (ex: Drimmel_Ceph_2024) to list out all arms and default colours.	</span>
+<span class="sd">		   :type model: String </span>
+<span class="sd">		   :param print\_: Optional - if set to False does not print to screen.</span>
+<span class="sd">		   :type print\_: Boolean </span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		
 		<span class="k">if</span> <span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>		
 			<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;try self.getinfo(model) for more details&#39;</span><span class="p">)</span>		
 			<span class="n">dfmodlist</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Available models &amp; maps:&#39;</span><span class="p">])</span>			
@@ -979,29 +988,14 @@
 								<span class="s1">&#39;polargrid&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span>    
 								<span class="s1">&#39;dataloc&#39;</span><span class="p">:</span><span class="n">dataloc</span><span class="p">}</span>    </div>
 
-<div class="viewcode-block" id="main_.add2plot">
-<a class="viewcode-back" href="../../api.html#SpiralMap.models_.main_.add2plot">[docs]</a>
-	<span class="k">def</span> <span class="nf">add2plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">plotattrs</span><span class="p">):</span>
-<span class="w">		</span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">		PURPOSE:		</span>
-<span class="sd">			1. overplots positions of the Galactic center and the Sun</span>
-<span class="sd">		&#39;&#39;&#39;</span>
-			
+	<span class="k">def</span> <span class="nf">add2plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">plotattrs</span><span class="p">):</span>			
 		<span class="k">if</span> <span class="n">plotattrs</span><span class="p">[</span><span class="s1">&#39;coordsys&#39;</span><span class="p">]</span> <span class="o">==</span><span class="s1">&#39;HC&#39;</span><span class="p">:</span>								
 			<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\odot$&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="n">plotattrs</span><span class="p">[</span><span class="s1">&#39;markersize&#39;</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
 			<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">xsun</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="n">plotattrs</span><span class="p">[</span><span class="s1">&#39;markersize&#39;</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>		
 		<span class="k">if</span> <span class="n">plotattrs</span><span class="p">[</span><span class="s1">&#39;coordsys&#39;</span><span class="p">]</span> <span class="o">==</span><span class="s1">&#39;GC&#39;</span><span class="p">:</span>										
 			<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="n">plotattrs</span><span class="p">[</span><span class="s1">&#39;markersize&#39;</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
-			<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xsun</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\odot$&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="n">plotattrs</span><span class="p">[</span><span class="s1">&#39;markersize&#39;</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="main_.xyplot">
-<a class="viewcode-back" href="../../api.html#SpiralMap.models_.main_.xyplot">[docs]</a>
-	<span class="k">def</span> <span class="nf">xyplot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">spimod</span><span class="p">,</span><span class="n">plotattrs_</span><span class="p">):</span>		
-<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">		PURPOSE:		</span>
-<span class="sd">			1. handles cartesian frame plots</span>
-<span class="sd">		&quot;&quot;&quot;</span>
-				
+			<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xsun</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\odot$&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="n">plotattrs</span><span class="p">[</span><span class="s1">&#39;markersize&#39;</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+	<span class="k">def</span> <span class="nf">xyplot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">spimod</span><span class="p">,</span><span class="n">plotattrs_</span><span class="p">):</span>						
 		<span class="k">if</span> <span class="n">plotattrs_</span><span class="p">[</span><span class="s1">&#39;plot&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">plotattrs_</span><span class="p">[</span><span class="s1">&#39;polarproj&#39;</span><span class="p">]</span><span class="o">==</span><span class="kc">False</span> <span class="p">:</span>							
 			<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">spimod</span><span class="o">.</span><span class="n">dout</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="o">+</span><span class="n">plotattrs_</span><span class="p">[</span><span class="s1">&#39;coordsys&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()],</span>
 			         <span class="n">spimod</span><span class="o">.</span><span class="n">dout</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="o">+</span><span class="n">plotattrs_</span><span class="p">[</span><span class="s1">&#39;coordsys&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()],</span>
@@ -1025,24 +1019,23 @@
 			<span class="bp">self</span><span class="o">.</span><span class="n">ymin</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ymax</span> <span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span><span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>			
 			
 			<span class="k">if</span> <span class="n">plotattrs_</span><span class="p">[</span><span class="s1">&#39;markSunGC&#39;</span><span class="p">]:</span>
-				<span class="bp">self</span><span class="o">.</span><span class="n">add2plot</span><span class="p">(</span><span class="n">plotattrs_</span><span class="p">)</span>	</div>
-
+				<span class="bp">self</span><span class="o">.</span><span class="n">add2plot</span><span class="p">(</span><span class="n">plotattrs_</span><span class="p">)</span>	
 <div class="viewcode-block" id="main_.readout">
 <a class="viewcode-back" href="../../api.html#SpiralMap.models_.main_.readout">[docs]</a>
 	<span class="k">def</span> <span class="nf">readout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">plotattrs</span><span class="o">=</span><span class="p">{},</span><span class="n">model</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">arm</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">print_</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>	
-<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">		PURPOSE:		</span>
-<span class="sd">			1. reads out individual models/ makes plots etc.</span>
-<span class="sd">		INPUT:</span>
-<span class="sd">			1. plotattrs (dict)- if not provided, uses default plot attributes.			   		          </span>
-<span class="sd">			2. model (String) 	 			</span>
-<span class="sd">			3. arm (String) - by default reads all arms	 			</span>
-<span class="sd">			4. print_ (Boolean) - if set to False does not print to screen.	 			</span>
-<span class="sd">		Raises:</span>
-<span class="sd">			RuntimeError - if no model is provided</span>
-<span class="sd">			</span>
-<span class="sd">		&quot;&quot;&quot;</span>
-						
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;			</span>
+<span class="sd">		   reads out individual models/ makes plots etc.</span>
+<span class="sd">		</span>
+<span class="sd">		   :param plotattrs: Optional - if not provided, uses default plot attributes.</span>
+<span class="sd">		   :type plotattrs: dict </span>
+<span class="sd">		   :param model: (required otherwise raises exception)</span>
+<span class="sd">		   :type model: String </span>
+<span class="sd">		   :param arm:  Optional - (default = &#39;&#39; so reads all arms)</span>
+<span class="sd">		   :type arm:  String</span>
+<span class="sd">		   :param print\_: Optional - if set to False does not print to screen.</span>
+<span class="sd">		   :type print\_: Boolean </span>
+<span class="sd">		   :raise RuntimeError: if no model is provided.</span>
+<span class="sd">		&quot;&quot;&quot;</span>						
 		<span class="k">if</span> <span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
 			 <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;model = blank | no model provided </span><span class="se">\n</span><span class="s1"> try self.getino() for list of available models&#39;</span><span class="p">)</span>			 
 			
