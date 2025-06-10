@@ -1,2 +1,2 @@
 import importlib.metadata
-# __version__=importlib.metadata.version('SpiralMap')
+__version__=importlib.metadata.version('SpiralMap')
