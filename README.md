@@ -1,7 +1,7 @@
 # SpiralMap 
 A Python library of the Milky Way's spiral arms. 
 
-[![pypi status](https://img.shields.io/pypi/v/gaiaunlimited.svg)](https://test.pypi.org/project/SpiralMap/)
+[![pypi status](https://img.shields.io/pypi/v/gaiaunlimited.svg)](https://pypi.org/project/SpiralMap)
 
 The package can be used to extract and/or plot the 2D trace of the major spiral arm models & maps in literature. The current release includes 8 independent models and we are open to requests for including other spiral arm models. 
 
@@ -28,5 +28,6 @@ Acknowledging ``SpiralMap``
 ---------------------------------------
 If you make use of our package, please cite the accompanying JOSS paper (link). 
 
-Additionally, please also cite the individual spiral model used. To facilitate this, we provide a BibTex file with the relevant citations in 'datafiles/spiral.bib'.
+Additionally, please also cite the individual spiral model used. To facilitate this, we provide a BibTex file with the relevant citations in 'datafiles/spiral.bib' (here on GitHub),
+or alternatively these are also available on [Read the docs](https://spiralmap.readthedocs.io/en/latest/#api-docs).
 
