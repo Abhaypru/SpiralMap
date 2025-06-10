@@ -61,10 +61,34 @@
 <li class="toctree-l3"><a class="reference internal" href="#SpiralMap.models_.main_.readout"><code class="docutils literal notranslate"><span class="pre">main_.readout()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#SpiralMap.models_.reid_spiral"><code class="docutils literal notranslate"><span class="pre">reid_spiral</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#SpiralMap.models_.reid_spiral.arms"><code class="docutils literal notranslate"><span class="pre">reid_spiral.arms</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#SpiralMap.models_.reid_spiral.getarmlist"><code class="docutils literal notranslate"><span class="pre">reid_spiral.getarmlist()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#SpiralMap.models_.reid_spiral.getparams"><code class="docutils literal notranslate"><span class="pre">reid_spiral.getparams()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#SpiralMap.models_.reid_spiral.model_"><code class="docutils literal notranslate"><span class="pre">reid_spiral.model_()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#SpiralMap.models_.reid_spiral.output_"><code class="docutils literal notranslate"><span class="pre">reid_spiral.output_()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#SpiralMap.models_.spiral_drimmel_nir"><code class="docutils literal notranslate"><span class="pre">spiral_drimmel_nir</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#SpiralMap.models_.spiral_drimmel_nir.arms"><code class="docutils literal notranslate"><span class="pre">spiral_drimmel_nir.arms</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#SpiralMap.models_.spiral_drimmel_nir.armcolour"><code class="docutils literal notranslate"><span class="pre">spiral_drimmel_nir.armcolour</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#SpiralMap.models_.spiral_drimmel_nir.getarmlist"><code class="docutils literal notranslate"><span class="pre">spiral_drimmel_nir.getarmlist()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#SpiralMap.models_.spiral_drimmel_nir.getdata"><code class="docutils literal notranslate"><span class="pre">spiral_drimmel_nir.getdata()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#SpiralMap.models_.spiral_drimmel_nir.output_"><code class="docutils literal notranslate"><span class="pre">spiral_drimmel_nir.output_()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#SpiralMap.models_.spiral_houhan"><code class="docutils literal notranslate"><span class="pre">spiral_houhan</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#SpiralMap.models_.spiral_houhan.getarmlist"><code class="docutils literal notranslate"><span class="pre">spiral_houhan.getarmlist()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#SpiralMap.models_.spiral_houhan.getparams"><code class="docutils literal notranslate"><span class="pre">spiral_houhan.getparams()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#SpiralMap.models_.spiral_houhan.output_"><code class="docutils literal notranslate"><span class="pre">spiral_houhan.output_()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#SpiralMap.models_.spiral_houhan.polynomial_log_spiral"><code class="docutils literal notranslate"><span class="pre">spiral_houhan.polynomial_log_spiral()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#SpiralMap.models_.spiral_levine"><code class="docutils literal notranslate"><span class="pre">spiral_levine</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#SpiralMap.models_.spiral_levine.getarmlist"><code class="docutils literal notranslate"><span class="pre">spiral_levine.getarmlist()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#SpiralMap.models_.spiral_levine.getparams"><code class="docutils literal notranslate"><span class="pre">spiral_levine.getparams()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#SpiralMap.models_.spiral_levine.model_"><code class="docutils literal notranslate"><span class="pre">spiral_levine.model_()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#SpiralMap.models_.spiral_levine.output_"><code class="docutils literal notranslate"><span class="pre">spiral_levine.output_()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -147,12 +171,10 @@ self.params[‘Arm’][‘theta_deg’] -&gt; Anchor points in galactic longitud
 <dd><p>Get arm coordinates in structured format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>arm</strong> (<em>str</em>) – Arm identifier (e.g., ‘Arm1’)</p>
+<dd class="field-odd"><p><strong>arm</strong> (<em>String</em>) – Arm identifier (e.g., ‘Arm1’)</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Contains coordinate arrays under keys:
-- ‘xhc’, ‘yhc’ (heliocentric)
-- ‘xgc’, ‘ygc’ (galactocentric)</p>
+<dd class="field-even"><p>self.dout = {‘xhc’:xhc,’yhc’:yhc,’xgc’:xgc,’ygc’:ygc}</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>dict</p>
@@ -210,6 +232,192 @@ Constructs dictionaries to initialise individual model classes</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="SpiralMap.models_.reid_spiral">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">SpiralMap.models_.</span></span><span class="sig-name descname"><span class="pre">reid_spiral</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kcor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SpiralMap/models_.html#reid_spiral"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.reid_spiral" title="Link to this definition"></a></dt>
+<dd><p>Reid et al. (2019) kinked logarithmic spiral arm model</p>
+<p>Implements the Milky Way spiral structure model from:
+“Trigonometric Parallaxes of High Mass Star Forming Regions: The Structure and Kinematics of the Milky Way”
+using kinked logarithmic spirals with varying pitch angles. Models 7 major arm features.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="SpiralMap.models_.reid_spiral.arms">
+<span class="sig-name descname"><span class="pre">arms</span></span><a class="headerlink" href="#SpiralMap.models_.reid_spiral.arms" title="Link to this definition"></a></dt>
+<dd><p>Array of arm identifiers [‘3-kpc’, ‘Norma’, ‘Sct-Cen’, ‘Sgr-Car’, ‘Local’, ‘Perseus’, ‘Outer’]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SpiralMap.models_.reid_spiral.getarmlist">
+<span class="sig-name descname"><span class="pre">getarmlist</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/SpiralMap/models_.html#reid_spiral.getarmlist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.reid_spiral.getarmlist" title="Link to this definition"></a></dt>
+<dd><p>Set arm names and colours</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SpiralMap.models_.reid_spiral.getparams">
+<span class="sig-name descname"><span class="pre">getparams</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SpiralMap/models_.html#reid_spiral.getparams"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.reid_spiral.getparams" title="Link to this definition"></a></dt>
+<dd><p>Load spiral parameters for specified arm from Reid et al. (2019) Table 4.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>arm</strong> (<em>str</em>) – Valid arm identifier from class arms list</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><p>Dictionary containing:
+- beta_kink: Kink angle position in degrees</p>
+<ul class="simple">
+<li><p>pitch_low: Pitch angle before kink (degrees)</p></li>
+<li><p>pitch_high: Pitch angle after kink (degrees)</p></li>
+<li><p>R_kink: Galactocentric radius at kink (kpc)</p></li>
+<li><p>beta_min/max: Angular range in degrees</p></li>
+<li><p>width: Arm width parameter (kpc)</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Applies correction to R_kink if kcor=True during initialization</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SpiralMap.models_.reid_spiral.model_">
+<span class="sig-name descname"><span class="pre">model_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SpiralMap/models_.html#reid_spiral.model_"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.reid_spiral.model_" title="Link to this definition"></a></dt>
+<dd><p>Generate kinked logarithmic spiral coordinates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>params</strong> (<em>dict</em>) – Spiral parameters dictionary from getparams()</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><p>(x, y, x1, y1, x2, y2) coordinate arrays where:</p>
+<ul class="simple">
+<li><p>x,y: Arm center coordinates (GC)</p></li>
+<li><p>x1,y1: Inner arm boundary</p></li>
+<li><p>x2,y2: Outer arm boundary</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Implements modified logarithmic spiral equation with pitch angle kink:
+R(β) = R_kink * exp[-(β - β_kink) * tan(pitch)]
+where pitch changes at β_kink</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SpiralMap.models_.reid_spiral.output_">
+<span class="sig-name descname"><span class="pre">output_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SpiralMap/models_.html#reid_spiral.output_"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.reid_spiral.output_" title="Link to this definition"></a></dt>
+<dd><p>Get arm coordinates in structured format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>arm</strong> (<em>String</em>) – Arm identifier (e.g., ‘Norma’)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>self.dout = {‘xhc’:xhc,’yhc’:yhc,’xgc’:xgc,’ygc’:ygc}</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="SpiralMap.models_.spiral_drimmel_nir">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">SpiralMap.models_.</span></span><span class="sig-name descname"><span class="pre">spiral_drimmel_nir</span></span><a class="reference internal" href="_modules/SpiralMap/models_.html#spiral_drimmel_nir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.spiral_drimmel_nir" title="Link to this definition"></a></dt>
+<dd><p>Drimmel (2000) Near-Infrared (NIR) spiral arm model</p>
+<p>Implements the 2-arm spiral structure model from:
+Drimmel, R. (2000) “Evidence for a two-armed spiral in the Milky Way”
+using COBE/DIRBE near-infrared data. Includes main arms and phase-shifted interarms.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="SpiralMap.models_.spiral_drimmel_nir.arms">
+<span class="sig-name descname"><span class="pre">arms</span></span><a class="headerlink" href="#SpiralMap.models_.spiral_drimmel_nir.arms" title="Link to this definition"></a></dt>
+<dd><p>Array of arm identifiers [‘1_arm’, ‘2_arm’, ‘3_interarm’, ‘4_interarm’]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="SpiralMap.models_.spiral_drimmel_nir.armcolour">
+<span class="sig-name descname"><span class="pre">armcolour</span></span><a class="headerlink" href="#SpiralMap.models_.spiral_drimmel_nir.armcolour" title="Link to this definition"></a></dt>
+<dd><p>Color mapping for visualization:
+- Main arms: black
+- Interarms: red</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SpiralMap.models_.spiral_drimmel_nir.getarmlist">
+<span class="sig-name descname"><span class="pre">getarmlist</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/SpiralMap/models_.html#spiral_drimmel_nir.getarmlist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.spiral_drimmel_nir.getarmlist" title="Link to this definition"></a></dt>
+<dd><p>Set arm names and colours</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SpiralMap.models_.spiral_drimmel_nir.getdata">
+<span class="sig-name descname"><span class="pre">getdata</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/SpiralMap/models_.html#spiral_drimmel_nir.getdata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.spiral_drimmel_nir.getdata" title="Link to this definition"></a></dt>
+<dd><p>Load and preprocess spiral arm data from FITS file.</p>
+<ol class="arabic simple">
+<li><p>Loads base FITS data</p></li>
+<li><p>Scales coordinates using solar position</p></li>
+<li><p>Adds phase-shifted interarm components</p></li>
+<li><p>Calculates galactocentric radii</p></li>
+</ol>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>Original data scaled by solar galactocentric distance</p></li>
+<li><p>Phase-shifted arms loaded from separate numpy files</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SpiralMap.models_.spiral_drimmel_nir.output_">
+<span class="sig-name descname"><span class="pre">output_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SpiralMap/models_.html#spiral_drimmel_nir.output_"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.spiral_drimmel_nir.output_" title="Link to this definition"></a></dt>
+<dd><p>Retrieve spiral arm coordinates in specified format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>arm</strong> (<em>str</em>) – Arm identifier or selection mode:
+- ‘1’, ‘2’ for main arms
+- ‘3’, ‘4’ for interarms
+- ‘all’ for all components
+- ‘main’ for just main arms</p></li>
+<li><p><strong>typ</strong> (<em>{'cartesian'</em><em>, </em><em>'polar'</em><em>, </em><em>'polargrid'}</em><em>, </em><em>default 'cartesian'</em>) – Output format:
+- cartesian: Returns x,y coordinates
+- polar/polargrid: Generates polar coordinate plots</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>For cartesian type contains:
+- xhc, yhc: Heliocentric coordinates (kpc)
+- xgc, ygc: Galactocentric coordinates (kpc)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Polar modes create matplotlib plots directly using:
+- phi1: Angle from negative x-axis (GC frame)
+- phi4: Galactic longitude (0-360 degrees)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="SpiralMap.models_.spiral_houhan">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">SpiralMap.models_.</span></span><span class="sig-name descname"><span class="pre">spiral_houhan</span></span><a class="reference internal" href="_modules/SpiralMap/models_.html#spiral_houhan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.spiral_houhan" title="Link to this definition"></a></dt>
 <dd><p>Hou &amp; Han (2014) polynomial-logarithmic spiral arm model</p>
@@ -219,9 +427,7 @@ using polynomial-logarithmic spiral functions. Provides 6 major arm segments.</p
 <dl class="py method">
 <dt class="sig sig-object py" id="SpiralMap.models_.spiral_houhan.getarmlist">
 <span class="sig-name descname"><span class="pre">getarmlist</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/SpiralMap/models_.html#spiral_houhan.getarmlist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.spiral_houhan.getarmlist" title="Link to this definition"></a></dt>
-<dd><p>Initialize arm names and visualization colors.
-Sets:
-- arms: List of 6 spiral arm segments</p>
+<dd><p>Set arm names and colours</p>
 </dd></dl>
 
 <dl class="py method">
@@ -230,21 +436,33 @@ Sets:
 <dd><p>Load spiral parameters from Hou &amp; Han (2014) Table 4.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Nested dictionary containing for each arm:
-- a, b, c, d: Polynomial coefficients
-- θ_start: Start angle in degrees (Galactic longitude)
-- θ_end: End angle in degrees</p>
+<dd class="field-odd"><p><p>params ( Nested dictionary containing for each arm).</p>
+<p>a, b, c, d: Polynomial coefficients.</p>
+<p>θ_start: Start angle in degrees (Galactic longitude).</p>
+<p>θ_end: End angle in degrees.</p>
+</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>dict</p>
 </dd>
 </dl>
-<p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;Scutum-Centaurus&#39;</span><span class="p">]</span>
-<span class="go">{&#39;a&#39;: 5.8002, &#39;b&#39;: -1.8188, &#39;c&#39;: 0.2352, &#39;d&#39;: -0.008999,</span>
-<span class="go"> &#39;θ_start&#39;: 275, &#39;θ_end&#39;: 620}</span>
-</pre></div>
-</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SpiralMap.models_.spiral_houhan.output_">
+<span class="sig-name descname"><span class="pre">output_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SpiralMap/models_.html#spiral_houhan.output_"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.spiral_houhan.output_" title="Link to this definition"></a></dt>
+<dd><p>Get arm coordinates in structured format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>arm</strong> (<em>String</em>) – Arm identifier (e.g., ‘Arm1’)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>self.dout = {‘xhc’:xhc,’yhc’:yhc,’xgc’:xgc,’ygc’:ygc}</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -272,6 +490,87 @@ Sets:
 <p>Implements equation:
 R(θ) = exp(a + bθ_rad + cθ_rad² + dθ_rad³)
 where θ_rad = np.radians(θ)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="SpiralMap.models_.spiral_levine">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">SpiralMap.models_.</span></span><span class="sig-name descname"><span class="pre">spiral_levine</span></span><a class="reference internal" href="_modules/SpiralMap/models_.html#spiral_levine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.spiral_levine" title="Link to this definition"></a></dt>
+<dd><p>Levine et al (2006) logarithmic spiral arm model for the Milky Way.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="SpiralMap.models_.spiral_levine.getarmlist">
+<span class="sig-name descname"><span class="pre">getarmlist</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/SpiralMap/models_.html#spiral_levine.getarmlist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.spiral_levine.getarmlist" title="Link to this definition"></a></dt>
+<dd><p>Set arm names and colours</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SpiralMap.models_.spiral_levine.getparams">
+<span class="sig-name descname"><span class="pre">getparams</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/SpiralMap/models_.html#spiral_levine.getparams"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.spiral_levine.getparams" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><p>self.params[‘Arm1’,’Arm2’,’Arm3’,’Arm4’], nested dictionary such that,</p>
+<p>self.params[‘Arm’][‘pitch’] -&gt; pitch angle</p>
+<p>self.params[‘Arm’][‘phi0’] -&gt; Solar crossing angle)</p>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SpiralMap.models_.spiral_levine.model_">
+<span class="sig-name descname"><span class="pre">model_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arm_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_points</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SpiralMap/models_.html#spiral_levine.model_"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.spiral_levine.model_" title="Link to this definition"></a></dt>
+<dd><p>Generate logarithmic spiral coordinates for specified arm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>arm_name</strong> (<em>str</em>) – Name of arm to model (must be in [‘Arm1’, ‘Arm2’, ‘Arm3’, ‘Arm4’])</p></li>
+<li><p><strong>R_max</strong> (<em>float</em><em>, </em><em>optional</em>) – Maximum galactocentric radius to model (kpc), default=25</p></li>
+<li><p><strong>n_points</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of points to sample along the spiral, default=1000</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(x_hc, y_hc, x_gc, y_gc) coordinate arrays where:
+- x_hc, y_hc: Heliocentric coordinates (kpc)
+- x_gc, y_gc: Galactocentric coordinates (kpc)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If invalid arm_name is provided</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<dl class="simple">
+<dt>Implements the logarithmic spiral equation:</dt><dd><p>R(φ) = R₀ * exp[(φ - φ₀) * tan(i)]</p>
+</dd>
+</dl>
+<p>where:
+- R₀ is solar galactocentric distance
+- i is pitch angle
+- φ₀ is solar crossing angle
+- φ is the angular coordinate</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SpiralMap.models_.spiral_levine.output_">
+<span class="sig-name descname"><span class="pre">output_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SpiralMap/models_.html#spiral_levine.output_"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.spiral_levine.output_" title="Link to this definition"></a></dt>
+<dd><p>Get arm coordinates in structured format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>arm</strong> (<em>String</em>) – Arm identifier (e.g., ‘Arm1’)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>self.dout = {‘xhc’:xhc,’yhc’:yhc,’xgc’:xgc,’ygc’:ygc}</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>

@@ -91,15 +91,6 @@
 <span class="c1">#--------------------------------------------       </span>
 
 
-<span class="c1"># # &quot;&quot;&quot;			</span>
-   <span class="c1"># # Initialize main object.</span>
-
-   <span class="c1"># # :param Rsun: Optional - Galactocentric R(kpc) of the Sun, default=8.277.	</span>
-   <span class="c1"># # :type Rsun: float </span>
-   <span class="c1"># # :param print\_: Optional - if set to False does not print to screen.</span>
-   <span class="c1"># # :type print\_: Boolean </span>
-<span class="c1"># # &quot;&quot;&quot;		</span>
-
 <span class="c1">### TO do:</span>
 <span class="c1">#1 consistent colours for similar arms</span>
 <span class="c1">####################################</span>
@@ -241,8 +232,7 @@
 
 <div class="viewcode-block" id="TaylorCordesSpiral.model_">
 <a class="viewcode-back" href="../../api.html#SpiralMap.models_.TaylorCordesSpiral.model_">[docs]</a>
-	<span class="k">def</span> <span class="nf">model_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arm_name</span><span class="p">):</span>			
-<span class="w">		</span>
+	<span class="k">def</span> <span class="nf">model_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arm_name</span><span class="p">):</span>					
 <span class="w">		</span><span class="sd">&quot;&quot;&quot;			</span>
 <span class="sd">		   Generate arm coordinates using cubic spline interpolation.</span>
 <span class="sd">		</span>
@@ -275,26 +265,20 @@
 		<span class="c1"># Convert to Heliocentric coordinates</span>
 		<span class="n">x_hc</span> <span class="o">=</span> <span class="n">x_gc</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">R0</span>  <span class="c1"># Sun at (-R0, 0) in GC</span>
 		
-		<span class="k">return</span> <span class="n">x_hc</span><span class="p">,</span> <span class="n">y_gc</span><span class="p">,</span> <span class="n">x_gc</span><span class="p">,</span> <span class="n">y_gc</span>	</div>
+		<span class="k">return</span> <span class="n">x_hc</span><span class="p">,</span> <span class="n">y_gc</span><span class="p">,</span> <span class="n">x_gc</span><span class="p">,</span> <span class="n">y_gc</span>		</div>
 
-	
 <div class="viewcode-block" id="TaylorCordesSpiral.output_">
 <a class="viewcode-back" href="../../api.html#SpiralMap.models_.TaylorCordesSpiral.output_">[docs]</a>
 	<span class="k">def</span> <span class="nf">output_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">arm</span><span class="p">):</span>			
-<span class="w">		</span><span class="sd">&quot;&quot;&quot;Get arm coordinates in structured format.</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;			</span>
+<span class="sd">		   Get arm coordinates in structured format.</span>
 <span class="sd">		</span>
-<span class="sd">		Parameters</span>
-<span class="sd">		----------</span>
-<span class="sd">		arm : str</span>
-<span class="sd">			Arm identifier (e.g., &#39;Arm1&#39;)		</span>
-<span class="sd">		Returns</span>
-<span class="sd">		-------</span>
-<span class="sd">		dict</span>
-<span class="sd">			Contains coordinate arrays under keys:</span>
-<span class="sd">			- &#39;xhc&#39;, &#39;yhc&#39; (heliocentric)</span>
-<span class="sd">			- &#39;xgc&#39;, &#39;ygc&#39; (galactocentric)		</span>
-
-<span class="sd">		&quot;&quot;&quot;</span>		
+<span class="sd">		   :param arm: Arm identifier (e.g., &#39;Arm1&#39;)		</span>
+<span class="sd">		   :type arm: String </span>
+<span class="sd">		   :return: self.dout = {&#39;xhc&#39;:xhc,&#39;yhc&#39;:yhc,&#39;xgc&#39;:xgc,&#39;ygc&#39;:ygc}</span>
+<span class="sd">		   :rtype: dict </span>
+<span class="sd">		&quot;&quot;&quot;</span>				
+		
 		<span class="n">xsun</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xsun</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">R0</span> <span class="o">=</span> <span class="o">-</span><span class="n">xsun</span>  <span class="c1"># Solar Galactocentric radius (kpc)					</span>
 		<span class="n">xhc</span><span class="p">,</span><span class="n">yhc</span><span class="p">,</span><span class="n">xgc</span><span class="p">,</span><span class="n">ygc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_</span><span class="p">(</span><span class="n">arm</span><span class="p">);</span>					
@@ -311,21 +295,15 @@
 <span class="sd">	Implements the Milky Way spiral structure model from:</span>
 <span class="sd">	&quot;The spiral structure of the Milky Way from classical Cepheids&quot; (Hou &amp; Han 2014)</span>
 <span class="sd">	using polynomial-logarithmic spiral functions. Provides 6 major arm segments.	</span>
-<span class="sd">	&quot;&quot;&quot;</span>
-	
+<span class="sd">	&quot;&quot;&quot;</span>	
 	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>			
-		<span class="bp">self</span><span class="o">.</span><span class="n">getarmlist</span><span class="p">()</span>
-	
+		<span class="bp">self</span><span class="o">.</span><span class="n">getarmlist</span><span class="p">()</span>	
 <div class="viewcode-block" id="spiral_houhan.getarmlist">
 <a class="viewcode-back" href="../../api.html#SpiralMap.models_.spiral_houhan.getarmlist">[docs]</a>
 	<span class="k">def</span> <span class="nf">getarmlist</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">		</span><span class="sd">&quot;&quot;&quot;Initialize arm names and visualization colors.		</span>
-<span class="sd">		Sets:</span>
-<span class="sd">		- arms: List of 6 spiral arm segments</span>
-<span class="sd">		&quot;&quot;&quot;</span>	
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;Set arm names and colours&quot;&quot;&quot;</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">arms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;Norma&#39;</span><span class="p">,</span><span class="s1">&#39;Scutum-Centaurus&#39;</span><span class="p">,</span><span class="s1">&#39;Sagittarius-Carina&#39;</span><span class="p">,</span><span class="s1">&#39;Perseus&#39;</span><span class="p">,</span><span class="s1">&#39;Local&#39;</span><span class="p">,</span><span class="s1">&#39;Outer&#39;</span><span class="p">])</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">armcolour</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Norma&#39;</span><span class="p">:</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="s1">&#39;Scutum-Centaurus&#39;</span><span class="p">:</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="s1">&#39;Sagittarius-Carina&#39;</span><span class="p">:</span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="s1">&#39;Perseus&#39;</span><span class="p">:</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="s1">&#39;Local&#39;</span><span class="p">:</span><span class="s1">&#39;purple&#39;</span><span class="p">,</span><span class="s1">&#39;Outer&#39;</span><span class="p">:</span><span class="s1">&#39;gold&#39;</span><span class="p">}</span>
-
 		<span class="bp">self</span><span class="o">.</span><span class="n">armcolours</span><span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">armcolour</span><span class="p">[</span><span class="n">ky</span><span class="p">]</span>  <span class="k">for</span> <span class="n">ky</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">arms</span>  <span class="p">]</span>	</div>
 
 	<span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>		
@@ -335,24 +313,19 @@
 		
 <div class="viewcode-block" id="spiral_houhan.getparams">
 <a class="viewcode-back" href="../../api.html#SpiralMap.models_.spiral_houhan.getparams">[docs]</a>
-	<span class="k">def</span> <span class="nf">getparams</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>				
-<span class="w">		</span><span class="sd">&quot;&quot;&quot;Load spiral parameters from Hou &amp; Han (2014) Table 4.</span>
-<span class="sd">		</span>
-<span class="sd">		Returns</span>
-<span class="sd">		-------</span>
-<span class="sd">		dict</span>
-<span class="sd">			Nested dictionary containing for each arm:</span>
-<span class="sd">			- a, b, c, d: Polynomial coefficients</span>
-<span class="sd">			- θ_start: Start angle in degrees (Galactic longitude)</span>
-<span class="sd">			- θ_end: End angle in degrees</span>
-<span class="sd">			</span>
-<span class="sd">		Example</span>
-<span class="sd">		-------</span>
-<span class="sd">		&gt;&gt;&gt; params[&#39;Scutum-Centaurus&#39;]</span>
-<span class="sd">		{&#39;a&#39;: 5.8002, &#39;b&#39;: -1.8188, &#39;c&#39;: 0.2352, &#39;d&#39;: -0.008999,</span>
-<span class="sd">		 &#39;θ_start&#39;: 275, &#39;θ_end&#39;: 620}</span>
-<span class="sd">		&quot;&quot;&quot;</span>
-			
+	<span class="k">def</span> <span class="nf">getparams</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>						
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;			</span>
+<span class="sd">		   Load spiral parameters from Hou &amp; Han (2014) Table 4.</span>
+<span class="sd">		   </span>
+<span class="sd">		   :return: params ( Nested dictionary containing for each arm).</span>
+<span class="sd">		   </span>
+<span class="sd">	   				a, b, c, d: Polynomial coefficients.</span>
+<span class="sd">	   				</span>
+<span class="sd">					θ_start: Start angle in degrees (Galactic longitude).</span>
+<span class="sd">					</span>
+<span class="sd">					θ_end: End angle in degrees.		   		   </span>
+<span class="sd">		   :rtype: dict </span>
+<span class="sd">		&quot;&quot;&quot;</span>					
 		<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
 			<span class="s1">&#39;Norma&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mf">1.1668</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mf">0.1198</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mf">0.002557</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s1">&#39;θ_start&#39;</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span> <span class="s1">&#39;θ_end&#39;</span><span class="p">:</span> <span class="mi">250</span><span class="p">},</span>
 			<span class="s1">&#39;Scutum-Centaurus&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mf">5.8002</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.8188</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mf">0.2352</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.008999</span><span class="p">,</span> <span class="s1">&#39;θ_start&#39;</span><span class="p">:</span> <span class="mi">275</span><span class="p">,</span> <span class="s1">&#39;θ_end&#39;</span><span class="p">:</span> <span class="mi">620</span><span class="p">},</span>
@@ -365,8 +338,7 @@
 
 <div class="viewcode-block" id="spiral_houhan.polynomial_log_spiral">
 <a class="viewcode-back" href="../../api.html#SpiralMap.models_.spiral_houhan.polynomial_log_spiral">[docs]</a>
-	<span class="k">def</span> <span class="nf">polynomial_log_spiral</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">θ</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
-<span class="w">		</span>
+	<span class="k">def</span> <span class="nf">polynomial_log_spiral</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">θ</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>		
 <span class="w">		</span><span class="sd">&quot;&quot;&quot;Calculate radius using polynomial-logarithmic spiral equation.</span>
 <span class="sd">		</span>
 <span class="sd">		Parameters</span>
@@ -408,7 +380,18 @@
 	
 		<span class="k">return</span> <span class="n">x_hc</span><span class="p">,</span> <span class="n">y_gc</span><span class="p">,</span> <span class="n">x_gc</span><span class="p">,</span> <span class="n">y_gc</span>
 	
+<div class="viewcode-block" id="spiral_houhan.output_">
+<a class="viewcode-back" href="../../api.html#SpiralMap.models_.spiral_houhan.output_">[docs]</a>
 	<span class="k">def</span> <span class="nf">output_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arm</span><span class="p">):</span>			
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;			</span>
+<span class="sd">		   Get arm coordinates in structured format.</span>
+<span class="sd">		</span>
+<span class="sd">		   :param arm: Arm identifier (e.g., &#39;Arm1&#39;)		</span>
+<span class="sd">		   :type arm: String </span>
+<span class="sd">		   :return: self.dout = {&#39;xhc&#39;:xhc,&#39;yhc&#39;:yhc,&#39;xgc&#39;:xgc,&#39;ygc&#39;:ygc}</span>
+<span class="sd">		   :rtype: dict </span>
+<span class="sd">		&quot;&quot;&quot;</span>				
+		
 		<span class="n">xsun</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xsun</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">R0</span> <span class="o">=</span> <span class="o">-</span><span class="n">xsun</span>  <span class="c1"># Solar Galactocentric radius (kpc)	</span>
 		<span class="c1"># Generate spiral arm coordinates</span>
@@ -419,28 +402,29 @@
 			<span class="s1">&#39;xgc&#39;</span><span class="p">:</span> <span class="n">xgc</span><span class="p">,</span>
 			<span class="s1">&#39;ygc&#39;</span><span class="p">:</span> <span class="n">ygc</span>
 		<span class="p">}</span></div>
+</div>
 
 
 
-<span class="k">class</span> <span class="nc">spiral_levine</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>	
-	<span class="c1"># &quot;&quot;&quot;Levine et al. (2006) logarithmic spiral arm model for the Milky Way.</span>
-	
-	<span class="c1"># Implements a four-arm logarithmic spiral model based on:</span>
-	<span class="c1"># Levine, E. S., Blitz, L., &amp; Heiles, C. (2006). &quot;The Spiral Structure </span>
-	<span class="c1"># of the Outer Milky Way in Hydrogen&quot;. Astrophysical Journal.</span>
-	
-	<span class="c1"># The model provides both galactocentric (GC) and heliocentric (HC) coordinates</span>
-	<span class="c1"># for each spiral arm segment with fixed pitch angles.		</span>
-	<span class="c1"># &quot;&quot;&quot;</span>
-	
+<div class="viewcode-block" id="spiral_levine">
+<a class="viewcode-back" href="../../api.html#SpiralMap.models_.spiral_levine">[docs]</a>
+<span class="k">class</span> <span class="nc">spiral_levine</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>		
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;	</span>
+<span class="sd">	Levine et al (2006) logarithmic spiral arm model for the Milky Way.  				</span>
+<span class="sd">	&quot;&quot;&quot;</span>	
+
 	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>   
 		<span class="bp">self</span><span class="o">.</span><span class="n">getarmlist</span><span class="p">()</span>
 	
-	<span class="k">def</span> <span class="nf">getarmlist</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>				
+<div class="viewcode-block" id="spiral_levine.getarmlist">
+<a class="viewcode-back" href="../../api.html#SpiralMap.models_.spiral_levine.getarmlist">[docs]</a>
+	<span class="k">def</span> <span class="nf">getarmlist</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>	
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;Set arm names and colours&quot;&quot;&quot;</span>					
 		<span class="bp">self</span><span class="o">.</span><span class="n">arms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;Arm1&#39;</span><span class="p">,</span><span class="s1">&#39;Arm2&#39;</span><span class="p">,</span><span class="s1">&#39;Arm3&#39;</span><span class="p">,</span><span class="s1">&#39;Arm4&#39;</span><span class="p">])</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">armcolour</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Arm1&#39;</span><span class="p">:</span><span class="s1">&#39;yellow&#39;</span><span class="p">,</span><span class="s1">&#39;Arm2&#39;</span><span class="p">:</span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="s1">&#39;Arm3&#39;</span><span class="p">:</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="s1">&#39;Arm4&#39;</span><span class="p">:</span><span class="s1">&#39;purple&#39;</span><span class="p">}</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">getparams</span><span class="p">()</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">armcolours</span><span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">armcolour</span><span class="p">[</span><span class="n">ky</span><span class="p">]</span>  <span class="k">for</span> <span class="n">ky</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">arms</span>  <span class="p">]</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">armcolours</span><span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">armcolour</span><span class="p">[</span><span class="n">ky</span><span class="p">]</span>  <span class="k">for</span> <span class="n">ky</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">arms</span>  <span class="p">]</span></div>
+
 		
 	<span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
@@ -448,15 +432,28 @@
 		<span class="n">dfmodlist</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>			
 		<span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">dfmodlist</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="s1">&#39;keys&#39;</span><span class="p">,</span> <span class="n">tablefmt</span> <span class="o">=</span> <span class="s1">&#39;psql&#39;</span><span class="p">))</span>			
 	
+<div class="viewcode-block" id="spiral_levine.getparams">
+<a class="viewcode-back" href="../../api.html#SpiralMap.models_.spiral_levine.getparams">[docs]</a>
 	<span class="k">def</span> <span class="nf">getparams</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">		</span><span class="sd">&#39;&#39;&#39; Pitch angle and Solar crossing angle &#39;&#39;&#39;</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;		</span>
+<span class="sd">	   :return: self.params[&#39;Arm1&#39;,&#39;Arm2&#39;,&#39;Arm3&#39;,&#39;Arm4&#39;], nested dictionary such that,</span>
+<span class="sd">	   				 				</span>
+<span class="sd">				self.params[&#39;Arm&#39;][&#39;pitch&#39;] -&gt; pitch angle</span>
+<span class="sd">				</span>
+<span class="sd">				self.params[&#39;Arm&#39;][&#39;phi0&#39;] -&gt; Solar crossing angle)</span>
+<span class="sd">	   :rtype: dict</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		
 		<span class="bp">self</span><span class="o">.</span><span class="n">arms_model</span> <span class="o">=</span> <span class="p">{</span>
 			<span class="s1">&#39;Arm1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;pitch&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span> <span class="s1">&#39;phi0&#39;</span><span class="p">:</span> <span class="mi">56</span><span class="p">},</span>   
 			<span class="s1">&#39;Arm2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;pitch&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span> <span class="s1">&#39;phi0&#39;</span><span class="p">:</span> <span class="mi">135</span><span class="p">},</span>
 			<span class="s1">&#39;Arm3&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;pitch&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="s1">&#39;phi0&#39;</span><span class="p">:</span> <span class="mi">189</span><span class="p">},</span>
 			<span class="s1">&#39;Arm4&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;pitch&#39;</span><span class="p">:</span> <span class="mi">21</span><span class="p">,</span> <span class="s1">&#39;phi0&#39;</span><span class="p">:</span> <span class="mi">234</span><span class="p">}</span>
-		<span class="p">}</span>
+		<span class="p">}</span></div>
+
 	 
+<div class="viewcode-block" id="spiral_levine.model_">
+<a class="viewcode-back" href="../../api.html#SpiralMap.models_.spiral_levine.model_">[docs]</a>
 	<span class="k">def</span> <span class="nf">model_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">arm_name</span><span class="p">,</span> <span class="n">R_max</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">n_points</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
 <span class="w">		</span>
 <span class="w">		</span><span class="sd">&quot;&quot;&quot;Generate logarithmic spiral coordinates for specified arm.</span>
@@ -513,9 +510,22 @@
 		<span class="c1"># Convert to Heliocentric coordinates</span>
 		<span class="n">x_hc</span> <span class="o">=</span> <span class="n">x_gc</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">R0</span>  
 	
-		<span class="k">return</span> <span class="n">x_hc</span><span class="p">,</span> <span class="n">y_gc</span><span class="p">,</span><span class="n">x_gc</span><span class="p">,</span> <span class="n">y_gc</span>
+		<span class="k">return</span> <span class="n">x_hc</span><span class="p">,</span> <span class="n">y_gc</span><span class="p">,</span><span class="n">x_gc</span><span class="p">,</span> <span class="n">y_gc</span></div>
+
 		
-	<span class="k">def</span> <span class="nf">output_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arm</span><span class="p">):</span>				
+<div class="viewcode-block" id="spiral_levine.output_">
+<a class="viewcode-back" href="../../api.html#SpiralMap.models_.spiral_levine.output_">[docs]</a>
+	<span class="k">def</span> <span class="nf">output_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arm</span><span class="p">):</span>		
+
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;			</span>
+<span class="sd">		   Get arm coordinates in structured format.</span>
+<span class="sd">		</span>
+<span class="sd">		   :param arm: Arm identifier (e.g., &#39;Arm1&#39;)		</span>
+<span class="sd">		   :type arm: String </span>
+<span class="sd">		   :return: self.dout = {&#39;xhc&#39;:xhc,&#39;yhc&#39;:yhc,&#39;xgc&#39;:xgc,&#39;ygc&#39;:ygc}</span>
+<span class="sd">		   :rtype: dict </span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+				
 		<span class="n">xsun</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xsun</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">R0</span> <span class="o">=</span> <span class="o">-</span><span class="n">xsun</span>  
 		<span class="n">xhc</span><span class="p">,</span> <span class="n">yhc</span><span class="p">,</span> <span class="n">xgc</span><span class="p">,</span> <span class="n">ygc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_</span><span class="p">(</span><span class="n">arm</span><span class="p">)</span>   
@@ -523,7 +533,9 @@
 			<span class="s1">&#39;xhc&#39;</span><span class="p">:</span> <span class="n">xhc</span><span class="p">,</span>
 			<span class="s1">&#39;yhc&#39;</span><span class="p">:</span> <span class="n">yhc</span><span class="p">,</span>
 			<span class="s1">&#39;xgc&#39;</span><span class="p">:</span> <span class="n">xgc</span><span class="p">,</span>
-			<span class="s1">&#39;ygc&#39;</span><span class="p">:</span> <span class="n">ygc</span><span class="p">}</span>
+			<span class="s1">&#39;ygc&#39;</span><span class="p">:</span> <span class="n">ygc</span><span class="p">}</span></div>
+</div>
+
 
 
 <span class="k">class</span> <span class="nc">spiral_drimmel_cepheids</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -533,6 +545,8 @@
 		<span class="bp">self</span><span class="o">.</span><span class="n">fname</span> <span class="o">=</span> <span class="s1">&#39;ArmAttributes_dyoungW1_bw025.pkl&#39;</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">getarmlist</span><span class="p">()</span>
 	<span class="k">def</span> <span class="nf">getarmlist</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+		
 		<span class="bp">self</span><span class="o">.</span><span class="n">spirals</span> <span class="o">=</span> <span class="n">pickleread</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">loc</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">fname</span><span class="p">)</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">arms</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spirals</span><span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">][</span><span class="s1">&#39;arm_attributes&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">armcolour</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Scutum&#39;</span><span class="p">:</span><span class="s1">&#39;C3&#39;</span><span class="p">,</span><span class="s1">&#39;Sag-Car&#39;</span><span class="p">:</span><span class="s1">&#39;C0&#39;</span><span class="p">,</span>
@@ -584,54 +598,55 @@
 		<span class="bp">self</span><span class="o">.</span><span class="n">dout</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;xhc&#39;</span><span class="p">:</span><span class="n">xhc</span><span class="p">,</span><span class="s1">&#39;yhc&#39;</span><span class="p">:</span><span class="n">yhc</span><span class="p">,</span><span class="s1">&#39;xgc&#39;</span><span class="p">:</span><span class="n">xgc</span><span class="p">,</span><span class="s1">&#39;ygc&#39;</span><span class="p">:</span><span class="n">ygc</span><span class="p">,</span><span class="s1">&#39;xhc_ex&#39;</span><span class="p">:</span><span class="n">xhc_ex</span><span class="p">,</span><span class="s1">&#39;yhc_ex&#39;</span><span class="p">:</span><span class="n">yhc_ex</span><span class="p">,</span><span class="s1">&#39;xgc_ex&#39;</span><span class="p">:</span><span class="n">xgc_ex</span><span class="p">,</span><span class="s1">&#39;ygc_ex&#39;</span><span class="p">:</span><span class="n">ygc_ex</span><span class="p">}</span>			
 
 
+<div class="viewcode-block" id="spiral_drimmel_nir">
+<a class="viewcode-back" href="../../api.html#SpiralMap.models_.spiral_drimmel_nir">[docs]</a>
 <span class="k">class</span> <span class="nc">spiral_drimmel_nir</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-	<span class="c1"># # &quot;&quot;&quot;Drimmel (2000) Near-Infrared (NIR) spiral arm model</span>
-	
-	<span class="c1"># # Implements the 2-arm spiral structure model from:</span>
-	<span class="c1"># # Drimmel, R. (2000) &quot;Evidence for a two-armed spiral in the Milky Way&quot;</span>
-	<span class="c1"># # using COBE/DIRBE near-infrared data. Includes main arms and phase-shifted interarms.</span>
-	
-	<span class="c1"># # Attributes</span>
-	<span class="c1"># # ----------</span>
-	<span class="c1"># # arms : ndarray</span>
-		<span class="c1"># # Array of arm identifiers [&#39;1_arm&#39;, &#39;2_arm&#39;, &#39;3_interarm&#39;, &#39;4_interarm&#39;]</span>
-	<span class="c1"># # armcolour : dict</span>
-		<span class="c1"># # Color mapping for visualization:</span>
-		<span class="c1"># # - Main arms: black</span>
-		<span class="c1"># # - Interarms: red	</span>
-	<span class="c1"># # &quot;&quot;&quot;</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;Drimmel (2000) Near-Infrared (NIR) spiral arm model</span>
+<span class="sd">	</span>
+<span class="sd">	Implements the 2-arm spiral structure model from:</span>
+<span class="sd">	Drimmel, R. (2000) &quot;Evidence for a two-armed spiral in the Milky Way&quot;</span>
+<span class="sd">	using COBE/DIRBE near-infrared data. Includes main arms and phase-shifted interarms.</span>
+<span class="sd">	</span>
+<span class="sd">	Attributes</span>
+<span class="sd">	----------</span>
+<span class="sd">	arms : ndarray</span>
+<span class="sd">		Array of arm identifiers [&#39;1_arm&#39;, &#39;2_arm&#39;, &#39;3_interarm&#39;, &#39;4_interarm&#39;]</span>
+<span class="sd">	armcolour : dict</span>
+<span class="sd">		Color mapping for visualization:</span>
+<span class="sd">		- Main arms: black</span>
+<span class="sd">		- Interarms: red	</span>
+<span class="sd">	&quot;&quot;&quot;</span>
 	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">		</span><span class="sd">&quot;&quot;&quot;Initialize Drimmel NIR spiral model with default parameters&quot;&quot;&quot;</span>
 	 
 		<span class="bp">self</span><span class="o">.</span><span class="n">loc</span> <span class="o">=</span> <span class="n">dataloc</span><span class="o">+</span><span class="s1">&#39;/Drimmel_NIR&#39;</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">fname</span> <span class="o">=</span> <span class="s1">&#39;Drimmel2armspiral.fits&#39;</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">getarmlist</span><span class="p">()</span>
+<div class="viewcode-block" id="spiral_drimmel_nir.getarmlist">
+<a class="viewcode-back" href="../../api.html#SpiralMap.models_.spiral_drimmel_nir.getarmlist">[docs]</a>
 	<span class="k">def</span> <span class="nf">getarmlist</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">		</span><span class="sd">&quot;&quot;&quot;Initialize arm identifiers and visualization scheme.</span>
-<span class="sd">		</span>
-<span class="sd">		Sets:</span>
-<span class="sd">		- arms: Array of 4 components (2 main arms + 2 interarms)</span>
-<span class="sd">		- armcolour: Color mapping dictionary</span>
-<span class="sd">		&quot;&quot;&quot;</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;Set arm names and colours&quot;&quot;&quot;</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">arms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;1_arm&#39;</span><span class="p">,</span><span class="s1">&#39;2_arm&#39;</span><span class="p">,</span><span class="s1">&#39;3_interarm&#39;</span><span class="p">,</span><span class="s1">&#39;4_interarm&#39;</span><span class="p">])</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">armcolour</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;1_arm&#39;</span><span class="p">:</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="s1">&#39;2_arm&#39;</span><span class="p">:</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="s1">&#39;3_interarm&#39;</span><span class="p">:</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="s1">&#39;4_interarm&#39;</span><span class="p">:</span><span class="s1">&#39;red&#39;</span><span class="p">}</span>		
-		<span class="bp">self</span><span class="o">.</span><span class="n">armcolours</span><span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">armcolour</span><span class="p">[</span><span class="n">ky</span><span class="p">]</span>  <span class="k">for</span> <span class="n">ky</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">arms</span>  <span class="p">]</span>			
-	<span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">		</span>
-<span class="w">		</span><span class="sd">&quot;&quot;&quot;Display basic model information and arm components.	</span>
-<span class="sd">		&quot;&quot;&quot;</span>
-	
+		<span class="bp">self</span><span class="o">.</span><span class="n">armcolours</span><span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">armcolour</span><span class="p">[</span><span class="n">ky</span><span class="p">]</span>  <span class="k">for</span> <span class="n">ky</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">arms</span>  <span class="p">]</span>			</div>
+
+	<span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>		
+		<span class="c1"># &quot;&quot;&quot;Display basic model information and arm components.&quot;&quot;&quot;	</span>
 		<span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Arm list&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">arms</span><span class="p">,</span> <span class="s1">&#39;Colour&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">armcolours</span><span class="p">}</span>
 		<span class="n">dfmodlist</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>			
 		<span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">dfmodlist</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="s1">&#39;keys&#39;</span><span class="p">,</span> <span class="n">tablefmt</span> <span class="o">=</span> <span class="s1">&#39;psql&#39;</span><span class="p">))</span>		
 	        
+<div class="viewcode-block" id="spiral_drimmel_nir.getdata">
+<a class="viewcode-back" href="../../api.html#SpiralMap.models_.spiral_drimmel_nir.getdata">[docs]</a>
 	<span class="k">def</span> <span class="nf">getdata</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">		</span><span class="sd">&quot;&quot;&quot;Load and preprocess spiral arm data from FITS file.</span>
 <span class="sd">		</span>
-<span class="sd">		Performs:</span>
 <span class="sd">		1. Loads base FITS data</span>
+<span class="sd">		</span>
 <span class="sd">		2. Scales coordinates using solar position</span>
+<span class="sd">		</span>
 <span class="sd">		3. Adds phase-shifted interarm components</span>
+<span class="sd">		</span>
 <span class="sd">		4. Calculates galactocentric radii</span>
 <span class="sd">		</span>
 <span class="sd">		Notes</span>
@@ -659,7 +674,10 @@
 		
 		<span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 	
-		<span class="k">return</span> 
+		<span class="k">return</span> </div>
+
+<div class="viewcode-block" id="spiral_drimmel_nir.output_">
+<a class="viewcode-back" href="../../api.html#SpiralMap.models_.spiral_drimmel_nir.output_">[docs]</a>
 	<span class="k">def</span> <span class="nf">output_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">arm</span><span class="p">):</span>			
 <span class="w">		</span><span class="sd">&quot;&quot;&quot;Retrieve spiral arm coordinates in specified format.</span>
 <span class="sd">		</span>
@@ -713,21 +731,25 @@
 			<span class="n">rgc</span> <span class="o">=</span> <span class="n">dt</span><span class="p">[</span><span class="s1">&#39;rgc&#39;</span><span class="o">+</span><span class="n">numb</span><span class="p">]</span>            
 			<span class="n">xgc</span> <span class="o">=</span> <span class="n">xhc</span> <span class="o">+</span> <span class="n">xsun</span>			
 			<span class="n">ygc</span> <span class="o">=</span> <span class="n">yhc</span>                     
-			<span class="bp">self</span><span class="o">.</span><span class="n">dout</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;xhc&#39;</span><span class="p">:</span><span class="n">xhc</span><span class="p">,</span><span class="s1">&#39;yhc&#39;</span><span class="p">:</span><span class="n">yhc</span><span class="p">,</span><span class="s1">&#39;xgc&#39;</span><span class="p">:</span><span class="n">xgc</span><span class="p">,</span><span class="s1">&#39;ygc&#39;</span><span class="p">:</span><span class="n">ygc</span><span class="p">}</span>					
+			<span class="bp">self</span><span class="o">.</span><span class="n">dout</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;xhc&#39;</span><span class="p">:</span><span class="n">xhc</span><span class="p">,</span><span class="s1">&#39;yhc&#39;</span><span class="p">:</span><span class="n">yhc</span><span class="p">,</span><span class="s1">&#39;xgc&#39;</span><span class="p">:</span><span class="n">xgc</span><span class="p">,</span><span class="s1">&#39;ygc&#39;</span><span class="p">:</span><span class="n">ygc</span><span class="p">}</span>					</div>
+</div>
 
 
+
+<div class="viewcode-block" id="reid_spiral">
+<a class="viewcode-back" href="../../api.html#SpiralMap.models_.reid_spiral">[docs]</a>
 <span class="k">class</span> <span class="nc">reid_spiral</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-	<span class="c1"># # &quot;&quot;&quot;Reid et al. (2019) kinked logarithmic spiral arm model</span>
-	
-	<span class="c1"># # Implements the Milky Way spiral structure model from:</span>
-	<span class="c1"># # &quot;Trigonometric Parallaxes of High Mass Star Forming Regions: The Structure and Kinematics of the Milky Way&quot;</span>
-	<span class="c1"># # using kinked logarithmic spirals with varying pitch angles. Models 7 major arm features.</span>
-	
-	<span class="c1"># # Attributes</span>
-	<span class="c1"># # ----------</span>
-	<span class="c1"># # arms : ndarray</span>
-		<span class="c1"># # Array of arm identifiers [&#39;3-kpc&#39;, &#39;Norma&#39;, &#39;Sct-Cen&#39;, &#39;Sgr-Car&#39;, &#39;Local&#39;, &#39;Perseus&#39;, &#39;Outer&#39;]	</span>
-	<span class="c1"># # &quot;&quot;&quot;</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;Reid et al. (2019) kinked logarithmic spiral arm model</span>
+<span class="sd">	</span>
+<span class="sd">	Implements the Milky Way spiral structure model from:</span>
+<span class="sd">	&quot;Trigonometric Parallaxes of High Mass Star Forming Regions: The Structure and Kinematics of the Milky Way&quot;</span>
+<span class="sd">	using kinked logarithmic spirals with varying pitch angles. Models 7 major arm features.</span>
+<span class="sd">	</span>
+<span class="sd">	Attributes</span>
+<span class="sd">	----------</span>
+<span class="sd">	arms : ndarray</span>
+<span class="sd">		Array of arm identifiers [&#39;3-kpc&#39;, &#39;Norma&#39;, &#39;Sct-Cen&#39;, &#39;Sgr-Car&#39;, &#39;Local&#39;, &#39;Perseus&#39;, &#39;Outer&#39;]	</span>
+<span class="sd">	&quot;&quot;&quot;</span>
 	
 	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kcor</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">		</span><span class="sd">&quot;&quot;&quot;Initialize Reid et al. (2019) spiral model</span>
@@ -740,17 +762,23 @@
 <span class="sd">		&quot;&quot;&quot;</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">kcor</span> <span class="o">=</span> <span class="n">kcor</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">getarmlist</span><span class="p">()</span>		
-	<span class="k">def</span> <span class="nf">getarmlist</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>		
+<div class="viewcode-block" id="reid_spiral.getarmlist">
+<a class="viewcode-back" href="../../api.html#SpiralMap.models_.reid_spiral.getarmlist">[docs]</a>
+	<span class="k">def</span> <span class="nf">getarmlist</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>	
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;Set arm names and colours&quot;&quot;&quot;</span>			
 		<span class="bp">self</span><span class="o">.</span><span class="n">arms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;3-kpc&#39;</span><span class="p">,</span><span class="s1">&#39;Norma&#39;</span><span class="p">,</span><span class="s1">&#39;Sct-Cen&#39;</span><span class="p">,</span><span class="s1">&#39;Sgr-Car&#39;</span><span class="p">,</span><span class="s1">&#39;Local&#39;</span><span class="p">,</span><span class="s1">&#39;Perseus&#39;</span><span class="p">,</span><span class="s1">&#39;Outer&#39;</span><span class="p">])</span>      				
 		<span class="bp">self</span><span class="o">.</span><span class="n">armcolour</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;3-kpc&#39;</span><span class="p">:</span><span class="s1">&#39;C6&#39;</span><span class="p">,</span><span class="s1">&#39;Norma&#39;</span><span class="p">:</span><span class="s1">&#39;C5&#39;</span><span class="p">,</span><span class="s1">&#39;Sct-Cen&#39;</span><span class="p">:</span><span class="s1">&#39;C4&#39;</span><span class="p">,</span>
 		                  <span class="s1">&#39;Sgr-Car&#39;</span><span class="p">:</span><span class="s1">&#39;C3&#39;</span><span class="p">,</span><span class="s1">&#39;Local&#39;</span><span class="p">:</span><span class="s1">&#39;C2&#39;</span><span class="p">,</span><span class="s1">&#39;Perseus&#39;</span><span class="p">:</span><span class="s1">&#39;C1&#39;</span><span class="p">,</span>
 		                  <span class="s1">&#39;Outer&#39;</span><span class="p">:</span><span class="s1">&#39;C0&#39;</span><span class="p">}</span>	
-		<span class="bp">self</span><span class="o">.</span><span class="n">armcolours</span><span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">armcolour</span><span class="p">[</span><span class="n">ky</span><span class="p">]</span>  <span class="k">for</span> <span class="n">ky</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">arms</span>  <span class="p">]</span>			                  	  		
+		<span class="bp">self</span><span class="o">.</span><span class="n">armcolours</span><span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">armcolour</span><span class="p">[</span><span class="n">ky</span><span class="p">]</span>  <span class="k">for</span> <span class="n">ky</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">arms</span>  <span class="p">]</span>			                  	  		</div>
+
 	<span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>		
 		<span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Arm list&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">arms</span><span class="p">,</span> <span class="s1">&#39;Colour&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">armcolours</span><span class="p">}</span>
 		<span class="n">dfmodlist</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>			
 		<span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">dfmodlist</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="s1">&#39;keys&#39;</span><span class="p">,</span> <span class="n">tablefmt</span> <span class="o">=</span> <span class="s1">&#39;psql&#39;</span><span class="p">))</span>				
 		
+<div class="viewcode-block" id="reid_spiral.getparams">
+<a class="viewcode-back" href="../../api.html#SpiralMap.models_.reid_spiral.getparams">[docs]</a>
 	<span class="k">def</span> <span class="nf">getparams</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">arm</span><span class="p">):</span>
 <span class="w">		</span><span class="sd">&quot;&quot;&quot;Load spiral parameters for specified arm from Reid et al. (2019) Table 4.</span>
 <span class="sd">		</span>
@@ -764,10 +792,15 @@
 <span class="sd">		dict</span>
 <span class="sd">			Dictionary containing:</span>
 <span class="sd">			- beta_kink: Kink angle position in degrees</span>
+<span class="sd">			</span>
 <span class="sd">			- pitch_low: Pitch angle before kink (degrees)</span>
+<span class="sd">			</span>
 <span class="sd">			- pitch_high: Pitch angle after kink (degrees)</span>
+<span class="sd">			</span>
 <span class="sd">			- R_kink: Galactocentric radius at kink (kpc)</span>
+<span class="sd">			</span>
 <span class="sd">			- beta_min/max: Angular range in degrees</span>
+<span class="sd">			</span>
 <span class="sd">			- width: Arm width parameter (kpc)</span>
 <span class="sd">	</span>
 <span class="sd">		Notes</span>
@@ -811,8 +844,11 @@
 				 <span class="n">params</span><span class="p">[</span><span class="s1">&#39;R_kink&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">xsun</span><span class="p">)</span> <span class="o">+</span> <span class="n">diffval</span>
 			<span class="k">else</span><span class="p">:</span>
 				 <span class="n">params</span><span class="p">[</span><span class="s1">&#39;R_kink&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">xsun</span><span class="p">)</span> <span class="o">+</span> <span class="n">diffval</span>							
-		<span class="k">return</span> <span class="n">params</span>
+		<span class="k">return</span> <span class="n">params</span></div>
+
 	
+<div class="viewcode-block" id="reid_spiral.model_">
+<a class="viewcode-back" href="../../api.html#SpiralMap.models_.reid_spiral.model_">[docs]</a>
 	<span class="k">def</span> <span class="nf">model_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">params</span><span class="p">):</span>
 <span class="w">		</span><span class="sd">&quot;&quot;&quot;Generate kinked logarithmic spiral coordinates.</span>
 <span class="sd">		</span>
@@ -825,8 +861,11 @@
 <span class="sd">		-------</span>
 <span class="sd">		tuple</span>
 <span class="sd">			(x, y, x1, y1, x2, y2) coordinate arrays where:</span>
+<span class="sd">			</span>
 <span class="sd">			- x,y: Arm center coordinates (GC)</span>
+<span class="sd">			</span>
 <span class="sd">			- x1,y1: Inner arm boundary</span>
+<span class="sd">			</span>
 <span class="sd">			- x2,y2: Outer arm boundary</span>
 <span class="sd">	</span>
 <span class="sd">		Notes</span>
@@ -868,8 +907,20 @@
 		<span class="n">x1</span> <span class="o">=</span> <span class="o">-</span><span class="n">R1</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">beta</span><span class="p">))</span>
 		<span class="n">y1</span> <span class="o">=</span> <span class="n">R1</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">beta</span><span class="p">))</span>
 						
-		<span class="k">return</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span><span class="n">x2</span><span class="p">,</span><span class="n">y2</span>	
-	<span class="k">def</span> <span class="nf">output_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">arm</span><span class="p">):</span>	
+		<span class="k">return</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span><span class="n">x2</span><span class="p">,</span><span class="n">y2</span>	</div>
+
+<div class="viewcode-block" id="reid_spiral.output_">
+<a class="viewcode-back" href="../../api.html#SpiralMap.models_.reid_spiral.output_">[docs]</a>
+	<span class="k">def</span> <span class="nf">output_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">arm</span><span class="p">):</span>		
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;			</span>
+<span class="sd">		   Get arm coordinates in structured format.</span>
+<span class="sd">		</span>
+<span class="sd">		   :param arm: Arm identifier (e.g., &#39;Norma&#39;)		</span>
+<span class="sd">		   :type arm: String </span>
+<span class="sd">		   :return: self.dout = {&#39;xhc&#39;:xhc,&#39;yhc&#39;:yhc,&#39;xgc&#39;:xgc,&#39;ygc&#39;:ygc}</span>
+<span class="sd">		   :rtype: dict </span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		
 		<span class="n">xsun</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xsun</span>
 		<span class="n">params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getparams</span><span class="p">(</span><span class="n">arm</span><span class="p">)</span>		
 		
@@ -878,7 +929,9 @@
 		<span class="n">xhc1</span> <span class="o">=</span> <span class="n">xgc1</span> <span class="o">-</span> <span class="n">xsun</span>
 		<span class="n">xhc2</span> <span class="o">=</span> <span class="n">xgc2</span> <span class="o">-</span> <span class="n">xsun</span>	
 		<span class="n">yhc</span> <span class="o">=</span> <span class="n">ygc</span>			
-		<span class="bp">self</span><span class="o">.</span><span class="n">dout</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;xhc&#39;</span><span class="p">:</span><span class="n">xhc</span><span class="p">,</span><span class="s1">&#39;yhc&#39;</span><span class="p">:</span><span class="n">yhc</span><span class="p">,</span><span class="s1">&#39;xgc&#39;</span><span class="p">:</span><span class="n">xgc</span><span class="p">,</span><span class="s1">&#39;ygc&#39;</span><span class="p">:</span><span class="n">ygc</span><span class="p">}</span>													
+		<span class="bp">self</span><span class="o">.</span><span class="n">dout</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;xhc&#39;</span><span class="p">:</span><span class="n">xhc</span><span class="p">,</span><span class="s1">&#39;yhc&#39;</span><span class="p">:</span><span class="n">yhc</span><span class="p">,</span><span class="s1">&#39;xgc&#39;</span><span class="p">:</span><span class="n">xgc</span><span class="p">,</span><span class="s1">&#39;ygc&#39;</span><span class="p">:</span><span class="n">ygc</span><span class="p">}</span>													</div>
+</div>
+
 
 
 <div class="viewcode-block" id="main_">

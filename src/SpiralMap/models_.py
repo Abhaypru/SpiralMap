@@ -16,15 +16,6 @@ exec(open(root_+"/mytools.py").read())
 #--------------------------------------------       
 
 
-# # """			
-   # # Initialize main object.
-
-   # # :param Rsun: Optional - Galactocentric R(kpc) of the Sun, default=8.277.	
-   # # :type Rsun: float 
-   # # :param print\_: Optional - if set to False does not print to screen.
-   # # :type print\_: Boolean 
-# # """		
-
 ### TO do:
 #1 consistent colours for similar arms
 ####################################
@@ -156,8 +147,7 @@ class TaylorCordesSpiral(object):
 					'Arm4':{'theta_deg': [20, 70, 100, 160, 180, 200, 223],
 					'r_kpc': [5.92, 7.06, 7.86, 9.68, 10.37, 11.39, 12.08]}					  
 								  }    
-	def model_(self, arm_name):			
-		
+	def model_(self, arm_name):					
 		"""			
 		   Generate arm coordinates using cubic spline interpolation.
 		
@@ -190,23 +180,17 @@ class TaylorCordesSpiral(object):
 		# Convert to Heliocentric coordinates
 		x_hc = x_gc + self.R0  # Sun at (-R0, 0) in GC
 		
-		return x_hc, y_gc, x_gc, y_gc	
-	
+		return x_hc, y_gc, x_gc, y_gc		
 	def output_(self,arm):			
-		"""Get arm coordinates in structured format.
+		"""			
+		   Get arm coordinates in structured format.
 		
-		Parameters
-		----------
-		arm : str
-			Arm identifier (e.g., 'Arm1')		
-		Returns
-		-------
-		dict
-			Contains coordinate arrays under keys:
-			- 'xhc', 'yhc' (heliocentric)
-			- 'xgc', 'ygc' (galactocentric)		
-
-		"""		
+		   :param arm: Arm identifier (e.g., 'Arm1')		
+		   :type arm: String 
+		   :return: self.dout = {'xhc':xhc,'yhc':yhc,'xgc':xgc,'ygc':ygc}
+		   :rtype: dict 
+		"""				
+		
 		xsun = self.xsun
 		self.R0 = -xsun  # Solar Galactocentric radius (kpc)					
 		xhc,yhc,xgc,ygc = self.model_(arm);					
@@ -219,43 +203,32 @@ class spiral_houhan(object):
 	Implements the Milky Way spiral structure model from:
 	"The spiral structure of the Milky Way from classical Cepheids" (Hou & Han 2014)
 	using polynomial-logarithmic spiral functions. Provides 6 major arm segments.	
-	"""
-	
+	"""	
 	def __init__(self):			
-		self.getarmlist()
-	
+		self.getarmlist()	
 	def getarmlist(self):
-		"""Initialize arm names and visualization colors.		
-		Sets:
-		- arms: List of 6 spiral arm segments
-		"""	
+		"""Set arm names and colours"""
 		self.arms = np.array(['Norma','Scutum-Centaurus','Sagittarius-Carina','Perseus','Local','Outer'])
 		self.armcolour = {'Norma':'black','Scutum-Centaurus':'red','Sagittarius-Carina':'green','Perseus':'blue','Local':'purple','Outer':'gold'}
-
 		self.armcolours= [self.armcolour[ky]  for ky in self.arms  ]	
 	def info(self):		
 		d = {'Arm list': self.arms, 'Colour': self.armcolours}
 		dfmodlist = pd.DataFrame(d)		
 		print(tabulate(dfmodlist, headers = 'keys', tablefmt = 'psql'))			
 		
-	def getparams(self):				
-		"""Load spiral parameters from Hou & Han (2014) Table 4.
-		
-		Returns
-		-------
-		dict
-			Nested dictionary containing for each arm:
-			- a, b, c, d: Polynomial coefficients
-			- θ_start: Start angle in degrees (Galactic longitude)
-			- θ_end: End angle in degrees
-			
-		Example
-		-------
-		>>> params['Scutum-Centaurus']
-		{'a': 5.8002, 'b': -1.8188, 'c': 0.2352, 'd': -0.008999,
-		 'θ_start': 275, 'θ_end': 620}
-		"""
-			
+	def getparams(self):						
+		"""			
+		   Load spiral parameters from Hou & Han (2014) Table 4.
+		   
+		   :return: params ( Nested dictionary containing for each arm).
+		   
+	   				a, b, c, d: Polynomial coefficients.
+	   				
+					θ_start: Start angle in degrees (Galactic longitude).
+					
+					θ_end: End angle in degrees.		   		   
+		   :rtype: dict 
+		"""					
 		params = {
 			'Norma': {'a': 1.1668, 'b': 0.1198, 'c': 0.002557, 'd': 0.0, 'θ_start': 40, 'θ_end': 250},
 			'Scutum-Centaurus': {'a': 5.8002, 'b': -1.8188, 'c': 0.2352, 'd': -0.008999, 'θ_start': 275, 'θ_end': 620},
@@ -265,8 +238,7 @@ class spiral_houhan(object):
 			'Outer': {'a': 3.3846, 'b': -0.6554, 'c': 0.08170, 'd': 0.0, 'θ_start': 280, 'θ_end': 355}
 		}	
 		return params		
-	def polynomial_log_spiral(self, θ, a, b, c, d):
-		
+	def polynomial_log_spiral(self, θ, a, b, c, d):		
 		"""Calculate radius using polynomial-logarithmic spiral equation.
 		
 		Parameters
@@ -308,6 +280,15 @@ class spiral_houhan(object):
 		return x_hc, y_gc, x_gc, y_gc
 	
 	def output_(self, arm):			
+		"""			
+		   Get arm coordinates in structured format.
+		
+		   :param arm: Arm identifier (e.g., 'Arm1')		
+		   :type arm: String 
+		   :return: self.dout = {'xhc':xhc,'yhc':yhc,'xgc':xgc,'ygc':ygc}
+		   :rtype: dict 
+		"""				
+		
 		xsun = self.xsun
 		self.R0 = -xsun  # Solar Galactocentric radius (kpc)	
 		# Generate spiral arm coordinates
@@ -320,21 +301,16 @@ class spiral_houhan(object):
 		}
 
 
-class spiral_levine(object):	
-	# """Levine et al. (2006) logarithmic spiral arm model for the Milky Way.
-	
-	# Implements a four-arm logarithmic spiral model based on:
-	# Levine, E. S., Blitz, L., & Heiles, C. (2006). "The Spiral Structure 
-	# of the Outer Milky Way in Hydrogen". Astrophysical Journal.
-	
-	# The model provides both galactocentric (GC) and heliocentric (HC) coordinates
-	# for each spiral arm segment with fixed pitch angles.		
-	# """
-	
+class spiral_levine(object):		
+	"""	
+	Levine et al (2006) logarithmic spiral arm model for the Milky Way.  				
+	"""	
+
 	def __init__(self):   
 		self.getarmlist()
 	
-	def getarmlist(self):				
+	def getarmlist(self):	
+		"""Set arm names and colours"""					
 		self.arms = np.array(['Arm1','Arm2','Arm3','Arm4'])
 		self.armcolour = {'Arm1':'yellow','Arm2':'green','Arm3':'blue','Arm4':'purple'}
 		self.getparams()
@@ -347,7 +323,15 @@ class spiral_levine(object):
 		print(tabulate(dfmodlist, headers = 'keys', tablefmt = 'psql'))			
 	
 	def getparams(self):
-		''' Pitch angle and Solar crossing angle '''
+		"""		
+	   :return: self.params['Arm1','Arm2','Arm3','Arm4'], nested dictionary such that,
+	   				 				
+				self.params['Arm']['pitch'] -> pitch angle
+				
+				self.params['Arm']['phi0'] -> Solar crossing angle)
+	   :rtype: dict
+		"""		
+		
 		self.arms_model = {
 			'Arm1': {'pitch': 24, 'phi0': 56},   
 			'Arm2': {'pitch': 24, 'phi0': 135},
@@ -413,7 +397,17 @@ class spiral_levine(object):
 	
 		return x_hc, y_gc,x_gc, y_gc
 		
-	def output_(self, arm):				
+	def output_(self, arm):		
+
+		"""			
+		   Get arm coordinates in structured format.
+		
+		   :param arm: Arm identifier (e.g., 'Arm1')		
+		   :type arm: String 
+		   :return: self.dout = {'xhc':xhc,'yhc':yhc,'xgc':xgc,'ygc':ygc}
+		   :rtype: dict 
+		"""		
+				
 		xsun = self.xsun
 		self.R0 = -xsun  
 		xhc, yhc, xgc, ygc = self.model_(arm)   
@@ -431,6 +425,8 @@ class spiral_drimmel_cepheids(object):
 		self.fname = 'ArmAttributes_dyoungW1_bw025.pkl'
 		self.getarmlist()
 	def getarmlist(self):
+
+		
 		self.spirals = pickleread(self.loc+'/'+self.fname)
 		self.arms= np.array(list(self.spirals['0']['arm_attributes'].keys()))
 		self.armcolour = {'Scutum':'C3','Sag-Car':'C0',
@@ -483,21 +479,21 @@ class spiral_drimmel_cepheids(object):
 
 
 class spiral_drimmel_nir(object):
-	# # """Drimmel (2000) Near-Infrared (NIR) spiral arm model
+	"""Drimmel (2000) Near-Infrared (NIR) spiral arm model
 	
-	# # Implements the 2-arm spiral structure model from:
-	# # Drimmel, R. (2000) "Evidence for a two-armed spiral in the Milky Way"
-	# # using COBE/DIRBE near-infrared data. Includes main arms and phase-shifted interarms.
+	Implements the 2-arm spiral structure model from:
+	Drimmel, R. (2000) "Evidence for a two-armed spiral in the Milky Way"
+	using COBE/DIRBE near-infrared data. Includes main arms and phase-shifted interarms.
 	
-	# # Attributes
-	# # ----------
-	# # arms : ndarray
-		# # Array of arm identifiers ['1_arm', '2_arm', '3_interarm', '4_interarm']
-	# # armcolour : dict
-		# # Color mapping for visualization:
-		# # - Main arms: black
-		# # - Interarms: red	
-	# # """
+	Attributes
+	----------
+	arms : ndarray
+		Array of arm identifiers ['1_arm', '2_arm', '3_interarm', '4_interarm']
+	armcolour : dict
+		Color mapping for visualization:
+		- Main arms: black
+		- Interarms: red	
+	"""
 	def __init__(self):
 		"""Initialize Drimmel NIR spiral model with default parameters"""
 	 
@@ -505,20 +501,12 @@ class spiral_drimmel_nir(object):
 		self.fname = 'Drimmel2armspiral.fits'
 		self.getarmlist()
 	def getarmlist(self):
-		"""Initialize arm identifiers and visualization scheme.
-		
-		Sets:
-		- arms: Array of 4 components (2 main arms + 2 interarms)
-		- armcolour: Color mapping dictionary
-		"""
+		"""Set arm names and colours"""
 		self.arms = np.array(['1_arm','2_arm','3_interarm','4_interarm'])
 		self.armcolour = {'1_arm':'black','2_arm':'black','3_interarm':'red','4_interarm':'red'}		
 		self.armcolours= [self.armcolour[ky]  for ky in self.arms  ]			
-	def info(self):
-		
-		"""Display basic model information and arm components.	
-		"""
-	
+	def info(self):		
+		# """Display basic model information and arm components."""	
 		d = {'Arm list': self.arms, 'Colour': self.armcolours}
 		dfmodlist = pd.DataFrame(d)			
 		print(tabulate(dfmodlist, headers = 'keys', tablefmt = 'psql'))		
@@ -526,10 +514,12 @@ class spiral_drimmel_nir(object):
 	def getdata(self):
 		"""Load and preprocess spiral arm data from FITS file.
 		
-		Performs:
 		1. Loads base FITS data
+		
 		2. Scales coordinates using solar position
+		
 		3. Adds phase-shifted interarm components
+		
 		4. Calculates galactocentric radii
 		
 		Notes
@@ -615,17 +605,17 @@ class spiral_drimmel_nir(object):
 
 
 class reid_spiral(object):
-	# # """Reid et al. (2019) kinked logarithmic spiral arm model
+	"""Reid et al. (2019) kinked logarithmic spiral arm model
 	
-	# # Implements the Milky Way spiral structure model from:
-	# # "Trigonometric Parallaxes of High Mass Star Forming Regions: The Structure and Kinematics of the Milky Way"
-	# # using kinked logarithmic spirals with varying pitch angles. Models 7 major arm features.
+	Implements the Milky Way spiral structure model from:
+	"Trigonometric Parallaxes of High Mass Star Forming Regions: The Structure and Kinematics of the Milky Way"
+	using kinked logarithmic spirals with varying pitch angles. Models 7 major arm features.
 	
-	# # Attributes
-	# # ----------
-	# # arms : ndarray
-		# # Array of arm identifiers ['3-kpc', 'Norma', 'Sct-Cen', 'Sgr-Car', 'Local', 'Perseus', 'Outer']	
-	# # """
+	Attributes
+	----------
+	arms : ndarray
+		Array of arm identifiers ['3-kpc', 'Norma', 'Sct-Cen', 'Sgr-Car', 'Local', 'Perseus', 'Outer']	
+	"""
 	
 	def __init__(self, kcor=False):
 		"""Initialize Reid et al. (2019) spiral model
@@ -638,7 +628,8 @@ class reid_spiral(object):
 		"""
 		self.kcor = kcor
 		self.getarmlist()		
-	def getarmlist(self):		
+	def getarmlist(self):	
+		"""Set arm names and colours"""			
 		self.arms = np.array(['3-kpc','Norma','Sct-Cen','Sgr-Car','Local','Perseus','Outer'])      				
 		self.armcolour = {'3-kpc':'C6','Norma':'C5','Sct-Cen':'C4',
 		                  'Sgr-Car':'C3','Local':'C2','Perseus':'C1',
@@ -662,10 +653,15 @@ class reid_spiral(object):
 		dict
 			Dictionary containing:
 			- beta_kink: Kink angle position in degrees
+			
 			- pitch_low: Pitch angle before kink (degrees)
+			
 			- pitch_high: Pitch angle after kink (degrees)
+			
 			- R_kink: Galactocentric radius at kink (kpc)
+			
 			- beta_min/max: Angular range in degrees
+			
 			- width: Arm width parameter (kpc)
 	
 		Notes
@@ -723,8 +719,11 @@ class reid_spiral(object):
 		-------
 		tuple
 			(x, y, x1, y1, x2, y2) coordinate arrays where:
+			
 			- x,y: Arm center coordinates (GC)
+			
 			- x1,y1: Inner arm boundary
+			
 			- x2,y2: Outer arm boundary
 	
 		Notes
@@ -767,7 +766,16 @@ class reid_spiral(object):
 		y1 = R1*(np.sin(beta))
 						
 		return x,y, x1,y1,x2,y2	
-	def output_(self,arm):	
+	def output_(self,arm):		
+		"""			
+		   Get arm coordinates in structured format.
+		
+		   :param arm: Arm identifier (e.g., 'Norma')		
+		   :type arm: String 
+		   :return: self.dout = {'xhc':xhc,'yhc':yhc,'xgc':xgc,'ygc':ygc}
+		   :rtype: dict 
+		"""		
+		
 		xsun = self.xsun
 		params = self.getparams(arm)		
 		
