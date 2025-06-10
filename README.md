@@ -8,18 +8,14 @@ The detailed documentation is hosted on [Read the docs](https://spiralmap.readth
 
 For a quickstart please refer to the accompanying [Jupyter notebook](https://github.com/Abhaypru/SpiralMap/blob/main/demo_spiralmap.ipynb)
 
-
 ## Features
 + Access 8 independent spiral arm models from literature. We are open to requests for including other spiral arm models. 
 + Extract the 2D trace of individual or all spiral arms from a particular model.
 + Directly overplot spiral arms with choice of Cartesian or Polar coordinates, and in Heliocentric or Galactocentric frames.
 
-
-
-![image info](src/SpiralMap/figdir_primer/polar_proj_multiple_models2.png).
+![image info](src/SpiralMap/movie_.gif).
 
 Shown above is a gallery of the spiral models & maps included in the current version. 
-
 
 Installation
 -------------
@@ -29,7 +25,6 @@ Install the latest released version using ``pip``:
 ```
    pip install SpiralMap
 ```
-
 
 Acknowledging ``SpiralMap``
 ---------------------------------------
