@@ -20,14 +20,14 @@ exec(open(root_+"/mytools.py").read())
 ####################################
 
 class spiral_poggio_maps(object):
-	"""
-	Class containing spiral arm models from
-		Poggio_2021: Poggio al. 2021 (EDR3 UMS stars)
-		GaiaPVP_2022: Gaia collaboration et al. 2021 (OB stars)
+	# """
+	# Class containing spiral arm models from
+		# Poggio_2021: Poggio al. 2021 (EDR3 UMS stars)
+		# GaiaPVP_2022: Gaia collaboration et al. 2021 (OB stars)
 					
-	HISTORY:
-		09 May 2025: Prusty/Khanna					
-	"""
+	# HISTORY:
+		# 09 May 2025: Prusty/Khanna					
+	# """
 	
 	def __init__(self,model_='GaiaPVP_cont_2022'):		
 		"""Initialize the list of available spiral arms 
@@ -106,12 +106,13 @@ class spiral_poggio_maps(object):
 				
 			
 class TaylorCordesSpiral(object):	
-    
-	def __init__(self):		
+	
+	"""	
+	Taylor & Cordes (1993) Galactic spiral arm model,	  
+	based on radio pulsar observations. The model defines four major spiral arms.		
+	"""	
 
-		""" Taylor & Cordes (1993) Galactic spiral arm model,	  
-		based on radio pulsar observations. The model defines four major spiral arms.	
-		"""		
+	def __init__(self):		
 		self.getarmlist()        
 	def getarmlist(self):
 		"""Set arm names and colours"""
@@ -130,8 +131,8 @@ class TaylorCordesSpiral(object):
 		"""Load original spiral parameters from Taylor & Cordes (1993) Table 1.
 		
 		Sets params dictionary with:
-		- theta_deg: Anchor points in galactic longitude (degrees)
-		- r_kpc: Corresponding galactocentric radii (kiloparsecs)
+		- theta_deg: Anchor points in galactic longitude (degrees).
+		- r_kpc: Corresponding galactocentric radii (kiloparsecs).
 		"""		
 		self.params = {	'Arm1': {'theta_deg': [164, 200, 240, 280, 290, 315, 330],
 					'r_kpc': [3.53, 3.76, 4.44, 5.24, 5.36, 5.81, 5.81]},
@@ -776,8 +777,20 @@ class reid_spiral(object):
 
 
 class main_(object):	
-
-	def __init__(self,Rsun=8.277,print_=True):   		   		 	
+	"""	
+	The main executor that calls the individual models to grab the spiral traces.
+	It is also used to set plot preferences and make plots.		
+	"""
+	def __init__(self,Rsun=8.277,print_=True):  
+		
+		"""
+	    PURPOSE:
+	       1. Initialize main object.
+	    INPUT:
+	       1. Rsun (float) - Galactocentric R(kpc) of the Sun, default=8.277.
+	       2. print_ (Boolean) - to print or not to screen.	
+		"""
+		 		   		 	
 		self.root_ = root_
 		self.dataloc = dataloc        
 		self.xsun = -Rsun
@@ -787,7 +800,12 @@ class main_(object):
 		
 		self.modrec = []
 		self.armrec = []
-	def listmodels(self):     
+	def listmodels(self):  
+		"""	
+		PURPOSE:
+			1. defines list of available models/maps
+			2. constructs dictionaries to initialise individual model classes
+		"""	
 		   		
 		self.models = ['Taylor_Cordes_1992','Drimmel_NIR_2000',
 					   'Levine_2006','Hou_Han_2014','Reid_2019',
@@ -806,11 +824,16 @@ class main_(object):
 					   'Upper main sequence (map)','OB stars (map)','Cepheids']  			 
 							 
 	def getinfo(self,model='',print_=True):	
-		'''
-		prints to screen the list of available models, and basic information such as tracers used to construct these
-		'''
-
-	
+		"""
+	    PURPOSE:
+	       1. prints (model list, tracers)
+	       2. default plot attributes are defined here. 
+	    INPUT:
+			1. model (string)- '' by default so prints lists all models.
+			   otherwise provide a model (ex: Drimmel_Ceph_2024) to list
+			   out all arms and default colours.			          
+			2. print_ (Boolean) - if set to False does not print to screen.	                         
+		"""	
 		if model == '':		
 			print('try self.getinfo(model) for more details')		
 			dfmodlist = pd.DataFrame(self.models,columns=['Available models & maps:'])			
@@ -848,10 +871,10 @@ class main_(object):
 								'dataloc':dataloc}    
 	def add2plot(self,plotattrs):
 		'''
-		overplots positions of the Galactic center and the Sun
+		PURPOSE:		
+			1. overplots positions of the Galactic center and the Sun
 		'''
-	
-		
+			
 		if plotattrs['coordsys'] =='HC':								
 			plt.plot(0.,0.,marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')
 			plt.plot(-self.xsun,0.,marker='*',markersize=plotattrs['markersize'],color='black')		
@@ -859,10 +882,10 @@ class main_(object):
 			plt.plot(0.,0.,marker='*',markersize=plotattrs['markersize'],color='black')
 			plt.plot(self.xsun,0.,marker=r'$\odot$',markersize=plotattrs['markersize'],color='black')
 	def xyplot(self,spimod,plotattrs_):		
-
-		'''
-		handles cartesian frame plots
-		'''
+		"""
+		PURPOSE:		
+			1. handles cartesian frame plots
+		"""
 				
 		if plotattrs_['plot'] and plotattrs_['polarproj']==False :							
 			plt.plot(spimod.dout['x'+plotattrs_['coordsys'].lower()],
@@ -889,9 +912,18 @@ class main_(object):
 			if plotattrs_['markSunGC']:
 				self.add2plot(plotattrs_)	
 	def readout(self,plotattrs={},model='',arm='',print_=False):	
-		'''
-		main class which reads out individual models, makes plots etc.
-		'''
+		"""
+		PURPOSE:		
+			1. reads out individual models/ makes plots etc.
+		INPUT:
+			1. plotattrs (dict)- if not provided, uses default plot attributes.			   		          
+			2. model (String) 	 			
+			3. arm (String) - by default reads all arms	 			
+			4. print_ (Boolean) - if set to False does not print to screen.	 			
+		Raises:
+			RuntimeError - if no model is provided
+			
+		"""
 						
 		if model == '':
 			 raise RuntimeError('model = blank | no model provided \n try self.getino() for list of available models')			 

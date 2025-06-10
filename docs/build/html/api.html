@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>API &mdash; SpiralMap 1. documentation</title>
+  <title>API &mdash; SpiralMap 1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=92fd9be5" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://spiralmap.readthedocs.io/en/latest/api.html" />
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=49501c99"></script>
+      <script src="_static/documentation_options.js?v=f2a433a1"></script>
       <script src="_static/doctools.js?v=9a2dae69"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -48,19 +48,28 @@
 <li class="toctree-l1"><a class="reference internal" href="models_available.html">Available Spiral Arm Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="citation.html">How to Cite</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#module-SpiralMap.models_">posterior</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-SpiralMap.models_">Main executor</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#SpiralMap.models_.TaylorCordesSpiral"><code class="docutils literal notranslate"><span class="pre">TaylorCordesSpiral</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#SpiralMap.models_.TaylorCordesSpiral.getarmlist"><code class="docutils literal notranslate"><span class="pre">TaylorCordesSpiral.getarmlist()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#SpiralMap.models_.TaylorCordesSpiral.getparams"><code class="docutils literal notranslate"><span class="pre">TaylorCordesSpiral.getparams()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#SpiralMap.models_.TaylorCordesSpiral.model_"><code class="docutils literal notranslate"><span class="pre">TaylorCordesSpiral.model_()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#SpiralMap.models_.TaylorCordesSpiral.output_"><code class="docutils literal notranslate"><span class="pre">TaylorCordesSpiral.output_()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#SpiralMap.models_.main_"><code class="docutils literal notranslate"><span class="pre">main_</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#SpiralMap.models_.main_.add2plot"><code class="docutils literal notranslate"><span class="pre">main_.add2plot()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#SpiralMap.models_.main_.getinfo"><code class="docutils literal notranslate"><span class="pre">main_.getinfo()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#SpiralMap.models_.main_.listmodels"><code class="docutils literal notranslate"><span class="pre">main_.listmodels()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#SpiralMap.models_.main_.readout"><code class="docutils literal notranslate"><span class="pre">main_.readout()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#SpiralMap.models_.main_.xyplot"><code class="docutils literal notranslate"><span class="pre">main_.xyplot()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#SpiralMap.models_.spiral_houhan"><code class="docutils literal notranslate"><span class="pre">spiral_houhan</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#SpiralMap.models_.spiral_houhan.getarmlist"><code class="docutils literal notranslate"><span class="pre">spiral_houhan.getarmlist()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#SpiralMap.models_.spiral_houhan.getparams"><code class="docutils literal notranslate"><span class="pre">spiral_houhan.getparams()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#SpiralMap.models_.spiral_houhan.polynomial_log_spiral"><code class="docutils literal notranslate"><span class="pre">spiral_houhan.polynomial_log_spiral()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#SpiralMap.models_.spiral_poggio_maps"><code class="docutils literal notranslate"><span class="pre">spiral_poggio_maps</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#SpiralMap.models_.spiral_poggio_maps.getarmlist"><code class="docutils literal notranslate"><span class="pre">spiral_poggio_maps.getarmlist()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#SpiralMap.models_.spiral_poggio_maps.info"><code class="docutils literal notranslate"><span class="pre">spiral_poggio_maps.info()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#SpiralMap.models_.sqrtsum"><code class="docutils literal notranslate"><span class="pre">sqrtsum()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -94,7 +103,150 @@
   <section id="api">
 <h1>API<a class="headerlink" href="#api" title="Link to this heading"></a></h1>
 <section id="module-SpiralMap.models_">
-<span id="posterior"></span><h2>posterior<a class="headerlink" href="#module-SpiralMap.models_" title="Link to this heading"></a></h2>
+<span id="main-executor"></span><h2>Main executor<a class="headerlink" href="#module-SpiralMap.models_" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="SpiralMap.models_.TaylorCordesSpiral">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">SpiralMap.models_.</span></span><span class="sig-name descname"><span class="pre">TaylorCordesSpiral</span></span><a class="reference internal" href="_modules/SpiralMap/models_.html#TaylorCordesSpiral"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.TaylorCordesSpiral" title="Link to this definition"></a></dt>
+<dd><p>Taylor &amp; Cordes (1993) Galactic spiral arm model,
+based on radio pulsar observations. The model defines four major spiral arms.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="SpiralMap.models_.TaylorCordesSpiral.getarmlist">
+<span class="sig-name descname"><span class="pre">getarmlist</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/SpiralMap/models_.html#TaylorCordesSpiral.getarmlist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.TaylorCordesSpiral.getarmlist" title="Link to this definition"></a></dt>
+<dd><p>Set arm names and colours</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SpiralMap.models_.TaylorCordesSpiral.getparams">
+<span class="sig-name descname"><span class="pre">getparams</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/SpiralMap/models_.html#TaylorCordesSpiral.getparams"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.TaylorCordesSpiral.getparams" title="Link to this definition"></a></dt>
+<dd><p>Load original spiral parameters from Taylor &amp; Cordes (1993) Table 1.</p>
+<p>Sets params dictionary with:
+- theta_deg: Anchor points in galactic longitude (degrees).
+- r_kpc: Corresponding galactocentric radii (kiloparsecs).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SpiralMap.models_.TaylorCordesSpiral.model_">
+<span class="sig-name descname"><span class="pre">model_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arm_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SpiralMap/models_.html#TaylorCordesSpiral.model_"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.TaylorCordesSpiral.model_" title="Link to this definition"></a></dt>
+<dd><p>Generate arm coordinates using cubic spline interpolation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>arm_name</strong> (<em>str</em>) – Must be one of: ‘Arm1’, ‘Arm2’, ‘Arm3’, ‘Arm4’</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(x_hc, y_hc, x_gc, y_gc) coordinate arrays where:
+- hc = heliocentric coordinates
+- gc = galactocentric coordinates</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SpiralMap.models_.TaylorCordesSpiral.output_">
+<span class="sig-name descname"><span class="pre">output_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SpiralMap/models_.html#TaylorCordesSpiral.output_"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.TaylorCordesSpiral.output_" title="Link to this definition"></a></dt>
+<dd><p>Get arm coordinates in structured format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>arm</strong> (<em>str</em>) – Arm identifier (e.g., ‘Arm1’)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Contains coordinate arrays under keys:
+- ‘xhc’, ‘yhc’ (heliocentric)
+- ‘xgc’, ‘ygc’ (galactocentric)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="SpiralMap.models_.main_">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">SpiralMap.models_.</span></span><span class="sig-name descname"><span class="pre">main_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Rsun</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8.277</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SpiralMap/models_.html#main_"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.main_" title="Link to this definition"></a></dt>
+<dd><p>The main executor that calls the individual models to grab the spiral traces.
+It is also used to set plot preferences and make plots.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="SpiralMap.models_.main_.add2plot">
+<span class="sig-name descname"><span class="pre">add2plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plotattrs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SpiralMap/models_.html#main_.add2plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.main_.add2plot" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>PURPOSE:</dt><dd><ol class="arabic simple">
+<li><p>overplots positions of the Galactic center and the Sun</p></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SpiralMap.models_.main_.getinfo">
+<span class="sig-name descname"><span class="pre">getinfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SpiralMap/models_.html#main_.getinfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.main_.getinfo" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>PURPOSE:</dt><dd><ol class="arabic simple">
+<li><p>prints (model list, tracers)</p></li>
+<li><p>default plot attributes are defined here.</p></li>
+</ol>
+</dd>
+<dt>INPUT:</dt><dd><ol class="arabic simple">
+<li><p>model (string)- ‘’ by default so prints lists all models.
+otherwise provide a model (ex: Drimmel_Ceph_2024) to list
+out all arms and default colours.</p></li>
+<li><p><a href="#id1"><span class="problematic" id="id2">print_</span></a> (Boolean) - if set to False does not print to screen.</p></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SpiralMap.models_.main_.listmodels">
+<span class="sig-name descname"><span class="pre">listmodels</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/SpiralMap/models_.html#main_.listmodels"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.main_.listmodels" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>PURPOSE:</dt><dd><ol class="arabic simple">
+<li><p>defines list of available models/maps</p></li>
+<li><p>constructs dictionaries to initialise individual model classes</p></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SpiralMap.models_.main_.readout">
+<span class="sig-name descname"><span class="pre">readout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plotattrs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SpiralMap/models_.html#main_.readout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.main_.readout" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>PURPOSE:</dt><dd><ol class="arabic simple">
+<li><p>reads out individual models/ makes plots etc.</p></li>
+</ol>
+</dd>
+<dt>INPUT:</dt><dd><ol class="arabic simple">
+<li><p>plotattrs (dict)- if not provided, uses default plot attributes.</p></li>
+<li><p>model (String)</p></li>
+<li><p>arm (String) - by default reads all arms</p></li>
+<li><p><a href="#id3"><span class="problematic" id="id4">print_</span></a> (Boolean) - if set to False does not print to screen.</p></li>
+</ol>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>RuntimeError - if no model is provided</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SpiralMap.models_.main_.xyplot">
+<span class="sig-name descname"><span class="pre">xyplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spimod</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plotattrs_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SpiralMap/models_.html#main_.xyplot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.main_.xyplot" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>PURPOSE:</dt><dd><ol class="arabic simple">
+<li><p>handles cartesian frame plots</p></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="SpiralMap.models_.spiral_houhan">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">SpiralMap.models_.</span></span><span class="sig-name descname"><span class="pre">spiral_houhan</span></span><a class="reference internal" href="_modules/SpiralMap/models_.html#spiral_houhan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.spiral_houhan" title="Link to this definition"></a></dt>
@@ -160,37 +312,6 @@ R(θ) = exp(a + bθ_rad + cθ_rad² + dθ_rad³)
 where θ_rad = np.radians(θ)</p>
 </dd></dl>
 
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="SpiralMap.models_.spiral_poggio_maps">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">SpiralMap.models_.</span></span><span class="sig-name descname"><span class="pre">spiral_poggio_maps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'GaiaPVP_cont_2022'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SpiralMap/models_.html#spiral_poggio_maps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.spiral_poggio_maps" title="Link to this definition"></a></dt>
-<dd><dl class="simple">
-<dt>Class containing spiral arm models from</dt><dd><p>Poggio_2021: Poggio al. 2021 (EDR3 UMS stars)
-GaiaPVP_2022: Gaia collaboration et al. 2021 (OB stars)</p>
-</dd>
-<dt>HISTORY:</dt><dd><p>09 May 2025: Prusty/Khanna</p>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="SpiralMap.models_.spiral_poggio_maps.getarmlist">
-<span class="sig-name descname"><span class="pre">getarmlist</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/SpiralMap/models_.html#spiral_poggio_maps.getarmlist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.spiral_poggio_maps.getarmlist" title="Link to this definition"></a></dt>
-<dd><p>Initialize the list of available spiral arms
-and their corresponding plot colors.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="SpiralMap.models_.spiral_poggio_maps.info">
-<span class="sig-name descname"><span class="pre">info</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/SpiralMap/models_.html#spiral_poggio_maps.info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SpiralMap.models_.spiral_poggio_maps.info" title="Link to this definition"></a></dt>
-<dd><p>Collate arm information</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="SpiralMap.models_.sqrtsum">
-<span class="sig-prename descclassname"><span class="pre">SpiralMap.models_.</span></span><span class="sig-name descname"><span class="pre">sqrtsum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prnt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#SpiralMap.models_.sqrtsum" title="Link to this definition"></a></dt>
-<dd><p>helper function</p>
 </dd></dl>
 
 </section>

@@ -9,16 +9,12 @@
 import os
 import sys
 from pathlib import Path
-
-# sys.path.insert(0, os.path.abspath('/Users/shouryapro/Documents/GitHub/SpiralMap'))
-
 sys.path.insert(0, os.path.abspath('../../src'))
-# sys.path.insert(0, os.path.abspath('../../src/SpiralMap'))
 
 project = 'SpiralMap'
 copyright = '2025, Prusty & Khanna'
 author = 'Prusty & Khanna'
-release = '1.'
+release = '1.0'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -32,8 +28,6 @@ extensions = [
 ]
 templates_path = ['_templates']
 exclude_patterns = []
-
-
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
