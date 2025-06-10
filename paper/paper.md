@@ -16,7 +16,7 @@ affiliations:
    index: 1
  - name: INAF - Osservatorio Astrofisico di Torino, via Osservatorio 20, 10025 Pino Torinese (TO), Italy
    index: 2 
-date: 02 June 2025
+date: 11 June 2025
 bibliography: paper.bib
 ---
 
