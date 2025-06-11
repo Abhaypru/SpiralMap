@@ -12,7 +12,7 @@ from pathlib import Path
 sys.path.insert(0, os.path.abspath('../../src'))
 
 project = 'SpiralMap'
-copyright = '2025, Prusty & Khanna'
+copyright = '2025, Abhay Kumar Prusty & Shourya Khanna'
 author = 'Prusty & Khanna'
 release = '1.0'
 
