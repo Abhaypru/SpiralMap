@@ -198,7 +198,7 @@ class TaylorCordesSpiral(object):
 
 
 class spiral_houhan(object):	
-	"""Hou & Han (2014) polynomial-logarithmic spiral arm model
+	"""Hou & Han (2014) polynomial-logarithmic spiral arm model, all tracers
 	
 	Implements the Milky Way spiral structure model from:
 	"The spiral structure of the Milky Way from classical Cepheids" (Hou & Han 2014)
@@ -218,7 +218,7 @@ class spiral_houhan(object):
 		
 	def getparams(self):						
 		"""			
-		   Load spiral parameters from Hou & Han (2014) Table 4.
+		   Load spiral parameters from Hou & Han (2014) Table 4 (vcirc=239, Z =0.16), all tracers.
 		   
 		   :return: params ( Nested dictionary containing for each arm).
 		   
@@ -228,7 +228,112 @@ class spiral_houhan(object):
 					
 					θ_end: End angle in degrees.		   		   
 		   :rtype: dict 
-		"""					
+		"""			
+		params = {
+			'Norma': {'a': 1.1320, 'b': 0.1233, 'c': 0.003488, 'd': 0.0, 'θ_start': 40, 'θ_end': 250},
+			'Scutum-Centaurus': {'a': 5.8243, 'b': -1.8196, 'c': 0.2350, 'd': -0.009011, 'θ_start': 275, 'θ_end': 620},
+			'Sagittarius-Carina': {'a': 4.2767, 'b': -1.1507, 'c': 0.1570, 'd': -0.006078, 'θ_start': 275, 'θ_end': 575},
+			'Perseus': {'a': 1.1280, 'b': 0.1282, 'c': 0.002617, 'd': 0.0, 'θ_start': 280, 'θ_end': 500},
+			'Local': {'a': 1.7978, 'b': -0.04738, 'c': 0.01684, 'd': 0.0, 'θ_start': 280, 'θ_end': 500},
+			'Outer': {'a': 2.4225, 'b': -0.1636, 'c': 0.02494, 'd': 0.0, 'θ_start': 280, 'θ_end': 405}
+		}	
+		return params		
+	def polynomial_log_spiral(self, θ, a, b, c, d):		
+		"""Calculate radius using polynomial-logarithmic spiral equation.
+		
+		Parameters
+		----------
+		θ : float or ndarray
+			Galactic longitude angle in degrees
+		a,b,c,d : float
+			Polynomial coefficients from Hou & Han Table 4
+			
+		Returns
+		-------
+		float or ndarray
+			Galactocentric radius in kiloparsecs
+			
+		Notes
+		-----
+		Implements equation:
+		R(θ) = exp(a + bθ_rad + cθ_rad² + dθ_rad³)
+		where θ_rad = np.radians(θ)
+		"""	
+		return np.exp(a + b*np.radians(θ) + c*np.radians(θ)**2 + d*np.radians(θ)**3)
+	
+	def model_(self, arm_name, n_points=500):
+		
+		params_ = self.getparams()
+		params = params_[arm_name]
+		
+		
+		θ = np.linspace(params['θ_start'], params['θ_end'], n_points)
+		R = self.polynomial_log_spiral(θ, params['a'], params['b'], params['c'], params['d'])
+				
+		# Convert to Cartesian coordinates (Galactocentric)
+		y_gc = R*np.cos(np.radians(θ))
+		x_gc = -R * np.sin(np.radians(θ))
+		
+		# Convert to Heliocentric coordinates
+		x_hc = (x_gc + self.R0)
+	
+		return x_hc, y_gc, x_gc, y_gc
+	
+	def output_(self, arm):			
+		"""			
+		   Get arm coordinates in structured format.
+		
+		   :param arm: Arm identifier (e.g., 'Arm1')		
+		   :type arm: String 
+		   :return: self.dout = {'xhc':xhc,'yhc':yhc,'xgc':xgc,'ygc':ygc}
+		   :rtype: dict 
+		"""				
+		
+		xsun = self.xsun
+		self.R0 = -xsun  # Solar Galactocentric radius (kpc)	
+		# Generate spiral arm coordinates
+		xhc, yhc, xgc, ygc = self.model_(arm)	
+		self.dout = {
+			'xhc': xhc,
+			'yhc': yhc,
+			'xgc': xgc,
+			'ygc': ygc
+		}
+
+
+class spiral_houhan_HII(object):	
+	"""Hou & Han (2014) polynomial-logarithmic spiral arm model, HII regions only.
+	
+	Implements the Milky Way spiral structure model from:
+	"The spiral structure of the Milky Way from classical Cepheids" (Hou & Han 2014)
+	using polynomial-logarithmic spiral functions. Provides 6 major arm segments.	
+	"""	
+	def __init__(self):			
+		self.getarmlist()	
+	def getarmlist(self):
+		"""Set arm names and colours"""
+		self.arms = np.array(['Norma','Scutum-Centaurus','Sagittarius-Carina','Perseus','Local','Outer'])
+		self.armcolour = {'Norma':'black','Scutum-Centaurus':'red','Sagittarius-Carina':'green','Perseus':'blue','Local':'purple','Outer':'gold'}
+		self.armcolours= [self.armcolour[ky]  for ky in self.arms  ]	
+	def info(self):		
+		d = {'Arm list': self.arms, 'Colour': self.armcolours}
+		dfmodlist = pd.DataFrame(d)		
+		print(tabulate(dfmodlist, headers = 'keys', tablefmt = 'psql'))			
+		
+	def getparams(self):						
+		"""			
+		   Load spiral parameters from Hou & Han (2014) Table 4 (vcirc=239, Z =0.16), HII regions only.
+		   
+		   :return: params ( Nested dictionary containing for each arm).
+		   
+	   				a, b, c, d: Polynomial coefficients.
+	   				
+					θ_start: Start angle in degrees (Galactic longitude).
+					
+					θ_end: End angle in degrees.		   		   
+		   :rtype: dict 
+		"""			
+
 		params = {
 			'Norma': {'a': 1.1668, 'b': 0.1198, 'c': 0.002557, 'd': 0.0, 'θ_start': 40, 'θ_end': 250},
 			'Scutum-Centaurus': {'a': 5.8002, 'b': -1.8188, 'c': 0.2352, 'd': -0.008999, 'θ_start': 275, 'θ_end': 620},
@@ -237,6 +342,7 @@ class spiral_houhan(object):
 			'Local': {'a': 0.9887, 'b': 0.1714, 'c': 0.004358, 'd': 0.0, 'θ_start': 280, 'θ_end': 475},
 			'Outer': {'a': 3.3846, 'b': -0.6554, 'c': 0.08170, 'd': 0.0, 'θ_start': 280, 'θ_end': 355}
 		}	
+
 		return params		
 	def polynomial_log_spiral(self, θ, a, b, c, d):		
 		"""Calculate radius using polynomial-logarithmic spiral equation.
@@ -271,8 +377,8 @@ class spiral_houhan(object):
 		R = self.polynomial_log_spiral(θ, params['a'], params['b'], params['c'], params['d'])
 		
 		# Convert to Cartesian coordinates (Galactocentric)
-		x_gc = R*np.cos(np.radians(θ))
-		y_gc = R * np.sin(np.radians(θ))
+		y_gc = R*np.cos(np.radians(θ))
+		x_gc = -R * np.sin(np.radians(θ))
 		
 		# Convert to Heliocentric coordinates
 		x_hc = (x_gc + self.R0)
@@ -299,6 +405,8 @@ class spiral_houhan(object):
 			'xgc': xgc,
 			'ygc': ygc
 		}
+
+
 
 
 class spiral_levine(object):		
@@ -818,7 +926,7 @@ class main_(object):
 		"""	
 		   		
 		self.models = ['Taylor_Cordes_1992','Drimmel_NIR_2000',
-					   'Levine_2006','Hou_Han_2014','Reid_2019',
+					   'Levine_2006','Hou_Han_2014','Hou_Han_HII_2014','Reid_2019',
 					   'Poggio_cont_2021','GaiaPVP_cont_2022','Drimmel_Ceph_2024']        
 		self.models_class = {'Reid_2019':reid_spiral(),
 							 'Levine_2006':spiral_levine(),
@@ -827,10 +935,11 @@ class main_(object):
 							 'Drimmel_NIR_2000':spiral_drimmel_nir(),
 							 'Taylor_Cordes_1992':TaylorCordesSpiral(),
 							 'Hou_Han_2014':spiral_houhan(),
+							 'Hou_Han_HII_2014':spiral_houhan_HII(),
 							 'Drimmel_Ceph_2024':spiral_drimmel_cepheids()}
 							 
 		self.models_desc = 	['HII','NIR emission',
-					   'HI','HII/GMC/Masers','MASER parallax',
+					   'HI','HII/GMC/Masers','HII','MASER parallax',
 					   'Upper main sequence (map)','OB stars (map)','Cepheids']  			 							 
 	def getinfo(self,model='',print_=True):	
 		"""			
@@ -973,7 +1082,7 @@ class _make_supportfiles(object):
 	
 	def __init__(self):
 					
-		self.xsun = -8.277	
+		self.Rsun = 8.277	
 	
 		# self.prep_poggio_polar()
 		self.savelims_all()
@@ -991,7 +1100,7 @@ class _make_supportfiles(object):
 			plt.close('all')
 			plotattrs = {'plot':True,'coordsys': 'HC','markersize':15,'linewidth':1,'polarproj':False,'armcolour':'black'}	
 			sp = spiral_poggio_maps(model_=usemodel)
-			sp.xsun = xsun
+			sp.Rsun = Rsun
 			cset1,cset2 = sp.output_(plotattrs)
 			
 			# # check xy projection
@@ -1043,11 +1152,11 @@ class _make_supportfiles(object):
 	def savelims_all(self):		
 	
 		print('saving plot limits for all models')
-		xsun=self.xsun
+		Rsun=self.Rsun
 	
 		mylims = {}
 		
-		spirals = main_(xsun=xsun)
+		spirals = main_(Rsun=Rsun)
 		for inum,use_model in enumerate(spirals.models):				
 			
 			plt.close('all')
@@ -1080,11 +1189,11 @@ class _make_supportfiles(object):
 	def savelims(self):		
 	
 		print('saving plot limits for all models')
-		xsun=self.xsun
+		Rsun=self.Rsun
 	
 		mylims = {}
 		
-		spirals = main_(xsun=xsun)
+		spirals = main_(Rsun=Rsun)
 		
 		for inum,use_model in enumerate(spirals.models):	
 						
@@ -1125,3 +1234,4 @@ class _make_supportfiles(object):
 	
 
 
+_make_supportfiles()

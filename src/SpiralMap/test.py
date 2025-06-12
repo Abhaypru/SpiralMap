@@ -195,7 +195,7 @@ if single_model_polar_hou:
 	plt.savefig(figdir_primer+'/polar_proj_single_model.png')
 
 
-multiple_models_polar = True
+multiple_models_polar = False
 if multiple_models_polar:
 
 	Rsun=8.277
@@ -255,6 +255,66 @@ if multiple_models_polar:
 
 
 
+hou_han_test_cartesian = False
+if hou_han_test_cartesian:
+
+	Rsun=8.277
+	spirals = sp.main_(Rsun=Rsun)
+	use_model = 'Hou_Han_2014'
+	use_arm = 'all'
+	# use_arm = 'Outer'
+		
+	spirals.getinfo(model=use_model)				
+	
+	plt.close('all')
+	
+	fig = plt.figure(figsize=(7,7.))
+	
+	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':False}
+	spirals.readout(plotattrs,model=use_model,arm=use_arm)
+	# spirals.readout(plotattrs,model=use_model2,arm=use_arm)
+		
+	plt.tight_layout()
+
+	plt.savefig(figdir_primer+'/test_houhan.png')
+hou_han_test = True
+if hou_han_test:
+
+	Rsun=8.277
+	spirals = sp.main_(Rsun=Rsun)
+	use_model = 'Hou_Han_2014'
+	use_model3 = 'Hou_Han__HII_2014'
+	use_arm = 'all'
+	use_model2 = 'Poggio_cont_2021'
+
+		
+	spirals.getinfo(model=use_model)				
+	
+	plt.close('all')
+	
+	fig = plt.figure(figsize=(10,10.))
+	
+	ax = plt.subplot(121, projection='polar')		
+
+	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polarproj':True,'linewidth':5}
+	spirals.readout(plotattrs,model=use_model,arm=use_arm)	
+	plotattrs = {'plot':True,'coordsys':'GC','markersize':3,'polarproj':True}	
+	spirals.readout(plotattrs,model=use_model2,arm='all')	
+	polar_style(ax,title=use_model+' (GC)')
+	
+	ax = plt.subplot(122, projection='polar')		
+
+	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polarproj':True,'linewidth':5}
+	spirals.readout(plotattrs,model=use_model3,arm=use_arm)	
+	plotattrs = {'plot':True,'coordsys':'GC','markersize':3,'polarproj':True}	
+	spirals.readout(plotattrs,model=use_model2,arm='all')	
+	polar_style(ax,title=use_model3+' (GC)')
+	
+	
+	plt.tight_layout()
+
+	plt.savefig(figdir_primer+'/test_houhan.png')
+
 makegif = False
 if makegif:
 
@@ -286,7 +346,7 @@ if makegif:
 
 	import mytools
 	curdir = os.getcwd()
-	mytools.png2movie(figdir_primer,curdir,flname='movie_',duration=2.5,fmt='gif')
+	mytools.png2movie(figdir_primer,curdir,flname='movie_',duration=0.5,fmt='gif')
 	
 	
 	
