@@ -292,7 +292,7 @@ if hou_han_test:
 
 	plt.savefig(figdir_primer+'/test_houhan.png')
 
-makegif = True
+makegif = False
 if makegif:
 
 	plt.close('all')
