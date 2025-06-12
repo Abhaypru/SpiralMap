@@ -35,3 +35,14 @@ exclude_patterns = []
 html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
 html_baseurl = "https://spiralmap.readthedocs.io/en/latest/"
+
+# -- Google Analytics (GA4) integration --------------------------------------
+
+def setup(app):
+    app.add_js_file("https://www.googletagmanager.com/gtag/js?id=G-2D1BGW81C9")
+    app.add_js_file(None, body="""
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2D1BGW81C9');
+    """)
