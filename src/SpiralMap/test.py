@@ -254,30 +254,7 @@ if multiple_models_polar:
 	plt.savefig(figdir_primer+'/polar_proj_multiple_models2.png')
 
 
-
-hou_han_test_cartesian = False
-if hou_han_test_cartesian:
-
-	Rsun=8.277
-	spirals = sp.main_(Rsun=Rsun)
-	use_model = 'Hou_Han_2014'
-	use_arm = 'all'
-	# use_arm = 'Outer'
-		
-	spirals.getinfo(model=use_model)				
-	
-	plt.close('all')
-	
-	fig = plt.figure(figsize=(7,7.))
-	
-	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polargrid':False}
-	spirals.readout(plotattrs,model=use_model,arm=use_arm)
-	# spirals.readout(plotattrs,model=use_model2,arm=use_arm)
-		
-	plt.tight_layout()
-
-	plt.savefig(figdir_primer+'/test_houhan.png')
-hou_han_test = True
+hou_han_test = False
 if hou_han_test:
 
 	Rsun=8.277
@@ -315,7 +292,7 @@ if hou_han_test:
 
 	plt.savefig(figdir_primer+'/test_houhan.png')
 
-makegif = False
+makegif = True
 if makegif:
 
 	plt.close('all')
@@ -346,7 +323,7 @@ if makegif:
 
 	import mytools
 	curdir = os.getcwd()
-	mytools.png2movie(figdir_primer,curdir,flname='movie_',duration=0.5,fmt='gif')
+	mytools.png2movie(figdir_primer,curdir,flname='movie_',duration=2.5,fmt='gif')
 	
 	
 	
