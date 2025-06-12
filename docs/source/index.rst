@@ -20,6 +20,13 @@ To this end, with `SpiralMap` one can:
 For a quick demonstration please see the accompanying `Jupyter Notebook <https://github.com/Abhaypru/SpiralMap/blob/main/demo_spiralmap.ipynb>`_.
 
 
+.. figure:: ../../src/SpiralMap/movie_.gif
+
+   A gallery of the various models included in this version, in this case in polar projection and in Galactocentric coordinates with 
+   the locations of the Sun and the Galactic center (star) marked.
+   
+
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
