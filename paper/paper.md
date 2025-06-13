@@ -56,7 +56,7 @@ a) Documentation: [`readthedocs`](https://spiralmap.readthedocs.io/en/latest/), 
 
 
 # Example Scientific application
-As an example of a science case, we reproduce figures from [@khanna2024] (hereafter K24) where `SpiralMap` was used. 
+As an example of a science case, we reproduce figures from @khanna2024 (hereafter K24) where `SpiralMap` was used. 
 In particular, K24 constructed a model for the stellar density distribution in Red Clump stars in the Milky Way, and then compared the residuals of their best-fit models
  with the locations of non-axisymmetric structures such as spiral arms. The figures below show two of their residual plots overlaid with spiral models
  ( `Drimmel_NIR_2000`, `Drimmel_Ceph_2024`, & `Reid_2019`) using `SpiralMap`.
