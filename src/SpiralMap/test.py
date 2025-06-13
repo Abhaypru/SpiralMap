@@ -325,7 +325,58 @@ if makegif:
 	curdir = os.getcwd()
 	mytools.png2movie(figdir_primer,curdir,flname='movie_',duration=3.5,fmt='gif')
 	
+		
+
+
+templot = False
+if templot:
+
+	# grab data	(poggio and ceph)
+	plotattrs = {'plot':False,'coordsys':'GC','markersize':3,'polarproj':True,'armcolour':''}
+	pg = spiral_poggio_maps()
+	pg.xsun = 8.277
+	pg.output_(plotattrs)	
+	xvalues = pg.dout['xhc']
+	yvalues = pg.dout['yhc']
+	overdens_grid = pg.over_dens_grid
 	
+
+	plotattrs = {'plot':True,'coordsys':'HC','markersize':5,'linewidth':4,'linestyle':'-','polargrid':False}
+	Rsun=8.277
+	spirals = sp.main_(Rsun=Rsun)
+	use_model2 = 'Drimmel_Ceph_2024' 
+	use_arm = 'all'	
+	
+	plt.close('all')
+	
+	fgsize=(6.5,5.)
+	fig = plt.figure(figsize=fgsize, dpi=150)
+	
+	ax = fig.gca()
+	
+	iniz=-1.18
+	fin=1.18
+	N_levels=50
+	levels=np.linspace(iniz,fin,N_levels)
+	cset1 = ax.contourf(xvalues, yvalues,overdens_grid.T, levels=levels, cmap='seismic',vmin=-1.18,vmax=1.18)
+	
+	cbar=plt.colorbar(mappable=cset1,orientation="vertical",ticks=[-1,-0.5, 0,  0.5, 1])
+	
+	cbar.set_label('Overdensity', fontsize=18)
+	cbar.ax.tick_params(labelsize=18) 
+
+	spirals.readout(plotattrs,model=use_model2,arm=use_arm)	
+	
+	ax.set_xlabel('X (kpc)', fontsize=18)
+	ax.set_ylabel('Y (kpc)', fontsize=18)
+	
+	ax.set_xlim([-5.5,5.1])
+	ax.set_ylim([-5.8,5.5])
+	ax.tick_params(axis="x", labelsize=15)
+	ax.tick_params(axis="y", labelsize=15)
+	plt.tight_layout()
+	
+	# # plt.show()	
 	
 	
 	

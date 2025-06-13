@@ -59,6 +59,7 @@ class spiral_poggio_maps(object):
 		func_ = lambda s: 'yval' in s
 		yval_file = list(filter(func_,flist1))[0]
 		
+		
 		# # read overdensity contours
 		xvalues_overdens=np.load(self.loc+'/'+xval_file)
 		yvalues_overdens=np.load(self.loc+'/'+yval_file)
@@ -66,6 +67,8 @@ class spiral_poggio_maps(object):
 		phi1_dens=np.arctan2(yvalues_overdens, -xvalues_overdens)
 		Rvalues_dens=sqrtsum(ds=[xvalues_overdens, yvalues_overdens])
 		Rgcvalues_dens=sqrtsum(ds=[xvalues_overdens+xsun, yvalues_overdens])
+		
+		self.over_dens_grid = over_dens_grid
 		
 		fl = pickleread(self.loc+'/'+self.model_+'_pproj_contours.pkl')
 		self.dout = {'xhc':xvalues_overdens,'yhc':yvalues_overdens,'xgc':xvalues_overdens+xsun,'ygc':yvalues_overdens}
@@ -998,11 +1001,11 @@ class main_(object):
 		if plotattrs_['plot'] and plotattrs_['polarproj']==False :							
 			plt.plot(spimod.dout['x'+plotattrs_['coordsys'].lower()],
 			         spimod.dout['y'+plotattrs_['coordsys'].lower()],
-			         plotattrs_['linestyle'],color=plotattrs_['armcolour'])			
+			         plotattrs_['linestyle'],linewidth=plotattrs_['linewidth'],color=plotattrs_['armcolour'])			
 			if 'xhc_ex' in 	spimod.dout.keys():
 				plt.plot(spimod.dout['x'+plotattrs_['coordsys'].lower()+'_ex'],
 				         spimod.dout['y'+plotattrs_['coordsys'].lower()+'_ex'],
-				         '--',color=plotattrs_['armcolour'])	
+				         '--',linewidth=plotattrs_['linewidth'],color=plotattrs_['armcolour'])	
 				                							
 			plt.xlabel('X$_{'+plotattrs_['coordsys']+'}$ [Kpc]')
 			plt.ylabel('Y$_{'+plotattrs_['coordsys']+'}$ [Kpc]')	 

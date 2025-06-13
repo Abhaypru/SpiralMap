@@ -50,7 +50,7 @@ The following table provides a summary of the spiral arm models included in **Sp
 	* Class built upon the polynomial-logarithmic formulation introduced by `Hou et al. 2014 <https://ui.adsabs.harvard.edu/abs/2014A%26A...569A.125H/abstract>`_, based on a combination of 
 	  H II, giant molecular clouds, and methanol MASER catalogs. 	
 	* Model publicly available.
-	* There are six arms in this model (Arm1, Arm2, Arm3, Arm4,Arm5,Arm6).
+	* There are six arms in this model (Arm1, Arm2, Arm3, Arm4, Arm5, Arm6).
 
 `Reid_2019`
 ---------
