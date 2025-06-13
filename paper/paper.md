@@ -63,8 +63,29 @@ In particular, K24 constructed a model for the stellar density distribution in R
 
 
 ![An example science case where `SpiralMap` can be useful. Here we show two figures reproduced from K24 (with permission), comparing the residuals between a best-fit model and data, and the locations of spiral arm models in the Milky Way. This figure shows the \drimmelnir{}, \drimmelceph{}, \& \reid{} overplotted together, shown in polar projection.\label{example_science_a}](figures/figures/residuals_polar_3.png)
-![Same as above, but showing only the \drimmelnir{} model.\label{example_science_b}](figures/figures/residuals_polar_0.png)
+![Same as above, but showing only the `Drimmel_NIR_2000` model.\label{example_science_b}](figures/figures/residuals_polar_0.png)
 
+
+
+A very basic example of using `SpiralMap` is shown below, where we access all information about one particular arm ( `Sag-Car`) in one particular model `Drimmel_Ceph_2024`,
+\begin{verbatim}
+
+::
+
+	##################################################
+	##### Readout a single arm from a single model ###
+	##################################################
+	$$import SpiralMap as sp$$
+	$$from SpiralMap import polar_style$$
+	
+	$$Rsun=8.277$$
+	$$spirals = sp.main_(Rsun=Rsun)	$$
+	$$use_model = `Drimmel_Ceph_2024'
+	spirals.getinfo(model=use_model)
+	plotattrs = {`plot':False}
+	spirals.readout(plotattrs,model=use_model,arm=`Sag-Car')    
+
+More common examples are shown in the accompanying [`Jupyter notebook`](https://github.com/Abhaypru/SpiralMap/blob/main/demo_spiralmap.ipynb). 
 
 
 # Availability
