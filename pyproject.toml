@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "SpiralMap"
-version = "0.0.22"
+version = "0.0.3"
 authors = [
   { name="Prusty & Khanna", email="shourya.khanna@inaf.it" },
 ]

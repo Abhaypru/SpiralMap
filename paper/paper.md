@@ -55,6 +55,19 @@ a) Documentation: [`readthedocs`](https://spiralmap.readthedocs.io/en/latest/), 
 ![Polar projections of multiple models plotted together. We show the `Taylor_Cordes_1992` & `Poggio_2021` models in HC (a) and GC (b) frames, and similarly the tiple models plotted together with a polar grid in the background and similarly, the `Drimmel_NIR_2000` & `Poggio_2021` models in HC (c) and GC (d) frames.\label{multiple_models_polar}](figures/multiple_models_polar.png)
 
 
+# Example Scientific application
+As an example of a science case, we reproduce figures from [@khanna2024] (hereafter K24) where `SpiralMap` was used. 
+In particular, K24 constructed a model for the stellar density distribution in Red Clump stars in the Milky Way, and then compared the residuals of their best-fit models
+ with the locations of non-axisymmetric structures such as spiral arms. The figures below show two of their residual plots overlaid with spiral models
+ ( `Drimmel_NIR_2000`, `Drimmel_Ceph_2024`, & `Reid_2019`) using `SpiralMap`.
+
+
+
+.. |pic1| image:: figures/residuals_polar_3.png
+   :width: 45%
+
+.. |pic2| image:: figures/residuals_polar_0.png
+   :width: 45%
 
 # Availability
 
