@@ -62,7 +62,7 @@ In particular, K24 constructed a model for the stellar density distribution in R
  ( `Drimmel_NIR_2000`, `Drimmel_Ceph_2024`, & `Reid_2019`) using `SpiralMap`.
 
 
-![An example science case where `SpiralMap` can be useful. Here we show two figures reproduced from K24 (with permission), comparing the residuals between a best-fit model and data, and the locations of spiral arm models in the Milky Way. This figure shows the \drimmelnir{}, \drimmelceph{}, \& \reid{} overplotted together, shown in polar projection.\label{example_science_a}](figures/figures/residuals_polar_3.png)
+![An example science case where `SpiralMap` can be useful. Here we show two figures reproduced from K24 (with permission), comparing the residuals between a best-fit model and data, and the locations of spiral arm models in the Milky Way. This figure shows the `Drimmel_NIR_2000`, `Drimmel_Ceph_2024`, & `Reid_2019` overplotted together, shown in polar projection.\label{example_science_a}](figures/figures/residuals_polar_3.png)
 ![Same as above, but showing only the `Drimmel_NIR_2000` model.\label{example_science_b}](figures/figures/residuals_polar_0.png)
 
 
