@@ -207,9 +207,10 @@ class spiral_houhan(object):
 	def __init__(self):			
 		self.getarmlist()	
 	def getarmlist(self):
-		"""Set arm names and colours"""
-		self.arms = np.array(['Norma','Scutum-Centaurus','Sagittarius-Carina','Perseus','Local','Outer'])
-		self.armcolour = {'Norma':'black','Scutum-Centaurus':'red','Sagittarius-Carina':'green','Perseus':'blue','Local':'purple','Outer':'gold'}
+		"""Set arm names and colours"""		
+		self.arms = np.array(['Arm1','Arm2','Arm3','Arm4','Arm5','Arm6'])
+		self.armcolour = {'Arm1':'black','Arm2':'red','Arm3':'green','Arm4':'blue','Arm5':'purple','Arm6':'gold'}
+		
 		self.armcolours= [self.armcolour[ky]  for ky in self.arms  ]	
 	def info(self):		
 		d = {'Arm list': self.arms, 'Colour': self.armcolours}
@@ -230,12 +231,12 @@ class spiral_houhan(object):
 		   :rtype: dict 
 		"""			
 		params = {
-			'Norma': {'a': 1.1320, 'b': 0.1233, 'c': 0.003488, 'd': 0.0, 'θ_start': 40, 'θ_end': 250},
-			'Scutum-Centaurus': {'a': 5.8243, 'b': -1.8196, 'c': 0.2350, 'd': -0.009011, 'θ_start': 275, 'θ_end': 620},
-			'Sagittarius-Carina': {'a': 4.2767, 'b': -1.1507, 'c': 0.1570, 'd': -0.006078, 'θ_start': 275, 'θ_end': 575},
-			'Perseus': {'a': 1.1280, 'b': 0.1282, 'c': 0.002617, 'd': 0.0, 'θ_start': 280, 'θ_end': 500},
-			'Local': {'a': 1.7978, 'b': -0.04738, 'c': 0.01684, 'd': 0.0, 'θ_start': 280, 'θ_end': 500},
-			'Outer': {'a': 2.4225, 'b': -0.1636, 'c': 0.02494, 'd': 0.0, 'θ_start': 280, 'θ_end': 405}
+			'Arm1': {'a': 1.1320, 'b': 0.1233, 'c': 0.003488, 'd': 0.0, 'θ_start': 40, 'θ_end': 250},
+			'Arm2': {'a': 5.8243, 'b': -1.8196, 'c': 0.2350, 'd': -0.009011, 'θ_start': 275, 'θ_end': 620},
+			'Arm3': {'a': 4.2767, 'b': -1.1507, 'c': 0.1570, 'd': -0.006078, 'θ_start': 275, 'θ_end': 575},
+			'Arm4': {'a': 1.1280, 'b': 0.1282, 'c': 0.002617, 'd': 0.0, 'θ_start': 280, 'θ_end': 500},
+			'Arm5': {'a': 1.7978, 'b': -0.04738, 'c': 0.01684, 'd': 0.0, 'θ_start': 280, 'θ_end': 500},
+			'Arm6': {'a': 2.4225, 'b': -0.1636, 'c': 0.02494, 'd': 0.0, 'θ_start': 280, 'θ_end': 405}
 		}	
 		return params		
 	def polynomial_log_spiral(self, θ, a, b, c, d):		
@@ -311,9 +312,9 @@ class spiral_houhan_HII(object):
 	def __init__(self):			
 		self.getarmlist()	
 	def getarmlist(self):
-		"""Set arm names and colours"""
-		self.arms = np.array(['Norma','Scutum-Centaurus','Sagittarius-Carina','Perseus','Local','Outer'])
-		self.armcolour = {'Norma':'black','Scutum-Centaurus':'red','Sagittarius-Carina':'green','Perseus':'blue','Local':'purple','Outer':'gold'}
+		"""Set arm names and colours"""		
+		self.arms = np.array(['Arm1','Arm2','Arm3','Arm4','Arm5','Arm6'])
+		self.armcolour = {'Arm1':'black','Arm2':'red','Arm3':'green','Arm4':'blue','Arm5':'purple','Arm6':'gold'}		
 		self.armcolours= [self.armcolour[ky]  for ky in self.arms  ]	
 	def info(self):		
 		d = {'Arm list': self.arms, 'Colour': self.armcolours}
@@ -335,12 +336,12 @@ class spiral_houhan_HII(object):
 		"""			
 
 		params = {
-			'Norma': {'a': 1.1668, 'b': 0.1198, 'c': 0.002557, 'd': 0.0, 'θ_start': 40, 'θ_end': 250},
-			'Scutum-Centaurus': {'a': 5.8002, 'b': -1.8188, 'c': 0.2352, 'd': -0.008999, 'θ_start': 275, 'θ_end': 620},
-			'Sagittarius-Carina': {'a': 4.2300, 'b': -1.1505, 'c': 0.1561, 'd': -0.005898, 'θ_start': 275, 'θ_end': 570},
-			'Perseus': {'a': 0.9744, 'b': 0.1405, 'c': 0.003995, 'd': 0.0, 'θ_start': 280, 'θ_end': 500},
-			'Local': {'a': 0.9887, 'b': 0.1714, 'c': 0.004358, 'd': 0.0, 'θ_start': 280, 'θ_end': 475},
-			'Outer': {'a': 3.3846, 'b': -0.6554, 'c': 0.08170, 'd': 0.0, 'θ_start': 280, 'θ_end': 355}
+			'Arm1': {'a': 1.1668, 'b': 0.1198, 'c': 0.002557, 'd': 0.0, 'θ_start': 40, 'θ_end': 250},
+			'Arm2': {'a': 5.8002, 'b': -1.8188, 'c': 0.2352, 'd': -0.008999, 'θ_start': 275, 'θ_end': 620},
+			'Arm3': {'a': 4.2300, 'b': -1.1505, 'c': 0.1561, 'd': -0.005898, 'θ_start': 275, 'θ_end': 570},
+			'Arm4': {'a': 0.9744, 'b': 0.1405, 'c': 0.003995, 'd': 0.0, 'θ_start': 280, 'θ_end': 500},
+			'Arm5': {'a': 0.9887, 'b': 0.1714, 'c': 0.004358, 'd': 0.0, 'θ_start': 280, 'θ_end': 475},
+			'Arm6': {'a': 3.3846, 'b': -0.6554, 'c': 0.08170, 'd': 0.0, 'θ_start': 280, 'θ_end': 355}
 		}	
 
 		return params		
