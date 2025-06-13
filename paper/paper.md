@@ -69,9 +69,8 @@ In particular, K24 constructed a model for the stellar density distribution in R
 
 
 A very basic example of using `SpiralMap` is shown below, where we access all information about one particular arm ( `Sag-Car`) in one particular model `Drimmel_Ceph_2024`,
-\begin{verbatim}
 
-::
+.. code-block:: python
 
 	##################################################
 	##### Readout a single arm from a single model ###
@@ -86,6 +85,8 @@ A very basic example of using `SpiralMap` is shown below, where we access all in
 	plotattrs = {`plot':False}
 	spirals.readout(plotattrs,model=use_model,arm=`Sag-Car')    
 
+	##################################################
+	
 More common examples are shown in the accompanying [`Jupyter notebook`](https://github.com/Abhaypru/SpiralMap/blob/main/demo_spiralmap.ipynb). 
 
 
