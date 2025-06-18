@@ -1,7 +1,7 @@
 How to Cite
 ===========
 
-If you use **SpiralMap**, please cite the accompanying paper (link). 
+If you use **SpiralMap**, please cite the accompanying paper `Prusty & Khanna <https://arxiv.org/abs/2506.11383>`_. 
 
 Pleae also cite the particular models used, we provide below the references in BibTeX format.
 
