@@ -7,6 +7,7 @@ A Python library of the Milky Way's spiral arms.
 The detailed documentation is hosted on [Read the docs](https://spiralmap.readthedocs.io/en/latest/#api-docs).
 
 For a quickstart please refer to the accompanying [Jupyter notebook](https://github.com/Abhaypru/SpiralMap/blob/main/demo_spiralmap.ipynb).
+
 Read the preprint at [arxiv](https://www.arxiv.org/abs/2506.11383)
 ## Features
 + Access 8 independent spiral arm models from literature. We are open to requests for including other spiral arm models. 
