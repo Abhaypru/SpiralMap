@@ -8,7 +8,7 @@ The detailed documentation is hosted on [Read the docs](https://spiralmap.readth
 
 For a quickstart please refer to the accompanying [Jupyter notebook](https://github.com/Abhaypru/SpiralMap/blob/main/demo_spiralmap.ipynb).
 
-Read the preprint at [arxiv](https://www.arxiv.org/abs/2506.11383)
+Read the preprint at [arxiv](https://www.arxiv.org/abs/2506.11383).
 ## Features
 + Access 8 independent spiral arm models from literature. We are open to requests for including other spiral arm models. 
 + Extract the 2D trace of individual or all spiral arms from a particular model.
