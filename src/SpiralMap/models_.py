@@ -2,6 +2,13 @@
 # SpiralMap: a library of the Milky Way's spiral arms
 # History:  	
 # May 2025: Prusty (IISER Kolkata) & Shourya Khanna (INAF Torino)
+# Feb 2026: Following updates:
+			# 1) Missing Local arm (logarithmic) added to Hou-Han 2014 model.
+			# 2) Vallee 1995 model included. 
+			# 3) added dependencies to .toml
+			# 4)  
+			# 5)  
+			# 6)  
 #######################################################################
 
 
@@ -108,6 +115,178 @@ class spiral_poggio_maps(object):
 			plotattrs['linestyle'] = '.'
 			_polarproj(self,plotattrs)	
 				
+
+class spiral_vallee(object):
+	"""	
+	Vallee et al (1995) logarithmic spiral arm model for the Milky Way.
+	Based on multi-tracer analysis including magnetic fields, dust, gas, and stars.
+	"""	
+
+	def __init__(self):   
+		self.getarmlist()
+		self.xsun = -8.0  # Sun at x=-8 in galactocentric (so R0 becomes positive)
+		self.R0 = -self.xsun  # 8.0 kpc
+	
+	def getarmlist(self):	
+		"""Set arm names """					
+		self.arms = np.array(['Sagittarius', 'Scutum', 'Norma', 'Perseus'])
+		self.armcolour = {
+			'Sagittarius': 'C0',
+			'Scutum': 'C3',
+			'Norma': 'C1',
+			'Perseus': 'C2'
+		}
+				
+		self.getparams()
+		self.armcolours = [self.armcolour[ky] for ky in self.arms]
+		
+	def info(self):
+		d = {'Arm list': self.arms, 'Colour': self.armcolours}
+		dfmodlist = pd.DataFrame(d)			
+		print(tabulate(dfmodlist, headers='keys', tablefmt='psql'))
+	
+	def getparams(self):
+		"""		
+		Return parameters for each arm.
+		
+		Parameters from Vallee 1995:
+		- Pitch angle: 12° ± 1° (inward, absolute value used here)
+		- Number of arms: 4
+		- Arm start radius: 2.5 kpc
+		- Solar position: 8 kpc from Galactic center
+		- Arm separation: ~3 kpc near Sun
+		
+		Note: phi0 is set to produce 4 equally spaced arms starting at 2.5 kpc
+		"""
+		
+		self.arms_model = {
+			'Sagittarius': {'pitch': 12.5, 'phi0': 0, 'r0': 2.5},
+			'Scutum': {'pitch': 12.5, 'phi0': 90, 'r0': 2.5},
+			'Norma': {'pitch': 12.5, 'phi0': 180, 'r0': 2.5},
+			'Perseus': {'pitch': 12.5, 'phi0': 270, 'r0': 2.5}
+		}
+	 
+	def model_(self, arm_name, R_max=13, n_points=1000):
+		"""Generate logarithmic spiral coordinates for specified arm.
+		
+		Parameters
+		----------
+		arm_name : str
+			Name of arm to model
+		R_max : float, optional
+			Maximum galactocentric radius to model (kpc), default=13
+			(Vallee 1995 limits to r_gal < 13 kpc)
+		n_points : int, optional
+			Number of points to sample along the spiral, default=1000
+	
+		Returns
+		-------
+		tuple
+			(x_hc, y_hc, x_gc, y_gc) coordinate arrays where:
+			- x_hc, y_hc: Heliocentric coordinates (kpc)
+			- x_gc, y_gc: Galactocentric coordinates (kpc)
+	
+		Model limited to 3 kpc < r_gal < 13 kpc per Vallee 1995 constraints
+		"""
+	
+		params = self.arms_model[arm_name]
+		pitch_rad = np.radians(params['pitch'])
+		phi0_rad = np.radians(params['phi0'])
+		r0 = params['r0']
+		
+		# Calculate maximum phi to reach R_max, starting from r0
+		phi_max = phi0_rad + (np.log(R_max/r0) / np.tan(pitch_rad))
+		
+		# Generate angular range starting from phi0
+		phi = np.linspace(phi0_rad, phi_max, n_points)
+		
+		# Logarithmic spiral equation (Vallee 1995 eq. 5a)
+		R = r0 * np.exp((phi - phi0_rad) * np.tan(pitch_rad))
+		
+		# Apply Vallee 1995 constraints: exclude r_gal < 3 kpc
+		mask = R >= 3.0
+		R = R[mask]
+		phi = phi[mask]
+		
+		# Convert to Cartesian coordinates (Galactocentric)
+		x_gc = R * np.cos(phi)
+		y_gc = R * np.sin(phi)
+		
+		# Convert to Heliocentric coordinates (Sun at x=8, y=0 in galactocentric)
+		# In heliocentric: x_hc = x_gc - (-8) = x_gc + 8, y_hc = y_gc - 0 = y_gc
+		x_hc = x_gc + self.R0  
+		y_hc = y_gc  # Sun at y=0 in galactocentric, so y_hc = y_gc
+	
+		return x_hc, y_hc, x_gc, y_gc
+		
+	def output_(self, arm):		
+		"""Get arm coordinates
+		
+		Parameters
+		----------
+		arm : str
+			Arm identifier (e.g., 'Sagittarius')
+		
+		Returns
+		-------
+		dict
+			Dictionary with keys:
+			- 'xhc': Heliocentric x coordinates
+			- 'yhc': Heliocentric y coordinates
+			- 'xgc': Galactocentric x coordinates
+			- 'ygc': Galactocentric y coordinates
+		"""		
+		
+		xhc, yhc, xgc, ygc = self.model_(arm)   
+		self.dout = {
+			'xhc': xhc,
+			'yhc': yhc,
+			'xgc': xgc,
+			'ygc': ygc
+		}
+		return self.dout
+
+	def df_plot(self, coord='GC', R_max=13):
+		rows = []
+
+		for arm in self.arms:
+			x_hc, y_hc, x_gc, y_gc = self.model_(arm, R_max)
+
+			if coord.upper() == 'GC':
+				x, y = x_gc, y_gc
+			else:
+				x, y = x_hc, y_hc
+
+			for xi, yi in zip(x, y):
+				rows.append([arm, xi, yi])
+
+		return pd.DataFrame(rows, columns=['arm', 'x', 'y'])
+
+	def plot(self, coord='GC', R_max=13):
+		df = self.df_plot(coord, R_max)
+
+		plt.figure(figsize=(6, 6))
+
+		for arm in self.arms:
+			d = df[df['arm'] == arm]
+			plt.plot(d['x'], d['y'], color=self.armcolour[arm], label=arm)
+
+		if coord.upper() == 'GC':
+			plt.plot(0, 0, 'r*', ms=12, label='GC')
+			plt.plot(-self.R0, 0, 'o', color='orange', label='Sun')
+			plt.xlabel('X_gc [kpc]')
+			plt.ylabel('Y_gc [kpc]')
+		else:
+			plt.plot(0, 0, 'o', color='orange', label='Sun')
+			plt.xlabel('X_hc [kpc]')
+			plt.ylabel('Y_hc [kpc]')
+
+		plt.axhline(0, ls='--', lw=0.5)
+		plt.axvline(0, ls='--', lw=0.5)
+		plt.axis('equal')
+		plt.legend()
+		plt.tight_layout()
+		plt.show()
 			
 class TaylorCordesSpiral(object):		
 	"""	
@@ -211,8 +390,8 @@ class spiral_houhan(object):
 		self.getarmlist()	
 	def getarmlist(self):
 		"""Set arm names and colours"""		
-		self.arms = np.array(['Arm1','Arm2','Arm3','Arm4','Arm5','Arm6'])
-		self.armcolour = {'Arm1':'black','Arm2':'red','Arm3':'green','Arm4':'blue','Arm5':'purple','Arm6':'gold'}
+		self.arms = np.array(['Arm1','Arm2','Arm3','Arm4','Arm5','Arm6','local'])
+		self.armcolour = {'Arm1':'black','Arm2':'red','Arm3':'green','Arm4':'blue','Arm5':'purple','Arm6':'gold','local':'cyan'}
 		
 		self.armcolours= [self.armcolour[ky]  for ky in self.arms  ]	
 	def info(self):		
@@ -222,15 +401,17 @@ class spiral_houhan(object):
 		
 	def getparams(self):						
 		"""			
-		   Load spiral parameters from Hou & Han (2014) Table 4 (vcirc=239, Z =0.16), all tracers.
-		   
+		   Load spiral parameters from Hou & Han (2014) Table 4 (vcirc=239, Z =0.17), all tracers.
+		   		   
 		   :return: params ( Nested dictionary containing for each arm).
 		   
 	   				a, b, c, d: Polynomial coefficients.
 	   				
 					θ_start: Start angle in degrees (Galactic longitude).
 					
-					θ_end: End angle in degrees.		   		   
+					θ_end: End angle in degrees.		
+					
+					ri,thetai,psi: logarithmic spiral (local arm only)   		   
 		   :rtype: dict 
 		"""			
 		params = {
@@ -239,8 +420,11 @@ class spiral_houhan(object):
 			'Arm3': {'a': 4.2767, 'b': -1.1507, 'c': 0.1570, 'd': -0.006078, 'θ_start': 275, 'θ_end': 575},
 			'Arm4': {'a': 1.1280, 'b': 0.1282, 'c': 0.002617, 'd': 0.0, 'θ_start': 280, 'θ_end': 500},
 			'Arm5': {'a': 1.7978, 'b': -0.04738, 'c': 0.01684, 'd': 0.0, 'θ_start': 280, 'θ_end': 500},
-			'Arm6': {'a': 2.4225, 'b': -0.1636, 'c': 0.02494, 'd': 0.0, 'θ_start': 280, 'θ_end': 405}
+			'Arm6': {'a': 2.4225, 'b': -0.1636, 'c': 0.02494, 'd': 0.0, 'θ_start': 280, 'θ_end': 405},			
+			'local': {'ri': 8.17, 'thetai': 57.8, 'psi':2.84,'ymin':-4.,'ymax':7.5'}			
 		}	
+		
+		
 		return params		
 	def polynomial_log_spiral(self, θ, a, b, c, d):		
 		"""Calculate radius using polynomial-logarithmic spiral equation.
@@ -268,19 +452,31 @@ class spiral_houhan(object):
 	def model_(self, arm_name, n_points=500):
 		
 		params_ = self.getparams()
-		params = params_[arm_name]
+		params = params_[arm_name]	
 		
-		
-		θ = np.linspace(params['θ_start'], params['θ_end'], n_points)
-		R = self.polynomial_log_spiral(θ, params['a'], params['b'], params['c'], params['d'])
-				
+		if arm_name == 'local':
+			θ = np.linspace(0., 180., n_points)
+			tmp1 = np.radians(θ - params['thetai'])
+			tmp2 = np.tan(np.radians(params['psi']))
+			R = params['ri']*np.exp( tmp1*tmp2 )
+		else:						
+			θ = np.linspace(params['θ_start'], params['θ_end'], n_points)
+			R = self.polynomial_log_spiral(θ, params['a'], params['b'], params['c'], params['d'])
+					
 		# Convert to Cartesian coordinates (Galactocentric)
 		y_gc = R*np.cos(np.radians(θ))
 		x_gc = -R * np.sin(np.radians(θ))
 		
 		# Convert to Heliocentric coordinates
 		x_hc = (x_gc + self.R0)
-	
+		
+		if arm_name == 'local':
+			ind_mask = np.where((y_gc < params['ymin'])|(y_gc > params['ymax']))[0]
+			y_gc[ind_mask] = np.nan	
+			x_gc[ind_mask] = np.nan	
+			x_hc[ind_mask] = np.nan	
+			
+			
 		return x_hc, y_gc, x_gc, y_gc
 	
 	def output_(self, arm):			
@@ -929,7 +1125,7 @@ class main_(object):
 		   	Constructs dictionaries to initialise individual model classes
 		"""	
 		   		
-		self.models = ['Taylor_Cordes_1992','Drimmel_NIR_2000',
+		self.models = ['Taylor_Cordes_1992','Vallee_1995','Drimmel_NIR_2000',
 					   'Levine_2006','Hou_Han_2014','Hou_Han_HII_2014','Reid_2019',
 					   'Poggio_cont_2021','GaiaPVP_cont_2022','Drimmel_Ceph_2024']        
 		self.models_class = {'Reid_2019':reid_spiral(),
@@ -940,9 +1136,10 @@ class main_(object):
 							 'Taylor_Cordes_1992':TaylorCordesSpiral(),
 							 'Hou_Han_2014':spiral_houhan(),
 							 'Hou_Han_HII_2014':spiral_houhan_HII(),
+							 'Vallee_1995':spiral_vallee(),
 							 'Drimmel_Ceph_2024':spiral_drimmel_cepheids()}
 							 
-		self.models_desc = 	['HII','NIR emission',
+		self.models_desc = 	['HII','Bfield/Dust/gas','NIR emission',
 					   'HI','HII/GMC/Masers','HII','MASER parallax',
 					   'Upper main sequence (map)','OB stars (map)','Cepheids']  			 							 
 	def getinfo(self,model='',print_=True):	
@@ -1238,4 +1435,4 @@ class _make_supportfiles(object):
 	
 
 
-# # _make_supportfiles()
+# _make_supportfiles()

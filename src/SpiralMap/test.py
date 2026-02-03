@@ -44,8 +44,35 @@ if initialise_:
 	spirals.getinfo(model=use_model)
 	plotattrs = {'plot':False}
 	spirals.readout(plotattrs,model=use_model,arm='Sag-Car')
-	
 
+
+impl_vallee_ = False
+if impl_vallee_ :
+
+
+	# spirals = sp.main_(Rsun=Rsun)
+	# spirals.getinfo()
+	# spirals.getinfo(model='Vallee_1995')
+	# spirals.plotattrs_default
+
+
+	#################
+	
+	spirals = sp.main_(Rsun=Rsun)	
+	use_model = 'Vallee_1995'
+	spirals.getinfo(model=use_model)
+	plotattrs = {'plot':True,'coordsys':'GC'}
+	spirals.readout(plotattrs,model=use_model,arm='all')	
+
+	plt.savefig(figdir_primer+'/test_vallee_gc.png')	
+
+
+	plt.close('all')
+	plotattrs = {'plot':True,'coordsys':'HC'}
+	spirals.readout(plotattrs,model=use_model,arm='all')	
+
+	plt.savefig(figdir_primer+'/test_vallee_hc.png')	
+		
 single_model_single_arm = False
 if single_model_single_arm:
 
@@ -81,7 +108,8 @@ if single_model_all_arms:
 		
 	Rsun=8.277
 	spirals = sp.main_(Rsun=Rsun)
-	use_model =  'Drimmel_Ceph_2024' 
+	# use_model =  'Drimmel_Ceph_2024' 
+	use_model =  'Vallee_1995' 
 	use_arm = 'all' 
 	spirals.getinfo(model=use_model)
 				
@@ -162,7 +190,7 @@ if single_model_polar_hou:
 	Rsun=8.277
 	spirals = sp.main_(Rsun=Rsun)
 	use_model = 'Hou_Han_2014'
-	use_arm = 'Sagittarius-Carina'
+	use_arm = 'Arm2'
 		
 	spirals.getinfo(model=use_model)				
 	
@@ -254,13 +282,13 @@ if multiple_models_polar:
 	plt.savefig(figdir_primer+'/polar_proj_multiple_models2.png')
 
 
-hou_han_test = False
+hou_han_test = True
 if hou_han_test:
 
 	Rsun=8.277
 	spirals = sp.main_(Rsun=Rsun)
 	use_model = 'Hou_Han_2014'
-	use_model3 = 'Hou_Han__HII_2014'
+	use_model3 = 'Hou_Han_2014'
 	use_arm = 'all'
 	use_model2 = 'Poggio_cont_2021'
 
@@ -273,11 +301,11 @@ if hou_han_test:
 	
 	ax = plt.subplot(121, projection='polar')		
 
-	plotattrs = {'plot':True,'coordsys':'GC','markersize':15,'markSunGC':True,'polarproj':True,'linewidth':5}
+	plotattrs = {'plot':True,'coordsys':'HC','markersize':15,'markSunGC':True,'polarproj':True,'linewidth':5}
 	spirals.readout(plotattrs,model=use_model,arm=use_arm)	
-	plotattrs = {'plot':True,'coordsys':'GC','markersize':3,'polarproj':True}	
+	plotattrs = {'plot':True,'coordsys':'HC','markersize':3,'polarproj':True}	
 	spirals.readout(plotattrs,model=use_model2,arm='all')	
-	polar_style(ax,title=use_model+' (GC)')
+	polar_style(ax,title=use_model+' (HC)')
 	
 	ax = plt.subplot(122, projection='polar')		
 
@@ -326,7 +354,6 @@ if makegif:
 	mytools.png2movie(figdir_primer,curdir,flname='movie_',duration=3.5,fmt='gif')
 	
 		
-
 
 templot = False
 if templot:
