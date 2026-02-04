@@ -282,7 +282,7 @@ if multiple_models_polar:
 	plt.savefig(figdir_primer+'/polar_proj_multiple_models2.png')
 
 
-hou_han_test = True
+hou_han_test = False
 if hou_han_test:
 
 	Rsun=8.277
@@ -320,7 +320,7 @@ if hou_han_test:
 
 	plt.savefig(figdir_primer+'/test_houhan.png')
 
-makegif = False
+makegif = True
 if makegif:
 
 	plt.close('all')
