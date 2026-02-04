@@ -223,4 +223,4 @@ def polar_style(ax,title='',rticks=[3., 6.,9.,12,15.,20.]):
 from update_checker import update_check
 import importlib.metadata
 __version__=importlib.metadata.version('SpiralMap')
-update_check('spiralmap', __version__)	
+update_check('spiralmap', __version__, check_interval=20)	
