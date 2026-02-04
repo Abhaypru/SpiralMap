@@ -10,10 +10,14 @@ For a quickstart please refer to the accompanying [Jupyter notebook](https://git
 
 Read the preprint at [arxiv](https://www.arxiv.org/abs/2506.11383).
 ## Features
-+ Access 8 independent spiral arm models from literature. We are open to requests for including other spiral arm models. 
++ Access 9 independent spiral arm models from literature. We are open to requests for including other spiral arm models. 
 + Extract the 2D trace of individual or all spiral arms from a particular model.
 + Directly overplot spiral arms with choice of Cartesian or Polar coordinates, and in Heliocentric or Galactocentric frames.
 
+## Updates
++ Missing Local arm (logarithmic) added to Hou-Han 2014 model.
++ Vallee 1995 model included. 
++ dependencies included
 
 Installation
 -------------

@@ -6,9 +6,6 @@
 			# 1) Missing Local arm (logarithmic) added to Hou-Han 2014 model.
 			# 2) Vallee 1995 model included. 
 			# 3) added dependencies to .toml
-			# 4)  
-			# 5)  
-			# 6)  
 #######################################################################
 
 
@@ -385,6 +382,7 @@ class spiral_houhan(object):
 	Implements the Milky Way spiral structure model from:
 	"The spiral structure of the Milky Way from classical Cepheids" (Hou & Han 2014)
 	using polynomial-logarithmic spiral functions. Provides 6 major arm segments.	
+	Additionally, the local arm is implemented as a logarithmic spiral.
 	"""	
 	def __init__(self):			
 		self.getarmlist()	
@@ -411,7 +409,7 @@ class spiral_houhan(object):
 					
 					θ_end: End angle in degrees.		
 					
-					ri,thetai,psi: logarithmic spiral (local arm only)   		   
+					ri,thetai,psi,ymin,ymax: logarithmic spiral (local arm only)   		   
 		   :rtype: dict 
 		"""			
 		params = {
@@ -513,7 +511,7 @@ class spiral_houhan_HII(object):
 	def getarmlist(self):
 		"""Set arm names and colours"""		
 		self.arms = np.array(['Arm1','Arm2','Arm3','Arm4','Arm5','Arm6'])
-		self.armcolour = {'Arm1':'black','Arm2':'red','Arm3':'green','Arm4':'blue','Arm5':'purple','Arm6':'gold'}		
+		self.armcolour = {'Arm1':'black','Arm2':'red','Arm3':'green','Arm4':'blue','Arm5':'purple','Arm6':'gold'}					
 		self.armcolours= [self.armcolour[ky]  for ky in self.arms  ]	
 	def info(self):		
 		d = {'Arm list': self.arms, 'Colour': self.armcolours}
