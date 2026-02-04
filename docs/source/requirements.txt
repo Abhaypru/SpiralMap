@@ -13,4 +13,5 @@ pandas
 popclass
 scikit-learn
 astropy
+update_checker
 tabulate

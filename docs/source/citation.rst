@@ -25,6 +25,23 @@ Pleae also cite the particular models used, we provide below the references in B
 	       adsurl = {https://ui.adsabs.harvard.edu/abs/1993ApJ...411..674T},
 	      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
 	}
+
+
+	@ARTICLE{Vallee_1995,
+	       author = {{Bower}, Gary and {Wilson}, Andrew and {Morse}, Jon A. and {Gelderman}, Richard and {Whittle}, Mark and {Mulchaey}, John},
+	        title = "{Radio and Emission-Line Jets in the Type 2 Seyfert Galaxy Markarian 1066 (UGC 2456)}",
+	      journal = {\apj},
+	     keywords = {GALAXIES: JETS, GALAXIES: INDIVIDUAL NAME: MARKARIAN 1066, RADIO CONTINUUM: GALAXIES, GALAXIES: NUCLEI, GALAXIES: SEYFERT},
+	         year = 1995,
+	        month = nov,
+	       volume = {454},
+	        pages = {106},
+	          doi = {10.1086/176469},
+	       adsurl = {https://ui.adsabs.harvard.edu/abs/1995ApJ...454..106B},
+	      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+	}
+
+
 	
 	@ARTICLE{Drimmel_NIR_2000,
 	       author = {{Drimmel}, R.},
