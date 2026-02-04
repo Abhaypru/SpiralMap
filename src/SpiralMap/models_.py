@@ -5,7 +5,7 @@
 # Feb 2026: Following updates:
 			# 1) Missing Local arm (logarithmic) added to Hou-Han 2014 model.
 			# 2) Vallee 1995 model included. 
-			# 3) added dependencies to .toml
+			# 3) added Dependencies
 #######################################################################
 
 
@@ -17,7 +17,6 @@ from os.path import dirname
 root_ = dirname(__file__)
 dataloc = root_+'/datafiles'
 exec(open(root_+"/mytools.py").read())
-
 #--------------------------------------------       
 
 
