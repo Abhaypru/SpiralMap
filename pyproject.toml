@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "SpiralMap"
-version = "0.0.95"  
+version = "0.15"  
 authors = [
   { name="Prusty & Khanna", email="shourya.khanna@inaf.it" },
 ]
@@ -25,6 +25,7 @@ dependencies = [
     "numpy",
     "scipy",
     "tabulate",
+    "update-checker",	
     "pandas",
 ]
 

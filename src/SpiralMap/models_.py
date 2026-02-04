@@ -12,11 +12,13 @@
 #--------------------------------------------
 # import utilities package / set root 
 import os
+import version 
 from os.path import dirname
+from update_checker import update_check
 root_ = dirname(__file__)
 dataloc = root_+'/datafiles'
 exec(open(root_+"/mytools.py").read())
-
+update_check('spiralmap', version.__version__)	
 #--------------------------------------------       
 
 

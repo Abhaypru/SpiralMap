@@ -51,6 +51,7 @@ The following table provides a summary of the spiral arm models included in **Sp
 	  H II, giant molecular clouds, and methanol MASER catalogs. 	
 	* Model publicly available.
 	* There are six arms in this model (Arm1, Arm2, Arm3, Arm4, Arm5, Arm6).
+	* Additionally their local arm is included as a regular logarithmic spiral.
 
 `Reid_2019`
 ---------
