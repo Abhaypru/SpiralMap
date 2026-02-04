@@ -122,18 +122,16 @@ class spiral_vallee(object):
 	"""	
 
 	def __init__(self):   
-		self.getarmlist()
-		self.xsun = -8.0  # Sun at x=-8 in galactocentric (so R0 becomes positive)
-		self.R0 = -self.xsun  # 8.0 kpc
+		self.getarmlist()		
 	
 	def getarmlist(self):	
 		"""Set arm names """					
-		self.arms = np.array(['Sagittarius', 'Scutum', 'Norma', 'Perseus'])
+		self.arms = np.array(['Sagittarius', 'Scutum', '3-kpc', 'Perseus'])
 		self.armcolour = {
-			'Sagittarius': 'C0',
-			'Scutum': 'C3',
-			'Norma': 'C1',
-			'Perseus': 'C2'
+			'Sagittarius': 'red', # red
+			'Perseus': 'orange',  # orange
+			'Scutum': 'purple', # 
+			'3-kpc': 'green' # brown
 		}
 				
 		self.getparams()
@@ -159,10 +157,10 @@ class spiral_vallee(object):
 		"""
 		
 		self.arms_model = {
-			'Sagittarius': {'pitch': 12.5, 'phi0': 0, 'r0': 2.5},
-			'Scutum': {'pitch': 12.5, 'phi0': 90, 'r0': 2.5},
-			'Norma': {'pitch': 12.5, 'phi0': 180, 'r0': 2.5},
-			'Perseus': {'pitch': 12.5, 'phi0': 270, 'r0': 2.5}
+			'Scutum': {'pitch': 12.5, 'phi0': 0, 'r0': 2.5},
+			'3-kpc': {'pitch': 12.5, 'phi0': 90, 'r0': 2.5},
+			'Perseus': {'pitch': 12.5, 'phi0': 180, 'r0': 2.5},
+			'Sagittarius': {'pitch': 12.5, 'phi0': 270, 'r0': 2.5}
 		}
 	 
 	def model_(self, arm_name, R_max=13, n_points=1000):
@@ -187,7 +185,7 @@ class spiral_vallee(object):
 	
 		Model limited to 3 kpc < r_gal < 13 kpc per Vallee 1995 constraints
 		"""
-	
+		self.R0 = -self.xsun  # 8.0 kpc
 		params = self.arms_model[arm_name]
 		pitch_rad = np.radians(params['pitch'])
 		phi0_rad = np.radians(params['phi0'])
@@ -208,11 +206,8 @@ class spiral_vallee(object):
 		phi = phi[mask]
 		
 		# Convert to Cartesian coordinates (Galactocentric)
-		# x_gc = R * np.cos(phi)
-		# y_gc = R * np.sin(phi)
-
-		y_gc = R * np.cos(phi)
-		x_gc = -R * np.sin(phi)
+		x_gc = R * np.cos(phi)
+		y_gc = R * np.sin(phi)
 
 		# Convert to Heliocentric coordinates (Sun at x=8, y=0 in galactocentric)
 		# In heliocentric: x_hc = x_gc - (-8) = x_gc + 8, y_hc = y_gc - 0 = y_gc

@@ -346,7 +346,7 @@ if makegif:
 			spirals.readout(plotattrs,model=use_model2,arm=use_arm)	
 			polar_style(ax,title=use_model+' (GC)')
 			ax.set_ylim([0.,15])	
-			
+			plt.legend()
 			plt.savefig(figdir_primer+'/map_'+str(inum)+'png')
 
 	import mytools
