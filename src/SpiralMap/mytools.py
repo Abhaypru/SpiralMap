@@ -220,7 +220,33 @@ def polar_style(ax,title='',rticks=[3., 6.,9.,12,15.,20.]):
 	return
 
 
+# from update_checker import update_check
+
+# update_check('spiralmap', __version__, check_interval=20)	
+
+
+
+import os
+import time
 from update_checker import update_check
 import importlib.metadata
 __version__=importlib.metadata.version('SpiralMap')
-update_check('spiralmap', __version__, check_interval=20)	
+def check_spiralmap_updates():
+    cache_file = os.path.expanduser("~/.spiralmap_last_check")
+    # 604800 seconds = 1 week
+    SECONDS = 20 
+    
+    # Check if we should skip
+    if os.path.exists(cache_file):
+        last_check = os.path.getmtime(cache_file)
+        if (time.time() - last_check) < SECONDS:
+            return
+
+    # If we got here, perform the check
+    update_check('spiralmap',__version__)
+    
+    # Update the timestamp of the hidden file
+    with open(cache_file, 'w') as f:
+        f.write(str(time.time()))
+
+check_spiralmap_updates()
