@@ -208,9 +208,12 @@ class spiral_vallee(object):
 		phi = phi[mask]
 		
 		# Convert to Cartesian coordinates (Galactocentric)
-		x_gc = R * np.cos(phi)
-		y_gc = R * np.sin(phi)
-		
+		# x_gc = R * np.cos(phi)
+		# y_gc = R * np.sin(phi)
+
+		y_gc = R * np.cos(phi)
+		x_gc = -R * np.sin(phi)
+
 		# Convert to Heliocentric coordinates (Sun at x=8, y=0 in galactocentric)
 		# In heliocentric: x_hc = x_gc - (-8) = x_gc + 8, y_hc = y_gc - 0 = y_gc
 		x_hc = x_gc + self.R0  
@@ -242,6 +245,7 @@ class spiral_vallee(object):
 			'yhc': yhc,
 			'xgc': xgc,
 			'ygc': ygc
+		
 		}
 		return self.dout
 

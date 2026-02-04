@@ -17,7 +17,7 @@ Read the preprint at [arxiv](https://www.arxiv.org/abs/2506.11383).
 ## Updates
 + Missing Local arm (logarithmic) added to Hou-Han 2014 model.
 + Vallee 1995 model included. 
-+ dependencies included
++ Dependencies included
 
 Installation
 -------------

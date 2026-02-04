@@ -9,6 +9,8 @@ The following table provides a summary of the spiral arm models included in **Sp
 +========================+==============================================+
 | Taylor_Cordes_1992     | Model based on HII regions                   |
 +------------------------+----------------------------------------------+
+| Vallee_1995            | Based on Galactic magnetic field/Dust/stars  |
++------------------------+----------------------------------------------+
 | Drimmel_NIR_2000       | Based on Galactic plane emission in N        |
 +------------------------+----------------------------------------------+
 | Levine_2006            | Based on HI (21 cm) data                     |
@@ -32,6 +34,13 @@ The following table provides a summary of the spiral arm models included in **Sp
 	  which is based on radio and optical observations of H II regions. 	  
 	* We use the model parameters presented in their Table 1.	
 	* There are four arms in this model (Arm1, Arm2, Arm3, Arm4).
+
+`Vallee_1995`
+-----------------
+	* Class implementing the model from `Vallee 1995 <https://ui.adsabs.harvard.edu/abs/1995ApJ...454..119V/abstract>`_ 
+ 	  which is based on Galactic magnetic field data, HI, HII, CO, and Dust. 	  
+	* We use their best model as depicted in their figure 3.	
+	* There are four arms in this model (Sagittarius, Scutum, Norma, Perseus).
 
 `Drimmel_NIR_2000`
 -----------------
