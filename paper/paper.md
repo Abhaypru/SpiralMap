@@ -20,6 +20,7 @@ date: 11 June 2025
 bibliography: paper.bib
 ---
 
+# Summary
 
 # Statement of need
 Mapping the structure of the Galaxy has been an ongoing endeavour for several decades, thanks to which we have come to piece together the components it is made up of such as the discs/bulge/halo and so on [@jbhreview2016]. 
@@ -54,6 +55,30 @@ a) Documentation: [`readthedocs`](https://spiralmap.readthedocs.io/en/latest/), 
 
 ![Polar projections of multiple models plotted together. We show the `Taylor_Cordes_1992` & `Poggio_2021` models in HC (a) and GC (b) frames, and similarly the tiple models plotted together with a polar grid in the background and similarly, the `Drimmel_NIR_2000` & `Poggio_2021` models in HC (c) and GC (d) frames.\label{multiple_models_polar}](figures/multiple_models_polar.png)
 
+# State of the field
+As far as we are aware, there is no existing ...
+
+
+# Software Design
+
+The main motivation behind `SpiralMap` is to provide a Python3 based user-friendly, object-oriented API that allows users to generate spatial traces of the various Spiral arm maps and models of the Milky Way, available in literature. 
+The package relies on a minimal set of dependencies, including on well maintained community tools such as Astropy. 
+While most of the models currently included in the package are analytical, i.e. the code generates the spiral trace for the user, in a few select cases these are read from 
+pre-generated files, which are provided in user-friendly formats such as `pickle` or `FITS` files. The individual spiral arm models are all available in literature but in disparate forms (datafiles, analytical descriptions, etc). 
+Our aim here is to provide the user with a one-stop python class where the application of the various spiral models can be homogenised, in particular accessing both heliocentric and galactocentric coordinates of the spiral tracers,
+the ability to quickly plot both cartesian or polar projections, or to select which (or all) spiral arms to plot for a particular model etc. Additionally, the user still has access to the raw forms of the spiral models as were presented in 
+literature, except here in a machine readable form. 
+
+
+# Research Impact Statement
+`SpiralMap` has been available to the community since June 2025. `PyPI` stats shows that the package has been downloaded about 1500 times since release, averaging about 200 downloads per month. 
+The supporting document on the `arXiv` has also been cited by two peer reviewed papers (ex: Trentin et al. 2025) as of Feb 2026, with at least 3 other papers in prep that have requested particular model updates.
+To this end, we pushed a new version in February 2026 with additional spiral arm models appended to the package, and expect another update in March 2026 which will include the first 3D spiral arm model. 
+
+
+# AI usage disclosure
+
+No generative AI tools were used in the development of this software, writing of this manuscript, or the preparation of supporting materials.
 
 # Example Scientific application
 As an example of a science case, we reproduce figures from @khanna2024 (hereafter K24) where `SpiralMap` was used. 
