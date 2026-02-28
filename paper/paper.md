@@ -21,22 +21,21 @@ bibliography: paper.bib
 ---
 
 # Summary
-
-# Statement of need
 Mapping the structure of the Galaxy has been an ongoing endeavour for several decades, thanks to which we have come to piece together the components it is made up of such as the discs/bulge/halo and so on [@jbhreview2016]. 
 Of particular interest is also the signature of non-axisymmetry in the disc, principally present in the form of the central Galactic bar, the warp, and various spiral like features fanning across a large portion of the disc.
  Over the years, various groups have surveyed the Galaxy across wavelengths (Radio to optical) and have deduced the rich variety of spiral structure present in the disc. 
 While some of the papers in literature provide machine readable data to trace out the spiral arms in their model, often this can be a cumbersome exercise for a user simply interested in extracting the coordinates and/or overplotting the spiral arms on another plot of interest, such as while comparing the locations of the arms to features in the velocity field [@Khanna:2023; @Poggio:2024]. 
-
-
 With `SpiralMap` we present a library of the major spiral arm models (and maps) of the Galaxy. 
-The package is written in `Python`, and allows the user to both extract the 2D trace and overplot the spiral arms in cartesian/polar coordinates in both Heliocentric (HC) and Galactocentric (GC) frames.
+
+# Statement of need
+The `SpiralMap` package is written in `Python`, and allows the user to both extract the 2D trace and overplot the spiral arms in cartesian/polar coordinates in both Heliocentric (HC) and Galactocentric (GC) frames.
 A summary of the models currently included is provided in the Table below, where we have tried to include models from across the electromagnetic spectrum, and based on various tracers (gas/stars etc.). 
 Other models can easily be included on request. In the near future, we anticipate the availability of 3D spiral arm traces for the Galaxy in literature which can also be included in `SpiralMap`.
 
 | Model  | Description   |
 |----------|------------------------------------|
 | `Taylor_Cordes_1992`  | Model based on HII [@Taylor:1993].  |
+| `Vallee_1995`  | Model based on Galactic magnetic field/Dust/stars [@Vallee:1995].  |
 | `Drimmel_NIR_2000`  | Model based on Galactic plane emission in the NIR [@drimmel2000].  |
 | `Levine_2006`  | Model based on HI (21 cm) [@Levine:2006].  |
 | `Hou_Han_2014`  | Logarithmic spiral model based on HII/ GMC/methanol Maser observations [@Hou:2014].  |
@@ -56,7 +55,12 @@ a) Documentation: [`readthedocs`](https://spiralmap.readthedocs.io/en/latest/), 
 ![Polar projections of multiple models plotted together. We show the `Taylor_Cordes_1992` & `Poggio_2021` models in HC (a) and GC (b) frames, and similarly the tiple models plotted together with a polar grid in the background and similarly, the `Drimmel_NIR_2000` & `Poggio_2021` models in HC (c) and GC (d) frames.\label{multiple_models_polar}](figures/multiple_models_polar.png)
 
 # State of the field
-As far as we are aware, there is no existing ...
+To the best of our knowledge, there is no other publicly available package providing similar tools to the community. We acknowledge the individual surveys and papers that have mapped out the spirality of the Milky Way, however
+we have also observed that it is quite easy to miss out on historically derived models, likely because there is no standard way of publishing a spiral arm model. Some papers provide datafiles, others provide large tables 
+which still require individual users to extract the data, and doing so for several papers can be a cumbersome exercise. With our package having all the major models under one umbrella interface allows for an easier comparison 
+between the various tracers (stars, gas, etc) of such non-axisymmetry, and also facilitates fair visibility of the various efforts carried out over decades.
+Indeed with `SpiralMap` we intend to address this gap, by providing a user-friendly interface encompassing all 
+the major spiral arm models and maps currently offering traces in 2D, and very soon to extend this to 3D. 
 
 
 # Software Design
